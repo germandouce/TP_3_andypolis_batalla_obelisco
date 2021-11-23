@@ -5,14 +5,14 @@
 
 template <typename Dato>
 class Nodo_dict {
-
+    
     private:
 
     // ATRIBUTOS.
     
     Dato* dato;
-    Nodo_dict* izquierda;
-    Nodo_dict* derecha;
+    Nodo_dict* izquierdo;
+    Nodo_dict* derecho;
     Nodo_dict* padre;
     int id;
 
@@ -43,20 +43,20 @@ class Nodo_dict {
     void coloca_nodo_padre(Nodo_dict* padre);
     
     // PRE: Recibe el nodo izquierdo y el nodo padre
-    // POST: agrega el nodo de su izquierda y su antecesor
-    void colocar_nodo_izquierdo(Nodo_dict* izquierda, Nodo_dict* padre );
+    // POST: agrega el nodo de su izquierdo y su antecesor
+    void colocar_nodo_izquierdo(Nodo_dict* izquierdo, Nodo_dict* padre );
 
     // PRE: Recibe el nodo derecho y el nodo padre
-    // POST: agrega el nodo de su derecha y su antecesor
-    void colocar_nodo_derecho(Nodo_dict* derecha, Nodo_dict* padre);
+    // POST: agrega el nodo de su derecho y su antecesor
+    void colocar_nodo_derecho(Nodo_dict* derecho, Nodo_dict* padre);
 
     // PRE: Recibe un nodo
-    // POST: Coloca el nodo a la izquierda
-    void colocar_nodo_izquierdo(Nodo_dict* izquierda);
+    // POST: Coloca el nodo a la izquierdo
+    void colocar_nodo_izquierdo(Nodo_dict* izquierdo);
 
     // PRE: Recibe un nodo
-    // POST: coloca el nodo a la derecha
-    void colocar_nodo_derecho(Nodo_dict* derecha);
+    // POST: coloca el nodo a la derecho
+    void colocar_nodo_derecho(Nodo_dict* derecho);
 
     // PRE: -
     // POST: Devuelve el nodo izquierdo
@@ -90,86 +90,89 @@ class Nodo_dict {
 template <typename Dato>
 Nodo_dict<Dato>::Nodo_dict(Dato* dato){
     
-}
+    this -> dato = dato;
+    this -> id = dato -> devolver_id();
+    this -> izquierdo = nullptr;
+    this -> derecho = nullptr;
+    this -> padre = nullptr;
 
-template <typename Dato>
-Nodo_dict<Dato>::Nodo_dict(){
-    
 }
 
 template <typename Dato>
 Dato* Nodo_dict<Dato>::devolver_dato() {
-    
+    return (this -> dato);
 }
 
 template <typename Dato>
 int Nodo_dict<Dato>::devolver_id() {
-    
+    return ( this -> id );
 }
+
 template <typename Dato>
 void Nodo_dict<Dato>::colocar_dato(Dato* dato) {
-    
+    this -> dato = dato;
 }
 
 template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecha, Nodo_dict* padre) {
-    
+void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecho, Nodo_dict* padre) {
+    this -> derecho = derecho;
+    this -> padre = padre;
 }
 
 template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierda, Nodo_dict* padre ) {
-    
+void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierdo, Nodo_dict* padre ) {
+    this -> izquierdo = izquierdo;
+    this -> padre = padre;
 }
 
 template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecha) {
-    
+void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecho) {
+    this -> derecho = derecho;
 }
 
 template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierda) {
-
+void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierdo) {
+    this -> izquierdo = izquierdo;
 }
 
 template <typename Dato>
 void Nodo_dict<Dato>::coloca_nodo_padre(Nodo_dict* padre) {
-    
+    this -> padre = padre;
 }
-
 
 template <typename Dato>
 Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_derecho() {
-
+    return ( this -> derecho );
 }
 
 template <typename Dato>
 Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_izquierdo() {
-    
+    return ( this -> izquierdo );
 }
 
 template <typename Dato>
 Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_padre(){
-    
+    return ( this -> padre );
 }
 
 template <typename Dato>
 bool Nodo_dict<Dato>::es_hoja() {
-
+    return ( this -> devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo == nullptr );
 }
 
 template <typename Dato>
 bool Nodo_dict<Dato>::hijo_derecho_unico() {
-
+    return (this -> devolver_nodo_izquierdo() == nullptr && this -> devolver_nodo_derecho() != nullptr );
 }
 
 template <typename Dato>
 bool Nodo_dict<Dato>::hijo_izquierdo_unico() {
-
+    return (this -> devolver_nodo_derecho() == nullptr && this -> devolver_nodo_izquierdo() != nullptr );
 }
 
 template <typename Dato>
 Nodo_dict<Dato>::~Nodo_dict() {
-    
+
 }
 
 
