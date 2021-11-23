@@ -1,5 +1,5 @@
-#ifndef _VECTOR_TEMPLATE_
-#define _VECTOR_TEMPLATE_
+#ifndef _VECTOR_H
+#define _VECTOR_H
 
 #include <iostream>
 
@@ -120,4 +120,4 @@ void Vector<Dato>::borrar_posicion(int posicion) {
     largo--;
 }
 
-#endif // _VECTOR_TEMPLATE_
+#endif // _VECTOR_H
