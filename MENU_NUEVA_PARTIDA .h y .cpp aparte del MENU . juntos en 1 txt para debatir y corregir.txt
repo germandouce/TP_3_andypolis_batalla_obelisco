@@ -1,0 +1,95 @@
+Menú Partida nueva(si ubicaciones.txt está blanco o no existe. Partida nueva)
+
+para el .h
+
+#ifndef MENU_NUEVA_PARTIDA_H
+#define MENU_NUEVA_PARTIDA_H
+
+const int OPCION_MINIMA_NP = 1;
+const int OPCION_MAXIMA_NP = 5;
+
+//pre: -
+//post: Imprime un mensaje de nueva partida.
+void mostrar_mensaje_nueva_partida();
+
+//pre: -
+//post: Imprime un menú de opciones.
+void mostrar_menu_nueva_partida();
+
+//pre: -
+//post: Procesa la opción elegida y realiza la operación requerida.
+void procesar_opcion(int opcion_elegida, Mapa* &mapa, Vector<Material> &vector_materiales, Vector<Edificio> &vector_edificios, Vector<Ubicacion> &vector_ubicaciones);
+
+//pre: -
+//post: Devuelve True o False dependiendo si la opción elegida es válida o no.
+bool es_opcion_valida(int opcion_elegida);
+
+#endif // MENU_NUEVA_PARTIDA_H
+
+para el .cpp
+
+#include <iostream>
+#include "menu_nueva_partida.h"
+
+void mostrar_mensaje_nueva_partida() {
+    system(CLR_SCREEN);
+    cout << SUCESS_COLOR;
+    cout << "Bienvenido al sistema de construccion de edificios de Andypolis." << endl;
+    cout << "Nueva Partida." << endl;//puede ser mejor el mensaje
+    cout << "El siguiente menu lo guiara a traves de las operaciones disponibles." << endl;
+    cout << "Debe ingresar los numeros correspondientes a las operaciones requeridas." << endl;
+    cout << END_COLOR << endl; 
+}
+
+void mostrar_menu() {
+    cout << ENTER_COLOR << "Puede elegir una de las siguiente opciones: " << END_COLOR << endl;
+    cout << endl;
+    cout << SUCESS_COLOR;
+    cout << "1. Modificar edificio por nombre." << endl;
+    cout << "2. Listar todos los edificios." << endl;
+    cout << "3. Mostrar mapa." << endl;
+    cout << "4. Comenzar partida." << endl;
+    cout << "5. Guardar y salir." << endl;
+    cout << END_COLOR;
+}
+
+void procesar_opcion(int opcion_elegida, Mapa* &mapa, Vector<Material> &vector_materiales, Vector<Edificio> &vector_edificios, Vector<Ubicacion> &vector_ubicaciones) {
+
+    int posiciones_materiales[MATERIALES_UTILIZADOS_EDIFICIOS];
+    cargar_posicion_material_edificios(vector_materiales, posiciones_materiales);
+
+    switch (opcion_elegida) {
+        case 1:
+            system(CLR_SCREEN);
+            //Verifica edificio existente.
+	    //Al ser correcto en nombre se le pide al ususario que pase
+            // los valores de construcción.
+            cout << endl;
+            break;
+        case 2:
+            system(CLR_SCREEN);
+            //mostrar_registro_edificios(vector_edificios)
+	    cout << endl;
+            break;
+        case 3:
+            system(CLR_SCREEN);
+            imprimir_mapa();
+            cout << endl;
+            break;
+        case 4:
+            system(CLR_SCREEN);
+       
+            break;
+        case 5:
+            system(CLR_SCREEN);
+	    guardar_materiales(vector_materiales);
+            guardar_ubicaciones(vector_ubicaciones);
+            mapa -> borrar();
+            delete mapa;
+            cout << SUCESS_COLOR << "-Se han guardado exitosamente los cambios efectuados!" << END_COLOR << endl;
+	}
+}
+
+bool es_opcion_valida(int opcion_elegida) {
+    return (opcion_elegida >= OPCION_MINIMA && opcion_elegida <= OPCION_MAXIMA);
+}

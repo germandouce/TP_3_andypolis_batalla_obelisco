@@ -1,10 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "utilidades.h"
-
 const int OPCION_MINIMA = 1;
-const int OPCION_MAXIMA = 10;
+const int OPCION_MAXIMA = 13;
 
 //pre: -
 //post: Imprime un mensaje de bienvenida.
