@@ -78,7 +78,10 @@ void procesar_opcion(int opcion_elegida, Mapa* &mapa, Vector<Material> &vector_m
             break;
         case 4:
             system(CLR_SCREEN);
-       
+            //COMENZAR PARTIDA
+            //Se pide a cada usuario que eliga entre jugador 1 y 2 (no pueden elegir el mismo).
+            //Pedir coordenada. Verificarla. Posicionar en mapa.
+            // Lluvia de recursos.
             break;
         case 5:
             system(CLR_SCREEN);
