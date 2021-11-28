@@ -6,11 +6,6 @@
 
 using namespace std;
 
-const string S = "piedra";
-const string W = "madera";
-const string I = "metal";
-const string VACIO = "";
-
 const int PRODUCCION_MINA = 15;
 const int PRODUCCION_ASERRADERO = 25;
 const int PRODUCCION_FABRICA = 40;
@@ -49,13 +44,15 @@ class Material: public Objeto{
     //post: Instancia un Material según los valores ingresados.
     Material(int cantidad_material);
     
-    //pre: -
-    //post: Devuelve el nombre del Material.
-    //string obtener_nombre();
+    // pre: -
+    // post: Devuelve el nombre del Material.
+    string obtener_nombre();
 
-    // //pre: -
-    // //post: Devuelve la cantidad del Material.
-    // int obtener_cantidad();
+    string obtener_diminutivo();
+
+    //pre: -
+    //post: Devuelve la cantidad del Material.
+    int obtener_cantidad();
 
     // //pre: -
     // //post: Imprime en pantalla los atributos del Material.

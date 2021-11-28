@@ -10,6 +10,10 @@ string Aserradero::obtener_nombre(){
     return nombre;
 }
 
+string Aserradero::obtener_diminutivo(){
+    return diminutivo;
+}
+
 int Aserradero::obtener_cantidad_brindada(){
     return brinda;
 }
@@ -19,6 +23,6 @@ int Aserradero::obtener_cantidad(){
 }
 
 
-void Aserradero::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " brindo : " << brinda << " de piedra y me encuentro en el casillero consultado . " << endl;
+void Aserradero::saludar(){
+    cout << " Soy una " << nombre << " brindo " << brinda << " de piedra y me encuentro en el casillero consultado" << endl;
 }

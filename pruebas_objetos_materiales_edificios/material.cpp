@@ -1,4 +1,3 @@
-#include <iostream>
 #include "material.h"
 
 Material::Material() {
@@ -9,13 +8,19 @@ Material::Material( int cantidad_material) {
     this -> cantidad_material = cantidad_material;
 }
 
-// string Material::obtener_nombre() {
-//     return nombre;
-// }
+string Material::obtener_nombre() {
+    return nombre;
+}
 
-// int Material::obtener_cantidad() {
-//     return cantidad_material;
-// }
+
+string Material::obtener_diminutivo(){
+    return diminutivo;
+}
+
+
+int Material::obtener_cantidad() {
+    return cantidad_material;
+}
 
 // void Material::mostrar_material() {
 //     cout << '-' << obtener_cantidad() << " unidades de " << obtener_nombre() << '.' << endl;

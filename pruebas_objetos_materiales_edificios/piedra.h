@@ -3,6 +3,7 @@
 
 #include "material.h"
 
+
 class Piedra: public Material {
 
 private:
@@ -13,11 +14,11 @@ public:
     
     string obtener_nombre();
 
+    string obtener_diminutivo();
+
     int obtener_cantidad();
 
-    int obtener_cantidad_brindada();
-
-    void mostrar_mensaje();
+    void saludar();
     
 };
 

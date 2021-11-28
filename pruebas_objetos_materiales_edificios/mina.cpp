@@ -10,6 +10,10 @@ string Mina::obtener_nombre(){
     return nombre;
 }
 
+string Mina::obtener_diminutivo(){
+    return diminutivo;
+}
+
 int Mina::obtener_cantidad_brindada(){
     return brinda;
 }
@@ -18,6 +22,6 @@ int Mina::obtener_cantidad(){
     return 1;
 }
 
-void Mina::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " brindo : " << brinda << " de piedra y me encuentro en el casillero consultado . " << endl;
+void Mina::saludar(){
+    cout << " Soy una " << nombre << " brindo " << brinda << " de piedra y me encuentro en el casillero consultado" << endl;
 }

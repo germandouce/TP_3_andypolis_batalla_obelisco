@@ -30,9 +30,10 @@ int Edificio:: obtener_cantidad_brindada(){
 int Edificio:: obtener_cantidad(){
     return 1;
 }
-// string Edificio::obtener_diminutivo(){
-//     return diminutivo;
-// }
+
+string Edificio::obtener_diminutivo(){
+    return diminutivo;
+}
 
 // int Edificio::obtener_cantidad_piedra(){
 //     return cantidad_piedra;

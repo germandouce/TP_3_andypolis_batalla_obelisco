@@ -1,10 +1,7 @@
 #ifndef EDIFICIO_H_
 #define EDIFICIO_H_
 
-#include <iostream>
 #include "objeto.h"
-
-using namespace std;
 
 // const string MINA = "mina";
 // const string ASERRADERO = "aserradero";
@@ -34,11 +31,11 @@ public:
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
     Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
 
-    int obtener_cantidad_brindada();
-    
-    int obtener_cantidad();
+    // PRE: Dependiendo al edificios que me diriga.
+    // POS: Devuelve una cierta cantidad de material que brinda el edificio en particular.
+    virtual int obtener_cantidad_brindada() = 0;
 
-    //virtual int obtener_cantidad_brindada() = 0;
+    int obtener_cantidad();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
@@ -46,7 +43,7 @@ public:
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el diminutivo del edificio, siendo este la primer letra de la palabra ( getter ).
-    // string obtener_diminutivo();
+    string obtener_diminutivo();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la cantidad de piedra necesaria para construir.
@@ -97,10 +94,6 @@ public:
     // PRE: -
     // POS: Por cada uno de los edificios muestra por pantalla su respectivo mensaje.
     //virtual void mostrar_mensaje() = 0;
-
-    // PRE: Dependiendo al edificios que me diriga.
-    // POS: Devuelve una cierta cantidad de material que brinda el edificio en particular.
-    //virtual int obtener_cantidad_brindada() = 0;
 
     // Destructor
     // PRE: -

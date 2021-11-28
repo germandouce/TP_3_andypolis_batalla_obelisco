@@ -9,13 +9,14 @@ string Piedra::obtener_nombre(){
     return nombre;
 }
 
+string Piedra::obtener_diminutivo(){
+    return diminutivo;
+}
+
 int Piedra::obtener_cantidad(){
     return cantidad_material;
 }
 
-int Piedra::obtener_cantidad_brindada(){
-    return 0;
+void Piedra::saludar(){
+    cout<< " Soy un conjunto de " << cantidad_material <<" "<< nombre << "s y me encuentro en el casillero consultado" << endl;
 }
-// void Piedra::mostrar_mensaje(){
-//     cout << " Soy una " << nombre << " brindo : " << " de piedra y me encuentro en el casillero consultado . " << endl;
-// }

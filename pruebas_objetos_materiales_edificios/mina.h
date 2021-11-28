@@ -12,12 +12,14 @@ public:
     Mina(int piedra, int madera, int metal, int maximo);
 
     string obtener_nombre();
+    
+    string obtener_diminutivo();
 
     int obtener_cantidad_brindada();
 
     int obtener_cantidad();
 
-    void mostrar_mensaje();
+    void saludar();
 
 };
 
