@@ -34,12 +34,15 @@ public:
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
     Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
 
+    int obtener_cantidad_brindada();
     
-    virtual int obtener_cantidad_brindada() = 0;
+    int obtener_cantidad();
+
+    //virtual int obtener_cantidad_brindada() = 0;
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
-    // string obtener_nombre();
+    string obtener_nombre();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el diminutivo del edificio, siendo este la primer letra de la palabra ( getter ).

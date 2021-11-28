@@ -17,12 +17,19 @@ Edificio::Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal
     this-> brinda = 0;
     this-> maximo_construir = maximo_construir;
 
-} 
+}
 
-// string Edificio::obtener_nombre(){
-//     return nombre;
-// }
+string Edificio::obtener_nombre(){
+    return nombre;
+}
 
+int Edificio:: obtener_cantidad_brindada(){
+    return brinda;
+}
+
+int Edificio:: obtener_cantidad(){
+    return 1;
+}
 // string Edificio::obtener_diminutivo(){
 //     return diminutivo;
 // }

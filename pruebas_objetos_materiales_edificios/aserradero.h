@@ -14,6 +14,8 @@ public:
     string obtener_nombre();
 
     int obtener_cantidad_brindada();
+    
+    int obtener_cantidad();
 
     void mostrar_mensaje();
 
