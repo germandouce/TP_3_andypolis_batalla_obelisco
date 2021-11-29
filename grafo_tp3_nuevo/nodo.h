@@ -3,6 +3,14 @@
 
 #include "vertice.h"
 
+const int CANTIDAD_NODOS_ADYACENTES = 4;
+
+const int POSICION_ARRIBA = 0;
+const int POSICION_ABAJO = 1;
+const int POSICION_IZQUIERDO = 2;
+const int POSICION_DERECHO = 3;
+
+
 class Nodo
 {
 //ATRIBUTOS
@@ -15,8 +23,13 @@ private:
     Nodo* siguiente;
     Nodo* anterior;
 
+    bool* existe_adyacente;
+
 //METODOS
+
 public:
+    void inicializar_existe_adyacente();
+
     //pre:
     //post: Inicializa el nodo con el vertice y sus vertices adyacentes.
     Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y);
@@ -54,8 +67,29 @@ public:
     Nodo* obtener_anterior();
 
     //pre:
+    //post: Obtiene el nodo arriba
+    Nodo* obtener_arriba();
+
+    //pre:
+    //post: Obtiene el nodo abajo
+    Nodo* obtener_abajo();
+
+    //pre:
+    //post: Obtiene el nodo derecho
+    Nodo* obtener_derecho();
+
+    //pre:
+    //post: Obtiene el nodo izquierdo
+    Nodo* obtener_izquierdo();
+
+
+    //pre:
     //post: Obtiene el vertice del nodo
     Vertice* obtener_vertice();
+
+    //pre:
+    //post: Obtiene vector existe_adyacente
+    bool* obtener_existe_adyacente();
 
     //pre:
     //post: Elimina el vertice.

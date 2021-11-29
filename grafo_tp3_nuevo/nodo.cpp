@@ -15,6 +15,24 @@ Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posici
 
 }
 
+void Nodo::inicializar_existe_adyacente(){
+    for (int i = 0; i < CANTIDAD_NODOS_ADYACENTES; i++){
+        existe_adyacente[i] = true;
+    }
+    if (obtener_arriba() == nullptr){
+        existe_adyacente[POSICION_ARRIBA] = false;
+    }
+    else if(obtener_abajo() == nullptr){
+        existe_adyacente[POSICION_ABAJO] = false;
+    }
+    else if(obtener_izquierdo() == nullptr){
+        existe_adyacente[POSICION_IZQUIERDO] = false;
+    }
+    else if (obtener_derecho() == nullptr){
+        existe_adyacente[POSICION_DERECHO] = false;
+    }
+}
+
 void Nodo::asignar_abajo(Nodo* vertice_abajo){
     this -> adyacente_abajo = vertice_abajo;
 }
@@ -47,33 +65,30 @@ Nodo* Nodo::obtener_anterior(){
     return anterior;
 }
 
+Nodo* Nodo::obtener_abajo(){
+    return adyacente_abajo;
+}
+
+Nodo* Nodo::obtener_arriba(){
+    return adyacente_arriba;
+}
+
+Nodo* Nodo::obtener_derecho(){
+    return adyacente_derecho;
+}
+
+Nodo* Nodo::obtener_izquierdo(){
+    return adyacente_izquierdo;
+}
+
 Vertice* Nodo::obtener_vertice(){
     return vertice;
+}
+
+bool* Nodo::obtener_existe_adyacente(){
+    return existe_adyacente;
 }
 
 Nodo::~Nodo() {
     delete vertice;
 }
-
-    /*
-    //inicializar variables del vertice
-    int numero_vertice = vertice -> obtener_vertice();
-    int filas = vertice -> obtener_fila();
-    int columnas = vertice -> obtener_columna();
-    int posicion_x = vertice -> obtener_posicion_x();
-    int posicion_y = vertice -> obtener_posicion_y();
-
-    //asignar adyacentes
-    if (posicion_x == PRIMERA_FILA){
-        adyacente_arriba = nullptr;
-    }
-
-    else if(posicion_x == filas){
-        adyacente_abajo = nullptr;
-    }
-    
-    if (posicion_y == PRIMERA_COLUMNA){
-        adyacente_izquierdo = nullptr;
-    }
-    */
- 

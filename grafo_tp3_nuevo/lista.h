@@ -16,8 +16,18 @@ private:
     Nodo* ultimo;
 
 //METODOS
+    //pre:
+    //post: Inicializa los nodos adyacentes horizontales.
+    void asignar_nodos_horizontales(int filas, int columnas, Nodo* nodo);
+
+    //pre:
+    //post: Inicializa los nodos adyacentes verticales.
+    void asignar_nodos_verticales(int filas, int columnas, Nodo* nodo);
+
 public:
     Lista();
+
+    Lista(int cantidad_elementos, int filas, int columnas);
 
     //pre:
     //post: Devuelve la cantidad de elementos que tiene la lista.
@@ -39,7 +49,6 @@ public:
     //pre: deben haber sido cargados los nodos en la lista antes.
     //post: Inicializa todos los nodos adyacentes.
     void asignar_nodos_adyacentes(int filas, int columnas, Nodo* nodo);
-
 
     ~Lista();
 };
