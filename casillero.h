@@ -51,6 +51,16 @@ class Casillero {
 	void desocupar_casillero();
 
 	//pre: -
+	//post: Construye el Edificio en el Casillero si este es construible.
+	//		Sino, imprime un mensaje.
+	void construir_edificio(Edificio* edificio);
+
+	//pre: -
+	//post: Coloca el Material en el Casillero si este es transitable.
+	//		Sino, imprime un mensaje.
+	void colocar_material(Material* material);
+
+	//pre: -
 	//post: Muestra información sobre el Casillero y sobre lo que contiene.
 	virtual void mostrar() = 0;
 
