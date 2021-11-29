@@ -13,19 +13,19 @@ Nodo::Nodo(Vertice* vertice){
 
 }
 
-void Nodo::asignar_abajo(Vertice* vertice_abajo){
+void Nodo::asignar_abajo(Nodo* vertice_abajo){
     this -> adyacente_abajo = vertice_abajo;
 }
 
-void Nodo::asignar_arriba(Vertice* vertice_arriba){
+void Nodo::asignar_arriba(Nodo* vertice_arriba){
     this -> adyacente_arriba = vertice_arriba;
 }
 
-void Nodo::asignar_derecho(Vertice* vertice_derecho){
+void Nodo::asignar_derecho(Nodo* vertice_derecho){
     this -> adyacente_derecho = vertice_derecho;
 }
 
-void Nodo::asignar_izquierdo(Verice* vertice_izquierdo){
+void Nodo::asignar_izquierdo(Nodo* vertice_izquierdo){
     this -> adyacente_izquierdo = vertice_izquierdo;
 }
 

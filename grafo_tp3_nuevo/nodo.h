@@ -19,25 +19,23 @@ public:
 
     //pre:
     //post: Inicializa el nodo adyacente derecho.
-    void asignar_derecho(Vertice* vertice_derecho);
+    void asignar_derecho(Nodo* vertice_derecho);
 
     //pre:
     //post: Inicializa el nodo adyacente izquierdo.
-    void asignar_izquierdo(Vertice* vertice_izquierdo);
+    void asignar_izquierdo(Nodo* vertice_izquierdo);
     
     //pre:
     //post: Inicializa el nodo adyacente superior.
-    void asignar_arriba(Vertice* vertice_arriba);
+    void asignar_arriba(Nodo* vertice_arriba);
 
     //pre:
     //post: Inicializa el nodo adyacente inferior.
-    void asignar_abajo(Vertice* vertice_abajo);
+    void asignar_abajo(Nodo* vertice_abajo);
 
     //pre:
     //post: Elimina el vertice.
     ~Nodo();
-}
-
 };
 
 #endif // NODO_H
