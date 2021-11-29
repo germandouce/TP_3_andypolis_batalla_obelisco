@@ -11,6 +11,7 @@ Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posici
     adyacente_izquierdo = nullptr;
     adyacente_derecho = nullptr;
     siguiente = nullptr;
+    anterior = nullptr;
 
 }
 
@@ -34,8 +35,20 @@ void Nodo::asignar_siguiente(Nodo* vertice_siguiente){
     this -> siguiente = vertice_siguiente;
 }
 
-Nodo* Nodo::obtener_siguiente() {
+void Nodo::asignar_anterior(Nodo* vertice_anterior){
+    this -> anterior = vertice_anterior;
+}
+
+Nodo* Nodo::obtener_siguiente(){
     return siguiente;
+}
+
+Nodo* Nodo::obtener_anterior(){
+    return anterior;
+}
+
+Vertice* Nodo::obtener_vertice(){
+    return vertice;
 }
 
 Nodo::~Nodo() {

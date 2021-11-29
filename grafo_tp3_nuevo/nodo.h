@@ -13,6 +13,7 @@ private:
     Nodo* adyacente_abajo;     
     Nodo* adyacente_arriba;
     Nodo* siguiente;
+    Nodo* anterior;
 
 //METODOS
 public:
@@ -37,12 +38,24 @@ public:
     void asignar_abajo(Nodo* vertice_abajo);
 
     //pre:
-    //post: asigna el siguiente nodo por orden de numero de vertice
+    //post: Asigna el siguiente nodo por orden de numero de vertice
     void asignar_siguiente(Nodo* vertice_siguiente);
 
     //pre:
-    //post:
+    //post: Asigna el nodo previo 
+    void asignar_anterior(Nodo* vertice_anterior);
+
+    //pre:
+    //post: Obtiene el nodo siguiente
     Nodo* obtener_siguiente();
+
+    //pre:
+    //post: Obtiene el nodo anterior
+    Nodo* obtener_anterior();
+
+    //pre:
+    //post: Obtiene el vertice del nodo
+    Vertice* obtener_vertice();
 
     //pre:
     //post: Elimina el vertice.

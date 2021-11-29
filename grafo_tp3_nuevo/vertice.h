@@ -18,7 +18,7 @@ public:
     //post: inicializa el objeto sin parametros
     Vertice();
 
-    //constructor con parametros(numero_vertice,fila,columna y coodernadas)
+    //constructor con parametros(numero_vertice, fila, columna y coodernadas)
     //pre: 0 < numero_vertice < cantidad vertices, 0 < filas < cantidad de filas, 0 < columnas < cantidad de columnas
     // 0< posicion_x < filas , 0 < posicion_y < columnas.
     Vertice(int numero_vertice, int filas, int columnas, int posicion_x, int posicion_y);
