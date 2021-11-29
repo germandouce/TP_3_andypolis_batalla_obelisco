@@ -5,17 +5,20 @@
 
 class Nodo
 {
+//ATRIBUTOS
 private:
     Vertice* vertice;
     Nodo* adyacente_derecho; 
     Nodo* adyacente_izquierdo; 
     Nodo* adyacente_abajo;     
     Nodo* adyacente_arriba;
+    Nodo* siguiente;
 
+//METODOS
 public:
     //pre:
     //post: Inicializa el nodo con el vertice y sus vertices adyacentes.
-    Nodo(Vertice* vertice);
+    Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y);
 
     //pre:
     //post: Inicializa el nodo adyacente derecho.
@@ -32,6 +35,14 @@ public:
     //pre:
     //post: Inicializa el nodo adyacente inferior.
     void asignar_abajo(Nodo* vertice_abajo);
+
+    //pre:
+    //post: asigna el siguiente nodo por orden de numero de vertice
+    void asignar_siguiente(Nodo* vertice_siguiente);
+
+    //pre:
+    //post:
+    Nodo* obtener_siguiente();
 
     //pre:
     //post: Elimina el vertice.

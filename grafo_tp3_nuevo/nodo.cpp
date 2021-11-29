@@ -3,13 +3,14 @@
 const int PRIMERA_FILA = 1;
 const int PRIMERA_COLUMNA = 1;
 
-Nodo::Nodo(Vertice* vertice){
+Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y){
     
-    this -> vertice = vertice;
+    vertice = new Vertice(numero_vertice, fila, columna, posicion_x, posicion_y);
     adyacente_arriba = nullptr;
     adyacente_abajo = nullptr;
     adyacente_izquierdo = nullptr;
     adyacente_derecho = nullptr;
+    siguiente = nullptr;
 
 }
 
@@ -27,6 +28,14 @@ void Nodo::asignar_derecho(Nodo* vertice_derecho){
 
 void Nodo::asignar_izquierdo(Nodo* vertice_izquierdo){
     this -> adyacente_izquierdo = vertice_izquierdo;
+}
+
+void Nodo::asignar_siguiente(Nodo* vertice_siguiente){
+    this -> siguiente = vertice_siguiente;
+}
+
+Nodo* Nodo::obtener_siguiente() {
+    return siguiente;
 }
 
 Nodo::~Nodo() {
