@@ -1,15 +1,16 @@
-#ifndef ASERRADERO_H
-#define ASERRADERO_H
+#ifndef MINA_ORO_H
+#define MINA_ORO_H
 
 #include "../edificio.h"
 
-class Aserradero: public Edificio {
+class Mina_oro: public Edificio {
 
 private:
 
+
 public:
 
-    Aserradero(int piedra, int madera, int metal, int maximo);
+    Mina_oro(int piedra, int madera, int metal, int maximo);
 
     int obtener_cantidad_brindada();
 
@@ -19,5 +20,4 @@ public:
 
 };
 
-
-#endif 
+#endif //MINA_ORO_H

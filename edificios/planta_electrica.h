@@ -13,6 +13,8 @@ public:
 
     int obtener_cantidad_brindada();
 
+    string obtener_elemento_brindado();
+
     void mostrar_mensaje();
 
 };

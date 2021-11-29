@@ -4,6 +4,8 @@ Mina::Mina(int piedra, int madera, int metal, int maximo) : Edificio(piedra, mad
     this->nombre = "mina";
     this->diminutivo = "M";
     this->brinda = 15;
+    this->vida_actual = 2;
+    this->vida_maxima = 2;
 }
 
 int Mina::obtener_cantidad_brindada(){
@@ -11,5 +13,9 @@ int Mina::obtener_cantidad_brindada(){
 }
 
 void Mina::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " brindo : " << brinda << " de piedra y me encuentro en el casillero consultado . " << endl;
+    cout << " Soy una " << nombre << " brindo " << brinda << " piedras y me encuentro en el casillero consultado." << endl;
+}
+
+string Mina::obtener_elemento_brindado(){
+    return "piedra";
 }

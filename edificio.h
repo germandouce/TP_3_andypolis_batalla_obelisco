@@ -5,13 +5,6 @@
 
 using namespace std;
 
-const string MINA = "mina";
-const string ASERRADERO = "aserradero";
-const string FABRICA = "fabrica";
-const string ESCUELA = "escuela";
-const string OBELISCO = "obelisco";
-const string PLANTA_ELECTRICA = "planta electrica";
-
 class Edificio
 {
 protected:
@@ -24,6 +17,8 @@ protected:
     int cantidad_edificios;
     int brinda;
     int maximo_construir;
+    int vida_actual;
+    int vida_maxima;
 
 public:
 
@@ -95,9 +90,25 @@ public:
     // POS: Por cada uno de los edificios muestra por pantalla su respectivo mensaje.
     virtual void mostrar_mensaje() = 0;
 
-    // PRE: Dependiendo al edificios que me diriga.
+    // PRE: Dependiendo al edificio que me diriga.
     // POS: Devuelve una cierta cantidad de material que brinda el edificio en particular.
     virtual int obtener_cantidad_brindada() = 0;
+
+    // PRE: Dependiendo al edificio que me diriga.
+    // POS: Devuelve el nombre del elemento que brinda el edificio en particular.
+    virtual string obtener_elemento_brindado() = 0;
+
+    //PRE:-
+    //POST:Resta 1 a la vida del edificio
+    void Edificio:: daniar();
+
+    // PRE: -
+    // POS: Devuelve True si el edificio sobrevivio a la explosion en pie y false en caso contrario
+    bool edificio_en_pie();
+
+    //PRE:
+    //POST: Suma 1 a la cantidad de vida siempre u cuando lo permita dicho edificio.
+    void reparar();
 
     // Destructor
     // PRE: -

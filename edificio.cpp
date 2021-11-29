@@ -9,6 +9,8 @@ Edificio::Edificio(){
     this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = 0;
+    this->vida_actual =0;
+    this->vida_maxima =0;
 }
 
 Edificio::Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
@@ -20,7 +22,8 @@ Edificio::Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal
     this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = maximo_construir;
-
+    this->vida_actual =0;
+    this->vida_maxima =0;
 } 
 
 string Edificio::obtener_nombre(){
@@ -73,6 +76,25 @@ void Edificio::sumar_cantidad(){
 void Edificio::restar_cantidad(){
     cantidad_edificios-- ;
 }
+
+void Edificio:: daniar(){
+    vida_actual--;
+}
+
+bool Edificio:: edificio_en_pie(){
+    return (vida_actual > 0);
+}
+
+void Edificio::reparar(){
+    if (vida_actual == vida_maxima){
+        cout <<"El edificio no requiere reparacion"<<endl;
+    }
+    else{
+        vida_actual++;
+        cout<<"Se reparo el edificio "<<nombre<<" corretamente";
+    }
+}
+
 
 Edificio::~Edificio(){}
 
