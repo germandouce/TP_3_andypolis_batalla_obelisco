@@ -1,3 +1,12 @@
-Recomiendo probar por separado cada menú y 
+Recomiendo probar por separado cada menu y 
 siempre terminar seleccionanda/con la opcion salir y 
-guardar (la última opción).
+guardar (la ultima opcion).
+
+compilar: g++ *.cpp -Werror -Wall -Wconversion 
+
+Te tira aviso de error conversion no obstante compila y funciona bien.
+
+Luego del mensaje escribir -> a.exe 
+
+(Estuve buscando maneras de corregirlo. Por el momento no encontré. Compilar
+ compila pero me preocupa que ese error afecte a todo el programa. )

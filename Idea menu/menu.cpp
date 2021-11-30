@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "menu.h"
 #include <conio.h>
 #include <windows.h>
@@ -8,10 +8,10 @@ void gotoxy(int x, int y)
 {
     HANDLE hcon;
     hcon = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD dwPos;
-    dwPos.X = x;
-    dwPos.Y = y;
-    SetConsoleCursorPosition(hcon, dwPos);
+    COORD coordenadas;
+    coordenadas.X = x;
+    coordenadas.Y = y;
+    SetConsoleCursorPosition(hcon, coordenadas);
 }
 
 
