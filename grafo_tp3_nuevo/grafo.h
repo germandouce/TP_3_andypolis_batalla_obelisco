@@ -43,6 +43,8 @@ void cargar_matriz_adyacencia(char** matriz_terrenos, int filas, int columnas);
 void crear_grafo(int filas, int columnas);
 
 void agregar_camino(int origen, int destino, int peso);
+
+void calcular_camino_minimo_dijktra(int origen, int destino, int filas, int columnas);
     
 void mostrar_grafo();
 

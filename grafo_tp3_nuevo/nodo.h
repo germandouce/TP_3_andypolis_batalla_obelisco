@@ -22,8 +22,10 @@ private:
     Nodo* adyacente_arriba;
     Nodo* siguiente;
     Nodo* anterior;
+    int distancia_minima_origen;
 
     bool* existe_adyacente;
+
 
 //METODOS
 
@@ -90,6 +92,22 @@ public:
     //pre:
     //post: Obtiene vector existe_adyacente
     bool* obtener_existe_adyacente();
+
+    //pre:
+    //post: Devuelve distancia_minima_origen
+    int obtener_distancia_minima_origen();
+
+    //pre: distancia_minima_origen tiene que haber sido inicializado en 0.
+    //post: Asigna el camino minimo desde el origen hasta el nodo.
+    void asignar_distancia_minima(int peso_nodo);
+
+    //pre:
+    //post: Inicializa en 0 en el camino minimo desde el origen hasta el nodo.
+    void Nodo::asignar_distancia_minima();
+
+    //pre:
+    //post: Reemplaza el distancia_minima_origen por el nuevo valor.
+    void Nodo::reemplazar_distancia_minima(int distancia_minima_origen);
 
     //pre:
     //post: Elimina el vertice.

@@ -13,6 +13,8 @@ Lista::Lista(int cantidad_elementos, int filas, int columnas){
         agregar(i, filas, columnas, fila, columna);
         asignar_nodos_adyacentes(filas, columnas, devolver_nodo(i));
         devolver_nodo(i) -> inicializar_existe_adyacente();
+        devolver_nodo(i) -> asignar_distancia_minima();
+        devolver_nodo(i) -> asignar_distancia_minima(INFINITO);
         if (columna == columnas){
             columna = 0;
             fila++;

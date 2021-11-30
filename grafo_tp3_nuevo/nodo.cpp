@@ -15,6 +15,22 @@ Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posici
 
 }
 
+int Nodo::obtener_distancia_minima_origen(){
+    return distancia_minima_origen;
+}
+
+void Nodo::asignar_distancia_minima(int peso_nodo){
+    this -> distancia_minima_origen = 0;
+}
+
+void Nodo::asignar_distancia_minima(int peso_nodo){
+    this -> distancia_minima_origen = distancia_minima_origen + peso_nodo;
+}
+
+void Nodo::reemplazar_distancia_minima(int distancia_minima_origen){
+    this -> distancia_minima_origen = distancia_minima_origen;
+}
+
 void Nodo::inicializar_existe_adyacente(){
     for (int i = 0; i < CANTIDAD_NODOS_ADYACENTES; i++){
         existe_adyacente[i] = true;
