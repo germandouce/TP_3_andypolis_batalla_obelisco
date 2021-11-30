@@ -6,19 +6,19 @@ Lista::Lista(){
     primero =  nullptr;
 }
 
-Lista::Lista(int cantidad_elementos, int filas, int columnas){
+void Lista::agregar_vertices(int cantidad_elementos, int filas, int columnas){
     for(int i = 1; i <= cantidad_elementos; i++){
         int columna = i;
         int fila = PRIMER_FILA;
         agregar(i, filas, columnas, fila, columna);
-        asignar_nodos_adyacentes(filas, columnas, devolver_nodo(i));
+        /*asignar_nodos_adyacentes(filas, columnas, devolver_nodo(i));
         devolver_nodo(i) -> inicializar_existe_adyacente();
         devolver_nodo(i) -> asignar_distancia_minima();
         devolver_nodo(i) -> asignar_distancia_minima(INFINITO);
         if (columna == columnas){
             columna = 0;
             fila++;
-        }
+        }*/
     }
 
 }
@@ -46,15 +46,17 @@ Nodo* devolver_siguiente(Nodo* nodo_actual){
 
 Nodo* Lista::devolver_nodo(int posicion){
     
-    Nodo* siguiente = primero -> obtener_siguiente();
+    Nodo* nodo_buscado = primero ;
     
-    for (int i = 0; i <= posicion; i++){
+    if(posicion != 1){
+    	for (int i = 1; i <= posicion - 1; i++){
             
-        siguiente = siguiente -> obtener_siguiente();
+    		nodo_buscado = nodo_buscado -> obtener_siguiente();
 
+    	}
     }
     
-    return siguiente;
+    return nodo_buscado;
 }
 // hay que inicializar toda la lista con sus elementos
 

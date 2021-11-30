@@ -1,6 +1,6 @@
 #include "vertice.h"
 
-Vertice::Vertice(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y) {
+Vertice::Vertice(int numero_vertice, int filas, int columnas, int posicion_x, int posicion_y) {
     this -> numero_vertice = numero_vertice;
     this -> filas = filas;
     this -> columnas = columnas;
