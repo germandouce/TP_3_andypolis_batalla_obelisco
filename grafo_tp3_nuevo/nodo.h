@@ -3,8 +3,6 @@
 
 #include "vertice.h"
 
-const int INFINITO = 99999;
-
 const int CANTIDAD_NODOS_ADYACENTES = 4;
 
 const int POSICION_ARRIBA = 0;

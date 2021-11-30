@@ -7,6 +7,7 @@ const int PRIMER_POSICION = 1;
 const int PRIMER_FILA = 1;
 const int PRIMER_COLUMNA = 1;
 
+const int INFINITO = 99999;
 
 class Lista{
 
@@ -28,7 +29,7 @@ private:
 public:
     Lista();
 
-    void agregar_vertices(int cantidad_elementos, int filas, int columnas);
+    Lista(int cantidad_elementos, int filas, int columnas);
 
     //pre:
     //post: Devuelve la cantidad de elementos que tiene la lista.

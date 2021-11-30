@@ -12,8 +12,6 @@ Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posici
     adyacente_derecho = nullptr;
     siguiente = nullptr;
     anterior = nullptr;
-    existe_adyacente = nullptr;
-    distancia_minima_origen = INFINITO;
 
 }
 
