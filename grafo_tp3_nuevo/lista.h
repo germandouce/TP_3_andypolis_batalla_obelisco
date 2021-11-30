@@ -7,7 +7,7 @@ const int PRIMER_POSICION = 1;
 const int PRIMER_FILA = 1;
 const int PRIMER_COLUMNA = 1;
 
-const int INFINITO = 999999999999;
+const int INFINITO = 99999;
 
 class Lista{
 

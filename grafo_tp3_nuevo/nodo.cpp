@@ -19,7 +19,7 @@ int Nodo::obtener_distancia_minima_origen(){
     return distancia_minima_origen;
 }
 
-void Nodo::asignar_distancia_minima(int peso_nodo){
+void Nodo::asignar_distancia_minima(){
     this -> distancia_minima_origen = 0;
 }
 

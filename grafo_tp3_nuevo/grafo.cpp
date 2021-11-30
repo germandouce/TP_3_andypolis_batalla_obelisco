@@ -7,6 +7,8 @@ Grafo::Grafo() {
 }
 
 void Grafo::calcular_camino_minimo_dijktra(int origen, int destino, int filas, int columnas){
+    //tengo que tener la lista con todos los nodos y si paso por ahi
+    // arranco del origen y tengo que ver los nodos adyacentes empesando por el que tiene menos peso
     lista_vertices -> devolver_nodo(origen) -> asignar_distancia_minima();
     int nueva_distancia_minima = lista_vertices -> devolver_nodo(origen) -> obtener_distancia_minima_origen() + matriz_adyacencia[origen][origen + columnas];
     lista_vertices -> devolver_nodo(origen) -> obtener_abajo() -> reemplazar_distancia_minima(nueva_distancia_minima);

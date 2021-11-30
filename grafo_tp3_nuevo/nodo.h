@@ -103,11 +103,11 @@ public:
 
     //pre:
     //post: Inicializa en 0 en el camino minimo desde el origen hasta el nodo.
-    void Nodo::asignar_distancia_minima();
+    void asignar_distancia_minima();
 
     //pre:
     //post: Reemplaza el distancia_minima_origen por el nuevo valor.
-    void Nodo::reemplazar_distancia_minima(int distancia_minima_origen);
+    void reemplazar_distancia_minima(int distancia_minima_origen);
 
     //pre:
     //post: Elimina el vertice.

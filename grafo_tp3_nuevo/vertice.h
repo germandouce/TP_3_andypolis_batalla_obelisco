@@ -25,7 +25,7 @@ public:
 
     //pre:
     //post: devuelve el numero de vertice
-    int obtener_vertice();
+    int obtener_numero_vertice();
 
     //pre:
     //post: devuelve la cantidad de filas

@@ -16,7 +16,7 @@ Vertice::Vertice(){
     posicion_y = 0;
 }
 
-int Vertice::obtener_vertice() {
+int Vertice::obtener_numero_vertice() {
     return numero_vertice;
 }
 
