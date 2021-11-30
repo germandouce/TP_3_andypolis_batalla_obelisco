@@ -2,8 +2,6 @@
 #define MATERIAL_H_INCLUDED
 
 #include <string>
-#include "system_clear.h"
-#include "colores.h"
 
 using namespace std;
 
@@ -12,29 +10,10 @@ const string W = "madera";
 const string I = "metal";
 const string VACIO = "";
 
-const int PRODUCCION_MINA = 15;
-const int PRODUCCION_ASERRADERO = 25;
-const int PRODUCCION_FABRICA = 40;
-
-const int SIN_MATERIAL = 0;
-const int MATERIAL_CONTENIDO_POR_CASILLERO = 1;
-
-const int PIEDRA = 0;
-const int MADERA = 1;
-const int METAL = 2;
-const int BOMBAS = 3;
-
-const int CANT_MATERIALES = 3;
-const int CANT_MAX_PIEDRA = 2;
-const int CANT_MAX_MADERA = 2;
-const int CANT_MAX_METAL = 3;
-const int CANT_MIN_PIEDRA = 1;
-const int CANT_MIN_MADERA = 0;
-const int CANT_MIN_METAL = 2;
 
 class Material {
 
-    private:
+    protected:
     
     string nombre_material;
     int cantidad_material;
@@ -46,11 +25,23 @@ class Material {
     //post: Instancia un Material "vacío" con todos sus atributos nulos.
     Material();
 
-    // Constructor con parámetros.
+    // Constructor con dos parámetros.
     //pre: -
-    //post: Instancia un Material según los valores ingresados.
+    //post: Instancia un Material cualquiera sea el nombre y con la 
+    //cantidad del mismo
     Material(string nombre_material, int cantidad_material);
     
+    // Constructor con dos parámetros.
+    //pre: -
+    //post: Instancia un Material standard sea el nombre y con la 
+    //cantidad del mismo
+    Material(int cantidad_material);
+
+    //Saluda
+    //PRE: -
+    //POST: Saluda. Todos saludan "igual" pero con distintos nombre y contenidos
+    virtual void saludar() = 0;
+
     //pre: -
     //post: Devuelve el nombre del Material.
     string obtener_nombre();

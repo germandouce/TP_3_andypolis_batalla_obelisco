@@ -2,13 +2,13 @@
 #include "metal.h"
 
 //Constructor de Metal don dos parametros
-Metal :: Metal(string nombre, int cantidad) : Material(nombre, cantidad){
-        nombre = nombre;
-        cantidad = cantidad;
+Metal :: Metal() : Material(cantidad_material){
+        nombre_material = "metal";
 }
 
 
 //metal saluda
 void Metal :: saludar(){
-        cout << "Soy un metal y me encuentro en el casillero consultado" <<endl;
+        cout << "Soy un paquete de "<<cantidad_material << " metale "<<
+        "y me encuentro en el casillero consultado"<<endl;
 }

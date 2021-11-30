@@ -14,7 +14,7 @@ public:
     //Constructor de metal con dos parametros
     //PRE:-
     //POST: Construye una piedra con 2 parametros
-    Metal(string, int);
+    Metal();
 
     //metal saluda
     //PRE:-

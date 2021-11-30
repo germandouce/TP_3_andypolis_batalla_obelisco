@@ -1,6 +1,6 @@
 
-#ifndef MADERA_H
-#define MADERA_H
+#ifndef BOMBAS_H
+#define BOMBAS_H
 
 #include <iostream>
 #include <string>
@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class Madera : public Material {
+class Bombas : public Material {
 
 private:
 
@@ -16,8 +16,8 @@ private:
 public:
     //Constructor de piedra con dos parametros
     //PRE:-
-    //POST: Construye una piedra con 2 parametros
-    Madera();
+    //POST: Construye un paquete de bombas sin parametros
+    Bombas();
 
     //Piedra saluda
     //PRE:-
@@ -28,4 +28,4 @@ public:
 };
 
 
-#endif // MADERA_H_INCLUDED
+#endif // BOMBAS_H

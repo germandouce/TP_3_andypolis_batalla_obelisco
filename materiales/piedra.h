@@ -12,12 +12,11 @@ class Piedra : public Material {
 
 private:
 
-
 public:
     //Constructor de piedra con dos parametros
     //PRE:-
     //POST: Construye una piedra con 2 parametros
-    Piedra(string, int);
+    Piedra();
 
     //Piedra saluda
     //PRE:-

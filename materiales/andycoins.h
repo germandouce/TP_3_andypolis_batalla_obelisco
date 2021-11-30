@@ -8,16 +8,15 @@
 
 using namespace std;
 
-class Madera : public Material {
+class Andycoins : public Material {
 
 private:
-
 
 public:
     //Constructor de piedra con dos parametros
     //PRE:-
-    //POST: Construye una piedra con 2 parametros
-    Madera();
+    //POST: Construye un andycoin con 2 parametros
+    Andycoins();
 
     //Piedra saluda
     //PRE:-

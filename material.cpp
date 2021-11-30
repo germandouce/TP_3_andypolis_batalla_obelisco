@@ -1,9 +1,13 @@
-#include <iostream>
 #include "material.h"
 
 Material::Material() {
     this -> nombre_material = "";
     this -> cantidad_material = 0;
+}
+
+Material::Material(int cantidad_material) {
+	this -> nombre_material = "material";
+    this -> cantidad_material = cantidad_material;
 }
 
 Material::Material(string nombre_material, int cantidad_material) {
@@ -29,10 +33,6 @@ void Material::sumar_costo(int costo) {
 
 void Material::restar_costo(int costo) {
     cantidad_material -= costo;
-}
-
-void Material::mostrar_informacion() {
-	cout << SUCESS_COLOR << "-Soy un/a " << obtener_nombre() << " y me encuentro en el casillero consultado." << END_COLOR << endl;
 }
 
 int Material::llover_material_aleatorio() {

@@ -1,14 +1,13 @@
-#include <iostream>
 #include "piedra.h"
 
 //Constructor de piedra don dos parametros
-Piedra :: Piedra(string nombre, int cantidad) : Material(nombre, cantidad){
-        nombre = nombre;
-        cantidad = cantidad;
+Piedra :: Piedra(): Material(cantidad_material){
+        nombre_material = "piedra";
 }
 
 
 //Piedra saluda
 void Piedra :: saludar(){
-        cout << "Soy una piedra y me encuentro en el casillero consultado"<<endl;
+        cout << "Soy un paquete de" << cantidad_material << " piedras y me encuentro en"<<
+        "el casillero consultado"<<endl;
 }
