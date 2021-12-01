@@ -1,7 +1,7 @@
 #ifndef MINA_H
 #define MINA_H
 
-#include "../edificio.h"
+#include "edificio.h"
 
 class Mina: public Edificio {
 
@@ -12,12 +12,10 @@ public:
 
     Mina(int piedra, int madera, int metal, int maximo);
 
-    int obtener_cantidad_brindada();
-
-    string obtener_elemento_brindado();
+    string obtener_material_brindado();
     
     void mostrar_mensaje();
 
 };
 
-#endif
+#endif //MINA_H
