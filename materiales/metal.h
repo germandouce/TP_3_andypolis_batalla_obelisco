@@ -1,9 +1,6 @@
-#ifndef METAL_H
-#define METAL_H#include <iostream>
-#include <string>
+#ifndef METAL_H_INCLUDED
+#define METAL_H_INCLUDED
 #include "material.h"
-
-using namespace std;
 
 class Metal : public Material {
 
@@ -11,10 +8,10 @@ private:
 
 
 public:
-    //Constructor de metal con dos parametros
+    //Constructor de metal con 1 parametro
     //PRE:-
-    //POST: Construye una piedra con 2 parametros
-    Metal();
+    //POST: Construye un paquete de metales con 1 parametro
+    Metal(int cantidad_material);
 
     //metal saluda
     //PRE:-
@@ -24,4 +21,4 @@ public:
 };
 
 
-#endif // METAL_H
+#endif // METAL_H_INCLUDED

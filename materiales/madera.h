@@ -1,25 +1,19 @@
+#ifndef MADERA_H_INCLDUED
+#define MADERA_H_INCLUDED
 
-#ifndef MADERA_H
-#define MADERA_H
-
-#include <iostream>
-#include <string>
 #include "material.h"
-
-using namespace std;
 
 class Madera : public Material {
 
 private:
 
-
 public:
-    //Constructor de piedra con dos parametros
+    //Constructor de madera con 1 parametro
     //PRE:-
-    //POST: Construye una piedra con 2 parametros
-    Madera();
+    //POST: Construye un paquete de maderas con 1 parametros
+    Madera(int cantidad_material);
 
-    //Piedra saluda
+    //Madera saluda
     //PRE:-
     //POST: Saluda describiendose
     void saludar();
