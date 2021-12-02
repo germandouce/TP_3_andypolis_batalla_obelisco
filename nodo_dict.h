@@ -2,15 +2,15 @@
 #define NODO_DICT_H
 
 #include <iostream>
+#include "edificios/edificio.h"
 
-template <typename Dato>
 class Nodo_dict {
     
     private:
 
     // ATRIBUTOS.
     
-    Dato* dato;
+    Edificio* edificio;
     Nodo_dict* izquierdo;
     Nodo_dict* derecho;
     Nodo_dict* padre;
@@ -21,22 +21,22 @@ class Nodo_dict {
     // METODOS
 
     // Constructor con parametros
-    Nodo_dict(Dato* dato);
+    Nodo_dict(Edificio* edificio);
 
     // Constructor sin parametros (por default)
     Nodo_dict();
 
     // PRE: -
-    // POST: Devuelve el dato
-    Dato* devolver_dato();
+    // POST: Devuelve el edificio
+    Edificio* devolver_edificio();
 
     // PRE: -
-    // POST: Devuelve el ID del dato
+    // POST: Devuelve el ID del edificio
     int devolver_id();
 
-    // PRE: Recibe un dato
-    // POST: coloca el dato en el nodo
-    void colocar_dato(Dato* dato);
+    // PRE: Recibe un edificio
+    // POST: coloca el edificio en el nodo
+    void colocar_edificio(Edificio* edificio);
 
     // PRE: Recibe un nodo
     // POST: Coloca el nodo como su padre
@@ -44,7 +44,7 @@ class Nodo_dict {
     
     // PRE: Recibe el nodo izquierdo y el nodo padre
     // POST: agrega el nodo de su izquierdo y su antecesor
-    void colocar_nodo_izquierdo(Nodo_dict* izquierdo, Nodo_dict* padre );
+    void colocar_nodo_izquierdo(Nodo_dict* izquierdo, Nodo_dict* padre);
 
     // PRE: Recibe el nodo derecho y el nodo padre
     // POST: agrega el nodo de su derecho y su antecesor
@@ -84,96 +84,6 @@ class Nodo_dict {
 
     //Destructor de nodo
     ~Nodo_dict();
-
 };
-
-template <typename Dato>
-Nodo_dict<Dato>::Nodo_dict(Dato* dato){
-    
-    this -> dato = dato;
-    this -> id = dato -> devolver_id();
-    this -> izquierdo = nullptr;
-    this -> derecho = nullptr;
-    this -> padre = nullptr;
-
-}
-
-template <typename Dato>
-Dato* Nodo_dict<Dato>::devolver_dato() {
-    return (this -> dato);
-}
-
-template <typename Dato>
-int Nodo_dict<Dato>::devolver_id() {
-    return ( this -> id );
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::colocar_dato(Dato* dato) {
-    this -> dato = dato;
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecho, Nodo_dict* padre) {
-    this -> derecho = derecho;
-    this -> padre = padre;
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierdo, Nodo_dict* padre ) {
-    this -> izquierdo = izquierdo;
-    this -> padre = padre;
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_derecho(Nodo_dict* derecho) {
-    this -> derecho = derecho;
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::colocar_nodo_izquierdo(Nodo_dict* izquierdo) {
-    this -> izquierdo = izquierdo;
-}
-
-template <typename Dato>
-void Nodo_dict<Dato>::coloca_nodo_padre(Nodo_dict* padre) {
-    this -> padre = padre;
-}
-
-template <typename Dato>
-Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_derecho() {
-    return ( this -> derecho );
-}
-
-template <typename Dato>
-Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_izquierdo() {
-    return ( this -> izquierdo );
-}
-
-template <typename Dato>
-Nodo_dict<Dato>* Nodo_dict<Dato>::devolver_nodo_padre(){
-    return ( this -> padre );
-}
-
-template <typename Dato>
-bool Nodo_dict<Dato>::es_hoja() {
-    return ( this -> devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo == nullptr );
-}
-
-template <typename Dato>
-bool Nodo_dict<Dato>::hijo_derecho_unico() {
-    return (this -> devolver_nodo_izquierdo() == nullptr && this -> devolver_nodo_derecho() != nullptr );
-}
-
-template <typename Dato>
-bool Nodo_dict<Dato>::hijo_izquierdo_unico() {
-    return (this -> devolver_nodo_derecho() == nullptr && this -> devolver_nodo_izquierdo() != nullptr );
-}
-
-template <typename Dato>
-Nodo_dict<Dato>::~Nodo_dict() {
-
-}
-
 
 #endif // NODO_DICT_H
