@@ -11,5 +11,9 @@ int Obelisco::obtener_cantidad_brindada(){
 }
 
 void Obelisco::mostrar_mensaje(){
-    cout << " Soy un " << nombre << " no brindo materiales, me encuentro en el casillero consultado . " << endl;
+    cout << " Soy un " << nombre << " no brindo materiales, me encuentro en el casillero consultado " << endl;
+}
+
+string Obelisco::obtener_elemento_brindado(){
+    return "";
 }

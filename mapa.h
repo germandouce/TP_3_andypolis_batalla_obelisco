@@ -1,8 +1,40 @@
-#ifndef MAPA_H_INCLUDED
-#define MAPA_H_INCLUDED
+#ifndef MAPA_H
+#define MAPA_H
 
-#include "ubicacion.h"
-#include "casillero.h"
+#include <fstream>
+#include "diccionario.h"
+#include "colores.h"
+#include "system_clear.h"
+
+#include "./materiales./piedra.h"
+#include "./materiales./madera.h"
+#include "./materiales./metal.h"
+#include "./materiales./andycoins.h"
+#include "./materiales./bombas.h"
+
+#include "./edificios./aserradero.h"
+#include "./edificios./escuela.h"
+#include "./edificios./fabrica.h"
+#include "./edificios./mina.h"
+#include "./edificios./mina_oro.h"
+#include "./edificios./obelisco.h"
+#include "./edificios./planta_electrica.h"
+
+#include "./casilleros./terreno.h"
+#include "./casilleros./lago.h"
+#include "./casilleros./camino.h"
+#include "./casilleros./muelle.h"
+#include "./casilleros./betun.h"
+
+const string PATH_EDIFICIOS = "edificios.txt";
+const string PATH_MATERIALES = "materiales.txt";
+const string PATH_UBICACIONES = "ubicaciones.txt";
+const string PATH_MAPA = "mapa.txt";
+
+const char PARENTESIS_CHAR = '(';
+const int OPCION_PARENTESIS = 0;
+const int OPCION_NUMEROS = 1;
+const int POSICION_INICIAL = 0;
 
 const int TIPOS_MATERIALES_LLUVIA = 3;
 
@@ -13,9 +45,8 @@ class Mapa {
 	int filas;
 	int columnas;
 	int transitables_disponibles;
-	int construibles_disponibles;
-	int inaccesibles;
 	Casillero*** matriz;
+	Diccionario<Edificio*>* diccionario;
 
 	public:
 
@@ -53,6 +84,8 @@ class Mapa {
     //post: Asigna el puntero a Casillero a la posición fila y columna ingresadas.
 	void cargar_casillero(int fila, int columna, Casillero* casillero);
 
+	bool se_cargo_diccionario();
+
 	//pre: -
     //post: Imprime el Mapa.
 	void imprimir_mapa();
@@ -76,13 +109,17 @@ class Mapa {
 
 	//pre: Los valores ingresados deben cumplir que: 0 <= fila < filas y 0 <= columna < columnas.
     //post: Construye el Edificio en la fila y columna ingresadas si esta no está ocupada.
-	void construir_edificio(int fila, int columna, Edificio edificio_a_construir);
-
-	//pre: -
-    //post: Suma uno al atributo 'construibles_disponibles'.
-	void sumar_construibles_disponibles();
+	void construir_edificio(int fila, int columna, Edificio* edificio_a_construir);
 	
 	private:
+
+	string leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
+
+	bool verificar_tipo_caracter(string palabra, int tipo_caracter);
+
+	bool Mapa::es_numero(string palabra);
+
+	void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
 
 	//pre: -
     //post: Verifica si puede llover más del 'material_llovido' y devuelve True.
@@ -102,4 +139,4 @@ class Mapa {
 	void pedir_columna(int &columna);
 };
 
-#endif // MAPA_H_INCLUDED
+#endif // MAPA_H

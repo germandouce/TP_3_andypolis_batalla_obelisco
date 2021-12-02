@@ -4,6 +4,8 @@ Escuela::Escuela(int piedra, int madera, int metal, int maximo) : Edificio(piedr
     this->nombre = "escuela";
     this->diminutivo = "E";
     this->brinda = 0;
+    this->vida_actual = 1;
+    this->vida_maxima = 1;
 }
 
 int Escuela::obtener_cantidad_brindada(){
@@ -11,5 +13,9 @@ int Escuela::obtener_cantidad_brindada(){
 }
 
 void Escuela::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " no brindo materiales y me encuentro en el casillero consultado . " << endl;
+    cout << " Soy una " << nombre << " brindo " <<brinda<<" andycoins y me encuentro en el casillero consultado" << endl;
+}
+
+string Escuela::obtener_elemento_brindado(){
+    return "andycoin";
 }

@@ -7,8 +7,6 @@ Mapa::Mapa(int filas, int columnas) {
 	this -> filas = filas;
 	this -> columnas = columnas;
 	this -> transitables_disponibles = 0;
-	this -> construibles_disponibles = 0;
-	this -> inaccesibles = 0;
 	
 	this -> matriz = new Casillero** [filas];
 
@@ -52,30 +50,106 @@ void Mapa::cargar_casillero(int fila, int columna, Casillero* casillero) {
 	matriz[fila][columna] = casillero;
 }
 
+// CARGA DE ARCHIVOS
+
+bool Mapa::se_cargo_diccionario() {
+
+	ifstream archivo(PATH_EDIFICIOS);
+    string nombre_edificio;
+	int piedra;
+	int madera;
+	int metal;
+    int limite_construccion;
+
+    string nombre_material;
+    int cantidad_material;
+
+    if (!archivo.is_open()) {
+        cout << endl;
+        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de edificios." << END_COLOR << endl;
+        return false;
+    }
+    else {
+        while (archivo >> nombre_edificio) {
+
+            piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
+            archivo >> madera;
+            archivo >> metal;
+            archivo >> limite_construccion;
+
+            Edificio* edificio = cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+        }
+    };
+    archivo.close();
+    return true;
+}
+
+void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {
+
+	Edificio* edificio;
+
+	if (nombre_edificio == "aserradero") {
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
+		string diminutivo = edificio -> obtener_diminutivo();
+		diccionario -> agregar_dato(edificio);
+	}
+
+	if (nombre_edificio == "escuela") {
+		edificio = new Escuela(piedra, madera, metal, limite_construccion);
+		string diminutivo = edificio -> obtener_diminutivo();
+		diccionario -> agregar_dato(edificio);
+	}
+
+	if (nombre_edificio == "aserradero") {
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
+		string diminutivo = edificio -> obtener_diminutivo();
+		diccionario -> agregar_dato(edificio);
+	}
+
+
+
+
+}
+
+
+// FUNCIONALIDADES
+
 void Mapa::imprimir_mapa() {
 
-	string coordenas_columnas = "    ";
-	string lineas_columnas = "  -";
+	string coordenas_columnas = "     ";
+	string lineas_columnas = "  �";
+	string separador = "  �";
+	string espacios = "   ";
 
 	cout << SUCESS_COLOR << "Este es el mapa de la ciudad: " << endl;
 	cout << END_COLOR << endl;
 
 	for (int c = 0; c < columnas; c++) {
-		coordenas_columnas += to_string(c + 1) + "   ";
-		lineas_columnas += "----";
+
+		if (c > 8) {
+			espacios = "  ";
+		}
+
+		coordenas_columnas += to_string(c + 1) + espacios;
+		lineas_columnas += "����";
 	}
 
 	cout << ENTER_COLOR << coordenas_columnas << endl;
-	cout << ENTER_COLOR << lineas_columnas << endl;
+	cout << ENTER_COLOR << " " << lineas_columnas << endl;
 
 	for (int i = 0; i < filas; i++) {
-		cout << ENTER_COLOR << i + 1 << " |" << END_COLOR;
+
+		if (i > 8) {
+			separador = " �";
+		}
+
+		cout << ENTER_COLOR << i + 1 << separador << END_COLOR;
 		for (int j = 0; j < columnas; j++) {
 			matriz[i][j] -> imprimir_casillero();
-			cout << ENTER_COLOR << "|" << END_COLOR;
+			cout << ENTER_COLOR << "�" << END_COLOR;
 		}
 		cout << endl;
-		cout << ENTER_COLOR << lineas_columnas << endl;
+		cout << ENTER_COLOR << " " << lineas_columnas << endl;
 	}
 	cout << END_COLOR << endl;
 }
@@ -96,7 +170,9 @@ void Mapa::generar_lluvia_materiales() {
 	for (int i = 0; i < filas && total_llovido; i++) {
 		for (int j = 0; j < columnas && total_llovido; j++) {
 
-			if (matriz[i][j] -> obtener_tipo_casillero() == TRANSITABLE && !matriz[i][j] -> obtener_cantidad_contenida()) {
+			string tipo_casillero = matriz[i][j] -> obtener_tipo_casillero();
+
+			if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && !matriz[i][j] -> obtener_cantidad_contenida()) {
 
 				Material nuevo_material = Material();
 				material_llovido = nuevo_material.llover_material_aleatorio();
@@ -106,7 +182,7 @@ void Mapa::generar_lluvia_materiales() {
 
 					borrar_casillero(matriz[i][j]);
 
-					Casillero_transitable* transitable = new Casillero_transitable(i, j);
+					Casillero_transitable* transitable = new Casillero_transitable();
 					transitable -> asignar_material(nuevo_material);
 
 					matriz[i][j] = transitable;
@@ -173,17 +249,10 @@ void Mapa::borrar_casillero(Casillero* casillero) {
 
 void Mapa::sumar_casillero_por_tipo(string tipo_casillero) {
 
-	if (tipo_casillero == TRANSITABLE) {
+	if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
 		transitables_disponibles++;
 	}
 	
-	if (tipo_casillero == CONSTRUIBLE) {
-		construibles_disponibles++;
-	}
-	
-	if (tipo_casillero == INACCESIBLE) {
-		inaccesibles++;
-	}
 }
 
 void Mapa::consultar_casillero() {
@@ -250,16 +319,44 @@ void Mapa::construir_edificio(int fila, int columna, Edificio edificio_a_constru
 
 		borrar_casillero(matriz[fila][columna]);
 
-		Casillero_construible* construible = new Casillero_construible(fila, columna);
+		Casillero_construible* construible = new Casillero_construible();
 		construible -> asignar_edificio(edificio_a_construir);
 
 		matriz[fila][columna] = construible;
 		matriz[fila][columna] -> ocupar_casillero();
 
-		construibles_disponibles--;
 	}
 }
 
-void Mapa::sumar_construibles_disponibles() {
-	construibles_disponibles++;
+// METODOS PRIVADOS
+
+string Mapa::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion) {
+	
+    string palabra_edificio = "";
+	archivo >> palabra_edificio;
+
+	while (!verificar_tipo_caracter(palabra_edificio, opcion)) {
+		nombre_edificio = nombre_edificio + " " + palabra_edificio;
+		archivo >> palabra_edificio;
+	}
+	return palabra_edificio;
+}
+
+bool Mapa::verificar_tipo_caracter(string palabra, int tipo_caracter) {
+	
+    bool es_caracter_evaluado = false;
+
+	if (tipo_caracter == OPCION_NUMEROS) {
+		es_caracter_evaluado = es_numero(palabra);
+	}
+	else {
+		if (palabra[POSICION_INICIAL] == PARENTESIS_CHAR) {
+			es_caracter_evaluado = true;
+		}
+	}
+	return es_caracter_evaluado;
+}
+
+bool Mapa::es_numero(string palabra) {
+	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
 }
