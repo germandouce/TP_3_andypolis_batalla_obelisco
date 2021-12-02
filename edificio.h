@@ -11,7 +11,7 @@ class Edificio
 protected:
 
     string nombre;
-    string diminutivo;
+    char* diminutivo;
     int cantidad_piedra;
     int canitdad_madera;
     int cantidad_metal;
@@ -20,6 +20,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
+    int posicion_x;
+    int posicion_y;
 
 public:
 
@@ -39,7 +41,7 @@ public:
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el diminutivo del edificio, siendo este la primer letra de la palabra ( getter ).
-    string obtener_diminutivo();
+    char* obtener_diminutivo();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la cantidad de piedra necesaria para construir.
@@ -110,6 +112,16 @@ public:
     //PRE:
     //POST: Suma 1 a la cantidad de vida siempre u cuando lo permita dicho edificio.
     void reparar();
+
+    //Devolver posicion X
+    //PRE:-
+    //POST: Devuelve un entero con la posicion x del edificio
+    int obtener_posicion_x();
+
+    //Devolver posicion y
+    //PRE:-
+    //POST: Devuelve un entero con la posicion y del edificio
+    int obtener_posicion_y();
 
     // Destructor
     // PRE: -
