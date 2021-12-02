@@ -101,6 +101,13 @@ void Edificio::reparar(){
     }
 }
 
+int Edificio::obtener_posicion_x(){
+    return posicion_x;
+}
+
+int Edificio::obtener_posicion_y(){
+    return posicion_y;
+}
 
 Edificio::~Edificio(){}
 

@@ -20,6 +20,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
+    int posicion_x;
+    int posicion_y;
 
 public:
 
@@ -110,6 +112,16 @@ public:
     //PRE:
     //POST: Suma 1 a la cantidad de vida siempre u cuando lo permita dicho edificio.
     void reparar();
+
+    //Devolver posicion X
+    //PRE:-
+    //POST: Devuelve un entero con la posicion x del edificio
+    int obtener_posicion_x();
+
+    //Devolver posicion y
+    //PRE:-
+    //POST: Devuelve un entero con la posicion y del edificio
+    int obtener_posicion_y();
 
     // Destructor
     // PRE: -
