@@ -1,14 +1,24 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 
+
+#include <iostream>
+
+using namespace std;
+
+
+const int PRIMER_POSICION = 1;
+const int PRIMER_FILA = 1;
+const int PRIMER_COLUMNA = 1;
+
 class Vertice {
 //ATRIBUTOS
 private:
     int numero_vertice;
-    int filas;
-    int columnas;
-    int posicion_x;
-    int posicion_y;
+    int cantidad_filas;
+    int cantidad_columnas;
+    int fila;
+    int columna;
     
 
 //METODOS
@@ -19,28 +29,28 @@ public:
     Vertice();
 
     //constructor con parametros(numero_vertice, fila, columna y coodernadas)
-    //pre: 0 < numero_vertice < cantidad vertices, 0 < filas < cantidad de filas, 0 < columnas < cantidad de columnas
-    // 0< posicion_x < filas , 0 < posicion_y < columnas.
-    Vertice(int numero_vertice, int filas, int columnas, int posicion_x, int posicion_y);
+    //pre: 0 < numero_vertice < cantidad vertices, 0 < cantidad_filas < cantidad de cantidad_filas, 0 < cantidad_columnas < cantidad de cantidad_columnas
+    // 0< fila < cantidad_filas , 0 < columna < cantidad_columnas.
+    Vertice(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
     //pre:
     //post: devuelve el numero de vertice
     int obtener_numero_vertice();
 
     //pre:
-    //post: devuelve la cantidad de filas
-    int obtener_fila();
+    //post: devuelve la cantidad de cantidad_filas
+    int obtener_cantidad_filas();
 
     //pre:
-    //post: devuelve la cantidad de columnas
-    int obtener_columna();
+    //post: devuelve la cantidad de cantidad_columnas
+    int obtener_cantidad_columnas();
 
     //pre:
     //post: devuelve la coordenada "x" que ocupa en la matriz
-    int obtener_posicion_x();
+    int obtener_fila();
 
     //pre:
     //post: devuelve la coordena "y" que ocupa en la matriz
-    int obtener_posicion_y();
+    int obtener_columna();
 };
 #endif //VERTICE_H

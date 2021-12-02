@@ -1,38 +1,38 @@
 #include "vertice.h"
 
-Vertice::Vertice(int numero_vertice, int filas, int columnas, int posicion_x, int posicion_y) {
+Vertice::Vertice(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna) {
     this -> numero_vertice = numero_vertice;
-    this -> filas = filas;
-    this -> columnas = columnas;
-    this -> posicion_x = posicion_x;
-    this -> posicion_y = posicion_y;
+    this -> cantidad_filas = cantidad_filas;
+    this -> cantidad_columnas = cantidad_columnas;
+    this -> fila = fila;
+    this -> columna = columna;
 }
 
 Vertice::Vertice(){
     numero_vertice = 0;
-    filas = 0;
-    columnas = 0;
-    posicion_x = 0;
-    posicion_y = 0;
+    cantidad_filas = 0;
+    cantidad_columnas = 0;
+    fila = 0;
+    columna = 0;
 }
 
 int Vertice::obtener_numero_vertice() {
     return numero_vertice;
 }
 
-int Vertice::obtener_fila() {
-    return filas;
+int Vertice::obtener_cantidad_filas() {
+    return cantidad_filas;
 }
 
-int Vertice::obtener_columna() {
-    return columnas;
+int Vertice::obtener_cantidad_columnas() {
+    return cantidad_columnas;
 }
 
-int Vertice::obtener_posicion_x(){
-    return posicion_x;
+int Vertice::obtener_fila(){
+    return fila;
 }
 
-int Vertice::obtener_posicion_y(){
-    return posicion_y;
+int Vertice::obtener_columna(){
+    return columna;
 }
 

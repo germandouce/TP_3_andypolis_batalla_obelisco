@@ -6,13 +6,14 @@ Grafo::Grafo() {
     
 }
 
-void Grafo::calcular_camino_minimo_dijktra(int origen, int destino, int filas, int columnas){
+void Grafo::calcular_camino_minimo_dijktra(int origen, int destino, int cantidad_filas, int cantidad_columnas){
     //tengo que tener la lista con todos los nodos y si paso por ahi
     // arranco del origen y tengo que ver los nodos adyacentes empesando por el que tiene menos peso
+	/*
     lista_vertices -> devolver_nodo(origen) -> asignar_distancia_minima();
-    int nueva_distancia_minima = lista_vertices -> devolver_nodo(origen) -> obtener_distancia_minima_origen() + matriz_adyacencia[origen][origen + columnas];
+    int nueva_distancia_minima = lista_vertices -> devolver_nodo(origen) -> obtener_distancia_minima_origen() + matriz_adyacencia[origen][origen + cantidad_columnas];
     lista_vertices -> devolver_nodo(origen) -> obtener_abajo() -> reemplazar_distancia_minima(nueva_distancia_minima);
-
+*/
 }
 
 void Grafo::inicializar_lista_vertices(Lista* lista_vertices){
@@ -25,32 +26,36 @@ void Grafo::agregar_camino(int origen, int destino, int peso) {
         
 }
 
-void Grafo::cargar_matriz_adyacencia(char** matriz_terrenos, int filas, int columnas){
+void Grafo::cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas){
     for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++){
-        bool* existe_adyacente = lista_vertices -> devolver_nodo(i) -> obtener_existe_adyacente();
+    	int k = 0;
+    	for (int j = 0; j < lista_vertices -> obtener_cantidad_elementos(); j++){
 
-        for (int j = 0; i < lista_vertices -> obtener_cantidad_elementos(); j++){
-            matriz_adyacencia[i][j] = INFINITO;
-        }
+    		int nodo_adyacente = lista_vertices-> devolver_nodo(i) -> obtener_vector_adyacentes()[k];
 
-        matriz_adyacencia[i][i] = 0;
-
-        if (existe_adyacente[POSICION_ARRIBA]){
-            matriz_adyacencia[i][i - columnas] = transformar_terreno_a_peso(matriz_terrenos[i][i - columnas]);
-        }
-        else if (existe_adyacente[POSICION_ABAJO]){
-            matriz_adyacencia[i][i + columnas] = transformar_terreno_a_peso(matriz_terrenos[i][i + columnas]);
-        }
-        else if (existe_adyacente[POSICION_DERECHO]){
-            matriz_adyacencia[i][i + 1] = transformar_terreno_a_peso(matriz_terrenos[i][i + 1]);
-        }
-        else if (existe_adyacente[POSICION_IZQUIERDO]){
-            matriz_adyacencia[i][i - 1] = transformar_terreno_a_peso(matriz_terrenos[i][i - 1]);
-        }
-        
+    		if ((j + 1) == nodo_adyacente){
+    			matriz_adyacencia[i][j] = transformar_terreno_a_peso(matriz_terrenos[i][j]);
+    			k++;
+    		}
+    		else if (i == j){
+    			matriz_adyacencia[i][j] = 0;
+    		}
+    		else{
+    			matriz_adyacencia[i][j] = INFINITO;
+    		}
+    	}
     }
-   
 }
+
+void Grafo::mostrar_matriz_adyacencia(){
+    for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++){
+    	cout << endl;
+       	for (int j = 0; j < lista_vertices -> obtener_cantidad_elementos(); j++){
+    		cout <<"["<< matriz_adyacencia[i][j] << "] ";
+    	}
+    }
+}
+
 
 int Grafo::transformar_terreno_a_peso(char tipo_terreno){
     int peso;

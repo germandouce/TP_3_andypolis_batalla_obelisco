@@ -3,9 +3,6 @@
 
 #include "nodo.h"
 
-const int PRIMER_POSICION = 1;
-const int PRIMER_FILA = 1;
-const int PRIMER_COLUMNA = 1;
 
 
 class Lista{
@@ -16,19 +13,13 @@ private:
     Nodo* primero;
     Nodo* ultimo;
 
-//METODOS
-    //pre:
-    //post: Inicializa los nodos adyacentes horizontales.
-    void asignar_nodos_horizontales(int filas, int columnas, Nodo* nodo);
 
-    //pre:
-    //post: Inicializa los nodos adyacentes verticales.
-    void asignar_nodos_verticales(int filas, int columnas, Nodo* nodo);
+//METODOS
 
 public:
     Lista();
 
-    void agregar_vertices(int cantidad_elementos, int filas, int columnas);
+    void agregar_vertices(int cantidad_elementos, int cantidad_filas, int cantidad_columnas);
 
     //pre:
     //post: Devuelve la cantidad de elementos que tiene la lista.
@@ -36,7 +27,7 @@ public:
 
     //pre:
     //post: Agrega un nuevo elemento a la lista.
-    void agregar(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y);
+    void agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
     //pre: 1 < posicion <= cantidad_elementos. 
     //post: Devolver el nodo que esta n posiciones despues del primero.
@@ -46,10 +37,7 @@ public:
     //post: Devuelve el siguiente nodo respesto del nodo actual.
     Nodo* devolver_siguiente(Nodo* nodo_actual);
 
-
-    //pre: deben haber sido cargados los nodos en la lista antes.
-    //post: Inicializa todos los nodos adyacentes.
-    void asignar_nodos_adyacentes(int filas, int columnas, Nodo* nodo);
+    void mostrar();
 
     ~Lista();
 };

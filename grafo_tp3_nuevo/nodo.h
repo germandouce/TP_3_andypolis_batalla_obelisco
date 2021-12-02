@@ -3,56 +3,62 @@
 
 #include "vertice.h"
 
+
 const int INFINITO = 99999;
 
 const int CANTIDAD_NODOS_ADYACENTES = 4;
 
-const int POSICION_ARRIBA = 0;
-const int POSICION_ABAJO = 1;
-const int POSICION_IZQUIERDO = 2;
-const int POSICION_DERECHO = 3;
+const int CUATRO_ARISTAS = 4;
+const int TRES_ARISTAS = 3;
+const int DOS_ARISTAS = 2;
+
+const int PRIMERA_FILA = 1;
+const int PRIMERA_COLUMNA = 1;
 
 
 class Nodo
 {
 //ATRIBUTOS
 private:
+	int* vector_adyacentes;
     Vertice* vertice;
-    Nodo* adyacente_derecho; 
-    Nodo* adyacente_izquierdo; 
-    Nodo* adyacente_abajo;     
-    Nodo* adyacente_arriba;
     Nodo* siguiente;
     Nodo* anterior;
     int distancia_minima_origen;
 
-    bool* existe_adyacente;
+
 
 
 //METODOS
 
 public:
-    void inicializar_existe_adyacente();
+
+    bool tiene_cuatro_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool tiene_tres_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool tiene_dos_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool esta_en_los_bordes(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool esta_arriba(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool esta_abajo(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool esta_izquierda(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+    bool esta_derecha(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+
+
+    int encontrar_tipo_nodo(int fila, int columna, int cantidad_filas, int cantidad_columnas);
+
+    //pre: Se tiene que haber inicializado los nodos primero
+    //post: carga la lista de nodos adyacentes al nodo
+    void cargar_vector_adyacentes();
 
     //pre:
     //post: Inicializa el nodo con el vertice y sus vertices adyacentes.
-    Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y);
-
-    //pre:
-    //post: Inicializa el nodo adyacente derecho.
-    void asignar_derecho(Nodo* vertice_derecho);
-
-    //pre:
-    //post: Inicializa el nodo adyacente izquierdo.
-    void asignar_izquierdo(Nodo* vertice_izquierdo);
-    
-    //pre:
-    //post: Inicializa el nodo adyacente superior.
-    void asignar_arriba(Nodo* vertice_arriba);
-
-    //pre:
-    //post: Inicializa el nodo adyacente inferior.
-    void asignar_abajo(Nodo* vertice_abajo);
+    Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
     //pre:
     //post: Asigna el siguiente nodo por orden de numero de vertice
@@ -71,33 +77,16 @@ public:
     Nodo* obtener_anterior();
 
     //pre:
-    //post: Obtiene el nodo arriba
-    Nodo* obtener_arriba();
-
-    //pre:
-    //post: Obtiene el nodo abajo
-    Nodo* obtener_abajo();
-
-    //pre:
-    //post: Obtiene el nodo derecho
-    Nodo* obtener_derecho();
-
-    //pre:
-    //post: Obtiene el nodo izquierdo
-    Nodo* obtener_izquierdo();
-
-
-    //pre:
     //post: Obtiene el vertice del nodo
     Vertice* obtener_vertice();
 
     //pre:
-    //post: Obtiene vector existe_adyacente
-    bool* obtener_existe_adyacente();
-
-    //pre:
     //post: Devuelve distancia_minima_origen
     int obtener_distancia_minima_origen();
+
+    //pre:
+    //post: Devuelve el vector de vertices adyacentes
+    int* obtener_vector_adyacentes();
 
     //pre: distancia_minima_origen tiene que haber sido inicializado en 0.
     //post: Asigna el camino minimo desde el origen hasta el nodo.

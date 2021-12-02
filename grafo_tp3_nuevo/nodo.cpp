@@ -1,24 +1,102 @@
 #include "nodo.h"
 
-const int PRIMERA_FILA = 1;
-const int PRIMERA_COLUMNA = 1;
 
-Nodo::Nodo(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y){
+
+Nodo::Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna){
     
-    vertice = new Vertice(numero_vertice, fila, columna, posicion_x, posicion_y);
-    adyacente_arriba = nullptr;
-    adyacente_abajo = nullptr;
-    adyacente_izquierdo = nullptr;
-    adyacente_derecho = nullptr;
+    vertice = new Vertice(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
     siguiente = nullptr;
     anterior = nullptr;
-    existe_adyacente = nullptr;
+    vector_adyacentes = nullptr;
     distancia_minima_origen = INFINITO;
 
 }
 
+void Nodo::cargar_vector_adyacentes(){
+	int numero_vertice = obtener_vertice() -> obtener_numero_vertice();
+	int cantidad_filas = obtener_vertice()-> obtener_cantidad_filas();
+	int cantidad_columnas = obtener_vertice() -> obtener_cantidad_columnas();
+	int fila = obtener_vertice() -> obtener_fila();
+	int columna = obtener_vertice() -> obtener_columna();
+	int cantidad_aristas = encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas);
+
+	vector_adyacentes = new int[cantidad_aristas];
+	int i = 0;
+	if (!esta_arriba(fila, columna, cantidad_filas, cantidad_columnas)){
+		vector_adyacentes[i] = numero_vertice - cantidad_filas;
+		i++;
+	}
+	if (!esta_izquierda(fila, columna, cantidad_filas, cantidad_columnas)){
+		vector_adyacentes[i] = numero_vertice - 1;
+		i++;
+	}
+	if (!esta_derecha(fila, columna, cantidad_filas, cantidad_columnas)){
+		vector_adyacentes[i] = numero_vertice + 1;
+		i++;
+	}
+	if (!esta_abajo(fila, columna, cantidad_filas, cantidad_columnas)){
+		vector_adyacentes[i] = numero_vertice + cantidad_columnas;
+		i++;
+	}
+}
+
+bool Nodo::esta_arriba(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (fila == PRIMERA_FILA);
+}
+
+bool Nodo::esta_abajo(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (fila == cantidad_filas);
+}
+
+bool Nodo::esta_izquierda(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (columna == PRIMERA_COLUMNA);
+}
+
+bool Nodo::esta_derecha(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (columna == cantidad_columnas);
+}
+
+bool Nodo::tiene_dos_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (esta_en_los_bordes(fila, columna, cantidad_filas, cantidad_columnas) && (fila == PRIMERA_FILA || fila == cantidad_filas) && (columna == PRIMERA_COLUMNA || columna == cantidad_columnas));
+}
+
+bool Nodo::tiene_tres_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (esta_en_los_bordes(fila, columna, cantidad_filas, cantidad_columnas) && !tiene_dos_aristas(fila, columna, cantidad_filas, cantidad_columnas));
+}
+
+bool Nodo::tiene_cuatro_aristas(int fila,  int columna,  int cantidad_filas, int cantidad_columnas){
+	return (fila >PRIMERA_FILA && fila <cantidad_filas && columna > PRIMERA_COLUMNA && columna < cantidad_columnas);
+}
+
+bool Nodo::esta_en_los_bordes(int fila, int columna ,  int cantidad_filas, int cantidad_columnas){
+	return (!tiene_cuatro_aristas(fila, columna, cantidad_filas, cantidad_columnas));
+}
+
+int Nodo::encontrar_tipo_nodo(int fila, int columna, int cantidad_filas, int cantidad_columnas){
+	int tipo_nodo;
+	if (tiene_cuatro_aristas(fila, columna,  cantidad_filas, cantidad_columnas)){
+		tipo_nodo = CUATRO_ARISTAS;
+	}
+	else if (tiene_dos_aristas(fila, columna,  cantidad_filas, cantidad_columnas)){
+		tipo_nodo = DOS_ARISTAS;
+	}
+	else if (tiene_tres_aristas(fila, columna,  cantidad_filas, cantidad_columnas)){
+		tipo_nodo = TRES_ARISTAS;
+	}
+
+	return tipo_nodo;
+}
+
 int Nodo::obtener_distancia_minima_origen(){
     return distancia_minima_origen;
+}
+
+int* Nodo::obtener_vector_adyacentes(){
+	return vector_adyacentes;
+}
+
+void Nodo::asignar_siguiente(Nodo* vertice_siguiente){
+    this -> siguiente = vertice_siguiente;
 }
 
 void Nodo::asignar_distancia_minima(){
@@ -33,48 +111,6 @@ void Nodo::reemplazar_distancia_minima(int distancia_minima_origen){
     this -> distancia_minima_origen = distancia_minima_origen;
 }
 
-void Nodo::inicializar_existe_adyacente(){
-    for (int i = 0; i < CANTIDAD_NODOS_ADYACENTES; i++){
-        existe_adyacente[i] = true;
-    }
-    if (obtener_arriba() == nullptr){
-        existe_adyacente[POSICION_ARRIBA] = false;
-    }
-    else if(obtener_abajo() == nullptr){
-        existe_adyacente[POSICION_ABAJO] = false;
-    }
-    else if(obtener_izquierdo() == nullptr){
-        existe_adyacente[POSICION_IZQUIERDO] = false;
-    }
-    else if (obtener_derecho() == nullptr){
-        existe_adyacente[POSICION_DERECHO] = false;
-    }
-}
-
-void Nodo::asignar_abajo(Nodo* vertice_abajo){
-    this -> adyacente_abajo = vertice_abajo;
-}
-
-void Nodo::asignar_arriba(Nodo* vertice_arriba){
-    this -> adyacente_arriba = vertice_arriba;
-}
-
-void Nodo::asignar_derecho(Nodo* vertice_derecho){
-    this -> adyacente_derecho = vertice_derecho;
-}
-
-void Nodo::asignar_izquierdo(Nodo* vertice_izquierdo){
-    this -> adyacente_izquierdo = vertice_izquierdo;
-}
-
-void Nodo::asignar_siguiente(Nodo* vertice_siguiente){
-    this -> siguiente = vertice_siguiente;
-}
-
-void Nodo::asignar_anterior(Nodo* vertice_anterior){
-    this -> anterior = vertice_anterior;
-}
-
 Nodo* Nodo::obtener_siguiente(){
     return siguiente;
 }
@@ -83,28 +119,8 @@ Nodo* Nodo::obtener_anterior(){
     return anterior;
 }
 
-Nodo* Nodo::obtener_abajo(){
-    return adyacente_abajo;
-}
-
-Nodo* Nodo::obtener_arriba(){
-    return adyacente_arriba;
-}
-
-Nodo* Nodo::obtener_derecho(){
-    return adyacente_derecho;
-}
-
-Nodo* Nodo::obtener_izquierdo(){
-    return adyacente_izquierdo;
-}
-
 Vertice* Nodo::obtener_vertice(){
-    return vertice;
-}
-
-bool* Nodo::obtener_existe_adyacente(){
-    return existe_adyacente;
+	return vertice;
 }
 
 Nodo::~Nodo() {

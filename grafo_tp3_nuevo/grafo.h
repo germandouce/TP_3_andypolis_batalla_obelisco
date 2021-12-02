@@ -2,7 +2,7 @@
 #define GRAFO_H
 
 #include "lista.h"
-#include <iostream>
+
 
 const char CAMINO = 'C';
 const char BETUN = 'B';
@@ -18,7 +18,6 @@ const int PESO_LAGO = 2; //el jugador 2 es 5
 const int PESO_MUELLE = 5; //el jugador 2 es 2
 const int PESO_TERRENO = 25;
 
-using namespace std;
 
 class Grafo {
 //ATRIBUTOS
@@ -38,15 +37,15 @@ void inicializar_lista_vertices(Lista* lista_vertices);
 
 void inicializar_matriz_adyacencia();
 
-void cargar_matriz_adyacencia(char** matriz_terrenos, int filas, int columnas);
+void cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas);
 
-void crear_grafo(int filas, int columnas);
+void crear_grafo(int cantidad_filas, int cantidad_columnas);
 
 void agregar_camino(int origen, int destino, int peso);
 
-void calcular_camino_minimo_dijktra(int origen, int destino, int filas, int columnas);
+void calcular_camino_minimo_dijktra(int origen, int destino, int cantidad_filas, int cantidad_columnas);
     
-void mostrar_grafo();
+void mostrar_matriz_adyacencia();
 
 
 

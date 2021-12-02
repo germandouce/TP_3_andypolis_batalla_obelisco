@@ -1,34 +1,69 @@
 #include "lista.h"
 
+
+
 Lista::Lista(){
+
     cantidad_elementos = 0;
     ultimo = nullptr;
     primero =  nullptr;
 }
 
-void Lista::agregar_vertices(int cantidad_elementos, int filas, int columnas){
+void Lista::agregar_vertices(int cantidad_elementos, int cantidad_filas, int cantidad_columnas){
+	int fila = PRIMER_FILA;
+	int columna = PRIMER_COLUMNA;
+
     for(int i = 1; i <= cantidad_elementos; i++){
-        int columna = i;
-        int fila = PRIMER_FILA;
-        agregar(i, filas, columnas, fila, columna);
-        /*asignar_nodos_adyacentes(filas, columnas, devolver_nodo(i));
-        devolver_nodo(i) -> inicializar_existe_adyacente();
-        devolver_nodo(i) -> asignar_distancia_minima();
-        devolver_nodo(i) -> asignar_distancia_minima(INFINITO);
-        if (columna == columnas){
+
+
+        agregar(i, cantidad_filas, cantidad_columnas, fila, columna);
+        if (columna == cantidad_columnas){
             columna = 0;
             fila++;
-        }*/
-    }
+        }
+        columna++;
 
+    }
 }
+
+void Lista::mostrar(){
+	int fila = primero -> obtener_vertice() -> obtener_fila();
+	int columna = primero -> obtener_vertice() -> obtener_columna();
+	int cantidad_filas = primero -> obtener_vertice() -> obtener_cantidad_filas();
+	int cantidad_columnas = primero -> obtener_vertice() -> obtener_cantidad_columnas();
+	cout << "nodo " << primero -> obtener_vertice()-> obtener_numero_vertice() << " :" << endl;
+	cout << "fila, columna: (" << fila << ", " << columna << ")" << endl;
+	cout << "Nodos_adyacentes: " << endl;
+	for(int j = 0; j < primero->encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas) ; j++){
+		cout << "nodo " << primero -> obtener_vector_adyacentes()[j] <<", "<< endl;
+	}
+	cout << " " << endl;
+	Nodo* auxiliar = primero;
+	for (int i = 1; i <= cantidad_elementos; i++){
+
+		auxiliar = auxiliar -> obtener_siguiente();
+		fila = auxiliar -> obtener_vertice() -> obtener_fila();
+		columna = auxiliar -> obtener_vertice() -> obtener_columna();
+		cantidad_filas = auxiliar -> obtener_vertice() -> obtener_cantidad_filas();
+		cantidad_columnas = auxiliar -> obtener_vertice() -> obtener_cantidad_columnas();
+
+		cout << "nodo " << auxiliar -> obtener_vertice()-> obtener_numero_vertice() << " :" << endl;
+		cout << "fila, columna: (" << auxiliar -> obtener_vertice() -> obtener_fila() << ", " << auxiliar -> obtener_vertice() -> obtener_columna() << ")" << endl;
+		cout << "Nodos_adyacentes: " << endl;
+		for(int k = 0; k < auxiliar -> encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas) ; k++){
+			cout << " nodo " << auxiliar -> obtener_vector_adyacentes()[k] <<", " << endl;
+		}
+		cout << " " << endl;
+	}
+}
+
 
 int Lista::obtener_cantidad_elementos(){
     return cantidad_elementos;
 }
 
-void Lista::agregar(int numero_vertice, int fila, int columna, int posicion_x, int posicion_y) {
-    Nodo* nuevo_nodo = new Nodo(numero_vertice, fila, columna, posicion_x, posicion_y);
+void Lista::agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna) {
+    Nodo* nuevo_nodo = new Nodo(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
     if(primero == nullptr){
         primero = nuevo_nodo;
         ultimo = primero;
@@ -60,43 +95,6 @@ Nodo* Lista::devolver_nodo(int posicion){
 }
 // hay que inicializar toda la lista con sus elementos
 
-
-void Lista::asignar_nodos_horizontales(int filas, int columnas, Nodo* nodo){
-
-    if (nodo -> obtener_vertice() -> obtener_posicion_x() == PRIMER_COLUMNA){
-        nodo -> asignar_izquierdo(nullptr);
-    }
-    else if(nodo -> obtener_vertice() -> obtener_posicion_x() == columnas){
-        nodo -> asignar_derecho(nullptr);
-    }
-    else{
-        nodo -> asignar_izquierdo(nodo -> obtener_anterior());
-        nodo -> asignar_derecho(nodo -> obtener_siguiente());
-    }
-
-}
-
-void Lista::asignar_nodos_verticales(int filas, int columnas, Nodo* nodo){
-
-    if (nodo -> obtener_vertice() -> obtener_posicion_y() == PRIMER_FILA){
-        nodo -> asignar_arriba(nullptr);
-    }
-    else if(nodo -> obtener_vertice() -> obtener_posicion_y() == filas){
-        nodo -> asignar_abajo(nullptr);
-    }
-    else{
-        nodo -> asignar_arriba(devolver_nodo(nodo ->obtener_vertice() -> obtener_posicion_x() - columnas));
-        nodo -> asignar_abajo(devolver_nodo(nodo ->obtener_vertice() -> obtener_posicion_x() + columnas));
-    }
-
-}
-
-void Lista::asignar_nodos_adyacentes(int filas, int columnas, Nodo* nodo){
-
-    asignar_nodos_verticales(filas, columnas, nodo);
-    asignar_nodos_horizontales(filas, columnas, nodo);
-
-}
 
 Lista::~Lista() {
     Nodo* siguiente;
