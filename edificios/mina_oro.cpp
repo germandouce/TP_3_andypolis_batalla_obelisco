@@ -8,14 +8,10 @@ Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo) : Edificio(pie
     this->vida_maxima = 2;
 }
 
-int Mina_oro::obtener_cantidad_brindada(){
-    return brinda;
-}
-
 void Mina_oro::mostrar_mensaje(){
     cout << " Soy una " << nombre << " brindo " << brinda << " Andycoins" << endl;
 }
 
-string Mina_oro::obtener_elemento_brindado(){
+string Mina_oro::obtener_material_brindado(){
     return "andycoin";
 }

@@ -1,20 +1,16 @@
-#ifndef PIEDRA_H
-#define PIEDRA_H
+#ifndef PIEDRA_H_INCLUDED
+#define PIEDRA_H_INCLUDED
 
-#include <iostream>
-#include <string>
 #include "material.h"
-
-using namespace std;
 
 class Piedra : public Material {
 
 private:
 
 public:
-    //Constructor de piedra con dos parametros
+    //Constructor de piedra con un parametro
     //PRE:-
-    //POST: Construye una piedra con 2 parametros
+    //POST: Construye un paquete de piedras con 1 parametros
     Piedra(int cantidad_material);
 
     //Piedra saluda

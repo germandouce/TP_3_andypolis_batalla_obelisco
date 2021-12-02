@@ -2,19 +2,6 @@
 
 Mapa::Mapa() {}
 
-Mapa::Mapa(int filas, int columnas) {
-
-	this -> filas = filas;
-	this -> columnas = columnas;
-	this -> transitables_disponibles = 0;
-	
-	this -> matriz = new Casillero** [filas];
-
-    for (int i = 0; i < filas; i++) {
-        matriz[i] = new Casillero* [columnas];
-    }
-}
-
 void Mapa::borrar() {
 
 	for (int i = 0; i < filas; i++) {
@@ -52,6 +39,81 @@ void Mapa::cargar_casillero(int fila, int columna, Casillero* casillero) {
 
 // CARGA DE ARCHIVOS
 
+bool Mapa::se_cargo_terreno() {
+
+    ifstream archivo(PATH_MAPA);
+    int filas;
+    int columnas;
+    string tipo_casillero;
+
+    if (!archivo.is_open()) {
+        cout << endl;
+        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de mapa." << END_COLOR << endl;
+        return false;
+    }
+    else {
+
+        archivo >> filas;
+        archivo >> columnas;
+
+        asignar_atributos(filas, columnas);
+        
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                
+                archivo >> tipo_casillero;
+                Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
+                cargar_casillero(i, j, casillero);
+                sumar_casillero_por_tipo(tipo_casillero);
+            }
+        }
+    };
+    archivo.close();
+    return true;
+}
+
+void Mapa::asignar_atributos(int filas, int columnas) {
+	
+	this -> filas = filas;
+	this -> columnas = columnas;
+	this -> transitables_disponibles = 0;
+	
+	this -> matriz = new Casillero** [filas];
+
+    for (int i = 0; i < filas; i++) {
+        matriz[i] = new Casillero* [columnas];
+    }
+
+	this -> diccionario = new Diccionario();
+}
+
+Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero) {
+
+	Casillero* casillero_devuelto;
+
+	if (tipo_casillero == TERRENO) {
+		casillero_devuelto = new Terreno(fila, columna);
+	}
+
+	if (tipo_casillero == LAGO) {
+		casillero_devuelto = new Lago(fila, columna);
+	}
+
+	if (tipo_casillero == CAMINO) {
+		casillero_devuelto = new Camino(fila, columna);
+	}
+
+	if (tipo_casillero == MUELLE) {
+		casillero_devuelto = new Muelle(fila, columna);
+	}
+
+	if (tipo_casillero == BETUN) {
+		casillero_devuelto = new Betun(fila, columna);
+	}
+
+	return casillero_devuelto;
+}
+
 bool Mapa::se_cargo_diccionario() {
 
 	ifstream archivo(PATH_EDIFICIOS);
@@ -77,7 +139,7 @@ bool Mapa::se_cargo_diccionario() {
             archivo >> metal;
             archivo >> limite_construccion;
 
-            Edificio* edificio = cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+            cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
         }
     };
     archivo.close();
@@ -90,35 +152,47 @@ void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int m
 
 	if (nombre_edificio == "aserradero") {
 		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
-		string diminutivo = edificio -> obtener_diminutivo();
-		diccionario -> agregar_dato(edificio);
+		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == "escuela") {
 		edificio = new Escuela(piedra, madera, metal, limite_construccion);
-		string diminutivo = edificio -> obtener_diminutivo();
-		diccionario -> agregar_dato(edificio);
+		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "aserradero") {
-		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
-		string diminutivo = edificio -> obtener_diminutivo();
-		diccionario -> agregar_dato(edificio);
+	if (nombre_edificio == "fabrica") {
+		edificio = new Fabrica(piedra, madera, metal, limite_construccion);
+		diccionario -> agregar_edificio(edificio);
 	}
 
+	if (nombre_edificio == "mina") {
+		edificio = new Mina(piedra, madera, metal, limite_construccion);
+		diccionario -> agregar_edificio(edificio);
+	}
 
+	if (nombre_edificio == "mina de oro") {
+		edificio = new Mina(piedra, madera, metal, limite_construccion);
+		diccionario -> agregar_edificio(edificio);
+	}
 
+	if (nombre_edificio == "obelisco") {
+		edificio = new Obelisco(piedra, madera, metal, limite_construccion);
+		diccionario -> agregar_edificio(edificio);
+	}
 
+	if (nombre_edificio == "planta electrica") {
+		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion);
+		diccionario -> agregar_edificio(edificio);
+	}
 }
-
 
 // FUNCIONALIDADES
 
 void Mapa::imprimir_mapa() {
 
 	string coordenas_columnas = "     ";
-	string lineas_columnas = "  �";
-	string separador = "  �";
+	string lineas_columnas = "  -";
+	string separador = "  |";
 	string espacios = "   ";
 
 	cout << SUCESS_COLOR << "Este es el mapa de la ciudad: " << endl;
@@ -131,7 +205,7 @@ void Mapa::imprimir_mapa() {
 		}
 
 		coordenas_columnas += to_string(c + 1) + espacios;
-		lineas_columnas += "����";
+		lineas_columnas += "----";
 	}
 
 	cout << ENTER_COLOR << coordenas_columnas << endl;
@@ -140,13 +214,13 @@ void Mapa::imprimir_mapa() {
 	for (int i = 0; i < filas; i++) {
 
 		if (i > 8) {
-			separador = " �";
+			separador = " |";
 		}
 
 		cout << ENTER_COLOR << i + 1 << separador << END_COLOR;
 		for (int j = 0; j < columnas; j++) {
 			matriz[i][j] -> imprimir_casillero();
-			cout << ENTER_COLOR << "�" << END_COLOR;
+			cout << ENTER_COLOR << "|" << END_COLOR;
 		}
 		cout << endl;
 		cout << ENTER_COLOR << " " << lineas_columnas << endl;
@@ -159,8 +233,9 @@ void Mapa::generar_lluvia_materiales() {
 	int piedra_llovida = rand() % CANT_MAX_PIEDRA + CANT_MIN_PIEDRA;
 	int madera_llovida = rand() % CANT_MAX_MADERA + CANT_MIN_MADERA;
 	int metal_llovido = rand() % CANT_MAX_METAL + CANT_MIN_METAL;
+	int andycoins_llovido = rand() % CANT_MAX_ANDYCOINS + CANT_MIN_ANDYCOINS;
 
-	int total_llovido = piedra_llovida + madera_llovida + metal_llovido;
+	int total_llovido = piedra_llovida + madera_llovida + metal_llovido + andycoins_llovido;
 	int material_llovido;
 	bool ha_llovido = false;
 
@@ -174,18 +249,12 @@ void Mapa::generar_lluvia_materiales() {
 
 			if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && !matriz[i][j] -> obtener_cantidad_contenida()) {
 
-				Material nuevo_material = Material();
-				material_llovido = nuevo_material.llover_material_aleatorio();
-				string nombre_material = nuevo_material.obtener_nombre();
+				Material* material_random = llover_material_aleatorio();
+				string nombre_material = material_random -> obtener_nombre();
 
-				if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, material_llovido)) {
+				if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
 
-					borrar_casillero(matriz[i][j]);
-
-					Casillero_transitable* transitable = new Casillero_transitable();
-					transitable -> asignar_material(nuevo_material);
-
-					matriz[i][j] = transitable;
+					matriz[i][j] -> colocar_material(material_random);
 					matriz[i][j] -> ocupar_casillero();
 
 					cout << SUCESS_COLOR << "-Ha llovido un/a " << nombre_material << " en las coordenadas (";
@@ -209,7 +278,7 @@ void Mapa::generar_lluvia_materiales() {
 	cout << endl;
 }
 
-bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int material_llovido) {
+bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int &andycoins_llovido, int material_llovido) {
 
 	bool puede_llover_mas = true;
 
@@ -240,19 +309,21 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 		}
 	}
 
+	if (material_llovido == ANDYCOINS) {
+		if ((andycoins_llovido - 1) >= 0) {
+			andycoins_llovido--;
+		}
+		else {
+			puede_llover_mas = false;
+		}
+	}
+
+
 	return puede_llover_mas;
 }
 
 void Mapa::borrar_casillero(Casillero* casillero) {
 	delete casillero;
-}
-
-void Mapa::sumar_casillero_por_tipo(string tipo_casillero) {
-
-	if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
-		transitables_disponibles++;
-	}
-	
 }
 
 void Mapa::consultar_casillero() {
@@ -313,22 +384,25 @@ void Mapa::pedir_columna(int &columna) {
     cin.ignore(100, '\n');
 }
 
-void Mapa::construir_edificio(int fila, int columna, Edificio edificio_a_construir) {
+void Mapa::construir_edificio(int fila, int columna, Edificio* edificio_a_construir) {
 
 	if (matriz[fila][columna] -> obtener_tipo_casillero() == CONSTRUIBLE && !matriz[fila][columna] -> obtener_cantidad_contenida()) {
 
-		borrar_casillero(matriz[fila][columna]);
-
-		Casillero_construible* construible = new Casillero_construible();
-		construible -> asignar_edificio(edificio_a_construir);
-
-		matriz[fila][columna] = construible;
+		matriz[fila][columna] -> construir_edificio(edificio_a_construir);
 		matriz[fila][columna] -> ocupar_casillero();
 
 	}
 }
 
 // METODOS PRIVADOS
+
+void Mapa::sumar_casillero_por_tipo(string tipo_casillero) {
+
+	if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
+		transitables_disponibles++;
+	}
+	
+}
 
 string Mapa::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion) {
 	
@@ -359,4 +433,49 @@ bool Mapa::verificar_tipo_caracter(string palabra, int tipo_caracter) {
 
 bool Mapa::es_numero(string palabra) {
 	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
+}
+
+Material* Mapa::llover_material_aleatorio() {
+
+	int tipo_material = rand() % CANT_MATERIALES;
+	string nombre_material_aleatorio = obtener_tipo_material(tipo_material);
+	Material* material_devuelto;
+
+	if (nombre_material_aleatorio == S) {
+		material_devuelto = new Piedra(PIEDRA_LLOVIDA);
+	}
+
+	if (nombre_material_aleatorio == W) {
+		material_devuelto = new Madera(MADERA_LLOVIDA);
+	}
+
+	if (nombre_material_aleatorio == I) {
+		material_devuelto = new Piedra(METAL_LLOVIDO);
+	}
+
+	if (nombre_material_aleatorio == C) {
+		material_devuelto = new Andycoins(ANDYCOINS_LLOVIDO);
+	}
+
+	return material_devuelto;
+}
+
+string Mapa::obtener_tipo_material(int tipo_material) {
+	
+	string nombre_material;
+
+	switch(tipo_material) {
+		case PIEDRA:
+			nombre_material = "piedra";
+			break;
+		case MADERA:
+			nombre_material = "madera";
+			break;
+		case METAL:
+			nombre_material = "metal";
+			break;
+		case ANDYCOINS:
+			nombre_material = "andycoins";
+	}
+	return nombre_material;
 }

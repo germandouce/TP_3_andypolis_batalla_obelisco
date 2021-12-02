@@ -8,14 +8,10 @@ Aserradero::Aserradero(int piedra, int madera, int metal, int maximo) : Edificio
     this->vida_maxima = 1;
 }
 
-int Aserradero::obtener_cantidad_brindada(){
-    return brinda;
-}
-
 void Aserradero::mostrar_mensaje(){
-    cout << " Soy un " << nombre << " brindo " << brinda << " maderas y me encuentro en el casillero consultado" << endl;
+    cout << "Soy un " << nombre << " brindo " << brinda << " maderas y me encuentro en el casillero consultado" << endl;
 }
 
-string Aserradero::obtener_elemento_brindado(){
+string Aserradero::obtener_material_brindado(){
     return "madera";
 }

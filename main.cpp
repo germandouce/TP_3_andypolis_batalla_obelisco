@@ -8,21 +8,13 @@ int main() {
 
     srand((unsigned)time(NULL)); // Semilla para generar números aleatorios.
     
-    Vector<Material> vector_materiales;
-    Vector<Edificio> vector_edificios;
-    Vector<Ubicacion> vector_ubicaciones;
-    Mapa* mapa;
+    Mapa* mapa = new Mapa();
     
     int opcion_elegida;
 
-    if (!(cargar_materiales(vector_materiales) && 
-        cargar_edificios(vector_edificios) &&
-        cargar_ubicaciones(vector_ubicaciones) && 
-        cargar_mapa(mapa))) {
+    if (!(mapa -> se_cargo_terreno() && mapa -> se_cargo_diccionario())) {
         return 0;
     }
-
-    cargar_ubicaciones_mapa(mapa, vector_edificios, vector_ubicaciones);
     
     mostrar_bienvenida();
 
@@ -42,7 +34,7 @@ int main() {
             cin.ignore(100, '\n');
         }
 
-        procesar_opcion(opcion_elegida, mapa, vector_materiales, vector_edificios, vector_ubicaciones);
+        procesar_opcion(opcion_elegida, mapa);
         
     } while (opcion_elegida != 10);
 

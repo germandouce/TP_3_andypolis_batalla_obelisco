@@ -1,11 +1,7 @@
-#ifndef BOMBAS_H
-#define BOMBAS_H
+#ifndef BOMBAS_H_INCLUDED
+#define BOMBAS_H_INCLUDED
 
-#include <iostream>
-#include <string>
 #include "material.h"
-
-using namespace std;
 
 class Bombas : public Material {
 
@@ -13,12 +9,12 @@ private:
 
 
 public:
-    //Constructor de piedra con dos parametros
+    //Constructor de bombas con 1 parametros
     //PRE:-
-    //POST: Construye un paquete de bombas sin parametros
-    Bombas();
+    //POST: Construye un paquete de bombas con 1 parametro
+    Bombas(int cantidad_material);
 
-    //Piedra saluda
+    //Bombas saluda
     //PRE:-
     //POST: Saluda describiendose
     void saludar();
@@ -27,4 +23,4 @@ public:
 };
 
 
-#endif // BOMBAS_H
+#endif // BOMBAS_H_INCLUDED

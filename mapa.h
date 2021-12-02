@@ -1,30 +1,30 @@
-#ifndef MAPA_H
-#define MAPA_H
+#ifndef MAPA_H_INCLUDED
+#define MAPA_H_INCLUDED
 
 #include <fstream>
 #include "diccionario.h"
 #include "colores.h"
 #include "system_clear.h"
 
-#include "./materiales./piedra.h"
-#include "./materiales./madera.h"
-#include "./materiales./metal.h"
-#include "./materiales./andycoins.h"
-#include "./materiales./bombas.h"
+#include "materiales/piedra.h"
+#include "materiales/madera.h"
+#include "materiales/metal.h"
+#include "materiales/andycoins.h"
+#include "materiales/bombas.h"
 
-#include "./edificios./aserradero.h"
-#include "./edificios./escuela.h"
-#include "./edificios./fabrica.h"
-#include "./edificios./mina.h"
-#include "./edificios./mina_oro.h"
-#include "./edificios./obelisco.h"
-#include "./edificios./planta_electrica.h"
+#include "edificios/aserradero.h"
+#include "edificios/escuela.h"
+#include "edificios/fabrica.h"
+#include "edificios/mina.h"
+#include "edificios/mina_oro.h"
+#include "edificios/obelisco.h"
+#include "edificios/planta_electrica.h"
 
-#include "./casilleros./terreno.h"
-#include "./casilleros./lago.h"
-#include "./casilleros./camino.h"
-#include "./casilleros./muelle.h"
-#include "./casilleros./betun.h"
+#include "casilleros/terreno.h"
+#include "casilleros/lago.h"
+#include "casilleros/camino.h"
+#include "casilleros/muelle.h"
+#include "casilleros/betun.h"
 
 const string PATH_EDIFICIOS = "edificios.txt";
 const string PATH_MATERIALES = "materiales.txt";
@@ -37,6 +37,41 @@ const int OPCION_NUMEROS = 1;
 const int POSICION_INICIAL = 0;
 
 const int TIPOS_MATERIALES_LLUVIA = 3;
+const int PIEDRA_LLOVIDA = 100;
+const int MADERA_LLOVIDA = 50;
+const int METAL_LLOVIDO = 50;
+const int ANDYCOINS_LLOVIDO = 250;
+
+const int CANT_MATERIALES = 4;
+const int CANT_MAX_PIEDRA = 2;
+const int CANT_MAX_MADERA = 4;
+const int CANT_MAX_METAL = 3;
+const int CANT_MAX_ANDYCOINS = 2;
+const int CANT_MIN_PIEDRA = 1;
+const int CANT_MIN_MADERA = 0;
+const int CANT_MIN_METAL = 2;
+const int CANT_MIN_ANDYCOINS = 0;
+
+const int PIEDRA = 0;
+const int MADERA = 1;
+const int METAL = 2;
+const int ANDYCOINS = 3;
+
+const string S = "piedra";
+const string W = "madera";
+const string I = "metal";
+const string C = "andycoins";
+
+const char TOPE_CADENA_FILA = ',';
+const char TOPE_CADENA_COLUMNA = ')';
+const int ASCII_NUM_CERO = 48;
+const int ASCII_NUM_NUEVE = 57;
+const int POSICION_INICIAL_FILA = 1;
+const int POSICION_INICIAL_COLUMNA = 0;
+
+const int CANTIDAD_COORDENADAS = 2;
+const int FILA = 0;
+const int COLUMNA = 1;
 
 class Mapa {
 	
@@ -46,7 +81,7 @@ class Mapa {
 	int columnas;
 	int transitables_disponibles;
 	Casillero*** matriz;
-	Diccionario<Edificio*>* diccionario;
+	Diccionario* diccionario;
 
 	public:
 
@@ -84,6 +119,8 @@ class Mapa {
     //post: Asigna el puntero a Casillero a la posición fila y columna ingresadas.
 	void cargar_casillero(int fila, int columna, Casillero* casillero);
 
+	bool se_cargo_terreno();
+
 	bool se_cargo_diccionario();
 
 	//pre: -
@@ -98,10 +135,6 @@ class Mapa {
     //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.
 	void borrar_casillero(Casillero* casillero);
 
-	//pre: El 'tipo_casillero' es un tipo de Casillero válido.
-    //post: Suma uno a los casilleros disponibles correspondientes al tipo ingresado.
-	void sumar_casillero_por_tipo(string tipo_casillero);
-
 	//pre: -
     //post: Pide al usuario que ingrese una fila y una columna, y muestra información del Casillero
 	//		correspondiente a dichas coordenadas.
@@ -113,18 +146,31 @@ class Mapa {
 	
 	private:
 
+	//pre: El 'tipo_casillero' es un tipo de Casillero válido.
+    //post: Suma uno a los casilleros disponibles correspondientes al tipo ingresado.
+
+	Casillero* crear_subcasillero(int fila, int columna, string tipo_casillero);
+
+	void asignar_atributos(int filas, int columnas);
+
+	void sumar_casillero_por_tipo(string tipo_casillero);
+
 	string leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
 
 	bool verificar_tipo_caracter(string palabra, int tipo_caracter);
 
-	bool Mapa::es_numero(string palabra);
+	bool es_numero(string palabra);
 
-	void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
+	void cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
+
+	Material* llover_material_aleatorio();
+
+	string obtener_tipo_material(int tipo_material);
 
 	//pre: -
     //post: Verifica si puede llover más del 'material_llovido' y devuelve True.
 	//		Devuelve False si no se pasa la verificación.
-	bool puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int material_llovido);
+	bool puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int &andycoins_llovidos, int material_llovido);
 	
 	//pre: -
     //post: Pide coordenadas y actualiza los respectivos valores ingresados.
@@ -139,4 +185,4 @@ class Mapa {
 	void pedir_columna(int &columna);
 };
 
-#endif // MAPA_H
+#endif // MAPA_H_INCLUDED

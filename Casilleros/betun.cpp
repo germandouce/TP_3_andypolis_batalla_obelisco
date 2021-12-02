@@ -5,7 +5,7 @@ Betun::Betun(int fila, int columna) {
 	this -> columna = columna;
 	this -> tipo_casillero = BETUN;
 	this -> ocupado = false;
-	this -> material = Material();
+	this -> material = nullptr;
 }
 
 Betun::~Betun() {}

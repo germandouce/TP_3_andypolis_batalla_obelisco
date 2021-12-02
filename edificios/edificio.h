@@ -2,6 +2,7 @@
 #define EDIFICIO_H
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ protected:
     int cantidad_piedra;
     int canitdad_madera;
     int cantidad_metal;
-    int cantidad_edificios;
+    //int cantidad_edificios;
     int brinda;
     int maximo_construir;
     int vida_actual;
@@ -53,10 +54,6 @@ public:
     int obtener_cantidad_metal();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
-    // POS: Devuelve la cantidad que se encuentran construidos en el mapa hasta el momento.
-    int obtener_cantidad_construidos();
-
-    // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la maxima cantidad de edificios que se pueden construir , informacion que viene dada
     //      en edificio.txt.
     int obtener_maximo_construir();
@@ -76,15 +73,19 @@ public:
     // PRE: Que la cantidad maxima de edificios no sea menor que la cantidad de edificios construidos.
     // POS: Devuelve una resta entre el maximo y la cantidad de edificios construidos, para saber cuantos 
     //      mas puedo construir.
-    int obtener_cuantos_puedo_construir();
+    // int obtener_cuantos_puedo_construir();
+
+    // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
+    // POS: Devuelve la cantidad que se encuentran construidos en el mapa hasta el momento.
+    // int obtener_cantidad_construidos();
 
     // PRE: En caso de que se pueda construir edificio sin superar el maximo.
     // POS: suma 1 a la cantidad de edificios.
-    void sumar_cantidad();
+    // void sumar_cantidad();
 
     // PRE: En caso de que exista por lo menos 1 edificio creado.
     // POS: Resta 1 a cantidad_edificios.
-    void restar_cantidad();
+    // void restar_cantidad();
 
     // PRE: -
     // POS: Por cada uno de los edificios muestra por pantalla su respectivo mensaje.
@@ -92,15 +93,15 @@ public:
 
     // PRE: Dependiendo al edificio que me diriga.
     // POS: Devuelve una cierta cantidad de material que brinda el edificio en particular.
-    virtual int obtener_cantidad_brindada() = 0;
+    int obtener_cantidad_brindada();
 
     // PRE: Dependiendo al edificio que me diriga.
     // POS: Devuelve el nombre del elemento que brinda el edificio en particular.
-    virtual string obtener_elemento_brindado() = 0;
+    virtual string obtener_material_brindado() = 0;
 
     //PRE:-
     //POST:Resta 1 a la vida del edificio
-    void Edificio:: daniar();
+    void daniar();
 
     // PRE: -
     // POS: Devuelve True si el edificio sobrevivio a la explosion en pie y false en caso contrario

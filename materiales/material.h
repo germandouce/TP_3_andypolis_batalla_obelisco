@@ -1,39 +1,17 @@
 #ifndef MATERIAL_H_INCLUDED
 #define MATERIAL_H_INCLUDED
 
+#include <iostream>
 #include <string>
 
 using namespace std;
 
-const string S = "piedra";
-const string W = "madera";
-const string I = "metal";
-const string VACIO = "";
-
-const int PRODUCCION_MINA = 15;
-const int PRODUCCION_ASERRADERO = 25;
-const int PRODUCCION_FABRICA = 40;
-
-const int SIN_MATERIAL = 0;
-const int MATERIAL_CONTENIDO_POR_CASILLERO = 1;
-
-const int PIEDRA = 0;
-const int MADERA = 1;
-const int METAL = 2;
-
-const int CANT_MATERIALES = 3;
-const int CANT_MAX_PIEDRA = 2;
-const int CANT_MAX_MADERA = 2;
-const int CANT_MAX_METAL = 3;
-const int CANT_MIN_PIEDRA = 1;
-const int CANT_MIN_MADERA = 0;
-const int CANT_MIN_METAL = 2;
-
 class Material {
 
     protected:
-    
+ 
     string nombre_material;
+    string diminutivo;
     int cantidad_material;
 
     public:
@@ -49,51 +27,37 @@ class Material {
     //cantidad del mismo
     Material(string nombre_material, int cantidad_material);
     
-    // Constructor con dos parámetros.
+    // Constructor con 1 parámetros.
     //pre: -
-    //post: Instancia un Material standard sea el nombre y con la 
-    //cantidad del mismo
+    //post: Instancia un Material "standard"
     Material(int cantidad_material);
 
     //Saluda
     //PRE: -
-    //POST: Saluda. Todos saludan "igual" pero con distintos nombre y contenidos
+    //POST: Cada material saluda.
     virtual void saludar() = 0;
 
     //pre: -
     //post: Devuelve el nombre del Material.
     string obtener_nombre();
+    
+    //Obtener diminutivo
+    //PRE: -
+    //POST: Devuelve el diminutivo del material
+    string obtener_diminutivo();
 
     //pre: -
     //post: Devuelve la cantidad del Material.
     int obtener_cantidad();
 
     //pre: -
-    //post: Imprime en pantalla los atributos del Material.
-    void mostrar_material();
-
-    //pre: El costo debe ser mayor ó igual a cero.
-    //post: Suma el 'costo' a la 'cantidad_material'.
-    void sumar_costo(int costo);
-
-    //pre: El costo debe ser mayor ó igual a cero.
-    //post: Resta el 'costo' a la 'cantidad_material'.
-    void restar_costo(int costo);
-
-    //pre: El Material debe ser una instancia "vacía", con sus atributos nulos.
-    //post: Genera una unidad de un material de forma aleatoria entre los posibles materiales que pueden llover.
-    //      Devuelve un número asociado al material llovido.
-    int llover_material_aleatorio();
+    //post: Suma el cantidad a la 'cantidad_material'.
+    void sumar_cantidad(int cantidad);
 
     //pre: -
-    //post: Imprime en pantalla información del Material.
-    void mostrar_informacion();
+    //post: Resta cantidad a la 'cantidad_material'.
+    void restar_cantidad(int cantidad);
     
-    private:
-
-    //pre: -
-    //post: Devuelve el nombre de un material según el número ingresado asociado.
-    string obtener_tipo_material(int tipo_material);
 };
 
 #endif // MATERIAL_H_INCLUDED

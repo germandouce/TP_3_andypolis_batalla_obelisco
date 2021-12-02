@@ -16,10 +16,6 @@ class Casillero_construible: public Casillero {
     //post: -
 	Casillero_construible();
 
-	//pre: -
-	//post: Actualiza el edificio con el 'edificio' ingresado.
-	void asignar_edificio(Edificio edificio);
-
 	void construir_edificio(Edificio* edificio) {
 		this -> edificio = edificio;
 	}
@@ -32,7 +28,7 @@ class Casillero_construible: public Casillero {
 		}
 		else {
 			cout << SUCESS_COLOR << "-Soy un casillero construible y no me encuentro vacio." << END_COLOR << endl;
-			edificio -> mostrar_informacion();
+			edificio -> mostrar_mensaje();
 		}
 		cout << endl;
 	}
@@ -41,47 +37,36 @@ class Casillero_construible: public Casillero {
 
 		string edificio_contenido = "   ";
 
-		if (edificio -> obtener_nombre() == M) {
-			edificio_contenido = " M ";
+		if (edificio != nullptr) {
+			edificio_contenido = " " + edificio -> obtener_diminutivo() + " ";
 		}
-
-		if (edificio -> obtener_nombre() == A) {
-			edificio_contenido = " A ";
-		}
-
-		if (edificio -> obtener_nombre() == F) {
-			edificio_contenido = " F ";
-		}
-
-		if (edificio -> obtener_nombre() == E) {
-			edificio_contenido = " E ";
-		}
-
-		if (edificio -> obtener_nombre() == O) {
-			edificio_contenido = " O ";
-		}
-
-		if (edificio -> obtener_nombre() == P) {
-			edificio_contenido = " P ";
-		}
-
-		cout << obtener_color() << NEGRO << edificio_contenido << END_COLOR;
 		
+		cout << obtener_color() << NEGRO << edificio_contenido << END_COLOR;
 	}
 
 	int obtener_cantidad_contenida() {
 		
-		int existe_edificio = 0;
+		int existe_edificio = 1;
 
-		if (edificio -> obtener_nombre() != "") {
-			existe_edificio = 1;
+		if (edificio == nullptr) {
+			existe_edificio = 0;
 		}
 
 		return existe_edificio;
 	}
 
 	string obtener_nombre_contenido() {
-		return edificio -> obtener_nombre();
+		
+		string nombre_edificio;
+		
+		if (edificio == nullptr) {
+			nombre_edificio = "";
+		}
+		else {
+			nombre_edificio = edificio -> obtener_nombre();
+		}
+		
+		return nombre_edificio;
 	}
 
 	string obtener_color() {

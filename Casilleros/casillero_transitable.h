@@ -16,10 +16,6 @@ class Casillero_transitable: public Casillero {
     //post: -
 	Casillero_transitable();
 
-	//pre: -
-	//post: Actualiza el material con el 'material' ingresado.
-	void asignar_material(Material material);
-
 	void construir_edificio(Edificio* edificio) {}
 
 	void colocar_material(Material* material) {
@@ -32,7 +28,7 @@ class Casillero_transitable: public Casillero {
 		}
 		else {
 			cout << SUCESS_COLOR << "-Soy un casillero transitable y no me encuentro vacio." << END_COLOR << endl;
-			material -> mostrar_informacion();
+			material -> saludar();
 	    }
 		cout << endl;
 	}
@@ -41,27 +37,34 @@ class Casillero_transitable: public Casillero {
 
 		string material_contenido = "   ";
 
-		if (material -> obtener_nombre() == S && material -> obtener_cantidad()) {
-			material_contenido = " S ";
-		}
-
-		if (material -> obtener_nombre() == W && material -> obtener_cantidad()) {
-			material_contenido = " W ";
-		}
-
-		if (material -> obtener_nombre() == I && material -> obtener_cantidad()) {
-			material_contenido = " I ";
+		if (material != nullptr) {
+			material_contenido = " " + material -> obtener_diminutivo() + " ";
 		}
 
 		cout << obtener_color() << NEGRO << material_contenido << END_COLOR;
 	}
 
 	int obtener_cantidad_contenida() {
-		return material -> obtener_cantidad();
+		if (material == nullptr) {
+			return 0;
+		}
+		else {
+			return material -> obtener_cantidad();
+		}
 	}
 
 	string obtener_nombre_contenido() {
-		return material -> obtener_nombre();
+		
+		string nombre_material;
+		
+		if (material == nullptr) {
+			nombre_material = "";
+		}
+		else {
+			nombre_material = material -> obtener_nombre();
+		}
+		
+		return nombre_material;
 	}
 
 	string obtener_color() {

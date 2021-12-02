@@ -11,13 +11,11 @@ public:
 
     Aserradero(int piedra, int madera, int metal, int maximo);
 
-    int obtener_cantidad_brindada();
-
-    string obtener_elemento_brindado();
+    string obtener_material_brindado();
 
     void mostrar_mensaje();
 
 };
 
 
-#endif 
+#endif //ASERRADERO_H

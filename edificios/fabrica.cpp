@@ -8,14 +8,10 @@ Fabrica::Fabrica(int piedra, int madera, int metal, int maximo) : Edificio(piedr
     this->vida_maxima = 2;
 }
 
-int Fabrica::obtener_cantidad_brindada(){
-    return brinda;
-}
-
 void Fabrica::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " brindo : " << brinda << " metales y me encuentro en el casillero consultado." << endl;
+    cout << " Soy una " << nombre << " brindo " << brinda << " metales y me encuentro en el casillero consultado." << endl;
 }
 
-string Fabrica::obtener_elemento_brindado(){
+string Fabrica::obtener_material_brindado(){
     return "metal";
 }
