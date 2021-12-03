@@ -11,7 +11,7 @@ class Edificio
 protected:
 
     string nombre;
-    string diminutivo;
+    const char* diminutivo;
     int cantidad_piedra;
     int canitdad_madera;
     int cantidad_metal;
@@ -41,7 +41,7 @@ public:
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el diminutivo del edificio, siendo este la primer letra de la palabra ( getter ).
-    string obtener_diminutivo();
+    const char* obtener_diminutivo();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la cantidad de piedra necesaria para construir.

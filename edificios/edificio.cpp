@@ -2,7 +2,7 @@
 
 Edificio::Edificio(){
     this-> nombre = "edificio";
-    this-> diminutivo = "";
+    this-> diminutivo = "-";
     this-> cantidad_piedra = 0;
     this-> canitdad_madera = 0;
     this-> cantidad_metal = 0;
@@ -14,8 +14,8 @@ Edificio::Edificio(){
 }
 
 Edificio::Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
-    this-> nombre = "";
-    this-> diminutivo = "Ed";
+    this-> nombre = "-`";
+    this-> diminutivo = "-";
     this-> cantidad_piedra = cantidad_piedra;
     this-> canitdad_madera = cantidad_madera;
     this-> cantidad_metal = cantidad_metal;
@@ -30,7 +30,7 @@ string Edificio::obtener_nombre(){
     return nombre;
 }
 
-string Edificio::obtener_diminutivo(){
+const char* Edificio::obtener_diminutivo(){
     return diminutivo;
 }
 
