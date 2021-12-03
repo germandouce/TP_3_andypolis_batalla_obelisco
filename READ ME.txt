@@ -1,0 +1,13 @@
+Hice la clase Registro edificios y la de nodo_listas
+(para el registro y el inventario). 
+
+La clase Registro edificios la hice pensando Edificio 
+teniendo como atributos las coordenadas x e y
+(tomé la clase Edificio que subieron y se las agregue).
+
+Falta agregar la clase Inventario.
+
+La subo mañana.
+
+Sientanse libres de chequear , cambiar y si quieren sugerir alguna mejora o 
+si ven que necesita alguna correción :)
