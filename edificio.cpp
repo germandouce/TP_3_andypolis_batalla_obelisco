@@ -30,7 +30,7 @@ string Edificio::obtener_nombre(){
     return nombre;
 }
 
-char* Edificio::obtener_diminutivo(){
+const char* Edificio::obtener_diminutivo(){
     return diminutivo;
 }
 

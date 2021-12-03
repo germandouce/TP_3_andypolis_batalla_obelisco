@@ -22,7 +22,7 @@ string Material::obtener_nombre() {
     return nombre_material;
 }
 
-char* Material::obtener_diminutivo(){
+const char* Material::obtener_diminutivo(){
     return diminutivo;
 }
 
