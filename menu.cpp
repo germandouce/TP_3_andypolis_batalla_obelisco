@@ -35,7 +35,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa) {
     switch (opcion_elegida) {
         case 1:
             system(CLR_SCREEN);
-            //verificar_construccion(mapa, vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
+            mapa -> verificar_construccion();
             cout << endl;
             break;
         case 2:
@@ -44,7 +44,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa) {
             break;
         case 3:
             system(CLR_SCREEN);
-            //mostrar_todos_edificios(vector_edificios, vector_ubicaciones);
+            mapa -> mostrar_todos_edificios();
             break;
         case 4:
             system(CLR_SCREEN);

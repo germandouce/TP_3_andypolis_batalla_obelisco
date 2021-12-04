@@ -23,11 +23,55 @@ Nodo_dict* Diccionario::agregar_edificio(Nodo_dict* nodo, Edificio* edificio) {
     return nodo;
 }
 
-Edificio* Diccionario::buscar_edificio(int id) {
-    return (buscar(this -> origen, id) -> devolver_edificio());
+Edificio* Diccionario::buscar_edificio(string nombre_edificio) {
+    
+    int id = asociar_nombre_id(nombre_edificio);
+    
+    Nodo_dict* nodo = buscar(this -> origen, id);
+
+    if (nodo != nullptr) {
+        return nodo -> devolver_edificio();
+    }
+
+    return nullptr;
 }
 
-Nodo_dict* Diccionario::buscar(Nodo_dict* nodo, int id ) {
+int Diccionario::asociar_nombre_id(string nombre_edificio) {
+
+    int id = -1;
+
+    if (nombre_edificio == A) {
+        id = ASCII_A;
+    }
+
+    if (nombre_edificio == E) {
+        id = ASCII_E;
+    }
+
+    if (nombre_edificio == F) {
+        id = ASCII_F;
+    }
+
+    if (nombre_edificio == G) {
+        id = ASCII_G;
+    }
+
+    if (nombre_edificio == M) {
+        id = ASCII_M;
+    }
+
+    if (nombre_edificio == O) {
+        id = ASCII_O;
+    }
+
+    if (nombre_edificio == P) {
+        id = ASCII_P;
+    }
+
+    return id;
+}
+
+Nodo_dict* Diccionario::buscar(Nodo_dict* nodo, int id) {
 
     if (nodo == nullptr || nodo -> devolver_id() == id)
         return nodo;
@@ -36,6 +80,20 @@ Nodo_dict* Diccionario::buscar(Nodo_dict* nodo, int id ) {
         return buscar(nodo -> devolver_nodo_derecho(), id);
 
     return buscar(nodo -> devolver_nodo_izquierdo(), id);
+}
+
+void Diccionario::mostrar_todos_edificios() {
+    mostrar_todos_edificios(origen);
+}
+
+void Diccionario::mostrar_todos_edificios(Nodo_dict* nodo) {
+
+    if (nodo != nullptr) {
+        nodo -> devolver_edificio() -> mostrar_toda_informacion();
+        
+        mostrar_todos_edificios(nodo -> devolver_nodo_derecho());
+        mostrar_todos_edificios(nodo -> devolver_nodo_izquierdo());
+    }
 }
 
 void Diccionario::borrar_todo(Nodo_dict* nodo) {

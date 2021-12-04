@@ -12,32 +12,21 @@ class Casillero_inaccesible: public Casillero {
     //post: -
 	Casillero_inaccesible();
 
-	void construir_edificio(Edificio* edificio) {}
+	~Casillero_inaccesible();
 
-	void colocar_material(Material* material) {}
+	void construir_edificio(Edificio* edificio);
+
+	void colocar_material(Material* material);
 	
-	void mostrar() {
-		cout << SUCESS_COLOR << "-Soy un casillero inaccesible y me encuentro vacio." << END_COLOR << endl;
-		cout << endl;
-	}
+	void mostrar();
 
-	void imprimir_casillero() {
-		cout << obtener_color() << NEGRO << "   " << END_COLOR;
-	}
+	void imprimir_casillero();
 
-	int obtener_cantidad_contenida() {
-		return 0;
-	}
+	int obtener_cantidad_contenida();
 
-	string obtener_nombre_contenido() {
-		return "";
-	}
+	string obtener_nombre_contenido();
 
-	string obtener_color() {
-		return C_LAGO;
-	}
-
-	~Casillero_inaccesible() {}
+	string obtener_color();
 };
 
 #endif // CASILLERO_INACCESIBLE_H

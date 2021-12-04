@@ -9,9 +9,9 @@ Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo) : Edificio(pie
 }
 
 void Mina_oro::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " brindo " << brinda << " Andycoins" << endl;
+    cout << " Soy una " << nombre << " brindo " << brinda << " andycoins" << endl;
 }
 
 string Mina_oro::obtener_material_brindado(){
-    return "andycoin";
+    return "andycoins";
 }

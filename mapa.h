@@ -127,6 +127,8 @@ class Mapa {
     //post: Imprime el Mapa.
 	void imprimir_mapa();
 
+	void mostrar_todos_edificios();
+
 	//pre: -
     //post: Genera una lluvia de Materiales en el Mapa.
 	void generar_lluvia_materiales();
@@ -139,6 +141,8 @@ class Mapa {
     //post: Pide al usuario que ingrese una fila y una columna, y muestra información del Casillero
 	//		correspondiente a dichas coordenadas.
 	void consultar_casillero();
+
+	void verificar_construccion();
 
 	//pre: Los valores ingresados deben cumplir que: 0 <= fila < filas y 0 <= columna < columnas.
     //post: Construye el Edificio en la fila y columna ingresadas si esta no está ocupada.
@@ -163,14 +167,20 @@ class Mapa {
 
 	void cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
 
-	Material* llover_material_aleatorio();
+	Edificio* encontrar_edificio();
+	
+	void confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir);
+
+	void mostrar_costo_edificio(Edificio* edificio_a_construir);
+
+	Material* llover_material_aleatorio(int &material_llovido);
 
 	string obtener_tipo_material(int tipo_material);
 
 	//pre: -
     //post: Verifica si puede llover más del 'material_llovido' y devuelve True.
 	//		Devuelve False si no se pasa la verificación.
-	bool puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int &andycoins_llovidos, int material_llovido);
+	bool puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int &andycoins_llovido, int material_llovido);
 	
 	//pre: -
     //post: Pide coordenadas y actualiza los respectivos valores ingresados.

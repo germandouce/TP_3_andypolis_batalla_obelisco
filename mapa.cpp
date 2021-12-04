@@ -150,37 +150,37 @@ void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int m
 
 	Edificio* edificio;
 
-	if (nombre_edificio == "aserradero") {
+	if (nombre_edificio == A) {
 		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "escuela") {
+	if (nombre_edificio == E) {
 		edificio = new Escuela(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "fabrica") {
+	if (nombre_edificio == F) {
 		edificio = new Fabrica(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "mina") {
+	if (nombre_edificio == M) {
 		edificio = new Mina(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "mina de oro") {
-		edificio = new Mina(piedra, madera, metal, limite_construccion);
+	if (nombre_edificio == G) {
+		edificio = new Mina_oro(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "obelisco") {
+	if (nombre_edificio == O) {
 		edificio = new Obelisco(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
 
-	if (nombre_edificio == "planta electrica") {
+	if (nombre_edificio == P) {
 		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion);
 		diccionario -> agregar_edificio(edificio);
 	}
@@ -228,6 +228,14 @@ void Mapa::imprimir_mapa() {
 	cout << END_COLOR << endl;
 }
 
+void Mapa::mostrar_todos_edificios() {
+
+	cout << ENTER_COLOR << "Esta es la informacion de todos los edificios: " << END_COLOR << endl;
+    cout << endl;
+
+	diccionario -> mostrar_todos_edificios();
+}
+
 void Mapa::generar_lluvia_materiales() {
 
 	int piedra_llovida = rand() % CANT_MAX_PIEDRA + CANT_MIN_PIEDRA;
@@ -249,7 +257,7 @@ void Mapa::generar_lluvia_materiales() {
 
 			if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && !matriz[i][j] -> obtener_cantidad_contenida()) {
 
-				Material* material_random = llover_material_aleatorio();
+				Material* material_random = llover_material_aleatorio(material_llovido);
 				string nombre_material = material_random -> obtener_nombre();
 
 				if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
@@ -318,7 +326,6 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 		}
 	}
 
-
 	return puede_llover_mas;
 }
 
@@ -347,6 +354,8 @@ void Mapa::consultar_casillero() {
 
 void Mapa::pedir_coordenadas(int &fila, int &columna) {
 	
+	system(CLR_SCREEN);
+
 	pedir_fila(fila);
 
     while (fila <= 0) {
@@ -384,14 +393,82 @@ void Mapa::pedir_columna(int &columna) {
     cin.ignore(100, '\n');
 }
 
+// CONSTRUIR EDIFICIO
+
+Edificio* Mapa::encontrar_edificio() {
+
+    string nombre_ingresado;
+
+    cout << ENTER_COLOR << "Ingrese el nombre del edificio deseado: " << END_COLOR << endl;
+    
+    getline(cin, nombre_ingresado);
+    
+	Edificio* edificio_encontrado = diccionario -> buscar_edificio(nombre_ingresado);
+
+    if (edificio_encontrado == nullptr) {
+        cout << endl;
+        cout << ERROR_COLOR << "-El nombre del edificio ingresado es incorrecto." << END_COLOR << endl;
+    }
+    
+    return edificio_encontrado;
+}
+
+void Mapa::verificar_construccion() {
+
+    Edificio* edificio_a_construir = encontrar_edificio();
+	int fila;
+	int columna;
+	bool verificacion = true;
+
+	if (edificio_a_construir != nullptr) {
+
+		pedir_coordenadas(fila, columna);
+			
+		if (matriz[fila][columna] -> esta_ocupado()) {
+			cout << ERROR_COLOR << "-Las coordenadas ingresadas se encuentran ocupadas." << END_COLOR << endl;
+			verificacion = false;
+		}
+
+		if (verificacion) {
+			confirmar_construccion(fila, columna, edificio_a_construir);
+    	}
+	} 
+}
+
+void Mapa::confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir) {
+
+    string respuesta;
+    string nombre_edificio = edificio_a_construir -> obtener_nombre();
+
+    system(CLR_SCREEN);
+    cout << ENTER_COLOR << "Esta seguro que desea construir un/a '" << nombre_edificio << "'?" << END_COLOR << endl;;
+    cout << SUCESS_COLOR << "Ingrese 'si' para confirmar." << END_COLOR << endl;
+    mostrar_costo_edificio(edificio_a_construir);
+    cin >> respuesta;
+    cout << endl;
+    
+    if (respuesta == "si") {
+        construir_edificio(fila, columna, edificio_a_construir);
+        cout << SUCESS_COLOR << "-Se ha construido exitosamente un/a '" << nombre_edificio << "'." << END_COLOR << endl;
+    }
+    else {
+        cout << ERROR_COLOR << "-No se ha construido el edificio." << END_COLOR << endl;
+    }
+}
+
+void Mapa::mostrar_costo_edificio(Edificio* edificio_a_construir) {
+    cout << endl;
+    cout << ENTER_COLOR << "Costos de construccion: " << END_COLOR << endl;
+    cout << SUCESS_COLOR;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_piedra() << " unidades de piedra." << endl;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_madera() << " unidades de madera." << endl;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_metal() << " unidades de metal." << endl;
+    cout << END_COLOR << endl;
+}
+
 void Mapa::construir_edificio(int fila, int columna, Edificio* edificio_a_construir) {
-
-	if (matriz[fila][columna] -> obtener_tipo_casillero() == CONSTRUIBLE && !matriz[fila][columna] -> obtener_cantidad_contenida()) {
-
-		matriz[fila][columna] -> construir_edificio(edificio_a_construir);
-		matriz[fila][columna] -> ocupar_casillero();
-
-	}
+	matriz[fila][columna] -> construir_edificio(edificio_a_construir);
+	matriz[fila][columna] -> ocupar_casillero();
 }
 
 // METODOS PRIVADOS
@@ -435,10 +512,10 @@ bool Mapa::es_numero(string palabra) {
 	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
 }
 
-Material* Mapa::llover_material_aleatorio() {
+Material* Mapa::llover_material_aleatorio(int &material_llovido) {
 
-	int tipo_material = rand() % CANT_MATERIALES;
-	string nombre_material_aleatorio = obtener_tipo_material(tipo_material);
+	material_llovido = rand() % CANT_MATERIALES;
+	string nombre_material_aleatorio = obtener_tipo_material(material_llovido);
 	Material* material_devuelto;
 
 	if (nombre_material_aleatorio == S) {
@@ -450,7 +527,7 @@ Material* Mapa::llover_material_aleatorio() {
 	}
 
 	if (nombre_material_aleatorio == I) {
-		material_devuelto = new Piedra(METAL_LLOVIDO);
+		material_devuelto = new Metal(METAL_LLOVIDO);
 	}
 
 	if (nombre_material_aleatorio == C) {
