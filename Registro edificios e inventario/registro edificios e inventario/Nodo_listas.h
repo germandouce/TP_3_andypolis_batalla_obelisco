@@ -2,16 +2,16 @@
 #define REGISTRO_EDIFICIOS_NODO_LISTAS_H
 #include "Edificio.h"
 
-class Nodo_Reg_ed {
+class Nodo_l{
 //Atributos
 private:
     Edificio* edificio;
-    Nodo_Reg_ed* siguiente;
+    Nodo_l* siguiente;
 
 //Metodos
 public:
     //constructor
-    Nodo_Reg_ed();
+    Nodo_l();
 
     //PRE:
     //POS: devuelve datos del edificio que apunta.
@@ -19,11 +19,11 @@ public:
 
     //PRE:
     //POS: devuelve nodo que le sigue en posicion en el registro al actual.
-    Nodo_Reg_ed* obtener_siguiente();
+    Nodo_l* obtener_siguiente();
 
     //pre:
     //post: cambia al nodo que le sigue en posicion en el registro al actual.
-    void cambiar_siguiente(Nodo_Reg_ed* puntero);
+    void cambiar_siguiente(Nodo_l* puntero);
 
 };
 

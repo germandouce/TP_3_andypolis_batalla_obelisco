@@ -12,7 +12,7 @@ int Registro_edificios::obtener_cantidad_edificios(){
 }
 
 int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
-    Nodo_Reg_ed *actual = new Nodo_Reg_ed();
+    Nodo_l *actual = new Nodo_l();
     actual = primero;
     bool encontrado = false;
     int posicion = 0;
@@ -24,6 +24,7 @@ int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
         actual = actual->obtener_siguiente();
         posicion++;
     }
+    delete actual;
     return  posicion;
 }
 
@@ -42,27 +43,22 @@ bool Registro_edificios::existe( int coordenada_x , int coordenada_y) {
 }
 
 void Registro_edificios::agregar() {
-    Nodo_Reg_ed*nuevo = new Nodo_Reg_ed();
-    Nodo_Reg_ed*siguiente = primero;
-    nuevo ->obtener_edificio();
+    Nodo_l*nuevo = new Nodo_l();
 
     if(primero == nullptr){
         primero = nuevo;
         ultimo = primero;
     }
-    else {
-        ultimo = nuevo;
-        int posicion_ultimo_x = ultimo->obtener_edificio()->obtener_coordenada_x();
-        int posicion_ultimo_y = ultimo->obtener_edificio()->obtener_coordenada_y();
-        Nodo_Reg_ed* anterior = obtener_nodo(buscar_posicion(posicion_ultimo_x-1,posicion_ultimo_y-1));
-        siguiente = anterior->obtener_siguiente();
-        anterior->cambiar_siguiente(nuevo);
+    else{
+        ultimo ->cambiar_siguiente(nuevo);
     }
+    ultimo = nuevo;
+
     cantidad_edificios++;
 }
 
 void Registro_edificios::eliminar(int coordenada_x , int coordenada_y){
-    Nodo_Reg_ed* baja = primero;
+    Nodo_l* baja = primero;
     Edificio*edificio_buscado;
     edificio_buscado = buscar_edificio_en_registro(coordenada_x,coordenada_y);
     int posicion_ed_buscado = buscar_posicion(edificio_buscado->obtener_coordenada_x(),edificio_buscado->obtener_coordenada_y());
@@ -71,7 +67,7 @@ void Registro_edificios::eliminar(int coordenada_x , int coordenada_y){
     }
     else{
         baja = baja->obtener_siguiente();
-        Nodo_Reg_ed*anterior = obtener_nodo(posicion_ed_buscado-1);
+        Nodo_l*anterior = obtener_nodo(posicion_ed_buscado-1);
         anterior->cambiar_siguiente(baja->obtener_siguiente());
     }
     cantidad_edificios--;
@@ -80,7 +76,7 @@ void Registro_edificios::eliminar(int coordenada_x , int coordenada_y){
 
 
 Registro_edificios::~Registro_edificios() {
-    Nodo_Reg_ed* siguiente;
+    Nodo_l* siguiente;
     while(primero != nullptr){
         siguiente = primero -> obtener_siguiente();
         delete primero;
@@ -90,7 +86,7 @@ Registro_edificios::~Registro_edificios() {
 
 
 void Registro_edificios :: mostrar_registro_edificios(Edificio edificio) {
-    Nodo_Reg_ed *act = new Nodo_Reg_ed;
+    Nodo_l *act = new Nodo_l;
     act = primero;
     if (cantidad_edificios == 0) {
         cout << "EL REGISTRO DE EDIFICIOS ESTÁ VACIO" << "\n\n";
@@ -111,8 +107,8 @@ void Registro_edificios :: mostrar_registro_edificios(Edificio edificio) {
     }
 }
 
-Nodo_Reg_ed* Registro_edificios::obtener_nodo(int pos) {
-    Nodo_Reg_ed* aux = primero;
+Nodo_l* Registro_edificios::obtener_nodo(int pos) {
+    Nodo_l* aux = primero;
     for (int i = 1; i < pos; i++)
         aux = aux->obtener_siguiente();
     return aux;

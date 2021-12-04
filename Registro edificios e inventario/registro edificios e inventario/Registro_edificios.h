@@ -7,8 +7,8 @@ class Registro_edificios{
 //ATRIBUTOS
 private:
     int cantidad_edificios;
-    Nodo_Reg_ed* primero;
-    Nodo_Reg_ed* ultimo;
+    Nodo_l* primero;
+    Nodo_l* ultimo;
 
 //METODOS
 public:
@@ -46,7 +46,7 @@ public:
 
     //pre:
     //post: devueve un nodo aux segun posicion.
-    Nodo_Reg_ed* obtener_nodo(int pos);
+    Nodo_l* obtener_nodo(int pos);
 
     //DESTRUCTOR
     ~Registro_edificios();
