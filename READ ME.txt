@@ -1,0 +1,3 @@
+Recomiendo probar por separado cada menú y 
+siempre terminar seleccionanda/con la opcion salir y 
+guardar (la última opción).
