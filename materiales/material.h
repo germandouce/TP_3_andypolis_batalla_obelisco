@@ -11,11 +11,7 @@ class Material {
     protected:
  
     string nombre_material;
-<<<<<<< HEAD
     string diminutivo;
-=======
-    const  char* diminutivo;
->>>>>>> release
     int cantidad_material;
 
     public:
@@ -48,11 +44,7 @@ class Material {
     //Obtener diminutivo
     //PRE: -
     //POST: Devuelve el diminutivo del material
-<<<<<<< HEAD
     string obtener_diminutivo();
-=======
-    const char* obtener_diminutivo();
->>>>>>> release
 
     //pre: -
     //post: Devuelve la cantidad del Material.
@@ -65,7 +57,6 @@ class Material {
     //pre: -
     //post: Resta cantidad a la 'cantidad_material'.
     void restar_cantidad(int cantidad);
-    
 };
 
 #endif // MATERIAL_H_INCLUDED

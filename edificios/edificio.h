@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-<<<<<<< HEAD
 #include "../colores.h"
 
 using namespace std;
@@ -25,29 +24,12 @@ protected:
     int cantidad_piedra;
     int cantidad_madera;
     int cantidad_metal;
-=======
-using namespace std;
-
-class Edificio
-{
-protected:
-
-    string nombre;
-    const char* diminutivo;
-    int cantidad_piedra;
-    int canitdad_madera;
-    int cantidad_metal;
-    //int cantidad_edificios;
->>>>>>> release
     int brinda;
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
-<<<<<<< HEAD
-=======
     int posicion_x;
     int posicion_y;
->>>>>>> release
 
 public:
 
@@ -59,7 +41,7 @@ public:
     // PRE: -
     // POS: Como es una clase abstracta cada edificio va a implementar su nombre, aca se
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
-    Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
+    Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
@@ -67,11 +49,7 @@ public:
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el diminutivo del edificio, siendo este la primer letra de la palabra ( getter ).
-<<<<<<< HEAD
     string obtener_diminutivo();
-=======
-    const char* obtener_diminutivo();
->>>>>>> release
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la cantidad de piedra necesaria para construir.
@@ -143,9 +121,8 @@ public:
     //POST: Suma 1 a la cantidad de vida siempre u cuando lo permita dicho edificio.
     void reparar();
 
-<<<<<<< HEAD
     void mostrar_toda_informacion();
-=======
+    
     //Devolver posicion X
     //PRE:-
     //POST: Devuelve un entero con la posicion x del edificio
@@ -155,20 +132,11 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la posicion y del edificio
     int obtener_posicion_y();
->>>>>>> release
 
     // Destructor
     // PRE: -
     // POS: -
     virtual ~Edificio();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> release
 };
-
-
-
 
 #endif // EDIFICIO_H

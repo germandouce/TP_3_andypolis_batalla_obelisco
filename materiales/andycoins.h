@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-#ifndef ANDYCOINS_H_INCLUDED
+#ifndef ANDYCOINS_H
 #define ANDYCOINS_H
-=======
-
-#ifndef ANDYCOINS_H_INCLUDED
-#define ANDYCOINS
->>>>>>> release
 
 #include "material.h"
 
@@ -28,4 +22,4 @@ public:
 };
 
 
-#endif // ANDYCOINS_H_INCLUDED_INCLUDED
+#endif // ANDYCOINS_H
