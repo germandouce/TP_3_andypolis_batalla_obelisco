@@ -15,23 +15,32 @@ const char TERRENO = 'T';
 const int PESO_CAMINO = 4;
 const int PESO_BETUN = 0;
 const int PESO_LAGO = 2; //el jugador 2 es 5
-const int PESO_MUELLE = 5; //el jugador 2 es 2
+const int PESO_MUELLE = 5; //el posicionjugador 2 es 2
 const int PESO_TERRENO = 25;
 
+const int DISTANCIA_INICIAL_ORIGEN = 0;
 
 class Grafo {
 //ATRIBUTOS
 private:
     int ** matriz_adyacencia;
     Lista* lista_vertices;
+    Lista* nodos_a_visitar;
+    Lista* camino_minimo;
 
 //METODOS
 
-int transformar_terreno_a_peso(char tipo_terreno);
+
 
 public:
 
-Grafo();
+int transformar_terreno_a_peso(char tipo_terreno);
+
+Grafo(Lista* lista_vertices);
+
+void recorrer_nodo(Nodo* nodo_anterior, int distancia_origen_nodo_anterior, int num_nodo_anterior, int num_nodo_adyacente);
+
+bool no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados);
 
 void inicializar_lista_vertices(Lista* lista_vertices);
 
@@ -43,7 +52,7 @@ void crear_grafo(int cantidad_filas, int cantidad_columnas);
 
 void agregar_camino(int origen, int destino, int peso);
 
-void calcular_camino_minimo_dijktra(int origen, int destino, int cantidad_filas, int cantidad_columnas);
+void calcular_camino_minimo_dijktra(int origen, int destino);
     
 void mostrar_matriz_adyacencia();
 

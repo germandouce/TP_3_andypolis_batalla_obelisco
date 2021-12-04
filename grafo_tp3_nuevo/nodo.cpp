@@ -12,6 +12,16 @@ Nodo::Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fi
 
 }
 
+Nodo::Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original){
+
+    vertice = new Vertice(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
+    siguiente = nullptr;
+    anterior = nullptr;
+    vector_adyacentes = nodo_original -> obtener_vector_adyacentes();
+    distancia_minima_origen = INFINITO;
+
+}
+
 void Nodo::cargar_vector_adyacentes(){
 	int numero_vertice = obtener_vertice() -> obtener_numero_vertice();
 	int cantidad_filas = obtener_vertice()-> obtener_cantidad_filas();
@@ -99,6 +109,10 @@ void Nodo::asignar_siguiente(Nodo* vertice_siguiente){
     this -> siguiente = vertice_siguiente;
 }
 
+void Nodo::asignar_anterior(Nodo* vertice_anterior){
+    this -> anterior = vertice_anterior;
+}
+
 void Nodo::asignar_distancia_minima(){
     this -> distancia_minima_origen = 0;
 }
@@ -112,6 +126,7 @@ void Nodo::reemplazar_distancia_minima(int distancia_minima_origen){
 }
 
 Nodo* Nodo::obtener_siguiente(){
+
     return siguiente;
 }
 

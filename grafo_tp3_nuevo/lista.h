@@ -29,6 +29,12 @@ public:
     //post: Agrega un nuevo elemento a la lista.
     void agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
+    void agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original);
+
+    void agregar_fifo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
+
+    void agregar(Nodo* nuevo_nodo);
+
     //pre: 1 < posicion <= cantidad_elementos. 
     //post: Devolver el nodo que esta n posiciones despues del primero.
     Nodo* devolver_nodo(int posicion);
@@ -38,6 +44,8 @@ public:
     Nodo* devolver_siguiente(Nodo* nodo_actual);
 
     void mostrar();
+
+    void eliminar_nodo();
 
     ~Lista();
 };

@@ -18,7 +18,7 @@ Nodo Nodo(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
 	cout << Nodo.encontrar_tipo_nodo(2, 1,  3, 3) << endl;
 
 
-char ** matriz_terrenos;
+
 /*
 matriz_terrenos = new char* [3];
 for(int h = 0; h < 3; h++){
@@ -27,7 +27,7 @@ for(int h = 0; h < 3; h++){
 */
 char var_l = 'L';
 char var_t = 'T';
-char var_b = 'B';
+//char var_b = 'B';
 char var_m = 'M';
 
 char* p_terreno[3];
@@ -44,10 +44,24 @@ terrenos[1] = terreno1;
 terrenos[2] = terreno2;
 
 terreno[0] = var_l;
-terreno1[1] = var_b;
-terreno2[2] = var_m;
+terreno[1] = var_t;
+terreno[2] = var_l;
 
-cout << terrenos[1][1] << endl;
+terreno1[0] = var_m;
+terreno1[1] = var_m;
+terreno1[2] = var_t;
+
+terreno2[0] = var_l;
+terreno2[1] = var_m;
+terreno2[2] = var_l;
+
+for (int i = 0; i < 3; i++){
+	for (int j = 0; j < 3; j++){
+		cout << terrenos[i][j] << endl;
+	}
+}
+
+
 /*
 matriz_terrenos[0][0] = &var_l;
 matriz_terrenos[0][1] = &var_m;
@@ -62,8 +76,8 @@ matriz_terrenos[2][2] = &var_l;
 
 
 Lista lista;
-Grafo grafo;
 
+Lista* p_lista = &lista;
 
 lista.agregar(1, 3, 3, 1, 1);
 lista.devolver_nodo(1) -> cargar_vector_adyacentes();
@@ -84,9 +98,13 @@ lista.devolver_nodo(8) -> cargar_vector_adyacentes();
 lista.agregar(9, 3, 3, 3, 3);
 lista.devolver_nodo(9) -> cargar_vector_adyacentes();
 
-lista.mostrar();
+Grafo grafo(p_lista);
+//lista.mostrar();
 
-//grafo.cargar_matriz_adyacencia(matriz_terrenos,3,3);
-//grafo.mostrar_matriz_adyacencia();
+
+
+grafo.cargar_matriz_adyacencia(terrenos,3,3);
+grafo.mostrar_matriz_adyacencia();
+grafo.calcular_camino_minimo_dijktra(1, 9);
 
 }

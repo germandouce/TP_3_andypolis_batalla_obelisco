@@ -4,6 +4,7 @@
 #include "vertice.h"
 
 
+
 const int INFINITO = 99999;
 
 const int CANTIDAD_NODOS_ADYACENTES = 4;
@@ -59,6 +60,8 @@ public:
     //pre:
     //post: Inicializa el nodo con el vertice y sus vertices adyacentes.
     Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
+
+    Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original);
 
     //pre:
     //post: Asigna el siguiente nodo por orden de numero de vertice
