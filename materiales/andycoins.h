@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 #ifndef ANDYCOINS_H_INCLUDED
 #define ANDYCOINS_H
+=======
+
+#ifndef ANDYCOINS_H_INCLUDED
+#define ANDYCOINS
+>>>>>>> release
 
 #include "material.h"
 

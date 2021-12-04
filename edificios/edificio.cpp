@@ -2,9 +2,15 @@
 
 Edificio::Edificio(){
     this-> nombre = "edificio";
+<<<<<<< HEAD
     this-> diminutivo = "";
     this-> cantidad_piedra = 0;
     this-> cantidad_madera = 0;
+=======
+    this-> diminutivo = "-";
+    this-> cantidad_piedra = 0;
+    this-> canitdad_madera = 0;
+>>>>>>> release
     this-> cantidad_metal = 0;
     // this-> cantidad_edificios = 0;
     this-> brinda = 0;
@@ -14,10 +20,17 @@ Edificio::Edificio(){
 }
 
 Edificio::Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
+<<<<<<< HEAD
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
     this-> cantidad_madera = cantidad_madera;
+=======
+    this-> nombre = "-`";
+    this-> diminutivo = "-";
+    this-> cantidad_piedra = cantidad_piedra;
+    this-> canitdad_madera = cantidad_madera;
+>>>>>>> release
     this-> cantidad_metal = cantidad_metal;
     // this-> cantidad_edificios = 0;
     this-> brinda = 0;
@@ -30,7 +43,11 @@ string Edificio::obtener_nombre(){
     return nombre;
 }
 
+<<<<<<< HEAD
 string Edificio::obtener_diminutivo(){
+=======
+const char* Edificio::obtener_diminutivo(){
+>>>>>>> release
     return diminutivo;
 }
 
@@ -39,7 +56,11 @@ int Edificio::obtener_cantidad_piedra(){
 }
 
 int Edificio::obtener_cantidad_madera(){
+<<<<<<< HEAD
     return cantidad_madera;
+=======
+    return canitdad_madera;
+>>>>>>> release
 }
 
 int Edificio::obtener_cantidad_metal(){
@@ -59,7 +80,11 @@ int Edificio::obtener_maximo_construir(){
 }
 
 int Edificio::obtener_mitad_madera(){
+<<<<<<< HEAD
     return cantidad_madera/2;
+=======
+    return canitdad_madera/2;
+>>>>>>> release
 }
 
 int Edificio::obtener_mitad_piedra(){
@@ -87,6 +112,7 @@ void Edificio:: daniar(){
     vida_actual--;
 }
 
+<<<<<<< HEAD
 bool Edificio:: edificio_en_pie() {
     return (vida_actual > 0);
 }
@@ -123,3 +149,29 @@ void Edificio::mostrar_toda_informacion() {
 }
 
 Edificio::~Edificio() {}
+=======
+bool Edificio:: edificio_en_pie(){
+    return (vida_actual > 0);
+}
+
+void Edificio::reparar(){
+    if (vida_actual == vida_maxima){
+        cout <<"El edificio no requiere reparacion"<<endl;
+    }
+    else{
+        vida_actual++;
+        cout<<"Se reparo el edificio "<<nombre<<" corretamente";
+    }
+}
+
+int Edificio::obtener_posicion_x(){
+    return posicion_x;
+}
+
+int Edificio::obtener_posicion_y(){
+    return posicion_y;
+}
+
+Edificio::~Edificio(){}
+
+>>>>>>> release
