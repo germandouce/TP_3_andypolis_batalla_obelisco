@@ -8,23 +8,36 @@ Jugador::Jugador(){
     // this -> Vector<Material>* inventario;
     // this -> Vector<Objetivo>* objetivos;
     // this -> Vector<Edificio>* edificios;
-    this -> objetivos_secundarios_cumplidos;
+    this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
     //this -> bombas_usadas;
     this -> bombas_compradas = 0;
+    int coordenada_x = 0;
+    int coordenada_y = 0;
+
 }
 
 void Jugador::setear_numero_jugador(int numero_jugador){
     this -> numero_jugador = numero_jugador;
 }
 
-void Jugador::asignar_objetivos(int numero_random){
-    this -> vector_obejtivos
+void Jugador::asignar_objetivo(int objetivo, int numero_objetivo){
+    objetivos[numero_objetivo]  = objetivo;
 }
 
+void Jugador::agregar_material_a_inventario(){
 
+}
 
+void Jugador::agregar_edificio_al_registro_(){
+
+}
+
+void Jugador::asignar_coordenadas(int fila, int columna){
+    this -> fila = columna;
+    this -> fila = columna;
+}
 
 // Jugador::Jugador(Vector<Material>* inventario){
     

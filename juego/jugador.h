@@ -14,7 +14,8 @@ class Jugador {
     int  numero_jugador;
 
     // Vector<Material>* inventario;
-    // Vector<Objetivo>* objetivos;
+    //Vector<Objetivo>* objetivos;
+    int objetivos[3];
     // Vector<Edificio>* edificios;
     int objetivos_secundarios_cumplidos;
     int energia;
@@ -22,6 +23,9 @@ class Jugador {
     //int bombas_usadas;
     int bombas_compradas;
     
+    int fila;
+    int columna;
+
     public:
 
     //Jugador(Vector<Material>* inventario);
@@ -37,10 +41,24 @@ class Jugador {
 
     //Asignar objetivos
     //PRE:
-    //POST: Asigna objetivos al jugador
-    void asignar_objetivos(int numero_random);
-    
-    
+    //POST: Asigna 1 objetivo al jugador agregandolo a la lista de objetivos
+    void asignar_objetivo(int objetivo, int numero_objetivo);
+
+    //Cargar el inventario
+    //PRE:
+    //POST:-
+    void agregar_material_a_inventario();
+
+    //Cargar resgistro edificios
+    //PRE:-
+    //POST: Lee el archivo de edificios y va cargandolos en el registro
+    void agregar_edificio_al_registro_();
+
+    //Asignar coordenadas
+    //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.
+    //POST: Asigna al jugador en los atributos las coordenadas correspondientes.
+    void asignar_coordenadas(int fila, int columna);
+
     //Verificar objetivos
     //PRE:
     //POST: verifica si cumplio sus objetivos 
