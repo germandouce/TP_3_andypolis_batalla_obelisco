@@ -119,6 +119,8 @@ class Mapa {
     //post: Asigna el puntero a Casillero a la posición fila y columna ingresadas.
 	void cargar_casillero(int fila, int columna, Casillero* casillero);
 
+	void colocar_material(int fila, int columna, Material* material);
+
 	bool se_cargo_terreno();
 
 	bool se_cargo_diccionario();

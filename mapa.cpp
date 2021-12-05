@@ -37,6 +37,10 @@ void Mapa::cargar_casillero(int fila, int columna, Casillero* casillero) {
 	matriz[fila][columna] = casillero;
 }
 
+void Mapa::colocar_material(int fila, int columna, Material* material) {
+	matriz[fila][columna] -> colocar_material(material);
+}
+
 // CARGA DE ARCHIVOS
 
 bool Mapa::se_cargo_terreno() {
