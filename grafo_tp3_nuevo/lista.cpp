@@ -76,19 +76,6 @@ void Lista::agregar(int numero_vertice, int cantidad_filas, int cantidad_columna
     cantidad_elementos++;
 }
 
-void Lista::agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original) {
-
-	Nodo* nuevo_nodo = new Nodo(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna, nodo_original); //cambiar aca
-    if(primero == nullptr){
-        primero = nuevo_nodo;
-        ultimo = primero;
-    } else {
-        ultimo -> asignar_siguiente(nuevo_nodo); //cambio el atributo de nodo
-        ultimo = nuevo_nodo; //cambio el atributo de lista
-    }
-    cantidad_elementos++;
-}
-
 void Lista::agregar(Nodo* nuevo_nodo) {
 
     if(primero == nullptr){
@@ -101,8 +88,8 @@ void Lista::agregar(Nodo* nuevo_nodo) {
     cantidad_elementos++;
 }
 
-void Lista::agregar_fifo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna) {
-    Nodo* nuevo_nodo = new Nodo(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
+void Lista::agregar_fifo(Nodo* nodo_original) {
+    Nodo* nuevo_nodo = new Nodo(nodo_original);
     if(primero == nullptr){
         primero = nuevo_nodo;
         ultimo = primero;

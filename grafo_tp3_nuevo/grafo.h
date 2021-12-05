@@ -3,6 +3,7 @@
 
 #include "lista.h"
 
+const int PRIMER_ELEMENTO = 1;
 
 const char CAMINO = 'C';
 const char BETUN = 'B';
@@ -25,7 +26,6 @@ class Grafo {
 private:
     int ** matriz_adyacencia;
     Lista* lista_vertices;
-    Lista* nodos_a_visitar;
     Lista* camino_minimo;
 
 //METODOS
@@ -38,9 +38,13 @@ int transformar_terreno_a_peso(char tipo_terreno);
 
 Grafo(Lista* lista_vertices);
 
-void recorrer_nodo(Nodo* nodo_anterior, int distancia_origen_nodo_anterior, int num_nodo_anterior, int num_nodo_adyacente);
+Lista* crear_lista_a_recorrer(int origen);
+
+void recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente);
 
 bool no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados);
+
+bool no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int cantidad_elementos);
 
 void inicializar_lista_vertices(Lista* lista_vertices);
 
