@@ -4,6 +4,8 @@
 #include <string>
 #include "vector.h"
 #include "material.h"
+#include ".\edificio.h"
+
 
 using namespace std;
 
@@ -52,7 +54,7 @@ class Jugador {
     //Cargar resgistro edificios
     //PRE:-
     //POST: Lee el archivo de edificios y va cargandolos en el registro
-    void agregar_edificio_al_registro_();
+    void agregar_edificio_al_registro_(Edificio* edificio);
 
     //Asignar coordenadas
     //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.

@@ -7,6 +7,9 @@
 #include "Jugador.h"
 #include ".\diccionario.h"
 
+const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
+
+
 class Juego{
 
 private:
@@ -29,8 +32,32 @@ public:
     //POST: Lee el archivo mapa.txt y lo guarda.
     bool cargar_mapa();
 
-    //Cargar datos jugadores
-    void cargar_ubicaciones(Jugador * jug_1, Jugador * jug_2);
+    //Archivo vacio`
+    //PRE: Recibe el archivo
+    //POST: Devuelve true si el archivo esta vaio false en caso contrario
+    bool archivo_vacio(ifstream& archivo);
+    
+    //Existe archivo
+    //PRE: Recibe un objeto de tipo ifstream y el nombre del archivo
+    //POST: intenta abrir el archivo y Devuelve true si el archivo existe y flase en caso contrario
+    bool existe_archivo(ifstream& archivo,string nombre_archivo);
+
+    //Guardar edificio
+    //PRE: Recibe el nombre del edificio y un punetro a edificio
+    //POST: Instancia el edificio y lo guarda en el puntero recibido
+    void instanciar_edificio(string nombre_edificio, Edificio* edificio);
+
+    //Guardar material
+    //PRE: Recibe el nombre del material y un puntero a material
+    //POST: instancia el material y lo guarda en el puntero recibido
+    void instanciar_material(string nombre_material, Material * material);
+
+    //Cargar ubicaciones
+    //PRE: El acrhivo ubicaciones debe estar abierto. Recibe un puntero a jugador 1 y a jugador 2 y 
+    //un objeto ifstream
+    //POST: lee el archivo ubicaciones y carga sus datos en las listas de los edificios de cada jugador
+    //y en el mapa colocando los materiales y edificios
+    void cargar_ubicaciones(ifstream& ubicaciones, Jugador * jug_1, Jugador * jug_2);
 
     //Generar numero random
     //PRE: Recibe los enteros "min" y "max" con los valores limite (inclusives) entre los cuales se desea generar el numero random 
