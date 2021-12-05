@@ -60,6 +60,7 @@ void calcular_camino_minimo_dijktra(int origen, int destino);
     
 void mostrar_matriz_adyacencia();
 
+void ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion);
 
 
 

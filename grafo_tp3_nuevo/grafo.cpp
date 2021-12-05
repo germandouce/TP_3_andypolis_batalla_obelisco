@@ -60,18 +60,20 @@ void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente){
 
 	int peso_anterior = lista_vertices -> devolver_nodo(num_nodo_adyacente) ->obtener_distancia_minima_origen();
 	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1];
+
 	cout << "nodo : " << num_nodo_adyacente << endl;
 	cout << "anterior: " << num_nodo_raiz << endl;
-	//cout << "peso anterior: " << peso_anterior << endl;
-	//cout << "peso nodo: " << peso_nodo << endl;
-	//cout << "dist anterior: " << lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() << endl;
-	//cout << "matriz: " << matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1] << endl;
-
+	/*
+	cout << "peso anterior: " << peso_anterior << endl;
+	cout << "peso nodo: " << peso_nodo << endl;
+	cout << "dist anterior: " << lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() << endl;
+	cout << "matriz: " << matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1] << endl;
+*/
 	if (peso_nodo < peso_anterior){
 		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_distancia_minima(peso_nodo);
 		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_anterior(num_nodo_raiz);
 
-		cout << "distancia: " << lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen() << endl;
+		//cout << "distancia: " << lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen() << endl;
 
 		//cout << "anterior: " << lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_anterior() << endl;
 
@@ -79,6 +81,47 @@ void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente){
 	cout << endl;
 }
 
+
+void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion){
+	cout << "posicion: "<< posicion << endl;
+	for(int i = visitados; i < posicion + 1 ; i++){
+
+		for(int j =   i + 1; j < posicion + 1 ; j++){
+				cout << "A ("<<nodos_a_recorrer[i]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<<endl;
+				cout << "B ("<<nodos_a_recorrer[j]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<<endl;
+				cout << endl;
+
+				int distancia_i = lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen();
+				int distancia_j = lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen();
+				if( distancia_i > distancia_j){
+					int aux = nodos_a_recorrer[i];
+					nodos_a_recorrer[i] = nodos_a_recorrer[j];
+					nodos_a_recorrer[j] = aux;
+					cout << "A* ("<<nodos_a_recorrer[i]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<< endl;
+					cout << "B* ("<<nodos_a_recorrer[j]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<< endl;
+					cout << endl;
+				}
+
+		}
+	}
+
+
+
+
+	cout << "visitados " << visitados << endl;
+
+	for (int i = 0 ; i <= posicion ; i++){
+		cout << nodos_a_recorrer[i] << "-";
+	}
+	cout << endl;
+	for (int i = 0 ; i <= posicion ; i++){
+		cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
+	}
+	cout << endl;
+
+
+
+}
 
 
 void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
@@ -109,9 +152,9 @@ void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 				int num_nodo_adyacente = vector_adyacentes[i];
 				//cout <<"		nodo adyacente: " << num_nodo_adyacente << endl;
 
-				//if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados) ){
+				if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados) ){
 					recorrer_nodo(num_nodo_raiz, num_nodo_adyacente);
-					//}
+					}
 
 			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion) ){
 
@@ -131,10 +174,21 @@ void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 		//cout << endl;
 		//p_nodos_visitados -> mostrar();
 		visitados++;
-		//cout << "visitados " << visitados << endl;
-		//cout << nodos_a_recorrer[visitados] << endl;
+		ordenar_vector_distancia_min(nodos_a_recorrer, visitados, posicion);
+/*
+		cout << "visitados " << visitados << endl;
+
+		for (int i = 0 ; i <= posicion ; i++){
+			cout << nodos_a_recorrer[i] << "-";
+		}
+		cout << endl;
+		for (int i = 0 ; i <= posicion ; i++){
+			cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
+		}
+		cout << endl;
+*/
 		num_nodo_raiz = nodos_a_recorrer[visitados];
-		//cout << "nodos raiz: " << num_nodo_raiz << endl;
+		cout << "nodos raiz: " << num_nodo_raiz << endl;
 		cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> devolver_cantidad_aristas();
 		//cout << "cantidad nodos adyacentes: " << cantidad_nodos_adyacentes << endl;
 		vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
