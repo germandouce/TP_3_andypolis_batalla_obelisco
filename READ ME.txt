@@ -1,3 +1,4 @@
-Recomiendo probar por separado cada menú y 
-siempre terminar seleccionanda/con la opcion salir y 
-guardar (la última opción).
+Ya hice todas las pruebas incluida la prueba del 
+caso en que no exista el archivo materiales.txt
+
+Igualmente sientanse libres de hacer la prueba ustedes si quieren :)
