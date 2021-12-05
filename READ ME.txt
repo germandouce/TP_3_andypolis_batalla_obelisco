@@ -1,4 +1,4 @@
 Ya hice todas las pruebas incluida la prueba del 
 caso en que no exista el archivo materiales.txt
 
-Igualmente sientanse libres de hacer la prueba ustedes si quieren :)
+Igualmente sientanse libres de hacer las pruebas ustedes si quieren :)
