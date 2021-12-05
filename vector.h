@@ -9,7 +9,7 @@ class Vector {
     
     private:
 
-    Dato* datos;
+    Dato** datos;
     int largo;
 
     public:
@@ -27,7 +27,7 @@ class Vector {
     //pre: La 'posicion' se encuentra en el intervalo que va desde 0 hasta (largo - 1).
     //     No se puede usar en un Vector "vacío".
     //post: Devuelve el dato en la posición ingresada.
-    Dato obtener_dato(int posicion);
+    Dato* obtener_dato(int posicion);
 
     //pre: -
     //post: Devuelve el largo del Vector.
@@ -36,17 +36,19 @@ class Vector {
     //pre: La 'posicion' se encuentra en el intervalo que va desde 0 hasta (largo - 1).
     //     No se puede usar en un Vector "vacío".
     //post: Inserta el 'dato' en la posición ingresada.
-    void insertar_posicion(int posicion, Dato dato);
+    void insertar_posicion(int posicion, Dato* dato);
 
     //pre: -
     //post: Inserta el 'dato' al final del Vector. Reserva memoria para el 'dato' y actualiza el valor de su largo.
-    void insertar_ultimo(Dato dato);
+    void insertar_ultimo(Dato* dato);
 
     //pre: La 'posicion' se encuentra en el intervalo que va desde 0 hasta (largo - 1).
     //     No se puede usar en un Vector "vacío".
     //post: Borra el 'dato' ubicado en la posición ingresada.
     //      Modifica la memoria utilizada y actualiza el valor de su largo.
     void borrar_posicion(int posicion);
+
+    void borrar_todo();
 };
 
 template <typename Dato>
@@ -59,12 +61,12 @@ Vector<Dato>::Vector() {
 template <typename Dato>
 
 Vector<Dato>::~Vector() {
-    delete[] datos;
+    borrar_todo();
 }
 
 template <typename Dato>
 
-Dato Vector<Dato>::obtener_dato(int posicion) {
+Dato* Vector<Dato>::obtener_dato(int posicion) {
     return datos[posicion];
 }
 
@@ -76,15 +78,15 @@ int Vector<Dato>::obtener_largo() {
 
 template <typename Dato>
 
-void Vector<Dato>::insertar_posicion(int posicion, Dato dato) {
+void Vector<Dato>::insertar_posicion(int posicion, Dato* dato) {
     datos[posicion] = dato;
 }
 
 template <typename Dato>
 
-void Vector<Dato>::insertar_ultimo(Dato dato) {
+void Vector<Dato>::insertar_ultimo(Dato* dato) {
     
-    Dato* nuevos_datos = new Dato [largo + 1];
+    Dato** nuevos_datos = new Dato* [largo + 1];
 
     for (int i = 0; i < largo; i++) {
         nuevos_datos[i] = datos[i];
@@ -104,7 +106,7 @@ template <typename Dato>
 
 void Vector<Dato>::borrar_posicion(int posicion) {
 
-    Dato* nuevos_datos = new Dato [largo - 1];
+    Dato** nuevos_datos = new Dato* [largo - 1];
 
     for (int i = 0; i < posicion; i++) {
         nuevos_datos[i] = datos[i];
@@ -118,6 +120,13 @@ void Vector<Dato>::borrar_posicion(int posicion) {
     
     datos = nuevos_datos;
     largo--;
+}
+
+template <typename Dato>
+
+void Vector<Dato>::borrar_todo() {
+    largo = 0;
+    delete[] datos;
 }
 
 #endif // _VECTOR_TEMPLATE_
