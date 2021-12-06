@@ -1,16 +1,52 @@
 #include "grafo.h"
 
-Grafo::Grafo(Lista* lista_vertices) {
-   // matriz_adyacencia = nullptr;
+Grafo::Grafo(int cantidad_filas, int cantidad_columnas) {
 
-   this -> lista_vertices = lista_vertices;
-   nodos_a_visitar = nullptr;
+	
+
+	lista_vertices = new Lista();
+
+	int num_nodo = PRIMER_ELEMENTO;
+	for(int j = PRIMER_ELEMENTO;j <= cantidad_filas; j++){
+		for(int i = 1;i <= cantidad_columnas; i++){
+
+			lista_vertices -> agregar(num_nodo, cantidad_filas, cantidad_columnas, j, i);
+			lista_vertices -> devolver_nodo(num_nodo) -> cargar_vector_adyacentes();
+			num_nodo++;
+		}
+	}
+
    camino_minimo = nullptr;
    matriz_adyacencia = new int*[lista_vertices->obtener_cantidad_elementos()];
    for(int i = 0; i < lista_vertices->obtener_cantidad_elementos(); i++){
 	   matriz_adyacencia[i] = new int[lista_vertices->obtener_cantidad_elementos()];
    }
+   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
+
+}
+
+Grafo::Grafo(Lista* lista_vertices) {
+   // matriz_adyacencia = nullptr;
+
+   this -> lista_vertices = lista_vertices;
+   camino_minimo = nullptr;
+   matriz_adyacencia = new int*[lista_vertices->obtener_cantidad_elementos()];
+   for(int i = 0; i < lista_vertices->obtener_cantidad_elementos(); i++){
+	   matriz_adyacencia[i] = new int[lista_vertices->obtener_cantidad_elementos()];
+   }
+   int cantidad_filas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_filas();
+   int cantidad_columnas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_columnas();
+   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
     
+}
+
+
+void Grafo::inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas){
+	matriz_terrenos = new string* [cantidad_filas];
+	for (int i = 0; i < cantidad_filas; i++){
+		matriz_terrenos[i] = new string [cantidad_columnas];
+	}
+
 }
 
 bool Grafo::no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados){
@@ -44,101 +80,171 @@ bool Grafo::no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados){
 
 }
 
-void Grafo::recorrer_nodo(Nodo* nodo_anterior, int distancia_origen_nodo_anterior, int num_nodo_anterior, int num_nodo_adyacente){
+bool Grafo::no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int cantidad_elementos){
+		int posicion = 0;
+		while(num_nodo_adyacente != nodos_a_recorrer[posicion] && posicion < cantidad_elementos ){
+			posicion++;
+		}
+
+		return (num_nodo_adyacente != nodos_a_recorrer[posicion] );
 
 
-
-	Nodo* p_nodo_recorrido ;
-	p_nodo_recorrido = lista_vertices -> devolver_nodo(num_nodo_adyacente);
-	int peso_anterior = p_nodo_recorrido -> obtener_distancia_minima_origen();
-	int num_nodo_recorrido = p_nodo_recorrido -> obtener_vertice() -> obtener_numero_vertice();
-	int peso_nodo  = distancia_origen_nodo_anterior + matriz_adyacencia[num_nodo_anterior][num_nodo_recorrido];
-	if (peso_nodo < peso_anterior){
-		p_nodo_recorrido -> asignar_distancia_minima(peso_nodo);
-		p_nodo_recorrido -> asignar_anterior(nodo_anterior);
-	}
 }
+
+
+
+void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente){
+
+	int peso_anterior = lista_vertices -> devolver_nodo(num_nodo_adyacente) ->obtener_distancia_minima_origen();
+	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1];
+
+	cout << "nodo : " << num_nodo_adyacente << endl;
+	cout << "anterior: " << num_nodo_raiz << endl;
+	/*
+	cout << "peso anterior: " << peso_anterior << endl;
+	cout << "peso nodo: " << peso_nodo << endl;
+	cout << "dist anterior: " << lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() << endl;
+	cout << "matriz: " << matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1] << endl;
+*/
+	if (peso_nodo < peso_anterior){
+		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_distancia_minima(peso_nodo);
+		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_anterior(num_nodo_raiz);
+
+		//cout << "distancia: " << lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen() << endl;
+
+		//cout << "anterior: " << lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_anterior() << endl;
+
+	}
+	cout << endl;
+}
+
+
+void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion){
+	//cout << "posicion: "<< posicion << endl;
+	for(int i = visitados; i < posicion + 1 ; i++){
+
+		for(int j =   i + 1; j < posicion + 1 ; j++){
+				/*
+				cout << "A ("<<nodos_a_recorrer[i]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<<endl;
+				cout << "B ("<<nodos_a_recorrer[j]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<<endl;
+				cout << endl;
+				*/
+
+				int distancia_i = lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen();
+				int distancia_j = lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen();
+				if( distancia_i > distancia_j){
+					int aux = nodos_a_recorrer[i];
+					nodos_a_recorrer[i] = nodos_a_recorrer[j];
+					nodos_a_recorrer[j] = aux;
+					/*
+					cout << "A* ("<<nodos_a_recorrer[i]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<< endl;
+					cout << "B* ("<<nodos_a_recorrer[j]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<< endl;
+					cout << endl;
+					*/
+				}
+
+		}
+	}
+
+
+
+/*
+	cout << "visitados " << visitados << endl;
+
+	for (int i = 0 ; i <= posicion ; i++){
+		cout << nodos_a_recorrer[i] << "-";
+	}
+	cout << endl;
+	for (int i = 0 ; i <= posicion ; i++){
+		cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
+	}
+	cout << endl;
+*/
+
+
+}
+
 
 void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 		// hay que agregar le una condicion para que agregue los edificios a vector_num_visitados
 
-		Lista nodos_visitados;
-		Lista nodos_recorrer;
 
-		Lista* p_nodos_visitados = &nodos_visitados;
-		Lista* p_nodos_recorrer = &nodos_recorrer;
+		int cantidad_edificios = 0;
+		int posicion = 0;
+		int visitados = 0;
 
-
-		Nodo* nodo_origen = lista_vertices -> devolver_nodo(origen);
+		int* nodos_a_recorrer = new int [lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios];
 
 
-		int* vector_adyacentes = nodo_origen -> obtener_vector_adyacentes();
-		int fila = nodo_origen -> obtener_vertice()-> obtener_fila();
-		int columna = nodo_origen -> obtener_vertice()-> obtener_columna();
-		int cantidad_filas = nodo_origen -> obtener_vertice()-> obtener_cantidad_filas();
-		int cantidad_columnas = nodo_origen -> obtener_vertice()-> obtener_cantidad_columnas();
-		int cantidad_nodos_adyacentes = nodo_origen -> encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas);
+		int cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(origen) -> devolver_cantidad_aristas();
+		nodos_a_recorrer[posicion] = origen;
+		int num_nodo_raiz = origen;
+		lista_vertices -> devolver_nodo(origen) -> asignar_distancia_minima();
 
-		Nodo* nodo_anterior = nodo_origen;
-		int num_nodo_anterior = nodo_anterior -> obtener_vertice() -> obtener_numero_vertice();
-		p_nodos_recorrer -> agregar(num_nodo_anterior, cantidad_filas, cantidad_columnas, fila, columna,  lista_vertices ->devolver_nodo(num_nodo_anterior));
-		p_nodos_recorrer -> devolver_nodo(1) -> asignar_distancia_minima();
-		int distancia_origen_nodo_anterior = nodo_anterior -> obtener_distancia_minima_origen();
-		while(lista_vertices -> obtener_cantidad_elementos() != p_nodos_visitados -> obtener_cantidad_elementos()){
-			for (int i = 0; i <= cantidad_nodos_adyacentes; i++){
+		int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
+		while(visitados != (lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios)){
+			for (int i = 0; i < cantidad_nodos_adyacentes; i++){
 
-				//cout << "posicion:" << i << endl;
+				//cout << "num vertice raiz " << lista_vertices -> devolver_nodo(num_nodo_raiz) ->obtener_vertice() ->obtener_numero_vertice() << endl;
+
 				int num_nodo_adyacente = vector_adyacentes[i];
+				//cout <<"		nodo adyacente: " << num_nodo_adyacente << endl;
 
-				//cout << "nodos adyacentes for: " << num_nodo_adyacente << endl;
-				if (no_fue_visitado(num_nodo_adyacente,p_nodos_visitados)){
-					//cout << "num nodo adyacente:" << num_nodo_adyacente << endl;
-					int fila = lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
-					int columna = lista_vertices ->devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();;
-					Nodo nodo_adyacente(num_nodo_adyacente, cantidad_filas, cantidad_columnas, fila, columna, lista_vertices ->devolver_nodo(num_nodo_adyacente));
-					Nodo* p_nodo_adyacente = &nodo_adyacente;
-					recorrer_nodo(p_nodo_adyacente, distancia_origen_nodo_anterior, num_nodo_anterior, num_nodo_adyacente);
-					p_nodos_recorrer -> agregar(num_nodo_adyacente, cantidad_filas, cantidad_columnas, fila, columna, lista_vertices ->devolver_nodo(num_nodo_adyacente));
+				if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados) ){
+					recorrer_nodo(num_nodo_raiz, num_nodo_adyacente);
+					}
+
+			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion) ){
+
+					posicion++;
+					nodos_a_recorrer[posicion] = vector_adyacentes[i];
+					//cout << "nodos a recorrer: " << endl;
+					//cout << nodos_a_recorrer[posicion] << endl;
+
 				}
-			}
-		//cout << p_nodos_recorrer -> devolver_nodo(1) -> obtener_vertice() -> obtener_numero_vertice() << endl;
 
-		p_nodos_recorrer -> eliminar_nodo();
-		//p_nodos_recorrer -> mostrar();
-		fila = nodo_anterior -> obtener_vertice()-> obtener_fila();
-		columna = nodo_anterior -> obtener_vertice()-> obtener_columna();
-		p_nodos_visitados -> agregar(num_nodo_anterior, cantidad_filas, cantidad_columnas, fila, columna);
-		cout << "nodos visitados: " << endl;
-		p_nodos_visitados -> mostrar();
-		//cout << "nodos visitados: " << num_nodo_anterior << endl;
 
-		//cout << "nodo visitado: " << p_nodos_visitados -> devolver_nodo(1) -> obtener_vertice() -> obtener_numero_vertice() << endl;
-		nodo_anterior = p_nodos_recorrer -> devolver_nodo(1);
-		//cout << "nodo a recorrer:" << nodo_anterior -> obtener_vertice() -> obtener_numero_vertice()<< endl;
-		num_nodo_anterior = nodo_anterior -> obtener_vertice() -> obtener_numero_vertice();
-		vector_adyacentes = nodo_anterior -> obtener_vector_adyacentes(); //CAMBIAR
+				}
 
+
+		//p_nodos_visitados -> agregar(lista_vertices -> devolver_nodo(num_nodo_raiz));
+		//cout << "lista nodos visitados: " << endl;
+		//cout << endl;
+		//p_nodos_visitados -> mostrar();
+		visitados++;
+		ordenar_vector_distancia_min(nodos_a_recorrer, visitados, posicion);
+/*
+		cout << "visitados " << visitados << endl;
+
+		for (int i = 0 ; i <= posicion ; i++){
+			cout << nodos_a_recorrer[i] << "-";
+		}
+		cout << endl;
+		for (int i = 0 ; i <= posicion ; i++){
+			cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
+		}
+		cout << endl;
+*/
+		num_nodo_raiz = nodos_a_recorrer[visitados];
+		//cout << "nodos raiz: " << num_nodo_raiz << endl;
+		cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> devolver_cantidad_aristas();
+		//cout << "cantidad nodos adyacentes: " << cantidad_nodos_adyacentes << endl;
+		vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
+		}
+
+		int anterior = lista_vertices -> devolver_nodo(destino) -> obtener_anterior();
+
+		cout << "el camino minimo es :" << endl;
+		cout << destino << " <- " ;
+		while(anterior != origen){
+			cout << anterior << " <- " ;
+			anterior = lista_vertices -> devolver_nodo(anterior) -> obtener_anterior();
 
 		}
-		cout << "SALE" << endl;
+		cout << anterior  ;
 
-		//RECOMPONE CAMINO MINIMO
-
-		Nodo* nodo_destino = lista_vertices -> devolver_nodo(destino);
-		nodo_anterior = nodo_destino -> obtener_anterior();
-		fila = nodo_destino -> obtener_vertice()-> obtener_fila();
-		columna = nodo_destino -> obtener_vertice()-> obtener_columna();
-		camino_minimo -> agregar_fifo(destino, cantidad_filas, cantidad_columnas, fila, columna);
-
-		while(nodo_anterior != nodo_origen){
-			int num_nodo_anterior = nodo_anterior -> obtener_vertice() -> obtener_numero_vertice();
-			cout << num_nodo_anterior << endl; //prueba
-			fila = nodo_anterior -> obtener_vertice()-> obtener_fila();
-			columna = nodo_anterior -> obtener_vertice()-> obtener_columna();
-			camino_minimo -> agregar_fifo(num_nodo_anterior, cantidad_filas, cantidad_columnas, fila, columna);
-			nodo_anterior = nodo_anterior -> obtener_anterior();
-		}
 }
+
 
 void Grafo::inicializar_lista_vertices(Lista* lista_vertices){
     this -> lista_vertices = lista_vertices;
@@ -150,7 +256,7 @@ void Grafo::agregar_camino(int origen, int destino, int peso) {
         
 }
 
-void Grafo::cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas){
+void Grafo::cargar_matriz_adyacencia(string** matriz_terrenos, int cantidad_filas, int cantidad_columnas){
     //FALTA HACER LOS CAMBIOS SI APARECE UN EDIFICIO
 	for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos() ; i++){
     	int k = 0;
@@ -195,10 +301,11 @@ void Grafo::mostrar_matriz_adyacencia(){
     		}
     	}
     }
+    cout << "" << endl;
 }
 
 
-int Grafo::transformar_terreno_a_peso(char tipo_terreno){
+int Grafo::transformar_terreno_a_peso(string tipo_terreno){
     int peso;
     
     if (tipo_terreno == CAMINO){
@@ -218,4 +325,19 @@ int Grafo::transformar_terreno_a_peso(char tipo_terreno){
     }
 
     return peso;
+}
+
+string** Grafo::devolver_matriz_terrenos(){
+	return matriz_terrenos;
+}
+
+void Grafo::liberar_matriz_de_adyacencia() {
+    for(int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++){
+        delete[] matriz_adyacencia[i];
+    }
+    delete[] matriz_adyacencia;
+}
+
+Lista* Grafo::devolver_lista_vertices(){
+	return lista_vertices;
 }
