@@ -5,6 +5,7 @@ Terreno::Terreno(int fila, int columna) {
 	this -> columna = columna;
 	this -> tipo_casillero = TERRENO;
 	this -> ocupado = false;
+	this -> iluminado = false;
 	this -> edificio = nullptr;
 }
 
