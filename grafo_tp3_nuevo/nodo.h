@@ -24,7 +24,7 @@ private:
 	int* vector_adyacentes;
     Vertice* vertice;
     Nodo* siguiente;
-    Nodo* anterior;
+    int anterior;
     int distancia_minima_origen;
 
 
@@ -53,6 +53,8 @@ public:
 
     int encontrar_tipo_nodo(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
+    int devolver_cantidad_aristas();
+
     //pre: Se tiene que haber inicializado los nodos primero
     //post: carga la lista de nodos adyacentes al nodo
     void cargar_vector_adyacentes();
@@ -61,7 +63,12 @@ public:
     //post: Inicializa el nodo con el vertice y sus vertices adyacentes.
     Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
-    Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original);
+    //pre:
+    //post: Inicializa el nodo con el puntero de un vertice.
+    Nodo(Vertice* vertice);
+    //pre:
+    //post: Inicializa un nodo como copia de otro nodo
+    Nodo(Nodo* nodo_original);
 
     //pre:
     //post: Asigna el siguiente nodo por orden de numero de vertice
@@ -69,7 +76,7 @@ public:
 
     //pre:
     //post: Asigna el nodo previo 
-    void asignar_anterior(Nodo* vertice_anterior);
+    void asignar_anterior(int vertice_anterior);
 
     //pre:
     //post: Obtiene el nodo siguiente
@@ -77,7 +84,7 @@ public:
 
     //pre:
     //post: Obtiene el nodo anterior
-    Nodo* obtener_anterior();
+    int obtener_anterior();
 
     //pre:
     //post: Obtiene el vertice del nodo
