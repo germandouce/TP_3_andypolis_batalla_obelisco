@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/FacuNano/Desktop/Inventario/Inventario.cpp
+Inventario.h
+C:/Users/FacuNano/Desktop/Inventario/Inventario.h
+fstream
+-
+iostream
+-
+
+C:/Users/FacuNano/Desktop/Inventario/Inventario.h
+string
+-
+

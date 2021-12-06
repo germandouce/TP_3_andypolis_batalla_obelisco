@@ -1,0 +1,3 @@
+C:/Users/FacuNano/Desktop/Inventario/cmake-build-debug/CMakeFiles/Inventario.dir
+C:/Users/FacuNano/Desktop/Inventario/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/FacuNano/Desktop/Inventario/cmake-build-debug/CMakeFiles/rebuild_cache.dir
