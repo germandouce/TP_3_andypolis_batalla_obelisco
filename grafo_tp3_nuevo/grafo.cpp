@@ -100,12 +100,12 @@ void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente){
 
 	cout << "nodo : " << num_nodo_adyacente << endl;
 	cout << "anterior: " << num_nodo_raiz << endl;
-	/*
+
 	cout << "peso anterior: " << peso_anterior << endl;
 	cout << "peso nodo: " << peso_nodo << endl;
 	cout << "dist anterior: " << lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() << endl;
 	cout << "matriz: " << matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente-1] << endl;
-*/
+
 	if (peso_nodo < peso_anterior){
 		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_distancia_minima(peso_nodo);
 		lista_vertices ->devolver_nodo(num_nodo_adyacente) -> asignar_anterior(num_nodo_raiz);
@@ -124,23 +124,23 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 	for(int i = visitados; i < posicion + 1 ; i++){
 
 		for(int j =   i + 1; j < posicion + 1 ; j++){
-				/*
+/*
 				cout << "A ("<<nodos_a_recorrer[i]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<<endl;
 				cout << "B ("<<nodos_a_recorrer[j]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<<endl;
 				cout << endl;
-				*/
 
+*/
 				int distancia_i = lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen();
 				int distancia_j = lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen();
 				if( distancia_i > distancia_j){
 					int aux = nodos_a_recorrer[i];
 					nodos_a_recorrer[i] = nodos_a_recorrer[j];
 					nodos_a_recorrer[j] = aux;
-					/*
+/*
 					cout << "A* ("<<nodos_a_recorrer[i]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<< endl;
 					cout << "B* ("<<nodos_a_recorrer[j]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<< endl;
 					cout << endl;
-					*/
+*/
 				}
 
 		}
@@ -148,7 +148,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 
 
 
-/*
+
 	cout << "visitados " << visitados << endl;
 
 	for (int i = 0 ; i <= posicion ; i++){
@@ -159,7 +159,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 		cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
 	}
 	cout << endl;
-*/
+
 
 
 }
@@ -167,6 +167,11 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 
 void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 		// hay que agregar le una condicion para que agregue los edificios a vector_num_visitados
+
+	   // int cantidad_filas = lista_vertices -> devolver_nodo(origen) -> obtener_vertice() -> obtener_cantidad_filas();
+	    //int cantidad_columnas = lista_vertices -> devolver_nodo(origen) -> obtener_vertice() -> obtener_cantidad_columnas();
+
+
 
 
 		int cantidad_edificios = 0;
@@ -207,24 +212,9 @@ void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 				}
 
 
-		//p_nodos_visitados -> agregar(lista_vertices -> devolver_nodo(num_nodo_raiz));
-		//cout << "lista nodos visitados: " << endl;
-		//cout << endl;
-		//p_nodos_visitados -> mostrar();
 		visitados++;
 		ordenar_vector_distancia_min(nodos_a_recorrer, visitados, posicion);
-/*
-		cout << "visitados " << visitados << endl;
 
-		for (int i = 0 ; i <= posicion ; i++){
-			cout << nodos_a_recorrer[i] << "-";
-		}
-		cout << endl;
-		for (int i = 0 ; i <= posicion ; i++){
-			cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
-		}
-		cout << endl;
-*/
 		num_nodo_raiz = nodos_a_recorrer[visitados];
 		//cout << "nodos raiz: " << num_nodo_raiz << endl;
 		cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> devolver_cantidad_aristas();
@@ -234,14 +224,33 @@ void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 
 		int anterior = lista_vertices -> devolver_nodo(destino) -> obtener_anterior();
 
+		int fila_destino = lista_vertices -> devolver_nodo(destino) -> obtener_vertice() -> obtener_fila();
+		int columna_destino = lista_vertices -> devolver_nodo(destino) -> obtener_vertice() -> obtener_columna();
+		
 		cout << "el camino minimo es :" << endl;
-		cout << destino << " <- " ;
-		while(anterior != origen){
-			cout << anterior << " <- " ;
-			anterior = lista_vertices -> devolver_nodo(anterior) -> obtener_anterior();
+		cout << "(" << fila_destino << "," << columna_destino << ")" << " <- ";
 
+		while(anterior != origen){
+
+			int fila = lista_vertices -> devolver_nodo(anterior) -> obtener_vertice() -> obtener_fila();
+			int columna = lista_vertices -> devolver_nodo(anterior) -> obtener_vertice() -> obtener_columna();
+			//cout <<"#"<< lista_vertices -> devolver_nodo(anterior) -> obtener_distancia_minima_origen() ;
+			cout << "(" << fila << "," << columna << ")" << " <- ";
+			anterior = lista_vertices -> devolver_nodo(anterior) -> obtener_anterior();
 		}
-		cout << anterior  ;
+
+		int fila_anterior = lista_vertices -> devolver_nodo(anterior) -> obtener_vertice() -> obtener_fila();
+		int columna_anterior = lista_vertices -> devolver_nodo(anterior) -> obtener_vertice() -> obtener_columna();
+
+		cout << "(" << fila_anterior << "," << columna_anterior << ")";
+		cout << endl;
+		cout << endl;
+
+		//mostrar_matriz_adyacencia();
+		for(int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++){
+			lista_vertices ->devolver_nodo(i) -> asignar_distancia_minima(INFINITO);
+			lista_vertices ->devolver_nodo(i) ->asignar_anterior(0);
+		}
 
 }
 
@@ -308,16 +317,16 @@ void Grafo::mostrar_matriz_adyacencia(){
 int Grafo::transformar_terreno_a_peso(string tipo_terreno){
     int peso;
     
-    if (tipo_terreno == CAMINO){
+    if (tipo_terreno == G_CAMINO){
         peso = PESO_CAMINO;
     }
-    else if (tipo_terreno == BETUN){
+    else if (tipo_terreno == G_BETUN){
         peso = PESO_BETUN;
     }
-    else if (tipo_terreno == LAGO){
+    else if (tipo_terreno == G_LAGO){
         peso = PESO_LAGO;
     }
-    else if (tipo_terreno == MUELLE){
+    else if (tipo_terreno == G_MUELLE){
         peso = PESO_MUELLE;
     }
     else{

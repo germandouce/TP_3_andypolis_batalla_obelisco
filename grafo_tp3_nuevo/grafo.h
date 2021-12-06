@@ -5,11 +5,11 @@
 
 const int PRIMER_ELEMENTO = 1;
 
-const string CAMINO = "C";
-const string BETUN = "B";
-const string LAGO = "L";
-const string MUELLE = "M";
-const string TERRENO = "T";
+const string G_CAMINO = "C";
+const string G_BETUN = "B";
+const string G_LAGO = "L";
+const string G_MUELLE = "M";
+const string G_TERRENO = "T";
 
 //valores tomados desde jugador 1
 
@@ -17,7 +17,7 @@ const int PESO_CAMINO = 4;
 const int PESO_BETUN = 0;
 const int PESO_LAGO = 2; //el jugador 2 es 5
 const int PESO_MUELLE = 5; //el posicionjugador 2 es 2
-const int PESO_TERRENO = 25;
+const int PESO_TERRENO = 25;//25
 
 const int DISTANCIA_INICIAL_ORIGEN = 0;
 

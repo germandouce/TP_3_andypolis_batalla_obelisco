@@ -20,27 +20,27 @@ Nodo Nodo(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
 
 
 /*
-matriz_terrenos = new string* [3];
+matriz_terrenos = new char* [3];
 for(int h = 0; h < 3; h++){
-	pmatriz_terrenos[h] = new string[3];
+	pmatriz_terrenos[h] = new char[3];
 }
 */
-string var_l = "L";
-string var_t = "T";
-string var_b = "B";
-string var_m = "M";
+char var_l = 'L';
+char var_t = 'T';
+char var_b = 'B';
+char var_m = 'M';
 
-string* p_terreno[6];
-//string** terrenos = &p_terreno[0];
-string** terrenos;
+char* p_terreno[6];
+//char** terrenos = &p_terreno[0];
+char** terrenos;
 terrenos = p_terreno;
 
-string terreno[6];
-string terreno1[6];
-string terreno2[6];
-string terreno3[6];
-string terreno4[6];
-string terreno5[6];
+char terreno[6];
+char terreno1[6];
+char terreno2[6];
+char terreno3[6];
+char terreno4[6];
+char terreno5[6];
 
 terrenos[0] = terreno;
 terrenos[1] = terreno1;
@@ -149,13 +149,13 @@ lista.agregar(9, 3, 3, 3, 3);
 lista.devolver_nodo(9) -> cargar_vector_adyacentes();
 */
 Grafo grafo(6,6);
-//grafo.devolver_lista_vertices()->mostrar();
+grafo.devolver_lista_vertices()->mostrar();
 //lista.mostrar();
 
 
 
 grafo.cargar_matriz_adyacencia(terrenos,6,6);
-//grafo.mostrar_matriz_adyacencia();
-grafo.calcular_camino_minimo_dijktra(2, 36);
+grafo.mostrar_matriz_adyacencia();
+grafo.calcular_camino_minimo_dijktra(2, 34);
 
 }
