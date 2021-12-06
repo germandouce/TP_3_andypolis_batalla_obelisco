@@ -7,14 +7,17 @@
 #include "Jugador.h"
 #include ".\diccionario.h"
 
+const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
+const string ARCHIVO_EDIFICIOS = "edificios.txt";
+const string ARCHIVO_MATERIALES = "materiales.txt";
 
 
 class Juego{
 
 private:
     Mapa * mapa;
-    Diccionario * diccionario_edificios;
+    //Diccionario * diccionario_edificios;
     //List lista_objetivos
 
 public:
@@ -25,14 +28,20 @@ public:
     //Inicia una nueva partida
     //PRE:-
     //POST:-
-    void crear_juego();
+    void crear_juego(Jugador * jug_1, Jugador * jug_2);
 
     //Cargar mapa
     //PRE:-
     //POST: Lee el archivo mapa.txt y lo guarda.
     bool cargar_mapa();
 
-    //Archivo vacio`
+    //es archivo legible
+    //PRE: 
+    //POST: Devuelve true si el archivo existe y no esta vacio. Si no existe, no lo llega a abrir. Si existe
+    //y esta vacio, lo cierra.
+    bool es_archivo_legible(ifstream& archivo, string nombre_archivo);
+    
+    //Archivo vacio
     //PRE: Recibe el archivo
     //POST: Devuelve true si el archivo esta vaio false en caso contrario
     bool archivo_vacio(ifstream& archivo);
@@ -68,6 +77,8 @@ public:
     //PRE:
     //POST: Asigna objetivos al jugador
     void asignar_objetivos(Jugador * jugador);
+
+    int limpiar_string(string cadena, int posicion_inicial, char str_tope);
 
 };
 

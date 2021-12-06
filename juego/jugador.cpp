@@ -1,6 +1,7 @@
 #include "jugador.h"
 
 
+
 Jugador::Jugador(){
 
     this -> numero_jugador = 0;
@@ -11,7 +12,7 @@ Jugador::Jugador(){
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
-    //this -> bombas_usadas;
+    this -> bombas_usadas;
     this -> bombas_compradas = 0;
     int coordenada_x = 0;
     int coordenada_y = 0;
@@ -45,83 +46,70 @@ void Jugador::asignar_coordenadas(int fila, int columna){
 
 
 
-// void Jugador::verificar_objetivos(int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
+void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
 
-//     for (int i = 0; i < objetivos.obtener_largo(); i++) {
-        
-//         Objetivo objetivo = objetivos[i];
-//         int identificador = objetivo.obtener_identificador();
+    for (int i = 0; i < 3; i++) {
+        //const int objetivo; COMO ES ESTO NICO??? AYUDAAAAAA 
+        switch (objetivo) {
+            case COMPRAR_ANDYPOLIS:
+                if (andycoins_acumulados = 100000){
+                    objetivos_secundarios_cumplidos++;
+                }
+                break;
 
-//         switch identificador {
-//             case COMPRAR_ANDYPOLIS:
-            
-//                 if (objetivo.comprobar_requisito(andycoins_acumulados)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
+            case EDAD_PIEDRA:
+                //if (vector_inventario->obteer_cantidad("piedra") == 50000){
+                    objetivos_secundarios_cumplidos++;
+                //}
+                break;
 
-//             case EDAD_PIEDRA:
+            case BOMBARDERO:
+                if (bombas_usadas = 5){
+                    objetivos_secundarios_cumplidos++;
+                }
+                break;
+                
+            case ENERGETICO:
+                if (energia == 100){
+                    objetivos_secundarios_cumplidos++;
+                }
+                break;
 
-//                 if (objetivo.comprobar_requisito(inventario[PIEDRA])) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
+            case LETRADO:
+                // if (registro_edificios->obetner_cantidad_escuelas() = mapa->dict("escuela")->obtener_maxima_cantidad()){
+                //     objetivos_secundarios_cumplidos++;
+                // }
+                break;
 
-//             case BOMBARDERO:
+            case MINERO:
+                // if (registro_edificios->obetner_cantidad_mina() && registro_edificios->obetner_cantidad_mina_oro){
+                //     objetivos_secundarios_cumplidos++;
+                // }
+                break;
 
-//                 if (objetivo.comprobar_requisito(bombas_usadas)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
+            case CANSADO:
+                if (energia = 0){
+                    objetivos_secundarios_cumplidos++;
+                }
+                break;
 
-//             case ENERGETICO:
+            case CONSTRUCTOR:
+                // if (andycoins_acumulados = 100000){
+                //     objetivos_secundarios_cumplidos++;
+                // } 
+                // break;
 
-//                 if (objetivo.comprobar_requisito(energia)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
+            case ARMARDO:
+                // if (inventario->obtener_cantidad_bombas == 10){
+                //     objetivos_secundarios_cumplidos++;
+                // } 
+                // break;
 
-//             case LETRADO:
-
-//                 if (objetivo.comprobar_requisito(escuelas_construidas)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
-
-//             case MINERO:
-
-//                 if (objetivo.comprobar_requisito(cantidad_minas)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
-
-//             case CANSADO:
-
-//                 if (objetivo.comprobar_requisito(energia)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
-
-//             case CONSTRUCTOR:
-
-//                 if (objetivo.comprobar_requisito(distintos_edificios)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
-
-//             case ARMARDO:
-
-//                 if (objetivo.comprobar_requisito(inventario[BOMBAS])) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;
-
-//             case EXTREMISTA:
-
-//                 if (objetivo.comprobar_requisito(bombas_compradas)) {
-//                     objetivos_secundarios_cumplidos++;
-//                 }
-//                 break;  
-//             }
-//     }
-// }
+            case EXTREMISTA:
+                if (bombas_compradas= 5000){
+                    objetivos_secundarios_cumplidos++;
+                }
+                break;  
+            }
+    }
+}
