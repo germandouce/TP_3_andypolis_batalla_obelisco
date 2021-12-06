@@ -24,6 +24,7 @@ const int DISTANCIA_INICIAL_ORIGEN = 0;
 class Grafo {
 //ATRIBUTOS
 private:
+	char** matriz_terrenos;
     int ** matriz_adyacencia;
     Lista* lista_vertices;
     Lista* camino_minimo;
@@ -37,6 +38,8 @@ public:
 int transformar_terreno_a_peso(char tipo_terreno);
 
 Grafo(Lista* lista_vertices);
+
+Grafo(int cantidad_filas, int cantidad_columnas);
 
 Lista* crear_lista_a_recorrer(int origen);
 
@@ -62,8 +65,17 @@ void mostrar_matriz_adyacencia();
 
 void ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion);
 
+void inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas);
 
+Lista* devolver_lista_vertices();
 
+//pre:
+//post: Devuelve la matriz de terrenos
+char** devolver_matriz_terrenos();
+
+//pre:
+//post: Libera la matriz de adyacencia
+void liberar_matriz_de_adyacencia();
 
 };
 

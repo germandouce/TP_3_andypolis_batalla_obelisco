@@ -9,6 +9,7 @@ Lista::Lista(){
     primero =  nullptr;
 }
 
+
 void Lista::agregar_vertices(int cantidad_elementos, int cantidad_filas, int cantidad_columnas){
 	int fila = PRIMER_FILA;
 	int columna = PRIMER_COLUMNA;

@@ -1,5 +1,30 @@
 #include "grafo.h"
 
+Grafo::Grafo(int cantidad_filas, int cantidad_columnas) {
+
+	
+
+	lista_vertices = new Lista();
+
+	int num_nodo = PRIMER_ELEMENTO;
+	for(int j = PRIMER_ELEMENTO;j <= cantidad_filas; j++){
+		for(int i = 1;i <= cantidad_columnas; i++){
+
+			lista_vertices -> agregar(num_nodo, cantidad_filas, cantidad_columnas, j, i);
+			lista_vertices -> devolver_nodo(num_nodo) -> cargar_vector_adyacentes();
+			num_nodo++;
+		}
+	}
+
+   camino_minimo = nullptr;
+   matriz_adyacencia = new int*[lista_vertices->obtener_cantidad_elementos()];
+   for(int i = 0; i < lista_vertices->obtener_cantidad_elementos(); i++){
+	   matriz_adyacencia[i] = new int[lista_vertices->obtener_cantidad_elementos()];
+   }
+   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
+
+}
+
 Grafo::Grafo(Lista* lista_vertices) {
    // matriz_adyacencia = nullptr;
 
@@ -9,7 +34,19 @@ Grafo::Grafo(Lista* lista_vertices) {
    for(int i = 0; i < lista_vertices->obtener_cantidad_elementos(); i++){
 	   matriz_adyacencia[i] = new int[lista_vertices->obtener_cantidad_elementos()];
    }
+   int cantidad_filas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_filas();
+   int cantidad_columnas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_columnas();
+   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
     
+}
+
+
+void Grafo::inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas){
+	matriz_terrenos = new char* [cantidad_filas];
+	for (int i = 0; i < cantidad_filas; i++){
+		matriz_terrenos[i] = new char [cantidad_columnas];
+	}
+
 }
 
 bool Grafo::no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados){
@@ -83,13 +120,15 @@ void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente){
 
 
 void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion){
-	cout << "posicion: "<< posicion << endl;
+	//cout << "posicion: "<< posicion << endl;
 	for(int i = visitados; i < posicion + 1 ; i++){
 
 		for(int j =   i + 1; j < posicion + 1 ; j++){
+				/*
 				cout << "A ("<<nodos_a_recorrer[i]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<<endl;
 				cout << "B ("<<nodos_a_recorrer[j]<<"):" << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<<endl;
 				cout << endl;
+				*/
 
 				int distancia_i = lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen();
 				int distancia_j = lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen();
@@ -97,9 +136,11 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 					int aux = nodos_a_recorrer[i];
 					nodos_a_recorrer[i] = nodos_a_recorrer[j];
 					nodos_a_recorrer[j] = aux;
+					/*
 					cout << "A* ("<<nodos_a_recorrer[i]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen()<< endl;
 					cout << "B* ("<<nodos_a_recorrer[j]<<"):"  << lista_vertices ->devolver_nodo(nodos_a_recorrer[j])->obtener_distancia_minima_origen()<< endl;
 					cout << endl;
+					*/
 				}
 
 		}
@@ -107,7 +148,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 
 
 
-
+/*
 	cout << "visitados " << visitados << endl;
 
 	for (int i = 0 ; i <= posicion ; i++){
@@ -118,7 +159,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 		cout  << lista_vertices -> devolver_nodo(nodos_a_recorrer[i])->obtener_distancia_minima_origen() << "-";
 	}
 	cout << endl;
-
+*/
 
 
 }
@@ -127,10 +168,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 		// hay que agregar le una condicion para que agregue los edificios a vector_num_visitados
 
-		Lista nodos_visitados;
 
-
-		Lista* p_nodos_visitados = &nodos_visitados;
 		int cantidad_edificios = 0;
 		int posicion = 0;
 		int visitados = 0;
@@ -188,7 +226,7 @@ void Grafo::calcular_camino_minimo_dijktra(int origen, int destino){
 		cout << endl;
 */
 		num_nodo_raiz = nodos_a_recorrer[visitados];
-		cout << "nodos raiz: " << num_nodo_raiz << endl;
+		//cout << "nodos raiz: " << num_nodo_raiz << endl;
 		cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> devolver_cantidad_aristas();
 		//cout << "cantidad nodos adyacentes: " << cantidad_nodos_adyacentes << endl;
 		vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
@@ -287,4 +325,19 @@ int Grafo::transformar_terreno_a_peso(char tipo_terreno){
     }
 
     return peso;
+}
+
+char** Grafo::devolver_matriz_terrenos(){
+	return matriz_terrenos;
+}
+
+void Grafo::liberar_matriz_de_adyacencia() {
+    for(int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++){
+        delete[] matriz_adyacencia[i];
+    }
+    delete[] matriz_adyacencia;
+}
+
+Lista* Grafo::devolver_lista_vertices(){
+	return lista_vertices;
 }

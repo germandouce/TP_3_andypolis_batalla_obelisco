@@ -111,7 +111,7 @@ matriz_terrenos[2][1] = &var_b;
 matriz_terrenos[2][2] = &var_l;
 */
 
-
+/*
 Lista lista;
 
 Lista* p_lista = &lista;
@@ -125,6 +125,8 @@ for(int j = 1;j <= 6; j++){
 		num_nodo++;
 	}
 }
+*/
+
 
 	/*
 lista.agregar(1, 3, 3, 1, 1);
@@ -146,13 +148,14 @@ lista.devolver_nodo(8) -> cargar_vector_adyacentes();
 lista.agregar(9, 3, 3, 3, 3);
 lista.devolver_nodo(9) -> cargar_vector_adyacentes();
 */
-Grafo grafo(p_lista);
+Grafo grafo(6,6);
+//grafo.devolver_lista_vertices()->mostrar();
 //lista.mostrar();
 
 
 
 grafo.cargar_matriz_adyacencia(terrenos,6,6);
-grafo.mostrar_matriz_adyacencia();
-grafo.calcular_camino_minimo_dijktra(2, 34);
+//grafo.mostrar_matriz_adyacencia();
+grafo.calcular_camino_minimo_dijktra(2, 36);
 
 }
