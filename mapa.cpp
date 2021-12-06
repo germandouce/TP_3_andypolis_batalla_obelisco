@@ -2,6 +2,10 @@
 
 Mapa::Mapa() {}
 
+Mapa::~Mapa() {
+	borrar();
+}
+
 void Mapa::borrar() {
 
 	for (int i = 0; i < filas; i++) {
@@ -87,7 +91,7 @@ void Mapa::asignar_atributos(int filas, int columnas) {
     for (int i = 0; i < filas; i++) {
         matriz[i] = new Casillero* [columnas];
     }
-
+	
 	this -> diccionario = new Diccionario();
 }
 
@@ -240,6 +244,19 @@ void Mapa::mostrar_todos_edificios() {
 	diccionario -> mostrar_todos_edificios();
 }
 
+// LLUVIA DE MATERIALES
+
+void Mapa::llover() {
+
+	if (transitables_disponibles) {
+		generar_lluvia_materiales();
+	}
+	else {
+		cout << ERROR_COLOR << "-No puede llover mas por falta de casilleros transitables vacios." << END_COLOR << endl;
+	}
+	cout << endl;
+}
+
 void Mapa::generar_lluvia_materiales() {
 
 	int piedra_llovida = rand() % CANT_MAX_PIEDRA + CANT_MIN_PIEDRA;
@@ -247,47 +264,59 @@ void Mapa::generar_lluvia_materiales() {
 	int metal_llovido = rand() % CANT_MAX_METAL + CANT_MIN_METAL;
 	int andycoins_llovido = rand() % CANT_MAX_ANDYCOINS + CANT_MIN_ANDYCOINS;
 
-	int total_llovido = piedra_llovida + madera_llovida + metal_llovido + andycoins_llovido;
 	int material_llovido;
-	bool ha_llovido = false;
+	int posicion_vector;
 
 	cout << ENTER_COLOR << "Se va a generar una lluvia de recursos: " << END_COLOR << endl;
 	cout << endl;
 
-	for (int i = 0; i < filas && total_llovido; i++) {
-		for (int j = 0; j < columnas && total_llovido; j++) {
+	cargar_casilleros_lluvia();
+
+	for (int i = 0; i < casilleros_lluvia.obtener_largo() && transitables_disponibles; i++) {
+		
+		posicion_vector = rand() % casilleros_lluvia.obtener_largo() + ZERO;
+		Casillero* casillero_random = casilleros_lluvia.obtener_dato(posicion_vector);
+
+		while(casillero_random -> esta_ocupado()) {
+			posicion_vector = rand() % casilleros_lluvia.obtener_largo() + ZERO;
+			casillero_random = casilleros_lluvia.obtener_dato(posicion_vector);
+		}
+
+		Material* material_random = llover_material_aleatorio(material_llovido);
+		string nombre_material = material_random -> obtener_nombre();
+
+		if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
+
+			casillero_random -> colocar_material(material_random);
+			casillero_random -> ocupar_casillero();
+
+			cout << SUCESS_COLOR << "-Ha llovido un/a " << nombre_material << " en las coordenadas (";
+			cout << casillero_random -> obtener_fila() + 1 << ", " << casillero_random -> obtener_columna() + 1 << ").";
+			cout << END_COLOR << endl;
+			
+			transitables_disponibles--;
+		}	
+	}
+}
+
+void Mapa::cargar_casilleros_lluvia() {
+
+	if (transitables_disponibles) {
+		casilleros_lluvia.borrar_todo();
+	}
+
+	for (int i = 0; i < filas && transitables_disponibles; i++) {
+		for (int j = 0; j < columnas; j++) {
 
 			string tipo_casillero = matriz[i][j] -> obtener_tipo_casillero();
 
-			if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && !matriz[i][j] -> obtener_cantidad_contenida()) {
+			if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN)
+				&& !(matriz[i][j] -> esta_ocupado())) {
 
-				Material* material_random = llover_material_aleatorio(material_llovido);
-				string nombre_material = material_random -> obtener_nombre();
-
-				if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
-
-					matriz[i][j] -> colocar_material(material_random);
-					matriz[i][j] -> ocupar_casillero();
-
-					cout << SUCESS_COLOR << "-Ha llovido un/a " << nombre_material << " en las coordenadas (";
-					cout << i + 1 << ", " << j + 1 <<")." << END_COLOR << endl;
-					
-					ha_llovido = true;
-					transitables_disponibles--;
-					total_llovido--;
-				}
-			}	
+				casilleros_lluvia.insertar_ultimo(matriz[i][j]);
+			}
 		}
 	}
-
-	if (transitables_disponibles && !ha_llovido) {
-		cout << ERROR_COLOR << "-El reporte meteorologico estaba equivocado. No ha llovido ningun recurso." << END_COLOR << endl;
-	}
-
-	if (!transitables_disponibles) {
-		cout << ERROR_COLOR << "-No puede llover mas por falta de casilleros transitables vacios." << END_COLOR << endl;
-	}
-	cout << endl;
 }
 
 bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal_llovido, int &andycoins_llovido, int material_llovido) {
@@ -295,7 +324,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	bool puede_llover_mas = true;
 
 	if (material_llovido == PIEDRA) {
-		if ((piedra_llovida - 1) >= 0) {
+		if (piedra_llovida > ZERO) {
 			piedra_llovida--;
 		}
 		else {
@@ -304,7 +333,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	}
 
 	if (material_llovido == MADERA) {
-		if ((madera_llovida - 1) >= 0) {
+		if (madera_llovida > ZERO) {
 			madera_llovida--;
 		}
 		else {
@@ -313,7 +342,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	}
 
 	if (material_llovido == METAL) {
-		if ((metal_llovido - 1) >= 0) {
+		if (metal_llovido > ZERO) {
 			metal_llovido--;
 		}
 		else {
@@ -322,7 +351,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	}
 
 	if (material_llovido == ANDYCOINS) {
-		if ((andycoins_llovido - 1) >= 0) {
+		if (andycoins_llovido > ZERO) {
 			andycoins_llovido--;
 		}
 		else {
@@ -518,7 +547,7 @@ bool Mapa::es_numero(string palabra) {
 
 Material* Mapa::llover_material_aleatorio(int &material_llovido) {
 
-	material_llovido = rand() % CANT_MATERIALES;
+	material_llovido = rand() % CANT_MATERIALES + ZERO;
 	string nombre_material_aleatorio = obtener_tipo_material(material_llovido);
 	Material* material_devuelto;
 

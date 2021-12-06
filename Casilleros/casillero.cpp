@@ -2,6 +2,14 @@
 
 Casillero::Casillero() {}
 
+int Casillero::obtener_fila() {
+	return fila;
+}
+
+int Casillero::obtener_columna() {
+	return columna;
+}
+
 void Casillero::ocupar_casillero() {
 	ocupado = true;
 }
