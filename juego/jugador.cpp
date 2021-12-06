@@ -1,7 +1,5 @@
 #include "jugador.h"
 
-
-
 Jugador::Jugador(){
 
     this -> numero_jugador = 0;
@@ -21,9 +19,29 @@ Jugador::Jugador(){
 
 }
 
+void Jugador::pedir_coordenadas(){
+    
+    cout<<"¡Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
+    <<"Por favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
+    cout<<"Ingrese la fila:"<<endl;
+    cin >>fila;
+    cout<<"Ingrese la columna:"<<endl;
+    cin >>fila;
+}
+
+void Jugador::asignar_coordenadas(int fila, int columna){
+    this -> fila = columna;
+    this -> fila = columna;
+}
+
 void Jugador::setear_numero_jugador(int numero_jugador){
     this -> numero_jugador = numero_jugador;
 }
+
+int Jugador::devolver_numero_jugador(){
+    return numero_jugador;
+}
+
 
 void Jugador::asignar_objetivo(int objetivo, int numero_objetivo){
     objetivos[numero_objetivo]  = objetivo;
@@ -37,16 +55,14 @@ void Jugador::agregar_edificio_al_registro_(Edificio* edificio){
 
 }
 
-void Jugador::asignar_coordenadas(int fila, int columna){
-    this -> fila = columna;
-    this -> fila = columna;
-}
 
 // Jugador::Jugador(Vector<Material>* inventario){
     
 // }
 
-
+int Jugador::obtener_energia(){
+    return energia;
+}
 
 void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
 
@@ -124,4 +140,12 @@ bool Jugador::gano(){
         gano = true;
     };
     return gano;
+}
+
+bool Jugador::sin_energia(){
+    return (energia ==0);
+}
+
+bool Jugador::quiere_salir_del_juego(){
+    return true;
 }

@@ -70,18 +70,22 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
     Edificio * edificio;
 
     while (ubicaciones >> nombre_elemento){
-        if (nombre_elemento == "1"){
-            jugador = jug_1;
-        }
-        if (nombre_elemento == "2"){
-            jugador = jug_2;
-        }
-
+        
         ubicaciones >> fila;   
         fila = limpiar_string(fila, POSICION_INICIAL_FILA, TOPE_CADENA_FILA);
 
         ubicaciones >> columna;
         columna = limpiar_string(columna, POSICION_INICIAL_COLUMNA, TOPE_CADENA_COLUMNA);
+
+        if (nombre_elemento =="1" || nombre_elemento =="2"){
+            if (nombre_elemento == "1"){
+                jugador = jug_1;
+            }
+            if (nombre_elemento == "2"){
+                jugador = jug_2;
+            }
+            jugador ->asignar_coordenadas(stoi(fila), stoi(columna));
+        }
         
         if (nombre_elemento == "piedra" || nombre_elemento == "madera" ||
         nombre_elemento == "metal" || nombre_elemento == "andycoins"){
@@ -89,7 +93,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
             instanciar_material(nombre_elemento, material);
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> colocar_material(material);
 
-        }else{
+        } else{
 
             instanciar_edificio(nombre_elemento, edificio);
             jugador->agregar_edificio_al_registro_(edificio);
@@ -98,6 +102,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
     }
     ubicaciones.close();
 }
+
 
 int Juego::limpiar_string(string cadena, int posicion_inicial, char str_tope) {
 
@@ -150,27 +155,27 @@ void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
         else{
             jugador = jug_1;
         }   
-        asignar_objetivos(jugador);
         jugador -> setear_numero_jugador(i);
+        asignar_objetivos(jugador);
     }
 }
 
 
-void Juego::turnos(){
+// void Juego::turnos(){
     
-    // (int i = 1; i <3 ; i++){
-    //     if (i = 1){
-    //         jugador = jug_1;
-    //     }
-    //     else{
-    //         jugador = jug_2;
-    //     }   
-    //     asignar_objetivos(jugador);
-    //     jugador -> setear_numero_jugador(i);
-    // }
+//     // (int i = 1; i <3 ; i++){
+//     //     if (i = 1){
+//     //         jugador = jug_1;
+//     //     }
+//     //     else{
+//     //         jugador = jug_2;
+//     //     }   
+//     //     asignar_objetivos(jugador);
+//     //     jugador -> setear_numero_jugador(i);
+//     // }
 
 
-}
+// }
 
 int Juego::generar_numero_random(int min, int max){
     int range = max + 1  - min;  

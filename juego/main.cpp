@@ -1,14 +1,16 @@
-#include ".\menu_nueva_partida.h"
-#include ".\menu.h"
-#include ".\juego.h"
+#include ".\idea menu\menu_nueva_partida.h"
+#include "menu.h"
+#include "juego.h"
 
 int main() {
 
     Juego *juego = new Juego();
-
+    
     Jugador *jug_1 = new Jugador();
     Jugador *jug_2 = new Jugador();
-    
+
+    juego -> crear_juego(jug_1, jug_2);
+
     ifstream archivo;
 
     bool mapa_bien_cargado = false;
@@ -35,37 +37,53 @@ int main() {
     nueva_partida = !( juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES) );
     
     if (mapa_bien_cargado || diccionario_edificios_bien_cargado || inventario_bien_cargado) {
-    
+
+        int turno = 1;
+        
         if (nueva_partida ){
+            int ingreso;
             menu_nueva_partida();
+            cout<<"Desea ser jugador 1 o 2 ? (ingrese 1 o 2)"<<endl;
+            cin >> ingreso;
+            jug_1 -> pedir_coordenadas();
+            jug_2 -> pedir_coordenadas();
+
         }else{
             juego -> cargar_ubicaciones(archivo, jug_1, jug_2);
         }
-        
-        juego->crear_juego(jug_1, jug_2);
-
-        Jugador* jugador;
 
         Jugador* jug_turno;
         Jugador* jug_secundario;
-        //while (!(gano) )
         
-        if (1){
-            jug_turno = jug_1;
-            jug_secundario = jug_2;
+        bool alguien_gano = false;
+        bool sin_energia = false;
+        bool alguien_quiere_salir = false;
+
+        while (!alguien_gano && !alguien_quiere_salir){
+        
+            if ( turno%2 ){ // turnos impares puese si el resto es 0 == false
+                jug_turno = jug_1;
+                jug_secundario = jug_2;
+            }
+            else{ //turnos pares
+                jug_turno = jug_2;
+                jug_secundario = jug_1;
+            } 
+        
+            while( !alguien_gano && !sin_energia && !alguien_quiere_salir ){
+
+                //menu_principal(Jugador* jug_turno, Jugador *jug_secundario);
+            
+                sin_energia = jug_turno ->sin_energia();
+                alguien_gano = jug_turno->gano();
+                alguien_quiere_salir = jug_turno ->quiere_salir_del_juego();
+            }
+            turno ++;
         }
-        else{
-            jug_turno = jug_2;
-            jug_secundario = jug_1;
-        }
-        menu_principal(Jugador* jug_turno, Jugador jugador_secundario));
-
-    }
-    else{
-        cout<<"No se pudo abrir uno de sus archivos";
-    }
-
-
+    }else{
+        cout<<"No se pudieron abrir uno o varios archivos ";
     
+    }  
+
     return 0;
 }
