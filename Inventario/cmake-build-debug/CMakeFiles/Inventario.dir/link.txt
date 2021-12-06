@@ -1,3 +1,0 @@
-"C:\Users\FacuNano\Desktop\clion data\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Inventario.dir/objects.a
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\Inventario.dir/objects.a @CMakeFiles\Inventario.dir\objects1.rsp
-C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\Inventario.dir/objects.a -Wl,--no-whole-archive -o Inventario.exe -Wl,--out-implib,libInventario.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Inventario.dir\linklibs.rsp
