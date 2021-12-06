@@ -158,16 +158,16 @@ void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
 
 void Juego::turnos(){
     
-    (int i = 1; i <3 ; i++){
-        if (i = 1){
-            jugador = jug_1;
-        }
-        else{
-            jugador = jug_2;
-        }   
-        asignar_objetivos(jugador);
-        jugador -> setear_numero_jugador(i);
-    }
+    // (int i = 1; i <3 ; i++){
+    //     if (i = 1){
+    //         jugador = jug_1;
+    //     }
+    //     else{
+    //         jugador = jug_2;
+    //     }   
+    //     asignar_objetivos(jugador);
+    //     jugador -> setear_numero_jugador(i);
+    // }
 
 
 }

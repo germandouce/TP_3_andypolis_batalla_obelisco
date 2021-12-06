@@ -78,6 +78,7 @@ public:
     //POST: Asigna objetivos al jugador
     void asignar_objetivos(Jugador * jugador);
 
+    void turnos();
 
     //Limpiar string
     //
