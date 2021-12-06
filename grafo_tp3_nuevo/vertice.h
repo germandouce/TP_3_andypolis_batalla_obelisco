@@ -1,7 +1,7 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 
-
+#include <string>
 #include <iostream>
 
 using namespace std;
