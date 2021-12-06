@@ -42,9 +42,9 @@ Grafo::Grafo(Lista* lista_vertices) {
 
 
 void Grafo::inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas){
-	matriz_terrenos = new char* [cantidad_filas];
+	matriz_terrenos = new string* [cantidad_filas];
 	for (int i = 0; i < cantidad_filas; i++){
-		matriz_terrenos[i] = new char [cantidad_columnas];
+		matriz_terrenos[i] = new string [cantidad_columnas];
 	}
 
 }
@@ -256,7 +256,7 @@ void Grafo::agregar_camino(int origen, int destino, int peso) {
         
 }
 
-void Grafo::cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas){
+void Grafo::cargar_matriz_adyacencia(string** matriz_terrenos, int cantidad_filas, int cantidad_columnas){
     //FALTA HACER LOS CAMBIOS SI APARECE UN EDIFICIO
 	for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos() ; i++){
     	int k = 0;
@@ -305,7 +305,7 @@ void Grafo::mostrar_matriz_adyacencia(){
 }
 
 
-int Grafo::transformar_terreno_a_peso(char tipo_terreno){
+int Grafo::transformar_terreno_a_peso(string tipo_terreno){
     int peso;
     
     if (tipo_terreno == CAMINO){
@@ -327,7 +327,7 @@ int Grafo::transformar_terreno_a_peso(char tipo_terreno){
     return peso;
 }
 
-char** Grafo::devolver_matriz_terrenos(){
+string** Grafo::devolver_matriz_terrenos(){
 	return matriz_terrenos;
 }
 

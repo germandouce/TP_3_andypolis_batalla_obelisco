@@ -5,11 +5,11 @@
 
 const int PRIMER_ELEMENTO = 1;
 
-const char CAMINO = 'C';
-const char BETUN = 'B';
-const char LAGO = 'L';
-const char MUELLE = 'M';
-const char TERRENO = 'T';
+const string CAMINO = "C";
+const string BETUN = "B";
+const string LAGO = "L";
+const string MUELLE = "M";
+const string TERRENO = "T";
 
 //valores tomados desde jugador 1
 
@@ -24,7 +24,7 @@ const int DISTANCIA_INICIAL_ORIGEN = 0;
 class Grafo {
 //ATRIBUTOS
 private:
-	char** matriz_terrenos;
+	string** matriz_terrenos;
     int ** matriz_adyacencia;
     Lista* lista_vertices;
     Lista* camino_minimo;
@@ -35,7 +35,7 @@ private:
 
 public:
 
-int transformar_terreno_a_peso(char tipo_terreno);
+int transformar_terreno_a_peso(string tipo_terreno);
 
 Grafo(Lista* lista_vertices);
 
@@ -53,7 +53,7 @@ void inicializar_lista_vertices(Lista* lista_vertices);
 
 void inicializar_matriz_adyacencia();
 
-void cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas);
+void cargar_matriz_adyacencia(string** matriz_terrenos, int cantidad_filas, int cantidad_columnas);
 
 void crear_grafo(int cantidad_filas, int cantidad_columnas);
 
@@ -71,7 +71,7 @@ Lista* devolver_lista_vertices();
 
 //pre:
 //post: Devuelve la matriz de terrenos
-char** devolver_matriz_terrenos();
+string** devolver_matriz_terrenos();
 
 //pre:
 //post: Libera la matriz de adyacencia
