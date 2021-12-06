@@ -1,0 +1,1 @@
+g++ edificios/*.cpp materiales/*.cpp casilleros/*.cpp *.cpp -o main
