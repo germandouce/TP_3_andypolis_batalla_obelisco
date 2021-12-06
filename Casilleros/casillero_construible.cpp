@@ -58,5 +58,12 @@ string Casillero_construible::obtener_nombre_contenido() {
 }
 
 string Casillero_construible::obtener_color() {
-    return C_TERRENO;
+
+    string color = C_TERRENO;
+
+    if (esta_iluminado()) {
+        color = ILUMINADO;  
+    }
+
+    return color;
 }

@@ -20,7 +20,7 @@ void mostrar_menu() {
     cout << "4. Demoler un edificio por coordenada." << endl;
     cout << "5. Mostrar mapa." << endl;
     cout << "6. Consultar coordenada." << endl;
-    cout << "7. Mostrar inventario." << endl;
+    cout << "7. Mostrar inventario. (Moverse pa probar xd)" << endl;
     cout << "8. Recolectar recursos producidos." << endl;
     cout << "9. Lluvia de recursos." << endl;
     cout << "10. Guardar y salir." << endl;
@@ -28,9 +28,6 @@ void mostrar_menu() {
 }
 
 void procesar_opcion(int opcion_elegida, Mapa* mapa) {
-
-    //int posiciones_materiales[MATERIALES_UTILIZADOS_EDIFICIOS];
-    //cargar_posicion_material_edificios(vector_materiales, posiciones_materiales);
 
     switch (opcion_elegida) {
         case 1:
@@ -61,7 +58,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa) {
             break;
         case 7:
             system(CLR_SCREEN);
-            //mostrar_inventario(vector_materiales);
+            mapa -> moverse();
             break;
         case 8:
             system(CLR_SCREEN);
@@ -76,7 +73,6 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa) {
             system(CLR_SCREEN);
             //guardar_materiales(vector_materiales);
             //guardar_ubicaciones(vector_ubicaciones);
-            mapa -> borrar();
             delete mapa;
             cout << SUCESS_COLOR << "-Se han guardado exitosamente los cambios efectuados!" << END_COLOR << endl;
     }
