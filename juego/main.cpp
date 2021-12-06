@@ -43,7 +43,22 @@ int main() {
         }
         
         juego->crear_juego(jug_1, jug_2);
-        menu_principal();
+
+        Jugador* jugador;
+
+        Jugador* jug_turno;
+        Jugador* jug_secundario;
+        //while (!(gano) )
+        
+        if (1){
+            jug_turno = jug_1;
+            jug_secundario = jug_2;
+        }
+        else{
+            jug_turno = jug_2;
+            jug_secundario = jug_1;
+        }
+        menu_principal(Jugador* jug_turno, Jugador jugador_secundario));
 
     }
     else{

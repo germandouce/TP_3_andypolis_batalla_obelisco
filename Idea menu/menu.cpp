@@ -28,7 +28,7 @@ void mostrar_bienvenida() {
     cout << "Debe ingresar los numeros correspondientes a las operaciones requeridas." << endl;
 }
 
-void menu_principal() {
+void menu_principal(Jugador* jug_turno, Jugador jugador_secundario) {
 
     bool repite = true;
     int opcion_elegida;

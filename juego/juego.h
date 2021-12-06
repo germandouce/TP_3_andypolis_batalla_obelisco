@@ -78,6 +78,10 @@ public:
     //POST: Asigna objetivos al jugador
     void asignar_objetivos(Jugador * jugador);
 
+
+    //Limpiar string
+    //
+    //
     int limpiar_string(string cadena, int posicion_inicial, char str_tope);
 
 };
