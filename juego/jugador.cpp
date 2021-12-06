@@ -14,8 +14,10 @@ Jugador::Jugador(){
     this -> andycoins_acumulados = 0;
     this -> bombas_usadas;
     this -> bombas_compradas = 0;
-    int coordenada_x = 0;
-    int coordenada_y = 0;
+    this -> fila = 0;
+    this -> columna = 0;
+    this -> obelisco_construido = false;
+
 
 }
 
@@ -112,4 +114,14 @@ void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int ca
                 break;  
             }
     }
+}
+
+
+bool Jugador::gano(){
+    bool gano = false;
+
+    if ( objetivos_secundarios_cumplidos == 2 || obelisco_construido){
+        gano = true;
+    };
+    return gano;
 }

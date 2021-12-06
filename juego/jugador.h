@@ -35,6 +35,8 @@ class Jugador {
     int bombas_usadas;
     int bombas_compradas;
     
+    bool obelisco_construido;
+
     int fila;
     int columna;
 
@@ -74,7 +76,12 @@ class Jugador {
     //Verificar objetivos
     //PRE:
     //POST: verifica si cumplio sus objetivos 
-    void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios);
+    void verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios);
+
+    //Gnao
+    //PRE:-
+    //POST:Verifica que si se construyo el obelisco o si se cumplieron 2 objetivos ppales
+    bool gano();
 
 };
 
