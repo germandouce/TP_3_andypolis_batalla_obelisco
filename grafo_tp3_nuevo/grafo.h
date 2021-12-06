@@ -3,12 +3,13 @@
 
 #include "lista.h"
 
+const int PRIMER_ELEMENTO = 1;
 
-const char CAMINO = 'C';
-const char BETUN = 'B';
-const char LAGO = 'L';
-const char MUELLE = 'M';
-const char TERRENO = 'T';
+const string CAMINO = "C";
+const string BETUN = "B";
+const string LAGO = "L";
+const string MUELLE = "M";
+const string TERRENO = "T";
 
 //valores tomados desde jugador 1
 
@@ -23,9 +24,9 @@ const int DISTANCIA_INICIAL_ORIGEN = 0;
 class Grafo {
 //ATRIBUTOS
 private:
+	string** matriz_terrenos;
     int ** matriz_adyacencia;
     Lista* lista_vertices;
-    Lista* nodos_a_visitar;
     Lista* camino_minimo;
 
 //METODOS
@@ -34,19 +35,25 @@ private:
 
 public:
 
-int transformar_terreno_a_peso(char tipo_terreno);
+int transformar_terreno_a_peso(string tipo_terreno);
 
 Grafo(Lista* lista_vertices);
 
-void recorrer_nodo(Nodo* nodo_anterior, int distancia_origen_nodo_anterior, int num_nodo_anterior, int num_nodo_adyacente);
+Grafo(int cantidad_filas, int cantidad_columnas);
+
+Lista* crear_lista_a_recorrer(int origen);
+
+void recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente);
 
 bool no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados);
+
+bool no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int cantidad_elementos);
 
 void inicializar_lista_vertices(Lista* lista_vertices);
 
 void inicializar_matriz_adyacencia();
 
-void cargar_matriz_adyacencia(char** matriz_terrenos, int cantidad_filas, int cantidad_columnas);
+void cargar_matriz_adyacencia(string** matriz_terrenos, int cantidad_filas, int cantidad_columnas);
 
 void crear_grafo(int cantidad_filas, int cantidad_columnas);
 
@@ -56,9 +63,19 @@ void calcular_camino_minimo_dijktra(int origen, int destino);
     
 void mostrar_matriz_adyacencia();
 
+void ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, int posicion);
 
+void inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas);
 
+Lista* devolver_lista_vertices();
 
+//pre:
+//post: Devuelve la matriz de terrenos
+string** devolver_matriz_terrenos();
+
+//pre:
+//post: Libera la matriz de adyacencia
+void liberar_matriz_de_adyacencia();
 
 };
 

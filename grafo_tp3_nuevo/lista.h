@@ -31,7 +31,7 @@ public:
 
     void agregar(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna, Nodo* nodo_original);
 
-    void agregar_fifo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
+    void agregar_fifo(Nodo* nodo_original);
 
     void agregar(Nodo* nuevo_nodo);
 
