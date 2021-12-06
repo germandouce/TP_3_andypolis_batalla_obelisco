@@ -2,6 +2,7 @@
 #define MAPA_H_INCLUDED
 
 #include <fstream>
+#include "vector.h"
 #include "diccionario.h"
 #include "colores.h"
 #include "system_clear.h"
@@ -35,6 +36,7 @@ const char PARENTESIS_CHAR = '(';
 const int OPCION_PARENTESIS = 0;
 const int OPCION_NUMEROS = 1;
 const int POSICION_INICIAL = 0;
+const int ZERO = 0;
 
 const int TIPOS_MATERIALES_LLUVIA = 3;
 const int PIEDRA_LLOVIDA = 100;
@@ -79,7 +81,10 @@ class Mapa {
 
 	int filas;
 	int columnas;
+	
+	Vector<Casillero> casilleros_lluvia;
 	int transitables_disponibles;
+	
 	Casillero*** matriz;
 	Diccionario* diccionario;
 
@@ -90,10 +95,7 @@ class Mapa {
     //post: Instancia un Mapa sin valor alguno.
 	Mapa();
 
-	// Constructor con parámetros.
-	//pre: -
-    //post: Instancia un Mapa de un tamaño que depende de los valores ingresados.
-	Mapa(int filas, int columnas);
+	~Mapa();
 
 	//pre: -
     //post: Libera por completo toda la memoria dinámica utilizada por el Mapa y sus Casilleros.
@@ -131,9 +133,13 @@ class Mapa {
 
 	void mostrar_todos_edificios();
 
+	void llover();
+
 	//pre: -
     //post: Genera una lluvia de Materiales en el Mapa.
 	void generar_lluvia_materiales();
+
+	void cargar_casilleros_lluvia();
 
 	//pre: -
     //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.
