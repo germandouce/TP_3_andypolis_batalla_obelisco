@@ -119,6 +119,7 @@ void menu_principal() {
                 system("cls");
                 cout << "hola 9" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
+
                 //Mostrar_objetivos primarios y secudarios.
                 //Podemos agregar una tecla que pregunte si desea volver
                 //al menú (así se le da el tiempo que necesite para ver su inventario).
@@ -134,6 +135,8 @@ void menu_principal() {
                 cout << "hola 11" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //MOVERSE
+                //Matchiar objetivo entero del jugador con ese numero de objetivo en el vector de strings
+                //de juego.h y dsps imprimirlo
                 //Pedir destino.
                 //Verificar caminos mínimos(tener en cuenta que sólo se permiten movimientos aledaños).
                 //Verificar energía usuario.
