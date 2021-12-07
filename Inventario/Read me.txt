@@ -1,0 +1,4 @@
+El main es importante ya que el mismo cuenta con un método que depende 
+de los inventarios de cada jugador y a la vez los inventarios dependen
+de este método.
+Por otra parte se dejo la implementación para verlo en funcionamiento.
