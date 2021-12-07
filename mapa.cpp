@@ -139,9 +139,6 @@ bool Mapa::se_cargo_diccionario() {
 	int metal;
     int limite_construccion;
 
-    string nombre_material;
-    int cantidad_material;
-
     if (!archivo.is_open()) {
         cout << endl;
         cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de edificios." << END_COLOR << endl;
