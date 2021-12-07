@@ -113,4 +113,24 @@ int Edificio::obtener_posicion_y() {
     return posicion_y;
 }
 
+void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
+    if (!edificio->obtener_nombre() == O){
+        int cantidad_suma_resta_madera;
+        int cantidad_suma_resta_piedra;
+        int cantidad_suma_resta_metal;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_madera;
+        edificio->cantidad_madera = edificio->cantidad_madera + cantidad_suma_resta_madera;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_piedra;
+        edificio->cantidad_piedra = edificio->cantidad_piedra + cantidad_suma_resta_piedra;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_metal;
+        edificio->cantidad_metal = edificio->cantidad_metal + cantidad_suma_resta_metal;
+    }
+    else{
+        cout<< "Obelisco no es un edificio modificable." << endl;
+    }
+}
+
 Edificio::~Edificio() {}
