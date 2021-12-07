@@ -1,5 +1,5 @@
-Madera 4
-Piedra 0
-Metal 0
-Andycoins 6
-Bombas 0
+Madera 4 9
+Piedra 10 9
+Metal 2 3
+Andycoins 6 4
+Bombas 7 0
