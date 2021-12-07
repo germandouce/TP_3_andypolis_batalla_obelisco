@@ -24,7 +24,8 @@ class Casillero {
 	int fila;
 	int columna;
 	string tipo_casillero;
-	bool ocupado; 
+	bool ocupado;
+	bool iluminado;
 
 	public:
 
@@ -56,6 +57,12 @@ class Casillero {
 	//pre: -
 	//post: Actualiza el valor de 'esta_vacio'.
 	void desocupar_casillero();
+
+	void iluminar_casillero();
+
+	void desiluminar_casillero();
+
+	bool esta_iluminado();
 
 	//pre: -
 	//post: Construye el Edificio en el Casillero si este es construible.

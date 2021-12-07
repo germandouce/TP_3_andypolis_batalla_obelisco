@@ -7,6 +7,8 @@
 #include "colores.h"
 #include "system_clear.h"
 
+#include "grafo/grafo.h"
+
 #include "materiales/piedra.h"
 #include "materiales/madera.h"
 #include "materiales/metal.h"
@@ -86,6 +88,7 @@ class Mapa {
 	int transitables_disponibles;
 	
 	Casillero*** matriz;
+	Grafo* grafo;
 	Diccionario* diccionario;
 
 	public:
@@ -140,6 +143,12 @@ class Mapa {
 	void generar_lluvia_materiales();
 
 	void cargar_casilleros_lluvia();
+
+	void moverse();
+
+	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino);
+
+	void print_lento(unsigned int tiempo);
 
 	//pre: -
     //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.

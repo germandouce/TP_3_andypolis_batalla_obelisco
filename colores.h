@@ -15,6 +15,7 @@
 //#define C_CAMINO "\033[48;5;248m"
 //#define C_BETUN "\033[48;5;246m"
 
+#define ILUMINADO "\033[48;5;13m"
 #define NEGRO "\033[38;5;233m"
 
 #endif // COLORES_H
