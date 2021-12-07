@@ -1,10 +1,9 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
-
 #include <ctime>
 #include ".\mapa.h"
-#include "Jugador.h"
+#include "jugador.h"
 #include ".\diccionario.h"
 
 const string ARCHIVO_MAPA = "mapa.txt";
@@ -78,6 +77,10 @@ public:
     //POST: Asigna objetivos al jugador
     void asignar_objetivos(Jugador * jugador);
 
+    //
+    //
+    //
+    // void turnos();
 
     //Limpiar string
     //

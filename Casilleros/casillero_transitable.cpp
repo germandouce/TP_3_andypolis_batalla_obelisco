@@ -71,5 +71,9 @@ string Casillero_transitable::obtener_color() {
         color = C_BETUN;
     }
 
+    if (esta_iluminado()) {
+        color = ILUMINADO;
+    }
+
     return color;
 }

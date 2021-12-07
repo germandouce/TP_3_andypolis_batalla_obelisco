@@ -26,5 +26,12 @@ string Casillero_inaccesible::obtener_nombre_contenido() {
 }
 
 string Casillero_inaccesible::obtener_color() {
-    return C_LAGO;
+    
+    string color = C_LAGO;
+
+    if (esta_iluminado()) {
+        color = ILUMINADO;
+    }
+    
+    return color;
 }
