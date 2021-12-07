@@ -57,11 +57,14 @@ int main() {
         
         bool alguien_gano = false;
         bool sin_energia = false;
-        bool alguien_quiere_salir = false;
-
-        while (!alguien_gano && !alguien_quiere_salir){
+        bool quiere_salir = false;
+        bool quiere_terminar_turno = false;
         
-            if ( turno%2 ){ // turnos impares puese si el resto es 0 == false
+        jug_2 -> terminar_truno();
+        
+        while (!alguien_gano && !quiere_salir){
+        
+            if ( !jug_turno->es_su_turno() ){ // turnos impares puese si el resto es 0 == false
                 jug_turno = jug_1;
                 jug_secundario = jug_2;
             }
@@ -70,13 +73,14 @@ int main() {
                 jug_secundario = jug_1;
             } 
         
-            while( !alguien_gano && !sin_energia && !alguien_quiere_salir ){
+            while( !alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir ){
 
                 //menu_principal(Jugador* jug_turno, Jugador *jug_secundario);
             
-                sin_energia = jug_turno ->sin_energia();
-                alguien_gano = jug_turno->gano();
-                alguien_quiere_salir = jug_turno ->quiere_salir_del_juego();
+                sin_energia = jug_turno -> obtener_energia();
+                alguien_gano = jug_turno ->gano();
+                quiere_salir = jug_turno -> quiere_salir_del_juego();
+                quiere_terminar_turno = jug_turno -> es_su_turno();
             }
             turno ++;
         }

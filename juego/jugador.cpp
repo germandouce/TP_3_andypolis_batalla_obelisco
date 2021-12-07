@@ -16,6 +16,9 @@ Jugador::Jugador(){
     this -> columna = 0;
     this -> obelisco_construido = false;
 
+    this -> en_juego = true;
+    this -> su_turno = true;
+
 
 }
 
@@ -143,9 +146,26 @@ bool Jugador::gano(){
 }
 
 bool Jugador::sin_energia(){
-    return (energia ==0);
+    return (energia == 0);
+}
+
+void Jugador::iniciar_turno(){
+    su_turno = true;
+}
+
+void Jugador::terminar_truno(){
+    su_turno = false;
+}
+
+bool Jugador::es_su_turno(){
+    return su_turno;
+}
+
+void Jugador::salir_del_juego(){
+    en_juego = false;
 }
 
 bool Jugador::quiere_salir_del_juego(){
-    return true;
+    return en_juego;
 }
+

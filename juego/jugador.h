@@ -40,6 +40,9 @@ class Jugador {
     int fila;
     int columna;
 
+    bool en_juego;
+    bool su_turno;
+
     public:
 
     //Jugador(Vector<Material>* inventario);
@@ -106,6 +109,16 @@ class Jugador {
     //PRE:
     //POST: Devuelve true cuando se la llama
     bool quiere_salir_del_juego();
+
+    void Jugador::iniciar_turno();
+
+    void Jugador::terminar_truno();
+
+    bool Jugador::es_su_turno();
+
+    void Jugador::salir_del_juego();
+
+    bool Jugador::quiere_salir_del_juego();
 
 };
 
