@@ -1,7 +1,5 @@
 #include "nodo.h"
 
-
-
 Nodo::Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna){
     
     vertice = new Vertice(numero_vertice, cantidad_filas, cantidad_columnas, fila, columna);
@@ -11,7 +9,6 @@ Nodo::Nodo(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fi
     distancia_minima_origen = INFINITO;
 
 }
-
 
 Nodo::Nodo(Nodo* nodo_original){
 

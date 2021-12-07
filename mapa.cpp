@@ -65,6 +65,8 @@ bool Mapa::se_cargo_terreno() {
         archivo >> columnas;
 
         asignar_atributos(filas, columnas);
+
+		string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
         
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
@@ -73,8 +75,13 @@ bool Mapa::se_cargo_terreno() {
                 Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
                 cargar_casillero(i, j, casillero);
                 sumar_casillero_por_tipo(tipo_casillero);
+
+				matriz_terrenos[i][j] = tipo_casillero;
             }
         }
+
+		grafo -> cargar_matriz_adyacencia(filas, columnas);
+
     };
     archivo.close();
     return true;
@@ -92,6 +99,7 @@ void Mapa::asignar_atributos(int filas, int columnas) {
         matriz[i] = new Casillero* [columnas];
     }
 	
+	this -> grafo = new Grafo(filas, columnas);
 	this -> diccionario = new Diccionario();
 }
 
@@ -362,6 +370,67 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	return puede_llover_mas;
 }
 
+void Mapa::moverse() {
+	
+	int fila_origen;
+	int columna_origen;
+	int origen;
+
+	int fila_destino;
+	int columna_destino;
+	int destino;
+	
+	pedir_coordenadas(fila_origen, columna_origen);
+	pedir_coordenadas(fila_destino, columna_destino);
+	system(CLR_SCREEN);
+
+	origen = fila_origen * filas + columna_origen + 1;
+	destino = fila_destino * filas + columna_destino + 1;
+
+	grafo -> calcular_camino_minimo_dijsktra(origen, destino);
+	
+	Lista* lista_vertices = grafo -> devolver_lista_vertices();
+
+	imprimir_camino_recorrido(lista_vertices, origen, destino);
+
+	grafo -> reiniciar_vector_vertices();
+}
+
+void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino) {
+
+	int fila;
+	int columna;
+
+	Nodo* nodo = lista_vertices -> devolver_nodo(destino);
+
+	fila = nodo -> obtener_vertice() -> obtener_fila() - 1;
+	columna = nodo -> obtener_vertice() -> obtener_columna() - 1;
+
+	if (destino != origen) {
+		int destino = nodo -> obtener_anterior();
+		imprimir_camino_recorrido(lista_vertices, origen, destino);
+	}
+	else {
+		cout << endl;
+		cout << SUCESS_COLOR << "El Jugador esta pensando cual es camino mas conveniente..." << END_COLOR << endl;
+	}
+
+	print_lento(ESPERA);
+
+	matriz[fila][columna] -> iluminar_casillero();
+	system(CLR_SCREEN);
+	imprimir_mapa();
+	matriz[fila][columna] -> desiluminar_casillero();
+}
+
+void Mapa::print_lento(unsigned int tiempo) {
+    #ifdef _WIN32
+        Sleep((DWORD) tiempo);
+    #else
+        usleep(tiempo);
+    #endif
+}
+
 void Mapa::borrar_casillero(Casillero* casillero) {
 	delete casillero;
 }
@@ -407,7 +476,7 @@ void Mapa::pedir_coordenadas(int &fila, int &columna) {
         pedir_columna(columna);
     }
 
-	fila = fila -1;
+	fila = fila - 1;
 	columna = columna - 1;
     cout << endl;
 }

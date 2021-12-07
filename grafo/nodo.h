@@ -3,8 +3,6 @@
 
 #include "vertice.h"
 
-
-
 const int INFINITO = 99999;
 
 const int CANTIDAD_NODOS_ADYACENTES = 4;
@@ -16,40 +14,33 @@ const int DOS_ARISTAS = 2;
 const int PRIMERA_FILA = 1;
 const int PRIMERA_COLUMNA = 1;
 
+class Nodo {
 
-class Nodo
-{
-//ATRIBUTOS
-private:
+    private:
+
 	int* vector_adyacentes;
     Vertice* vertice;
     Nodo* siguiente;
     int anterior;
     int distancia_minima_origen;
 
+    public:
 
+    bool tiene_cuatro_aristas(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
+    bool tiene_tres_aristas(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-//METODOS
+    bool tiene_dos_aristas(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-public:
+    bool esta_en_los_bordes(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-    bool tiene_cuatro_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+    bool esta_arriba(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-    bool tiene_tres_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+    bool esta_abajo(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-    bool tiene_dos_aristas(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
+    bool esta_izquierda(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
-    bool esta_en_los_bordes(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
-
-    bool esta_arriba(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
-
-    bool esta_abajo(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
-
-    bool esta_izquierda(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
-
-    bool esta_derecha(int fila, int columna ,  int cantidad_filas, int cantidad_columnas);
-
+    bool esta_derecha(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
     int encontrar_tipo_nodo(int fila, int columna, int cantidad_filas, int cantidad_columnas);
 
@@ -66,6 +57,7 @@ public:
     //pre:
     //post: Inicializa el nodo con el puntero de un vertice.
     Nodo(Vertice* vertice);
+
     //pre:
     //post: Inicializa un nodo como copia de otro nodo
     Nodo(Nodo* nodo_original);
