@@ -54,8 +54,8 @@ void Jugador::agregar_material_a_inventario(){
 
 }
 
-void Jugador::agregar_edificio_al_registro_(Edificio* edificio){
-
+void Jugador::agregar_edificio_al_registro(Edificio* edificio){
+    
 }
 
 

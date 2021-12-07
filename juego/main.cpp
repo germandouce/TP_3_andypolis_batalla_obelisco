@@ -3,6 +3,8 @@
 #include "juego.h"
 
 int main() {
+    
+    srand((unsigned)time(NULL)); // Semilla para generar números aleatorios.
 
     Juego *juego = new Juego();
     
