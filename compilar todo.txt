@@ -1,1 +1,1 @@
-g++ edificios/*.cpp materiales/*.cpp casilleros/*.cpp grafo/*.cpp *.cpp -o main
+g++ edificios/*.cpp materiales/*.cpp casilleros/*.cpp grafo/*.cpp *.cpp -o main -Werror -Wconversion -Wall
