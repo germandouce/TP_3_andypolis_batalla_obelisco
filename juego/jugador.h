@@ -110,14 +110,29 @@ class Jugador {
     //POST: Devuelve true cuando se la llama
     bool quiere_salir_del_juego();
 
+    //Iniciar turno
+    //PRE:-
+    //POST: cambia el valor de su turno a true
     void Jugador::iniciar_turno();
 
+    //termianr turno
+    //PRE:-
+    //POST: cambia el valor de su turno a false
     void Jugador::terminar_truno();
 
+    //es su turno
+    //PRE:-
+    //POST: Devuelve el valor de su_turno
     bool Jugador::es_su_turno();
 
+    //Salir del juego
+    //PRE:-
+    //POST: Coloca en false el atributo en_juego
     void Jugador::salir_del_juego();
 
+    //Quiere salir del juego
+    //PRE:-
+    //POST: Devuelve el valor del atributo en_juego
     bool Jugador::quiere_salir_del_juego();
 
 };
