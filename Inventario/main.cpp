@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+const std::string PATH_MATERIALES = "materiales.txt";
+
 //PRE: recive los inventarios de amabos jugadores en default.
 //POS: procesa el archivo txt materiales.
 // caso en que el archivo existe : carga/ actualiza las cantidades de cada elemento en el inventario y devuelve true.
@@ -43,8 +45,8 @@ bool procesar_archivo_materiales(Inventario*inventario_jugador_1,Inventario* inv
                 inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
                 inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
             }
-            inventario_jugador_1->actualizar_cantidad_elementos();
-            inventario_jugador_2->actualizar_cantidad_elementos();
+            inventario_jugador_1->actualizar_largo_de_inventario();
+            inventario_jugador_2->actualizar_largo_de_inventario();
         }
 
         archivo_materiales.close();
@@ -71,6 +73,21 @@ int main() {
     else{
         std::cout<< "\nSe eliminaron inventarios de cada jugador.\n" << std::endl;
     }
+    //se que existe el archivo
+    inventario_jugador_2->cambiar_cantidad_elemento("madera", -100);//mensaje error
+    inventario_jugador_1->cambiar_cantidad_elemento("silla",90);//mensaje error
+    inventario_jugador_2->cambiar_cantidad_elemento("madera", 100);
+    inventario_jugador_1->cambiar_cantidad_elemento("piedra",90);
+    inventario_jugador_2->cambiar_cantidad_elemento("madera", -10);//
+    inventario_jugador_1->cambiar_cantidad_elemento("bombas",90);
+    inventario_jugador_2->cambiar_cantidad_elemento("andycoins", 300);
+    inventario_jugador_1->cambiar_cantidad_elemento("andycoins",500);
+
+    std::cout<<"JUGADOR 1:" << std::endl;
+    inventario_jugador_1->mostrar_inventario();
+    std::cout<<"JUGADOR 2:" << std::endl;
+    inventario_jugador_2->mostrar_inventario()
+
     //ahora borro los inventarios sólo por la memoria(no hacerlo en esta instancia en el TP).
     delete inventario_jugador_1;
     delete inventario_jugador_2;
