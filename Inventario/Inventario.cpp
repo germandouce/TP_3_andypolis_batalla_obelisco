@@ -162,3 +162,6 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
     cout<< endl;
 }
 
+Inventario::~Inventario(){
+}
+
