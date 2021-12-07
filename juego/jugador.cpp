@@ -169,3 +169,6 @@ bool Jugador::quiere_salir_del_juego(){
     return en_juego;
 }
 
+void Jugador:: sumar_energia(int energia){
+    this->energia += energia;
+}

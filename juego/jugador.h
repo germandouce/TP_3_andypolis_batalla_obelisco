@@ -110,16 +110,36 @@ class Jugador {
     //POST: Devuelve true cuando se la llama
     bool quiere_salir_del_juego();
 
-    void Jugador::iniciar_turno();
+    //Iniciar turno
+    //PRE:-
+    //POST: cambia el valor de su turno a true
+    void iniciar_turno();
 
-    void Jugador::terminar_truno();
+    //termianr turno
+    //PRE:-
+    //POST: cambia el valor de su turno a false
+    void terminar_truno();
 
-    bool Jugador::es_su_turno();
+    //es su turno
+    //PRE:-
+    //POST: Devuelve el valor de su_turno
+    bool es_su_turno();
 
-    void Jugador::salir_del_juego();
+    //Salir del juego
+    //PRE:-
+    //POST: Coloca en false el atributo en_juego
+    void salir_del_juego();
 
-    bool Jugador::quiere_salir_del_juego();
+    //Quiere salir del juego
+    //PRE:-
+    //POST: Devuelve el valor del atributo en_juego
+    bool quiere_salir_del_juego();
 
+    //Sumar energia
+    //PRE: Recibe un entero con la cantidad de enrgia a sumar
+    //POST: Suma la cantidad de energia recibida por parametro al atributo energia.
+    //Si se supera los 100 pts de energia suma hasta 100
+    void sumar_energia(int energia);
 };
 
 #endif // JUGADOR_H

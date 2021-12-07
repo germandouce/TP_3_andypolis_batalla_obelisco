@@ -88,6 +88,9 @@ int main() {
         cout<<"No se pudieron abrir uno o varios archivos ";
     
     }  
+    delete juego;
+    delete jug_1;
+    delete jug_2;
 
     return 0;
 }
