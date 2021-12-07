@@ -20,7 +20,7 @@ void mostrar_menu() {
     cout << "4. Demoler un edificio por coordenada." << endl;
     cout << "5. Mostrar mapa." << endl;
     cout << "6. Consultar coordenada." << endl;
-    cout << "7. Mostrar inventario. (Moverse pa probar xd)" << endl;
+    cout << "7. Moverse pa probar" << endl;
     cout << "8. Recolectar recursos producidos." << endl;
     cout << "9. Lluvia de recursos." << endl;
     cout << "10. Guardar y salir." << endl;
