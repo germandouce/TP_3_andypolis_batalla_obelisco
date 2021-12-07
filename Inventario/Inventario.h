@@ -54,6 +54,10 @@ public:
     //POS: busca elemento segun el nombre y le modifica su cantidad actual registrada en el inventario.
     void cambiar_cantidad_elemento(std::string nombre_elemento, int cantidad_sumar_o_restar);
 
+    //DESTRUCTOR
+    ~Inventario();
+
+
 };
 
 
