@@ -1,0 +1,8 @@
+nombre_material (fila, columna)
+nombre_material (fila, columna)
+1 (fila, columna)
+nombre_edificio (fila, columna)
+nombre_edificio (fila, columna)
+2 (fila, columna)
+nombre_edificio (fila, columna)
+nombre_edificio (fila, columna)
