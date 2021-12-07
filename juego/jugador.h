@@ -4,7 +4,7 @@
 #include <string>
 #include "vector.h"
 #include "material.h"
-#include ".\edificio.h"
+#include ".\edificios\edificio.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
 const int EDAD_PIEDRA = 2;
@@ -35,6 +35,8 @@ class Jugador {
     int bombas_usadas;
     int bombas_compradas;
     
+    bool obelisco_construido;
+
     int fila;
     int columna;
 
@@ -45,11 +47,25 @@ class Jugador {
     //Constructor de jugador
     Jugador();
 
+    //Pedir coordenadas
+    //PRE:-
+    //POST: Pide las coordenadas en las q quiere ubicarse al jugador
+    void pedir_coordenadas();
+    
+    //Asignar coordenadas
+    //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.
+    //POST: Asigna al jugador en los atributos las coordenadas correspondientes.
+    void asignar_coordenadas(int fila, int columna);
+
     //Setear numero jugador
     //PRE:Recibe un entero con el numero de jugador
-    //POST: Modifica el atributo numero de jugador colocandole
-    //el numero que se pase por parametro
+    //POST:Modifica el atributo numero de jugador colocandole el numero que se pase por parametro
     void setear_numero_jugador(int numero_jugador);
+
+    //Devolver numero jugador;
+    //PRE: 
+    //POST: Devuelve el numero de juagdor.
+    int devolver_numero_jugador();
 
     //Asignar objetivos
     //PRE:
@@ -66,15 +82,30 @@ class Jugador {
     //POST: Lee el archivo de edificios y va cargandolos en el registro
     void agregar_edificio_al_registro_(Edificio* edificio);
 
-    //Asignar coordenadas
-    //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.
-    //POST: Asigna al jugador en los atributos las coordenadas correspondientes.
-    void asignar_coordenadas(int fila, int columna);
-
     //Verificar objetivos
     //PRE:
     //POST: verifica si cumplio sus objetivos 
-    void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios);
+    void verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios);
+
+    //Gnao
+    //PRE:-
+    //POST:Verifica que si se construyo el obelisco o si se cumplieron 2 objetivos ppales
+    bool gano();
+
+    //Obtener energia
+    //PRE:-
+    //POST:Devuelve la cantidad de energia que tiene el jugador
+    int obtener_energia();
+
+    //Sin energia
+    //PRE:-
+    //POSR: Devuelve true si se quedo sin energia, false en caso constrario
+    bool sin_energia();
+
+    //Quiere salir del juego
+    //PRE:
+    //POST: Devuelve true cuando se la llama
+    bool quiere_salir_del_juego();
 
 };
 
