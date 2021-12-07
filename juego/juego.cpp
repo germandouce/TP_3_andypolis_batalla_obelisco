@@ -3,6 +3,7 @@
 Juego::Juego(){
     this -> mapa = new Mapa();
     //this -> diccionario_edificios = 0;
+    //this -> objetivos = 0;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
@@ -96,7 +97,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
         } else{
 
             instanciar_edificio(nombre_elemento, edificio);
-            jugador->agregar_edificio_al_registro_(edificio);
+            jugador->agregar_edificio_al_registro(edificio);
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> agrgar_edificio(edificio);
         }
     }
@@ -183,8 +184,6 @@ int Juego::generar_numero_random(int min, int max){
 }
 
 void Juego::asignar_objetivos(Jugador *jugador){
-    srand( (unsigned)time(0) );
-    
     int objetivo;
 
     int vector_objetivos_jug_1[3];

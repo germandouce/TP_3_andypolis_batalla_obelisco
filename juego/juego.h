@@ -17,7 +17,7 @@ class Juego{
 private:
     Mapa * mapa;
     //Diccionario * diccionario_edificios;
-    //List lista_objetivos
+    //string objetivos[10];
 
 public:
     

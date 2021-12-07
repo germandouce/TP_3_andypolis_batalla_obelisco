@@ -83,7 +83,7 @@ class Jugador {
     //Cargar resgistro edificios
     //PRE:-
     //POST: Lee el archivo de edificios y va cargandolos en el registro
-    void agregar_edificio_al_registro_(Edificio* edificio);
+    void agregar_edificio_al_registro(Edificio* edificio);
 
     //Verificar objetivos
     //PRE:
