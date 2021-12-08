@@ -4,7 +4,7 @@
 #include <string>
 #include "vector.h"
 #include "material.h"
-#include ".\edificios\edificio.h"
+#include ".\registro_edificios\edificio.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
 const int EDAD_PIEDRA = 2;

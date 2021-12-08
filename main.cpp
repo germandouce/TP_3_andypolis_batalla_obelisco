@@ -1,6 +1,6 @@
-#include ".\idea menu\menu_nueva_partida.h"
-#include ".\idea menu\menu.h"
-#include "juego.h"
+#include ".\idea_menu\menu_nueva_partida.h"
+#include ".\idea_menu\menu.h"
+#include ".\juego\juego.h"
 
 int main() {
     
