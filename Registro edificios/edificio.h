@@ -134,6 +134,10 @@ public:
     //POST: Devuelve un entero con la posicion y del edificio
     int obtener_posicion_y();
 
+    //PRE: pasamos edificio que queremos modificar las cantidades de los materiales requeridos
+    //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.
+    void modificar_cantidades_edificio(Edificio*edificio);
+
     // Destructor
     // PRE: -
     // POS: -
