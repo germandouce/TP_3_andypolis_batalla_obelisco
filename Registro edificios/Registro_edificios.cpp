@@ -1,4 +1,4 @@
-#include "Registro_edificios.h"
+#include "registro_edificios.h"
 #include "Nodo_registro.h"
 #include "edificio.h"
 #include "planta_electrica.h"

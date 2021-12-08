@@ -5,7 +5,7 @@
 #include "fabrica.h"
 #include "escuela.h"
 #include "aserradero.h"
-#include "Registro_edificios.h"
+#include "registro_edificios.h"
 
 int main(){
     Edificio * edificio_1;
