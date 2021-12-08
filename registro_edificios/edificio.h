@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-const string G = "mina de oro";
+const string G = "mina oro";
 const string M = "mina";
 const string A = "aserradero";
 const string F = "fabrica";
@@ -25,8 +25,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
-    int posicion_x;
-    int posicion_y;
+    int fila;
+    int columna;
 
 public:
 
@@ -124,15 +124,19 @@ public:
 
     void mostrar_toda_informacion();
     
+    void asignar_fila(int fila);
+
+    void asignar_columna(int columna);
+
     //Devolver posicion X
     //PRE:-
     //POST: Devuelve un entero con la posicion x del edificio
-    int obtener_posicion_x();
+    int obtener_fila();
 
     //Devolver posicion y
     //PRE:-
     //POST: Devuelve un entero con la posicion y del edificio
-    int obtener_posicion_y();
+    int obtener_columna();
 
     //PRE: pasamos edificio que queremos modificar las cantidades de los materiales requeridos
     //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.
