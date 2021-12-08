@@ -75,17 +75,17 @@ int main() {
                 jug_turno = jug_2;
                 jug_secundario = jug_1;
             } 
-        
+            sin_energia = false;
+            cout <<"\nTURNO DE JUGADOR "<< jug_turno-> devolver_numero_jugador() <<endl;
+            cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
             while( !alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir ){
-                cout <<"en turno";
+                cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
                 //menu_principal(Jugador* jug_turno, Jugador *jug_secundario);
+                menu_principal(jug_turno, jug_secundario);
                 sin_energia = jug_turno -> obtener_energia();
                 alguien_gano = jug_turno ->gano();
                 quiere_salir = jug_turno -> quiere_salir_del_juego();
                 quiere_terminar_turno = jug_turno -> es_su_turno();
-                int opc;
-                cout<<"dese salir del juego?";
-                menu_principal(jug_turno, jug_secundario);
             }
         }
     }else{

@@ -13,7 +13,7 @@ using namespace std;
 void gotoxy(int x, int y);
 
 void mostrar_mensaje_nueva_partida() {
-    system("cls");
+    //system("cls");
     cout << "Bienvenido al sistema de construccion de edificios de Andypolis." << endl;
     cout << "Nueva Partida." << endl;//puede ser mejor el mensaje
     cout << "El siguiente menu lo guiara a traves de las operaciones disponibles." << endl;
@@ -36,37 +36,38 @@ void menu_nueva_partida() {
 
         switch (opcion_elegida) {
             case 1:
-                system("cls");
+                //system("cls");
                 cout << "hola 1" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 break;
             case 2:
-                system("cls");
+               // system("cls");
                 cout << "hola 2" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 break;
             case 3:
-                system("cls");
+              //  system("cls");
                 cout << "hola 3" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 break;
             case 4:
-                system("cls");
+              //  system("cls");
                 cout << "hola 4" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
+                repite = false;
                 break;
             case 5:
-                system("cls");
+               // system("cls");
                 cout << "-Se han guardado exitosamente los cambios efectuados!" << endl;
                 cout << "DOBLE ENTER PARA SALIR DEL PROGRAMA" << endl;
                 repite = false;
                 break;
         }
-        cin.get();
+        //cin.get();
 
     } while(repite);
 
-    cin.get();
+    //cin.get();
 }
 int menu_np(const char *titulo, const char *opciones[], int numero_opciones, const char *sub_titulo){
     int opcion_elegida = OPCION_MINIMA_NP;
@@ -74,7 +75,7 @@ int menu_np(const char *titulo, const char *opciones[], int numero_opciones, con
     bool repite = true;
 
     do {
-        system("cls");
+        //system("cls");
 
         gotoxy(5, 5 + opcion_elegida); cout << "-->";
 
