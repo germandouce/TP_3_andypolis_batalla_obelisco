@@ -95,7 +95,8 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> colocar_material(material);
 
         } else{
-
+            
+            //edificio = mapa->obtener_diccionario()->instanciar_edificio(nombre_elemento,);
             instanciar_edificio(nombre_elemento, edificio);
             jugador->agregar_edificio_al_registro(edificio);
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> agrgar_edificio(edificio);
