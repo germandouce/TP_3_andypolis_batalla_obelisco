@@ -7,7 +7,7 @@ Jugador::Jugador(){
 
     // this -> Vector<Material>* inventario;
     // this -> Vector<Objetivo>* objetivos;
-    // this -> Vector<Edificio>* edificios;
+    //this -> Vector<Edificio>* edificios;
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
@@ -71,7 +71,6 @@ int Jugador::obtener_energia(){
 void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
 
     for (int i = 0; i < 3; i++) {
-        //const int objetivo; COMO ES ESTO NICO??? AYUDAAAAAA 
         switch (objetivo) {
             case COMPRAR_ANDYPOLIS:
                 if (andycoins_acumulados = 100000){
