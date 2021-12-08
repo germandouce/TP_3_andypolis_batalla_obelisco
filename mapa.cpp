@@ -148,37 +148,37 @@ void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int m
 	Edificio* edificio;
 
 	if (nombre_edificio == A) {
-		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == E) {
-		edificio = new Escuela(piedra, madera, metal, limite_construccion);
+		edificio = new Escuela(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == F) {
-		edificio = new Fabrica(piedra, madera, metal, limite_construccion);
+		edificio = new Fabrica(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == M) {
-		edificio = new Mina(piedra, madera, metal, limite_construccion);
+		edificio = new Mina(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == G) {
-		edificio = new Mina_oro(piedra, madera, metal, limite_construccion);
+		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == O) {
-		edificio = new Obelisco(piedra, madera, metal, limite_construccion);
+		edificio = new Obelisco(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == P) {
-		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion);
+		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 }

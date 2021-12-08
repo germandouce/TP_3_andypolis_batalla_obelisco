@@ -10,7 +10,7 @@ private:
 
 public:
 
-    Mina(int piedra, int madera, int metal, int maximo, int fila, int fila);
+    Mina(int piedra, int madera, int metal, int maximo, int fila, int columna);
 
     string obtener_material_brindado();
     

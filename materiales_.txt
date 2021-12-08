@@ -1,0 +1,4 @@
+piedra 500 100
+madera 500 100
+metal 500 100
+oro 500 100

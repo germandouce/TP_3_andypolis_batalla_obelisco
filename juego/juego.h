@@ -2,9 +2,8 @@
 #define JUEGO_H
 
 #include <ctime>
-#include ".\mapa.h"
+#include "..\mapa.h"
 #include "jugador.h"
-#include ".\diccionario.h"
 
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
@@ -37,8 +36,7 @@ public:
     //
     //
     //
-    void cargar_inventario();
-
+    void cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,Inventario* inventario_jugador_2);
     //es archivo legible
     //PRE: 
     //POST: Devuelve true si el archivo existe y no esta vacio. Si no existe, no lo llega a abrir. Si existe

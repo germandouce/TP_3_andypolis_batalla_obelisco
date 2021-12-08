@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Obelisco(int piedra, int madera, int metal, int maximo,  int fila, int fila);
+    Obelisco(int piedra, int madera, int metal, int maximo,  int fila, int columna);
 
     string obtener_material_brindado();
 

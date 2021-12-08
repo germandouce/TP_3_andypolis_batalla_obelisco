@@ -1,6 +1,7 @@
 #include "obelisco.h"
 
-Obelisco::Obelisco(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio(piedra, madera, metal, maximo, fila, fila){
+Obelisco::Obelisco(int piedra, int madera, int metal, int maximo,  int fila, int columna) : 
+Edificio(piedra, madera, metal, maximo, fila, columna){
     this->nombre = "obelisco";
     this->diminutivo = "O";
     this->brinda = 0;

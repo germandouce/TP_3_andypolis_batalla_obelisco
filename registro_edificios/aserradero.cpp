@@ -1,6 +1,6 @@
 #include "aserradero.h"
 
-Aserradero::Aserradero(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio(piedra, madera, metal, maximo, fila, fila){
+Aserradero::Aserradero(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio(piedra, madera, metal, maximo, fila, columna){
     this->nombre = "aserradero";
     this->diminutivo = "A";
     this->brinda = 25;

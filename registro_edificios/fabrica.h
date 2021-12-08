@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Fabrica(int piedra, int madera, int metal, int maximo,  int fila, int fila);
+    Fabrica(int piedra, int madera, int metal, int maximo,  int fila, int columna);
 
     string obtener_material_brindado();
 

@@ -41,7 +41,7 @@ class Diccionario {
 
     Edificio* instanciar_edificio(string nombre_edificio, int fila, int columna);
 
-    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite);
+    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite, int fila, int columna);
 
     void mostrar_todos_edificios();
 

@@ -3,7 +3,6 @@
 #include <conio.h>
 #include <windows.h>
 
-
 void gotoxy(int x, int y)
 {
     HANDLE hcon;
@@ -28,7 +27,7 @@ void mostrar_bienvenida() {
     cout << "Debe ingresar los numeros correspondientes a las operaciones requeridas." << endl;
 }
 
-void menu_principal() {
+void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
 
     bool repite = true;
     int opcion_elegida;
@@ -152,6 +151,7 @@ void menu_principal() {
                 //Verifica energía usuario (si E == 0 finaliza turno y avisa al usuario).
                 //Consulta antes de realizar acción.
                 //Se guarda E no usada. Se le agregan 50 de Energia mientras >100 E. Si E > 100 se pierde la E sobrante.
+                jug_turno->
                 break;
             case 13:
                 system("cls");

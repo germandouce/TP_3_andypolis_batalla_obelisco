@@ -2,9 +2,8 @@
 #define JUGADOR_H
 
 #include <string>
-#include "vector.h"
-#include "material.h"
-#include ".\registro_edificios\edificio.h"
+#include "..\registro_edificios\edificio.h"
+#include "..\inventario\inventario.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
 const int EDAD_PIEDRA = 2;
@@ -104,11 +103,6 @@ class Jugador {
     //PRE:-
     //POSR: Devuelve true si se quedo sin energia, false en caso constrario
     bool sin_energia();
-
-    //Quiere salir del juego
-    //PRE:
-    //POST: Devuelve true cuando se la llama
-    bool quiere_salir_del_juego();
 
     //Iniciar turno
     //PRE:-

@@ -18,7 +18,7 @@ bool Juego::existe_archivo(ifstream& archivo,string nombre_archivo){
 
 void Juego::instanciar_edificio(string nombre_edificio, Edificio* edificio){
     if ( nombre_edificio == "mina"){
-        edificio = new Mina(0,0,0,0);
+        //edificio = new Mina();
     }
     else if ( nombre_edificio == "mina oro"){
         // edificio = new Mina_oro();
@@ -201,14 +201,15 @@ bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo){
 
 
 void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
-
     Jugador * jugador;
     for (int i = 1; i <3 ; i++){
-        if (i = 0){
+        
+        if (i == 1){
+           
             jugador = jug_1;
         }
         else{
-            jugador = jug_1;
+            jugador = jug_2;
         }   
         jugador -> setear_numero_jugador(i);
         asignar_objetivos(jugador);

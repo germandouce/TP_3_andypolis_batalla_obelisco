@@ -64,6 +64,9 @@ const int CANTIDAD_COORDENADAS = 2;
 const int FILA = 0;
 const int COLUMNA = 1;
 
+const int NULA =-1;
+
+
 class Mapa {
 	
 	private:
