@@ -88,7 +88,7 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
 
     else if (nombre_elemento == "Bombas" || nombre_elemento == "bombas"){
         if (cantidad_sumar_o_restar < 0  && cant_bombas < cantidad_sumar_o_restar*(-1)){
-            cout<< "No se puede restarle " << << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
         }
         else {
             cantidad_actualizada = cant_bombas + cantidad_sumar_o_restar;

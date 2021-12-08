@@ -1,4 +1,5 @@
 #include "jugador.h"
+#include "..\inventario\inventario.h"
 
 Jugador::Jugador(){
 
@@ -29,12 +30,12 @@ void Jugador::pedir_coordenadas(){
     cout<<"Ingrese la fila:"<<endl;
     cin >>fila;
     cout<<"Ingrese la columna:"<<endl;
-    cin >>fila;
+    cin >>columna;
 }
 
 void Jugador::asignar_coordenadas(int fila, int columna){
-    this -> fila = columna;
-    this -> fila = columna;
+    this -> fila = fila;
+    this -> columna = columna;
 }
 
 void Jugador::setear_numero_jugador(int numero_jugador){
@@ -54,8 +55,8 @@ void Jugador::agregar_material_a_inventario(){
 
 }
 
-void Jugador::agregar_edificio_al_registro_(Edificio* edificio){
-
+void Jugador::agregar_edificio_al_registro(Edificio* edificio){
+    
 }
 
 
@@ -166,7 +167,7 @@ void Jugador::salir_del_juego(){
 }
 
 bool Jugador::quiere_salir_del_juego(){
-    return en_juego;
+    return !en_juego;
 }
 
 void Jugador:: sumar_energia(int energia){

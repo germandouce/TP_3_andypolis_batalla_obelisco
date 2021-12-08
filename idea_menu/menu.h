@@ -10,7 +10,7 @@ void mostrar_bienvenida();
 
 void gotoxy(int x, int y);
 
-void menu_principal();
+void menu_principal(Jugador* jug_turno, Jugador* jug_secundario);
 
 int menu(const char *titulo, const char *opciones[], int numero_opciones, const char *sub_titulo);
 #endif // MENU_H

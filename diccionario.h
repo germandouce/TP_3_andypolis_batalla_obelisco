@@ -3,13 +3,13 @@
 
 #include "nodo_dict.h"
 
-#include "edificios/aserradero.h"
-#include "edificios/escuela.h"
-#include "edificios/fabrica.h"
-#include "edificios/mina.h"
-#include "edificios/mina_oro.h"
-#include "edificios/obelisco.h"
-#include "edificios/planta_electrica.h"
+#include "registro_edificios/aserradero.h"
+#include "registro_edificios/escuela.h"
+#include "registro_edificios/fabrica.h"
+#include "registro_edificios/mina.h"
+#include "registro_edificios/mina_oro.h"
+#include "registro_edificios/obelisco.h"
+#include "registro_edificios/planta_electrica.h"
 
 const int ASCII_A = 65;
 const int ASCII_E = 69;
@@ -41,7 +41,7 @@ class Diccionario {
 
     Edificio* instanciar_edificio(string nombre_edificio, int fila, int columna);
 
-    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite);
+    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite, int fila, int columna);
 
     void mostrar_todos_edificios();
 
