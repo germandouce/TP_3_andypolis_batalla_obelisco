@@ -63,11 +63,11 @@ public:
 
     //pre:
     //post: verifica existencia de edificio consultado segun coordenadas.
-    bool existe(int coordenada_x , int coordenada_y);
+    bool existe(int fila, int columna);
 
     //pre:
     //post: elimina edificio segun coordenadas.
-    void eliminar(int coordenada_x , int coordenada_y);
+    void eliminar(int fila, int columna);
 
     //pre:
     //post: presenta registro de edificios en pantalla.
@@ -79,11 +79,11 @@ public:
 
     //pre: verifica existencia.
     //post: devuelve posicion del edificion en el registro segun sus coordenadas.
-    int buscar_posicion(int coordenada_x , int coordenada_y);
+    int buscar_posicion(int fila, int columna);
 
     //pre:  verifica existencia y busca posicion.
     //post: busca y devuelve el edificio en el registro consultado segun sus coordenadas.
-    Edificio* buscar_edificio_en_registro(int coordenada_x , int coordenada_y);
+    Edificio* buscar_edificio_en_registro(int fila, int columna);
 
     //pre: verifica que 0 < = posicion pedida/consultada < cantiadad de edificios en registro.
     //post: devueve puntero a nodo pedido segun posicion en el registro si confirma validez de posicion pedida/consultada.

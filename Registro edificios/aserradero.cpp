@@ -1,13 +1,13 @@
 #include "aserradero.h"
 
-Aserradero::Aserradero(int piedra, int madera, int metal, int maximo,  int pos_x, int pos_y) : Edificio(piedra, madera, metal, maximo, pos_x, pos_y){
+Aserradero::Aserradero(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio(piedra, madera, metal, maximo,fila, columna){
     this->nombre = "aserradero";
     this->diminutivo = "A";
     this->brinda = 25;
     this->vida_actual = 1;
     this->vida_maxima = 1;
-    this->posicion_x = pos_x;
-    this->posicion_y = pos_y;
+    this->fila = fila;
+    this->columna = columna;
 }
 
 void Aserradero::mostrar_mensaje(){

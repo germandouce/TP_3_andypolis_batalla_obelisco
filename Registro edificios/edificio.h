@@ -25,8 +25,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
-    int posicion_x;
-    int posicion_y;
+    int fila;
+    int columna;
 
 public:
 
@@ -38,7 +38,7 @@ public:
     // PRE: -
     // POS: Como es una clase abstracta cada edificio va a implementar su nombre, aca se
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
-    Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir,  int posicion_x, int posicion_y);
+    Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir,  int fila, int columna);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
@@ -127,12 +127,12 @@ public:
     //Devolver posicion X
     //PRE:-
     //POST: Devuelve un entero con la posicion x del edificio
-    int obtener_posicion_x();
+    int obtener_fila();
 
     //Devolver posicion y
     //PRE:-
     //POST: Devuelve un entero con la posicion y del edificio
-    int obtener_posicion_y();
+    int obtener_columna();
 
     //PRE: pasamos edificio que queremos modificar las cantidades de los materiales requeridos
     //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.

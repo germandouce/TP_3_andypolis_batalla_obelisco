@@ -56,13 +56,13 @@ int Registro_edificios::obtener_cantidad_minas_oro(){
     return cantidad_minas_oro;
 }
 
-int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
+int Registro_edificios :: buscar_posicion(int fila, int columna){
     Nodo_R *actual;
     actual = primero;
     bool encontrado;
     int posicion;
     for ( posicion = 0; posicion < cantidad_edificios ; posicion++ ) {
-        if (coordenada_x == actual->obtener_edificio()->obtener_posicion_x() && coordenada_y == actual->obtener_edificio()->obtener_posicion_y()) {
+        if (fila == actual->obtener_edificio()->obtener_fila() && columna == actual->obtener_edificio()->obtener_columna()) {
             return posicion;
         }
         else{
@@ -72,7 +72,7 @@ int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
     }
     if (encontrado == false){
         posicion = -1;
-        cout << "No existe edificio en posicion ->> "<< "( " << coordenada_x << ", " << coordenada_y << " )" <<endl;
+        cout << "No existe edificio en posicion ->> "<< "( " << fila << ", " << columna << " )" <<endl;
         cout << "Entonces no existe en el registro de edificios."<<endl;
     }
 
@@ -80,13 +80,13 @@ int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
     return  posicion;
 }
 
-Edificio* Registro_edificios::buscar_edificio_en_registro(int coordenada_x , int coordenada_y) {
-    Nodo_R*aux = obtener_nodo(buscar_posicion(coordenada_x,coordenada_y));
+Edificio* Registro_edificios::buscar_edificio_en_registro(int fila, int columna) {
+    Nodo_R*aux = obtener_nodo(buscar_posicion(fila,columna));
     return aux -> obtener_edificio();
 }
 
-bool Registro_edificios::existe( int coordenada_x , int coordenada_y) {
-    return (buscar_posicion(coordenada_x, coordenada_y) > 0);
+bool Registro_edificios::existe( int fila, int columna) {
+    return (buscar_posicion( fila, columna) > 0);
 }
 
 
@@ -97,41 +97,41 @@ void Registro_edificios::agregar(Edificio*edificio){
     int madera = edificio->obtener_cantidad_madera();
     int metal = edificio->obtener_cantidad_metal();
     int limite_construccion = edificio->obtener_maximo_construir();
-    int pos_x = edificio->obtener_posicion_x();
-    int pos_y = edificio ->obtener_posicion_y();
+    int pos_x = edificio->obtener_fila();
+    int pos_y = edificio ->obtener_columna();
 
     if (nombre_edificio == A) {
-        nuevo = new Nodo_R(new Aserradero(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R(new Aserradero(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_aserraderos++;
     }
 
     else if (nombre_edificio == E) {
-        nuevo = new Nodo_R(new Escuela(piedra, madera, metal, limite_construccion, pos_x, pos_y)) ;
+        nuevo = new Nodo_R(new Escuela(piedra, madera, metal, limite_construccion, fila, columna)) ;
         cantidad_escuelas++;
     }
 
     else if (nombre_edificio == F) {
-        nuevo = new Nodo_R( new Fabrica(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R( new Fabrica(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_fabricas++;
     }
 
     else if (nombre_edificio == M) {
-        nuevo = new Nodo_R(new Mina(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R(new Mina(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_minas++;
     }
 
     else if (nombre_edificio == G) {
-        nuevo = new Nodo_R(new Mina_oro(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R(new Mina_oro(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_minas_oro++;
     }
 
     else if (nombre_edificio == O) {
-        nuevo = new Nodo_R(new Obelisco(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R(new Obelisco(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_obeliscos++;
     }
 
     else if (nombre_edificio == P) {
-        nuevo = new Nodo_R( new Planta_electrica(piedra, madera, metal, limite_construccion, pos_x, pos_y));
+        nuevo = new Nodo_R( new Planta_electrica(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_plantas_electricas++;
     }
     if(primero == nullptr){
@@ -148,11 +148,11 @@ void Registro_edificios::agregar(Edificio*edificio){
 }
 
 
-void Registro_edificios::eliminar(int coordenada_x , int coordenada_y){
-    if (existe(coordenada_x,coordenada_y)){
+void Registro_edificios::eliminar(int fila, int columna){
+    if (existe(fila, columna)){
         Nodo_R *baja;
-        int posicion_edificio_buscado = buscar_posicion(coordenada_x,coordenada_y);
-        string nombre_edificio = buscar_edificio_en_registro(coordenada_x,coordenada_y)->obtener_nombre();
+        int posicion_edificio_buscado = buscar_posicion(fila, columna);
+        string nombre_edificio = buscar_edificio_en_registro(fila, columna)->obtener_nombre();
         if (posicion_edificio_buscado == 0) {
             baja = primero;
             primero = primero->obtener_siguiente();
@@ -228,7 +228,7 @@ void Registro_edificios :: mostrar_registro_edificios() {
             cout << "Cantidad de metal: " << act->obtener_edificio()->obtener_cantidad_metal() << endl;
             cout << "Cantidad limitte de construccion: " << act->obtener_edificio()->obtener_maximo_construir() << endl;
             cout << "Vida actual: " << act->obtener_edificio()->obtener_vida_actual() << endl;
-            cout << "Ubicacion en mapa: " << "( " << act->obtener_edificio()->obtener_posicion_x() << ", "<< act->obtener_edificio()->obtener_posicion_y() << " )\n" << endl;
+            cout << "Ubicacion en mapa: " << "( " << act->obtener_edificio()->obtener_fila() << ", "<< act->obtener_edificio()->obtener_columna() << " )\n" << endl;
             act = act->obtener_siguiente();
         }
     }

@@ -14,7 +14,7 @@ Edificio::Edificio() {
     this->posicion_y=0;
 }
 
-Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int posicion_x, int posicion_y) {
+Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int fila, int columna) {
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
@@ -105,12 +105,12 @@ void Edificio::mostrar_toda_informacion() {
     cout << endl;
 }
 
-int Edificio::obtener_posicion_x() {
-    return posicion_x;
+int Edificio::obtener_fila() {
+    return fila;
 }
 
-int Edificio::obtener_posicion_y() {
-    return posicion_y;
+int Edificio::obtener_columna() {
+    return columna;
 }
 
 void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
