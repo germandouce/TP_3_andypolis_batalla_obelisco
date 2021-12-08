@@ -1,4 +1,5 @@
 #include "jugador.h"
+#include "inventario\inventario.h"
 
 Jugador::Jugador(){
 

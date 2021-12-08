@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 #include "../colores.h"
-#include ".././edificios./edificio.h"
-#include ".././materiales./material.h"
+#include "registro_edificios/edificio.h"
+#include "materiales/material.h"
 
 const string CONSTRUIBLE = "construible";
 const string TRANSITABLE = "transitable";

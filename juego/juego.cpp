@@ -60,6 +60,59 @@ void Juego::instanciar_material(string nombre_material, Material * material){
 }
 
 
+void Juego::cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,
+Inventario* inventario_jugador_2){
+    // bool procesar_archivo_materiales(){
+    // bool inventarios_actualizados;
+    // std::fstream archivo_materiales(PATH_MATERIALES, std::ios::in);
+
+    if(inventario.is_open()){
+
+        std::string nombre;
+        std::string cantidad_1;
+        std::string cantidad_2;
+
+        while(inventario >> nombre){
+            inventario >> cantidad_1;
+            inventario >> cantidad_2;
+
+            if (nombre == "Madera" || nombre == "madera"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Piedra" || nombre == "piedra"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Metal" || nombre == "metal"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Bombas" || nombre == "bombas"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Andycoins" || nombre == "andycoins"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            inventario_jugador_1->actualizar_largo_de_inventario();
+            inventario_jugador_2->actualizar_largo_de_inventario();
+        }
+
+        inventario.close();
+        //inventarios_actualizados = true;
+    }
+    // else{
+    //     std::cout << "\nNo se encuentra archivo materiales.\n" << std::endl;
+    //     delete inventario_jugador_1;
+    //     delete inventario_jugador_2;
+    //     inventarios_actualizados = false;
+    // }
+    // return inventarios_actualizados;
+}
+
+
 void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * jug_2){
 
     string nombre_elemento;

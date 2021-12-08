@@ -1,5 +1,5 @@
 #include ".\idea menu\menu_nueva_partida.h"
-#include "menu.h"
+#include ".\idea menu\menu.h"
 #include "juego.h"
 
 int main() {

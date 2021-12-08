@@ -114,7 +114,7 @@ int Edificio::obtener_posicion_y() {
 }
 
 void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
-    if (!edificio->obtener_nombre() == O){
+    if ( edificio->obtener_nombre() != "O"){
         int cantidad_suma_resta_madera;
         int cantidad_suma_resta_piedra;
         int cantidad_suma_resta_metal;

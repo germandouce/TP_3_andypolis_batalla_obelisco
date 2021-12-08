@@ -34,6 +34,11 @@ public:
     //POST: Lee el archivo mapa.txt y lo guarda.
     bool cargar_mapa();
 
+    //
+    //
+    //
+    void cargar_inventario();
+
     //es archivo legible
     //PRE: 
     //POST: Devuelve true si el archivo existe y no esta vacio. Si no existe, no lo llega a abrir. Si existe
