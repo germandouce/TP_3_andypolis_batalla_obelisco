@@ -14,7 +14,7 @@ Edificio::Edificio() {
     this->columna=0;
 }
 
-Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int posicion_x, int posicion_y) {
+Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int fila, int columna) {
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;

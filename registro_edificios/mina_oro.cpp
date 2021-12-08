@@ -1,13 +1,13 @@
 #include "mina_oro.h"
 
-Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo,  int pos_x, int pos_y) : Edificio(piedra, madera, metal, maximo, pos_x, pos_y){
+Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio(piedra, madera, metal, maximo, fila, fila){
     this->nombre = "mina de oro";
     this->diminutivo = "G";
     this->brinda = 50;
     this->vida_actual = 2;
     this->vida_maxima = 2;
-    this->posicion_x = pos_x;
-    this->posicion_y = pos_y;
+    this->fila = fila;
+    this->columna = columna;
 }
 
 void Mina_oro::mostrar_mensaje(){

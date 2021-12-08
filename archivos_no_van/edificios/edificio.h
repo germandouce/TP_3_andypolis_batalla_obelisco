@@ -28,8 +28,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
-    int posicion_x;
-    int posicion_y;
+    int fila;
+    int fila;
 
 public:
 
@@ -126,12 +126,12 @@ public:
     //Devolver posicion X
     //PRE:-
     //POST: Devuelve un entero con la posicion x del edificio
-    int obtener_posicion_x();
+    int obtener_fila();
 
     //Devolver posicion y
     //PRE:-
     //POST: Devuelve un entero con la posicion y del edificio
-    int obtener_posicion_y();
+    int obtener_fila();
 
     // Destructor
     // PRE: -

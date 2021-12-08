@@ -103,12 +103,12 @@ void Edificio::mostrar_toda_informacion() {
     cout << END_COLOR << endl;
 }
 
-int Edificio::obtener_posicion_x() {
-    return posicion_x;
+int Edificio::obtener_fila() {
+    return fila;
 }
 
-int Edificio::obtener_posicion_y() {
-    return posicion_y;
+int Edificio::obtener_fila() {
+    return fila;
 }
 
 Edificio::~Edificio() {}

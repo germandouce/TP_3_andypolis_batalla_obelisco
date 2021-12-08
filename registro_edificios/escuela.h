@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Escuela(int piedra, int madera, int metal, int maximo, int pos_x, int pos_y);
+    Escuela(int piedra, int madera, int metal, int maximo, int fila, int fila);
 
     string obtener_material_brindado();
 

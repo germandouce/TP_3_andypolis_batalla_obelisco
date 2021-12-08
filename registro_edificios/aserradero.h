@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Aserradero(int piedra, int madera, int metal, int maximo,  int pos_x, int pos_y);
+    Aserradero(int piedra, int madera, int metal, int maximo,  int fila, int columna);
 
     string obtener_material_brindado();
 

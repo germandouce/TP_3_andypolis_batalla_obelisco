@@ -1,13 +1,13 @@
 #include "planta_electrica.h"
 
-Planta_electrica::Planta_electrica(int piedra, int madera, int metal, int maximo,  int pos_x, int pos_y) : Edificio( piedra, madera, metal, maximo, pos_x, pos_y){
+Planta_electrica::Planta_electrica(int piedra, int madera, int metal, int maximo,  int fila, int columna) : Edificio( piedra, madera, metal, maximo, fila, fila){
     this->nombre = "planta electrica";
     this->diminutivo = "P";
     this->brinda = 15;
     this->vida_actual = 1;
     this->vida_maxima = 1;
-    this->posicion_x = pos_x;
-    this->posicion_y = pos_y;
+    this->fila = fila;
+    this->columna = columna;
 }
 
 void Planta_electrica::mostrar_mensaje(){
