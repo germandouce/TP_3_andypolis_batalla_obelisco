@@ -33,6 +33,10 @@ Casillero* Mapa::obtener_casillero(int fila, int columna) {
 	return matriz[fila][columna];
 }
 
+Diccionario* Mapa::obtener_diccionario() {
+	return diccionario;
+}
+
 string Mapa::obtener_tipo_casillero(int fila, int columna) {
 	return matriz[fila][columna] -> obtener_tipo_casillero();
 }
@@ -47,45 +51,34 @@ void Mapa::colocar_material(int fila, int columna, Material* material) {
 
 // CARGA DE ARCHIVOS
 
-bool Mapa::se_cargo_terreno() {
+void Mapa::cargar_mapa(ifstream& archivo) {
 
-    ifstream archivo(PATH_MAPA);
     int filas;
     int columnas;
     string tipo_casillero;
 
-    if (!archivo.is_open()) {
-        cout << endl;
-        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de mapa." << END_COLOR << endl;
-        return false;
-    }
-    else {
+    archivo >> filas;
+    archivo >> columnas;
 
-        archivo >> filas;
-        archivo >> columnas;
+    asignar_atributos(filas, columnas);
 
-        asignar_atributos(filas, columnas);
-
-		string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
+	string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
         
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
                 
-                archivo >> tipo_casillero;
-                Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
-                cargar_casillero(i, j, casillero);
-                sumar_casillero_por_tipo(tipo_casillero);
+            archivo >> tipo_casillero;
+            Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
+            cargar_casillero(i, j, casillero);
+            sumar_casillero_por_tipo(tipo_casillero);
 
-				matriz_terrenos[i][j] = tipo_casillero;
-            }
+			matriz_terrenos[i][j] = tipo_casillero;
         }
+    }
 
-		grafo -> cargar_matriz_adyacencia(filas, columnas);
-
-    };
-    archivo.close();
-    return true;
-}
+	grafo -> cargar_matriz_adyacencia(filas, columnas);
+	archivo.close();
+}  
 
 void Mapa::asignar_atributos(int filas, int columnas) {
 	
@@ -130,33 +123,24 @@ Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero
 	return casillero_devuelto;
 }
 
-bool Mapa::se_cargo_diccionario() {
+void Mapa::cargar_diccionario(ifstream &archivo) {
 
-	ifstream archivo(PATH_EDIFICIOS);
     string nombre_edificio;
 	int piedra;
 	int madera;
 	int metal;
     int limite_construccion;
 
-    if (!archivo.is_open()) {
-        cout << endl;
-        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de edificios." << END_COLOR << endl;
-        return false;
-    }
-    else {
-        while (archivo >> nombre_edificio) {
+	while (archivo >> nombre_edificio) {
 
-            piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
-            archivo >> madera;
-            archivo >> metal;
-            archivo >> limite_construccion;
+		piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
+		archivo >> madera;
+		archivo >> metal;
+		archivo >> limite_construccion;
 
-            cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
-        }
-    };
+		cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+	}
     archivo.close();
-    return true;
 }
 
 void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {

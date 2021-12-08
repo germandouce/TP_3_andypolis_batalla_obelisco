@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include <string>
-
-#include "../colores.h"
-
 using namespace std;
 
 const string G = "mina de oro";
@@ -28,8 +25,8 @@ protected:
     int maximo_construir;
     int vida_actual;
     int vida_maxima;
-    int posicion_x;
-    int posicion_y;
+    int fila;
+    int columna;
 
 public:
 
@@ -41,7 +38,7 @@ public:
     // PRE: -
     // POS: Como es una clase abstracta cada edificio va a implementar su nombre, aca se
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
-    Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
+    Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir,  int posicion_x, int posicion_y);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
@@ -67,6 +64,10 @@ public:
     // POS: Devuelve la maxima cantidad de edificios que se pueden construir , informacion que viene dada
     //      en edificio.txt.
     int obtener_maximo_construir();
+
+    // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
+    // POS: Devuelve la vida actual del edificio.
+    int obtener_vida_actual();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la mitad del material, metodo utilizado en caso de eliminar el edificio.
@@ -123,15 +124,23 @@ public:
 
     void mostrar_toda_informacion();
     
+    void asignar_fila(int fila);
+
+    void asignar_columna(int columna);
+
     //Devolver posicion X
     //PRE:-
     //POST: Devuelve un entero con la posicion x del edificio
-    int obtener_posicion_x();
+    int obtener_fila();
 
     //Devolver posicion y
     //PRE:-
     //POST: Devuelve un entero con la posicion y del edificio
-    int obtener_posicion_y();
+    int obtener_columna();
+
+    //PRE: pasamos edificio que queremos modificar las cantidades de los materiales requeridos
+    //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.
+    void modificar_cantidades_edificio(Edificio*edificio);
 
     // Destructor
     // PRE: -

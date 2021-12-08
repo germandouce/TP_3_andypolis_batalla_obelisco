@@ -10,9 +10,11 @@ Edificio::Edificio() {
     this-> maximo_construir = 0;
     this->vida_actual =0;
     this->vida_maxima =0;
+    this->fila=0;
+    this->columna=0;
 }
 
-Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir) {
+Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int fila, int columna) {
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
@@ -64,6 +66,10 @@ int Edificio::obtener_mitad_metal(){
     return cantidad_metal/2;
 }
 
+int Edificio::obtener_vida_actual(){
+    return vida_actual;
+}
+
 void Edificio:: daniar(){
     vida_actual--;
 }
@@ -84,11 +90,7 @@ void Edificio::reparar() {
 
 void Edificio::mostrar_toda_informacion() {
 
-    cout << ENTER_COLOR;
     cout << "Se requieren los siguientes materiales para construir un/a '" << nombre << "': ";
-    cout << END_COLOR << endl;
-
-    cout << SUCESS_COLOR;
     cout << "-" << cantidad_piedra << " unidades de piedra." << endl;
     cout << "-" << cantidad_madera << " unidades de madera." << endl;
     cout << "-" << cantidad_metal << " unidades de metal." << endl;
@@ -98,17 +100,45 @@ void Edificio::mostrar_toda_informacion() {
         cout << "-Produce " << brinda << " de " << obtener_material_brindado() << " cuando se recolecta." << endl;
     }
     
-    cout << SUCESS_COLOR << "-Construidos: " << "???" << "/";
+    cout << "-Construidos: " << "???" << "/";
     cout << obtener_maximo_construir() << "." << endl;
-    cout << END_COLOR << endl;
+    cout << endl;
 }
 
-int Edificio::obtener_posicion_x() {
-    return posicion_x;
+void Edificio::asignar_fila(int fila) {
+    this -> fila = fila;
 }
 
-int Edificio::obtener_posicion_y() {
-    return posicion_y;
+void Edificio::asignar_columna(int columna) {
+    this -> columna = columna;
+}
+
+int Edificio::obtener_fila() {
+    return fila;
+}
+
+int Edificio::obtener_columna() {
+    return columna;
+}
+
+void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
+    if (!(edificio->obtener_nombre() == O)){
+        int cantidad_suma_resta_madera;
+        int cantidad_suma_resta_piedra;
+        int cantidad_suma_resta_metal;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_madera;
+        edificio->cantidad_madera = edificio->cantidad_madera + cantidad_suma_resta_madera;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_piedra;
+        edificio->cantidad_piedra = edificio->cantidad_piedra + cantidad_suma_resta_piedra;
+        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
+        cin >> cantidad_suma_resta_metal;
+        edificio->cantidad_metal = edificio->cantidad_metal + cantidad_suma_resta_metal;
+    }
+    else{
+        cout<< "Obelisco no es un edificio modificable." << endl;
+    }
 }
 
 Edificio::~Edificio() {}

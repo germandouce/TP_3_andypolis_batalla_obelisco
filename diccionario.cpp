@@ -82,6 +82,57 @@ Nodo_dict* Diccionario::buscar(Nodo_dict* nodo, int id) {
     return buscar(nodo -> devolver_nodo_izquierdo(), id);
 }
 
+Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int fila, int columna) {
+
+    Edificio* edificio = buscar_edificio(nombre_edificio);
+
+    int piedra = edificio -> obtener_cantidad_piedra();
+    int madera = edificio -> obtener_cantidad_madera();
+    int metal = edificio -> obtener_cantidad_metal();
+    int limite_construccion = edificio -> obtener_maximo_construir();
+
+    edificio = instanciar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+    edificio -> asignar_fila(fila);
+    edificio -> asignar_columna(columna);
+
+    return edificio;
+}
+
+Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {
+
+    Edificio* edificio;
+
+    if (nombre_edificio == A) {
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == E) {
+		edificio = new Escuela(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == F) {
+		edificio = new Fabrica(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == M) {
+		edificio = new Mina(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == G) {
+		edificio = new Mina_oro(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == O) {
+		edificio = new Obelisco(piedra, madera, metal, limite_construccion);
+	}
+
+	if (nombre_edificio == P) {
+		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion);
+	}
+
+    return edificio;
+}
+
 void Diccionario::mostrar_todos_edificios() {
     mostrar_todos_edificios(origen);
 }

@@ -10,11 +10,11 @@ Edificio::Edificio() {
     this-> maximo_construir = 0;
     this->vida_actual =0;
     this->vida_maxima =0;
-    this->posicion_x=0;
-    this->posicion_y=0;
+    this->fila=0;
+    this->columna=0;
 }
 
-Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int posicion_x, int posicion_y) {
+Edificio::Edificio(int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir, int fila, int columna) {
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
@@ -105,16 +105,24 @@ void Edificio::mostrar_toda_informacion() {
     cout << endl;
 }
 
-int Edificio::obtener_posicion_x() {
-    return posicion_x;
+void Edificio::asignar_fila(int fila) {
+    this -> fila = fila;
 }
 
-int Edificio::obtener_posicion_y() {
-    return posicion_y;
+void Edificio::asignar_columna(int columna) {
+    this -> columna = columna;
+}
+
+int Edificio::obtener_fila() {
+    return fila;
+}
+
+int Edificio::obtener_columna() {
+    return columna;
 }
 
 void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
-    if (!edificio->obtener_nombre() == O){
+    if (!(edificio->obtener_nombre() == O)){
         int cantidad_suma_resta_madera;
         int cantidad_suma_resta_piedra;
         int cantidad_suma_resta_metal;
