@@ -33,6 +33,10 @@ Casillero* Mapa::obtener_casillero(int fila, int columna) {
 	return matriz[fila][columna];
 }
 
+Diccionario* Mapa::obtener_diccionario() {
+	return diccionario;
+}
+
 string Mapa::obtener_tipo_casillero(int fila, int columna) {
 	return matriz[fila][columna] -> obtener_tipo_casillero();
 }
@@ -47,45 +51,34 @@ void Mapa::colocar_material(int fila, int columna, Material* material) {
 
 // CARGA DE ARCHIVOS
 
-bool Mapa::se_cargo_terreno() {
+void Mapa::cargar_mapa(ifstream& archivo) {
 
-    ifstream archivo(PATH_MAPA);
     int filas;
     int columnas;
     string tipo_casillero;
 
-    if (!archivo.is_open()) {
-        cout << endl;
-        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de mapa." << END_COLOR << endl;
-        return false;
-    }
-    else {
+    archivo >> filas;
+    archivo >> columnas;
 
-        archivo >> filas;
-        archivo >> columnas;
+    asignar_atributos(filas, columnas);
 
-        asignar_atributos(filas, columnas);
-
-		string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
+	string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
         
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
                 
-                archivo >> tipo_casillero;
-                Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
-                cargar_casillero(i, j, casillero);
-                sumar_casillero_por_tipo(tipo_casillero);
+            archivo >> tipo_casillero;
+            Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
+            cargar_casillero(i, j, casillero);
+            sumar_casillero_por_tipo(tipo_casillero);
 
-				matriz_terrenos[i][j] = tipo_casillero;
-            }
+			matriz_terrenos[i][j] = tipo_casillero;
         }
+    }
 
-		grafo -> cargar_matriz_adyacencia(filas, columnas);
-
-    };
-    archivo.close();
-    return true;
-}
+	grafo -> cargar_matriz_adyacencia(filas, columnas);
+	archivo.close();
+}  
 
 void Mapa::asignar_atributos(int filas, int columnas) {
 	
@@ -130,33 +123,24 @@ Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero
 	return casillero_devuelto;
 }
 
-bool Mapa::se_cargo_diccionario() {
+void Mapa::cargar_diccionario(ifstream &archivo) {
 
-	ifstream archivo(PATH_EDIFICIOS);
     string nombre_edificio;
 	int piedra;
 	int madera;
 	int metal;
     int limite_construccion;
 
-    if (!archivo.is_open()) {
-        cout << endl;
-        cout << ERROR_COLOR << "ERROR: No se encuentra el archivo de edificios." << END_COLOR << endl;
-        return false;
-    }
-    else {
-        while (archivo >> nombre_edificio) {
+	while (archivo >> nombre_edificio) {
 
-            piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
-            archivo >> madera;
-            archivo >> metal;
-            archivo >> limite_construccion;
+		piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
+		archivo >> madera;
+		archivo >> metal;
+		archivo >> limite_construccion;
 
-            cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
-        }
-    };
+		cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+	}
     archivo.close();
-    return true;
 }
 
 void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {
@@ -164,37 +148,37 @@ void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int m
 	Edificio* edificio;
 
 	if (nombre_edificio == A) {
-		edificio = new Aserradero(piedra, madera, metal, limite_construccion);
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == E) {
-		edificio = new Escuela(piedra, madera, metal, limite_construccion);
+		edificio = new Escuela(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == F) {
-		edificio = new Fabrica(piedra, madera, metal, limite_construccion);
+		edificio = new Fabrica(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == M) {
-		edificio = new Mina(piedra, madera, metal, limite_construccion);
+		edificio = new Mina(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == G) {
-		edificio = new Mina_oro(piedra, madera, metal, limite_construccion);
+		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == O) {
-		edificio = new Obelisco(piedra, madera, metal, limite_construccion);
+		edificio = new Obelisco(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 
 	if (nombre_edificio == P) {
-		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion);
+		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 }
@@ -367,7 +351,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	return puede_llover_mas;
 }
 
-void Mapa::moverse() {
+void Mapa::moverse(bool es_jugador2) {
 	
 	int fila_origen;
 	int columna_origen;
@@ -384,16 +368,27 @@ void Mapa::moverse() {
 	origen = fila_origen * filas + columna_origen + 1;
 	destino = fila_destino * filas + columna_destino + 1;
 
-	grafo -> calcular_camino_minimo_dijsktra(origen, destino);
+	grafo -> calcular_camino_minimo_dijsktra(origen, destino, matriz, es_jugador2);
 	
 	Lista* lista_vertices = grafo -> devolver_lista_vertices();
+	int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
-	imprimir_camino_recorrido(lista_vertices, origen, destino);
+	if (distancia != INFINITO) {
+		imprimir_camino_recorrido(lista_vertices, origen, destino, es_jugador2);
+		ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+		cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
+		cout << endl;
 
+	}
+	else {
+		cout << ERROR_COLOR << "El Jugador no puede llegar a la coordenada elegida." << END_COLOR << endl;
+		cout << endl;
+	}
+	
 	grafo -> reiniciar_vector_vertices();
 }
 
-void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino) {
+void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino, bool es_jugador2) {
 
 	int fila;
 	int columna;
@@ -405,12 +400,14 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int dest
 
 	if (destino != origen) {
 		int destino = nodo -> obtener_anterior();
-		imprimir_camino_recorrido(lista_vertices, origen, destino);
+		imprimir_camino_recorrido(lista_vertices, origen, destino, es_jugador2);
 	}
 	else {
 		cout << endl;
 		cout << SUCESS_COLOR << "El Jugador esta pensando cual es camino mas conveniente..." << END_COLOR << endl;
 	}
+
+	ocupar_jugador(fila, columna, es_jugador2);
 
 	print_lento(ESPERA);
 
@@ -418,6 +415,8 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int dest
 	system(CLR_SCREEN);
 	imprimir_mapa();
 	matriz[fila][columna] -> desiluminar_casillero();
+
+	desocupar_jugador(fila, columna, es_jugador2);
 }
 
 void Mapa::print_lento(unsigned int tiempo) {
@@ -426,6 +425,26 @@ void Mapa::print_lento(unsigned int tiempo) {
     #else
         usleep(tiempo);
     #endif
+}
+
+void Mapa::ocupar_jugador(int fila, int columna, bool es_jugador2) {
+
+	if (es_jugador2) {
+		matriz[fila][columna] -> ocupar_jugador2();
+	}
+	else {
+		matriz[fila][columna] -> ocupar_jugador1();
+	}
+}
+
+void Mapa::desocupar_jugador(int fila, int columna, bool es_jugador2) {
+
+	if (es_jugador2) {
+		matriz[fila][columna] -> desocupar_jugador2();
+	}
+	else {
+		matriz[fila][columna] -> desocupar_jugador1();
+	}
 }
 
 void Mapa::borrar_casillero(Casillero* casillero) {

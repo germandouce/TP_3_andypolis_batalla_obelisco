@@ -4,8 +4,9 @@
 #include <iostream>
 #include <string>
 #include "../colores.h"
-#include ".././edificios./edificio.h"
-#include ".././materiales./material.h"
+#include "../registro_edificios/edificio.h"
+#include "../materiales/material.h"
+
 
 const string CONSTRUIBLE = "construible";
 const string TRANSITABLE = "transitable";
@@ -17,6 +18,9 @@ const string CAMINO = "C";
 const string MUELLE = "M";
 const string BETUN = "B";
 
+const string JUGADOR1 = "J";
+const string JUGADOR2 = "U";
+
 class Casillero {
 	
 	protected:
@@ -26,6 +30,8 @@ class Casillero {
 	string tipo_casillero;
 	bool ocupado;
 	bool iluminado;
+	bool jugador1;
+	bool jugador2;
 
 	public:
 
@@ -57,6 +63,18 @@ class Casillero {
 	//pre: -
 	//post: Actualiza el valor de 'esta_vacio'.
 	void desocupar_casillero();
+
+	bool hay_jugador1();
+
+	void ocupar_jugador1();
+
+	void desocupar_jugador1();
+
+	bool hay_jugador2();
+
+	void ocupar_jugador2();
+
+	void desocupar_jugador2();
 
 	void iluminar_casillero();
 

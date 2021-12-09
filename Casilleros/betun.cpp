@@ -6,6 +6,8 @@ Betun::Betun(int fila, int columna) {
 	this -> tipo_casillero = BETUN;
 	this -> ocupado = false;
 	this -> iluminado = false;
+	this -> jugador1 = false;
+	this -> jugador2 = false;
 	this -> material = nullptr;
 }
 

@@ -13,6 +13,7 @@ class Terreno: public Casillero_construible {
     Terreno(int fila, int columna);
 
     // Destructor.
+	//pre: -uctor.
 	//pre: -
 	//post: -
 	~Terreno();

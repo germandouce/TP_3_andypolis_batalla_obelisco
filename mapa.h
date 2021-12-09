@@ -15,24 +15,11 @@
 #include "materiales/andycoins.h"
 #include "materiales/bombas.h"
 
-#include "edificios/aserradero.h"
-#include "edificios/escuela.h"
-#include "edificios/fabrica.h"
-#include "edificios/mina.h"
-#include "edificios/mina_oro.h"
-#include "edificios/obelisco.h"
-#include "edificios/planta_electrica.h"
-
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "casilleros/betun.h"
-
-const string PATH_EDIFICIOS = "edificios.txt";
-const string PATH_MATERIALES = "materiales.txt";
-const string PATH_UBICACIONES = "ubicaciones.txt";
-const string PATH_MAPA = "mapa.txt";
 
 const char PARENTESIS_CHAR = '(';
 const int OPCION_PARENTESIS = 0;
@@ -77,6 +64,9 @@ const int CANTIDAD_COORDENADAS = 2;
 const int FILA = 0;
 const int COLUMNA = 1;
 
+const int NULA =-1;
+
+
 class Mapa {
 	
 	private:
@@ -116,6 +106,8 @@ class Mapa {
     //post: Devuelve un puntero al Casillero ubicado en la fila y columna ingresadas.
 	Casillero* obtener_casillero(int fila, int columna);
 
+	Diccionario* obtener_diccionario();
+
 	//pre: Los valores ingresados deben cumplir que: 0 <= fila < filas y 0 <= columna < columnas.
     //post: Devuelve el tipo del Casillero ubicado en la fila y columna ingresadas.
 	string obtener_tipo_casillero(int fila, int columna);
@@ -126,9 +118,9 @@ class Mapa {
 
 	void colocar_material(int fila, int columna, Material* material);
 
-	bool se_cargo_terreno();
+	void cargar_mapa(ifstream& mapa);
 
-	bool se_cargo_diccionario();
+	void cargar_diccionario(ifstream &archivo);
 
 	//pre: -
     //post: Imprime el Mapa.
@@ -144,11 +136,15 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse();
+	void moverse(bool es_jugador2);
 
-	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino);
+	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino, bool es_jugador2);
 
 	void print_lento(unsigned int tiempo);
+
+	void ocupar_jugador(int fila, int columna, bool es_jugador2);
+
+	void desocupar_jugador(int fila, int columna, bool es_jugador2);
 
 	//pre: -
     //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.

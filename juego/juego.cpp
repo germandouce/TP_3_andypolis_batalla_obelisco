@@ -3,6 +3,7 @@
 Juego::Juego(){
     this -> mapa = new Mapa();
     //this -> diccionario_edificios = 0;
+    //this -> objetivos = 0;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
@@ -17,7 +18,7 @@ bool Juego::existe_archivo(ifstream& archivo,string nombre_archivo){
 
 void Juego::instanciar_edificio(string nombre_edificio, Edificio* edificio){
     if ( nombre_edificio == "mina"){
-        edificio = new Mina(0,0,0,0);
+        //edificio = new Mina();
     }
     else if ( nombre_edificio == "mina oro"){
         // edificio = new Mina_oro();
@@ -59,6 +60,59 @@ void Juego::instanciar_material(string nombre_material, Material * material){
 }
 
 
+void Juego::cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,
+Inventario* inventario_jugador_2){
+    // bool procesar_archivo_materiales(){
+    // bool inventarios_actualizados;
+    // std::fstream archivo_materiales(PATH_MATERIALES, std::ios::in);
+
+    if(inventario.is_open()){
+
+        std::string nombre;
+        std::string cantidad_1;
+        std::string cantidad_2;
+
+        while(inventario >> nombre){
+            inventario >> cantidad_1;
+            inventario >> cantidad_2;
+
+            if (nombre == "Madera" || nombre == "madera"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Piedra" || nombre == "piedra"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Metal" || nombre == "metal"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Bombas" || nombre == "bombas"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            else if (nombre == "Andycoins" || nombre == "andycoins"){
+                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            }
+            inventario_jugador_1->actualizar_largo_de_inventario();
+            inventario_jugador_2->actualizar_largo_de_inventario();
+        }
+
+        inventario.close();
+        //inventarios_actualizados = true;
+    }
+    // else{
+    //     std::cout << "\nNo se encuentra archivo materiales.\n" << std::endl;
+    //     delete inventario_jugador_1;
+    //     delete inventario_jugador_2;
+    //     inventarios_actualizados = false;
+    // }
+    // return inventarios_actualizados;
+}
+
+
 void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * jug_2){
 
     string nombre_elemento;
@@ -94,9 +148,10 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> colocar_material(material);
 
         } else{
-
+            
+            //edificio = mapa->obtener_diccionario()->instanciar_edificio(nombre_elemento,);
             instanciar_edificio(nombre_elemento, edificio);
-            jugador->agregar_edificio_al_registro_(edificio);
+            jugador->agregar_edificio_al_registro(edificio);
             //mapa -> obtener_matriz_casilleros()[fila][columna] -> agrgar_edificio(edificio);
         }
     }
@@ -146,14 +201,15 @@ bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo){
 
 
 void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
-
     Jugador * jugador;
     for (int i = 1; i <3 ; i++){
-        if (i = 0){
+        
+        if (i == 1){
+           
             jugador = jug_1;
         }
         else{
-            jugador = jug_1;
+            jugador = jug_2;
         }   
         jugador -> setear_numero_jugador(i);
         asignar_objetivos(jugador);
@@ -183,8 +239,6 @@ int Juego::generar_numero_random(int min, int max){
 }
 
 void Juego::asignar_objetivos(Jugador *jugador){
-    srand( (unsigned)time(0) );
-    
     int objetivo;
 
     int vector_objetivos_jug_1[3];

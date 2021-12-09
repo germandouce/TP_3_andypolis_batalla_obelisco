@@ -2,8 +2,6 @@
 #define INVENTARIO_H
 #include <string>
 
-const std::string PATH_MATERIALES = "C:\\Users\\FacuNano\\Desktop\\Inventario\\materiales.txt";
-
 class Inventario {
     //ATRIBUTOS
 private:
@@ -42,17 +40,18 @@ public:
     //POS: muestra en pantalla el inventario.
     void mostrar_inventario();
 
-    //PRE: el inventario se crea en default (todas las cantidades en 0).
-    //POS: procesa el archivo de materiales y carga/ actualiza las cantidades de cada elemento en el inventario.
-    void procesar_archivo_materiales();
-
-    //PRE: no se encuentra el archivo materiales.
-    //POS: crea archivo faltante de materiales, todas las cantidades en 0.
-    void crear_archivo_faltante();
+    //PRE: se lee el archivo materiales previamente verificada su existencia.
+    //POS: incrementa +1 la cantidad de elementos en el inventario cada vez que se agrega 1 elemento al inventario
+    // de esta manera incrementa +1 el largo del invario.
+    void actualizar_largo_de_inventario();
 
     //PRE: cantidad sumar o restar depende del signo. Si quiere restar inlcuir signo menos o negativo "-".
     //POS: busca elemento segun el nombre y le modifica su cantidad actual registrada en el inventario.
     void cambiar_cantidad_elemento(std::string nombre_elemento, int cantidad_sumar_o_restar);
+
+    //DESTRUCTOR
+    ~Inventario();
+
 
 };
 

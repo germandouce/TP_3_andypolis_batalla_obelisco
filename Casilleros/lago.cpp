@@ -6,6 +6,8 @@ Lago::Lago(int fila, int columna) {
 	this -> tipo_casillero = LAGO;
 	this -> ocupado = false;
 	this -> iluminado = false;
+	this -> jugador1 = false;
+	this -> jugador2 = false;
 }
 
 Lago::~Lago() {}

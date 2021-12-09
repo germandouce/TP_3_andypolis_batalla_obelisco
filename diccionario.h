@@ -3,6 +3,14 @@
 
 #include "nodo_dict.h"
 
+#include "registro_edificios/aserradero.h"
+#include "registro_edificios/escuela.h"
+#include "registro_edificios/fabrica.h"
+#include "registro_edificios/mina.h"
+#include "registro_edificios/mina_oro.h"
+#include "registro_edificios/obelisco.h"
+#include "registro_edificios/planta_electrica.h"
+
 const int ASCII_A = 65;
 const int ASCII_E = 69;
 const int ASCII_F = 70;
@@ -30,6 +38,10 @@ class Diccionario {
     // entre 1 y 7 si son materiales, entre ??? y ???
     // POST: devuelve true si el id se está en el diccionario
     Edificio* buscar_edificio(string nombre);
+
+    Edificio* instanciar_edificio(string nombre_edificio, int fila, int columna);
+
+    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite, int fila, int columna);
 
     void mostrar_todos_edificios();
 

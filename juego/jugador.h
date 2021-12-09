@@ -2,9 +2,8 @@
 #define JUGADOR_H
 
 #include <string>
-#include "vector.h"
-#include "material.h"
-#include ".\edificios\edificio.h"
+#include "..\registro_edificios\edificio.h"
+#include "..\inventario\inventario.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
 const int EDAD_PIEDRA = 2;
@@ -83,7 +82,7 @@ class Jugador {
     //Cargar resgistro edificios
     //PRE:-
     //POST: Lee el archivo de edificios y va cargandolos en el registro
-    void agregar_edificio_al_registro_(Edificio* edificio);
+    void agregar_edificio_al_registro(Edificio* edificio);
 
     //Verificar objetivos
     //PRE:
@@ -105,21 +104,36 @@ class Jugador {
     //POSR: Devuelve true si se quedo sin energia, false en caso constrario
     bool sin_energia();
 
+    //Iniciar turno
+    //PRE:-
+    //POST: cambia el valor de su turno a true
+    void iniciar_turno();
+
+    //termianr turno
+    //PRE:-
+    //POST: cambia el valor de su turno a false
+    void terminar_truno();
+
+    //es su turno
+    //PRE:-
+    //POST: Devuelve el valor de su_turno
+    bool es_su_turno();
+
+    //Salir del juego
+    //PRE:-
+    //POST: Coloca en false el atributo en_juego
+    void salir_del_juego();
+
     //Quiere salir del juego
-    //PRE:
-    //POST: Devuelve true cuando se la llama
+    //PRE:-
+    //POST: Devuelve el valor del atributo en_juego
     bool quiere_salir_del_juego();
 
-    void Jugador::iniciar_turno();
-
-    void Jugador::terminar_truno();
-
-    bool Jugador::es_su_turno();
-
-    void Jugador::salir_del_juego();
-
-    bool Jugador::quiere_salir_del_juego();
-
+    //Sumar energia
+    //PRE: Recibe un entero con la cantidad de enrgia a sumar
+    //POST: Suma la cantidad de energia recibida por parametro al atributo energia.
+    //Si se supera los 100 pts de energia suma hasta 100
+    void sumar_energia(int energia);
 };
 
 #endif // JUGADOR_H

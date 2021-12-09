@@ -80,10 +80,17 @@ bool Grafo::no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int
 		posicion++;
 	}
 
-	return (num_nodo_adyacente != nodos_a_recorrer[posicion] );
+	return (num_nodo_adyacente != nodos_a_recorrer[posicion]);
 }
 
-void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente) {
+void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, bool es_jugador2) {
+
+	if (matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] == PESO_LAGO) {
+		matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] += es_jugador2 * DIFERENCIA_LAGO;
+	}
+	else if (matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] == PESO_MUELLE) {
+		matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] -= es_jugador2 * DIFERENCIA_MUELLE;
+	}
 
 	int peso_anterior = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen();
 	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
@@ -112,7 +119,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 	}
 }
 
-void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino) {
+void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero*** matriz, bool es_jugador2) {
 
 	int cantidad_edificios = 0;
 	int posicion = 0;
@@ -127,16 +134,24 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino) {
 	int num_nodo_raiz = origen;
 	int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
 
-	while (visitados != (lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios)) {
+	bool atrapado = esta_atrapado(matriz, num_nodo_raiz);
+
+	while (visitados != (lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios) && !atrapado) {
 		for (int i = 0; i < cantidad_nodos_adyacentes; i++) {
 
 			int num_nodo_adyacente = vector_adyacentes[i];
 
-			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)) {
-				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente);
+			int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
+			int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
+		
+			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
+				&& !existe_edificio(fila, columna, matriz)) {
+
+				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, es_jugador2);
 			}
 
-			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)) {
+			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
+				&& !existe_edificio(fila, columna, matriz)) {
 
 				posicion++;
 				nodos_a_recorrer[posicion] = vector_adyacentes[i];
@@ -152,9 +167,39 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino) {
 	}
 }
 
+bool Grafo::esta_atrapado(Casillero*** matriz, int num_nodo) {
+	
+	bool esta_atrapado = true;
+	int i = 0;
+	
+	int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo) -> obtener_vector_adyacentes();
+	int cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo) -> devolver_cantidad_aristas();
+	
+	while (esta_atrapado && i < cantidad_nodos_adyacentes) {
+		int num_nodo_adyacente = vector_adyacentes[i];
+		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
+		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
+		
+		if(!existe_edificio(fila, columna, matriz)) {
+			esta_atrapado = false;
+		}
+
+		i++;
+	}
+	return esta_atrapado;
+}
+
+bool Grafo::existe_edificio(int fila, int columna, Casillero*** matriz) {
+
+	if (matriz[fila - 1][columna - 1] -> obtener_tipo_casillero() == G_TERRENO) {
+		return matriz[fila - 1][columna - 1] -> esta_ocupado();
+	}
+	return false;
+}
+
 void Grafo::reiniciar_vector_vertices() {
 	
-	for(int i = PRIMER_ELEMENTO; i < lista_vertices -> obtener_cantidad_elementos(); i++) {
+	for(int i = PRIMER_ELEMENTO; i <= lista_vertices -> obtener_cantidad_elementos(); i++) {
 		lista_vertices -> devolver_nodo(i) -> asignar_distancia_minima(INFINITO);
 		lista_vertices -> devolver_nodo(i) -> asignar_anterior(0);
 	}

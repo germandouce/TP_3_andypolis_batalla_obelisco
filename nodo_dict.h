@@ -2,7 +2,7 @@
 #define NODO_DICT_H
 
 #include <iostream>
-#include "edificios/edificio.h"
+#include "registro_edificios/edificio.h"
 
 class Nodo_dict {
     

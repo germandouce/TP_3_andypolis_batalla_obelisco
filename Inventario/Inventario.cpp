@@ -1,5 +1,4 @@
 #include "Inventario.h"
-#include <fstream>
 #include <iostream>
 
 using namespace std;
@@ -55,59 +54,11 @@ void Inventario::mostrar_inventario() {
     cout << endl;
 }
 
-
-void Inventario::procesar_archivo_materiales(){
-    fstream archivo_materiales(PATH_MATERIALES, ios::in);
-
-    if(archivo_materiales.is_open()){
-
-        string nombre;
-        string cantidad;
-
-        while(archivo_materiales >> nombre){
-            archivo_materiales >> cantidad;
-
-            if (nombre == "Madera" || nombre == "madera")//verificar como está en archivo
-                cant_madera = cant_madera + stoi(cantidad);
-            else if (nombre == "Piedra" || nombre == "piedra")
-                cant_piedra = cant_piedra + stoi(cantidad);
-            else if (nombre == "Metal" || nombre == "metal")
-                cant_metal = cant_metal + stoi(cantidad);
-            else if (nombre == "Bombas" || nombre == "bombas")
-                cant_bombas = cant_bombas + stoi(cantidad);
-            else if (nombre == "Andycoins" || nombre == "andycoins")
-                cant_andycoins = cant_andycoins + stoi(cantidad);
-
-            cantidad_elementos++;
-        }
-
-        archivo_materiales.close();
-    }
-    else{
-        cout << "\nNo se encuentra archivo materiales.\n" << endl;
-        cout << "Se creará un archivo materiales.txt con todas las cantidades en 0." << endl;
-        crear_archivo_faltante();
-        cantidad_elementos = 5;
-    }
-}
-
-void Inventario::crear_archivo_faltante(){
-    ofstream file;
-    file.open("C:\\Users\\FacuNano\\Desktop\\Inventario\\materiales.txt");
-    file << "Madera 0" << endl;
-    file << "Piedra 0" << endl;
-    file << "Metal 0" << endl;
-    file << "Andycoins 0" << endl;
-    file << "Bombas 0" << endl;
-    file.close();
-}
-
 void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cantidad_sumar_o_restar) {
-    //verificar formato de nombres en archivo
     int cantidad_actualizada;
     if (nombre_elemento == "Madera" || nombre_elemento == "madera"){
         if (cantidad_sumar_o_restar < 0 &&  cant_madera < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar << " madera. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << endl;
         }
         else{
             cantidad_actualizada = cant_madera + cantidad_sumar_o_restar;
@@ -117,7 +68,7 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
 
     else if (nombre_elemento == "Piedra" || nombre_elemento == "piedra"){
         if (cantidad_sumar_o_restar < 0 &&  cant_piedra < cantidad_sumar_o_restar *(-1) ){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar << " piedra. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
         }
         else {
             cantidad_actualizada = cant_piedra + cantidad_sumar_o_restar;
@@ -127,7 +78,7 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
 
     else if (nombre_elemento == "Metal" || nombre_elemento == "metal"){
         if (cantidad_sumar_o_restar < 0  && cant_metal < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar << " metal. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
         }
         else {
             cantidad_actualizada = cant_metal + cantidad_sumar_o_restar;
@@ -137,7 +88,7 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
 
     else if (nombre_elemento == "Bombas" || nombre_elemento == "bombas"){
         if (cantidad_sumar_o_restar < 0  && cant_bombas < cantidad_sumar_o_restar*(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar << " bombas. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
         }
         else {
             cantidad_actualizada = cant_bombas + cantidad_sumar_o_restar;
@@ -147,7 +98,7 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
 
     else if (nombre_elemento == "Andycoins" || nombre_elemento == "andycoins"){
         if (cantidad_sumar_o_restar < 0  && cant_andycoins < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar << " andycoins. Las cantidades no pueden estar en negativo." << endl;
+            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
         }
         else {
             cantidad_actualizada = cant_andycoins + cantidad_sumar_o_restar;
@@ -160,5 +111,12 @@ void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cant
     }
 
     cout<< endl;
+}
+
+void Inventario::actualizar_largo_de_inventario(){
+    cantidad_elementos = cantidad_elementos+1;
+}
+
+Inventario::~Inventario(){
 }
 
