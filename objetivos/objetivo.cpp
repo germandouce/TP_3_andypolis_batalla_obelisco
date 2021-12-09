@@ -4,7 +4,7 @@ Objetivo::Objetivo(){
     this -> nombre_objetivo = "";
     this -> descripcion = "";
     this -> identificador = COMPRAR_ANDYPOLIS;
-    this -> requisito = REQUISITO_COMPRAR_ANDYPOLIS;
+    // this -> requisito = REQUISITO_COMPRAR_ANDYPOLIS;
 }
 
 Objetivo::~Objetivo(){

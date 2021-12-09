@@ -3,17 +3,17 @@
 Juego::Juego(){
     this -> mapa = new Mapa();
     //this -> diccionario_edificios = 0;
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
-    this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
+    // this -> objetivos[0] = "1";
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){

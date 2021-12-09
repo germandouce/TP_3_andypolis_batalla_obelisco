@@ -2,7 +2,7 @@
 #define JUGADOR_H
 
 #include <string>
-#include "..\registro_edificios\edificio.h"
+#include "..\registro_edificios\registro_edificios.h"
 #include "..\inventario\inventario.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
@@ -27,7 +27,8 @@ class Jugador {
     // Vector<Material>* inventario;
     //Vector<Objetivo>* objetivos;
     int objetivos[3];
-    // Vector<Edificio>* edificios;
+    //Vector<Edificio>* edificios;
+    Registro_edificios * registro_edificios;
     int objetivos_secundarios_cumplidos;
     int energia;
     int andycoins_acumulados;
@@ -134,6 +135,16 @@ class Jugador {
     //POST: Suma la cantidad de energia recibida por parametro al atributo energia.
     //Si se supera los 100 pts de energia suma hasta 100
     void sumar_energia(int energia);
+
+    //PRE: Recibe un entero con la cantidad de enrgia a sumar
+    //POST: 
+    void esta_obelisco_construido();
+    
+    //Devolver resgitro edificios
+    //PRE:-
+    //POST:Devuelve un puntero al registro de edificios del jugador
+    Registro_edificios* devolver_resgitro_edificios();
+    
 };
 
 #endif // JUGADOR_H
