@@ -1,6 +1,5 @@
-#include ".\idea_menu\menu_nueva_partida.h"
-#include ".\idea_menu\menu.h"
-#include ".\juego\juego.h"
+#include ".\menus\menu_nueva_partida.h"
+#include ".\menus\menu_principal.h"
 
 int main() {
     
@@ -44,15 +43,25 @@ int main() {
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
         
         bool alguien_gano = false;
-        bool sin_energia = false;
         bool quiere_salir = false;
         bool quiere_terminar_turno = false;
+        bool sin_energia = false;        
         
         if (nueva_partida ){
             int ingreso;
-            menu_nueva_partida();
-            cout<<"Desea ser jugador 1 o 2 ? (ingrese 1 o 2)"<<endl;
+            int opcion_elegida;
+            //proba de nuevo me olvide que el 
+            presentar_menu_np();
+            cin >> opcion_elegida;
+            while (!opcion_valida_np(opcion_elegida)){
+                cout<<"Opcion no valida. Eliga nuevamente." <<endl;
+                cin>>opcion_elegida;}
+                
+            procesar_opcion_np(opcion_elegida);
+            
+            cout<<"Desea ser jugador 1 o 2 ? (ingrese 1 o 2): ";
             cin >> ingreso;
+            cout<<endl;
             jug_1 -> pedir_coordenadas();
             jug_2 -> pedir_coordenadas();
 
@@ -60,34 +69,52 @@ int main() {
             juego -> cargar_ubicaciones(archivo, jug_1, jug_2);
         }
 
+        cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
+
         Jugador* jug_turno;
         Jugador* jug_secundario;        
 
-        jug_turno = jug_1;
-        //jug_secundario = jug_2;
+        jug_turno = jug_2;
+        jug_secundario = jug_1;
+
         while (!alguien_gano && !quiere_salir){
+            
+            bool alguien_gano = false;
+            bool sin_energia = false;
+            bool quiere_salir = false;
+            bool quiere_terminar_turno = false;
         
-            if ( !jug_turno->es_su_turno() ){ // turnos impares puese si el resto es 0 == false
+            if ( jug_1->es_su_turno() ){ // turnos impares puese si el resto es 0 == false
                 jug_turno = jug_1;
                 jug_secundario = jug_2;
             }
             else{ //turnos pares
                 jug_turno = jug_2;
                 jug_secundario = jug_1;
+
             } 
-            sin_energia = false;
+            //sin_energia = false;
             cout <<"\nTURNO DE JUGADOR "<< jug_turno-> devolver_numero_jugador() <<endl;
-            cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
+            //cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
+            
             while( !alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir ){
-                cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
-                //menu_principal(Jugador* jug_turno, Jugador *jug_secundario);
-                menu_principal(jug_turno, jug_secundario);
-                sin_energia = jug_turno -> obtener_energia();
+                //cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
+                
+                int opcion;
+                presentar_menu();
+                cin >> opcion;
+                while (!opcion_valida(opcion)){
+                    cout<<"Opcion no valida. Eliga nuevamente." <<endl;
+                    cin>>opcion;} // ahi estan los 2 hechos
+                procesar_opcion(opcion ,juego, jug_turno, jug_secundario);
+                
+                sin_energia = jug_turno ->esta_sin_energia();
                 alguien_gano = jug_turno ->gano();
                 quiere_salir = jug_turno -> quiere_salir_del_juego();
-                quiere_terminar_turno = jug_turno -> es_su_turno();
+                quiere_terminar_turno = ! ( jug_turno -> es_su_turno() );
             }
-        }
+        } 
+        cout<< "Has ganado "<< jug_turno -> devolver_numero_jugador() <<endl;
     }else{
         cout<<"No se pudieron abrir uno o varios archivos ";
     

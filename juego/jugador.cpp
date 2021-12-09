@@ -25,12 +25,13 @@ Jugador::Jugador(){
 
 void Jugador::pedir_coordenadas(){
     
-    cout<<"¡Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
-    <<"Por favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
-    cout<<"Ingrese la fila:"<<endl;
+    cout<<"Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
+    <<"\nPor favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
+    cout<<"Ingrese la fila: ";
     cin >>fila;
-    cout<<"Ingrese la columna:"<<endl;
+    cout<<"Ingrese la columna: ";
     cin >>columna;
+    cout<<endl;
 }
 
 void Jugador::asignar_coordenadas(int fila, int columna){
@@ -145,7 +146,7 @@ bool Jugador::gano(){
     return gano;
 }
 
-bool Jugador::sin_energia(){
+bool Jugador::esta_sin_energia(){
     return (energia == 0);
 }
 

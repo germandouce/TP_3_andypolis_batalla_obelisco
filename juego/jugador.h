@@ -103,7 +103,7 @@ class Jugador {
     //Sin energia
     //PRE:-
     //POSR: Devuelve true si se quedo sin energia, false en caso constrario
-    bool sin_energia();
+    bool esta_sin_energia();
 
     //Iniciar turno
     //PRE:-
