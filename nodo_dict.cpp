@@ -2,18 +2,18 @@
 
 Nodo_dict::Nodo_dict(Edificio* edificio){
     this -> edificio = edificio;
-    this -> id = edificio -> obtener_diminutivo()[0];
+    this -> clave = edificio -> obtener_nombre();
     this -> izquierdo = nullptr;
     this -> derecho = nullptr;
     this -> padre = nullptr;
 }
 
 Edificio* Nodo_dict::devolver_edificio() {
-    return (this -> edificio);
+    return edificio;
 }
 
-int Nodo_dict::devolver_id() {
-    return (this -> id);
+string Nodo_dict::devolver_clave() {
+    return clave;
 }
 
 void Nodo_dict::colocar_edificio(Edificio* edificio) {
@@ -43,27 +43,27 @@ void Nodo_dict::coloca_nodo_padre(Nodo_dict* padre) {
 }
 
 Nodo_dict* Nodo_dict::devolver_nodo_derecho() {
-    return (this -> derecho);
+    return derecho;
 }
 
 Nodo_dict* Nodo_dict::devolver_nodo_izquierdo() {
-    return (this -> izquierdo);
+    return izquierdo;
 }
 
 Nodo_dict* Nodo_dict::devolver_nodo_padre() {
-    return (this -> padre);
+    return padre;
 }
 
 bool Nodo_dict::es_hoja() {
-    return (this -> devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo() == nullptr);
+    return devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo() == nullptr;
 }
 
 bool Nodo_dict::hijo_derecho_unico() {
-    return (this -> devolver_nodo_izquierdo() == nullptr && this -> devolver_nodo_derecho() != nullptr);
+    return devolver_nodo_izquierdo() == nullptr && devolver_nodo_derecho() != nullptr;
 }
 
 bool Nodo_dict::hijo_izquierdo_unico() {
-    return (this -> devolver_nodo_derecho() == nullptr && this -> devolver_nodo_izquierdo() != nullptr);
+    return devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo() != nullptr;
 }
 
 Nodo_dict::~Nodo_dict() {}
