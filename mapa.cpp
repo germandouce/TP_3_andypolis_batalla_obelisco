@@ -351,7 +351,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	return puede_llover_mas;
 }
 
-void Mapa::moverse() {
+void Mapa::moverse(bool es_jugador2) {
 	
 	int fila_origen;
 	int columna_origen;
@@ -368,12 +368,22 @@ void Mapa::moverse() {
 	origen = fila_origen * filas + columna_origen + 1;
 	destino = fila_destino * filas + columna_destino + 1;
 
-	grafo -> calcular_camino_minimo_dijsktra(origen, destino);
+	grafo -> calcular_camino_minimo_dijsktra(origen, destino, matriz, es_jugador2);
 	
 	Lista* lista_vertices = grafo -> devolver_lista_vertices();
+	int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
-	imprimir_camino_recorrido(lista_vertices, origen, destino);
+	if (distancia != INFINITO) {
+		imprimir_camino_recorrido(lista_vertices, origen, destino);
+		cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
+		cout << endl;
 
+	}
+	else {
+		cout << ERROR_COLOR << "El Jugador no puede llegar a la coordenada elegida." << END_COLOR << endl;
+		cout << endl;
+	}
+	
 	grafo -> reiniciar_vector_vertices();
 }
 

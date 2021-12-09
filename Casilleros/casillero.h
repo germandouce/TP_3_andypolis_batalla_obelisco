@@ -18,6 +18,9 @@ const string CAMINO = "C";
 const string MUELLE = "M";
 const string BETUN = "B";
 
+const string JUGADOR1 = "J";
+const string JUGADOR2 = "U";
+
 class Casillero {
 	
 	protected:
@@ -27,6 +30,8 @@ class Casillero {
 	string tipo_casillero;
 	bool ocupado;
 	bool iluminado;
+	bool jugador1;
+	bool jugador2;
 
 	public:
 

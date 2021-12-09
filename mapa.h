@@ -136,7 +136,7 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse();
+	void moverse(bool es_jugador2);
 
 	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino);
 

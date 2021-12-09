@@ -23,13 +23,21 @@ void Casillero_transitable::mostrar() {
 
 void Casillero_transitable::imprimir_casillero() {
 
-    string material_contenido = "   ";
+    string contenido = "   ";
 
     if (material != nullptr) {
-        material_contenido = " " + material -> obtener_diminutivo() + " ";
+        contenido = " " + material -> obtener_diminutivo() + " ";
     }
 
-    cout << obtener_color() << NEGRO << material_contenido << END_COLOR;
+    if (jugador1) {
+        contenido = " " + JUGADOR1 + " ";
+    }
+
+    if (jugador2) {
+        contenido = " " + JUGADOR2 + " ";
+    }
+    
+    cout << obtener_color() << NEGRO << contenido << END_COLOR;
 }
 
 int Casillero_transitable::obtener_cantidad_contenida() {

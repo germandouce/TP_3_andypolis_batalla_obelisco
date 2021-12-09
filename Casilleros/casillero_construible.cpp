@@ -23,13 +23,21 @@ void Casillero_construible::mostrar() {
 
 void Casillero_construible::imprimir_casillero() {
 
-    string edificio_contenido = "   ";
+    string contenido = "   ";
 
     if (edificio != nullptr) {
-        edificio_contenido = " " + edificio -> obtener_diminutivo() + " ";
+        contenido = " " + edificio -> obtener_diminutivo() + " ";
+    }
+
+    if (jugador1) {
+        contenido = " " + JUGADOR1 + " ";
+    }
+
+    if (jugador2) {
+        contenido = " " + JUGADOR2 + " ";
     }
     
-    cout << obtener_color() << NEGRO << edificio_contenido << END_COLOR;
+    cout << obtener_color() << NEGRO << contenido << END_COLOR;
 }
 
 int Casillero_construible::obtener_cantidad_contenida() {

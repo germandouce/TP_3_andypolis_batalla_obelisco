@@ -22,7 +22,18 @@ int Casillero_inaccesible::obtener_cantidad_contenida() {
 }
 
 string Casillero_inaccesible::obtener_nombre_contenido() {
-    return "";
+    
+    string contenido = "  ";
+
+    if (jugador1) {
+        contenido = " " + JUGADOR1 + " ";
+    }
+
+    if (jugador2) {
+        contenido = " " + JUGADOR2 + " ";
+    }
+    
+    return contenido;
 }
 
 string Casillero_inaccesible::obtener_color() {
