@@ -4,6 +4,16 @@
 #include <ctime>
 #include "..\mapa.h"
 #include "jugador.h"
+#include "..\objetivos\armado.h"
+#include "..\objetivos\bombardero.h"
+#include "..\objetivos\cansado.h"
+#include "..\objetivos\comprar_andypolis.h"
+#include "..\objetivos\constructor.h"
+#include "..\objetivos\edad_piedra.h"
+#include "..\objetivos\energetico.h"
+#include "..\objetivos\extremista.h"
+#include "..\objetivos\letrado.h"
+#include "..\objetivos\minero.h"
 
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
@@ -16,7 +26,7 @@ class Juego{
 private:
     Mapa * mapa;
     //Diccionario * diccionario_edificios;
-    string objetivos[10];
+    Objetivo *objetivo;
 
 public:
     

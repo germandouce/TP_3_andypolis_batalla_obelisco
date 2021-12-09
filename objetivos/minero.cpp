@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "minero.h"
 
 Minero::Minero(): Objetivo() {
     this -> nombre_objetivo = "Minero";

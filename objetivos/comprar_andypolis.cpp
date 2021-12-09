@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "comprar_andypolis.h"
 
 Comprar_andypolis::Comprar_andypolis() : Objetivo() {
     this -> nombre_objetivo = "Comprar Andypolis";

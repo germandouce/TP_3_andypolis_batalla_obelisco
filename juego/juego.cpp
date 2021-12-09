@@ -2,18 +2,7 @@
 
 Juego::Juego(){
     this -> mapa = new Mapa();
-    //this -> diccionario_edificios = 0;
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
-    // this -> objetivos[0] = "1";
+    this -> objetivo =0;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
@@ -228,7 +217,7 @@ void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
 
 void Juego::cargar_vector_de_objetivos(){
     for (int i = 0; i <10; i++){
-        this -> objetivos[i] = 1;
+        //this -> objetivos[i] = 1;
     };
 }
 

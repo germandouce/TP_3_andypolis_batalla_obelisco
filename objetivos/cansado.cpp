@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "cansado.h"
 
 Cansado::Cansado() : Objetivo() {
     this -> nombre_objetivo = "Cansado";

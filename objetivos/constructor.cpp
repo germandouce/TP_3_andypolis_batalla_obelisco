@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "constructor.h"
 
 Constructor::Constructor(): Objetivo() {
     this -> nombre_objetivo = "Extremista";
