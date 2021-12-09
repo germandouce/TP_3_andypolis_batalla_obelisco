@@ -29,11 +29,11 @@ void Casillero_transitable::imprimir_casillero() {
         contenido = " " + material -> obtener_diminutivo() + " ";
     }
 
-    if (jugador1) {
+    if (hay_jugador1()) {
         contenido = " " + JUGADOR1 + " ";
     }
 
-    if (jugador2) {
+    if (hay_jugador2()) {
         contenido = " " + JUGADOR2 + " ";
     }
     

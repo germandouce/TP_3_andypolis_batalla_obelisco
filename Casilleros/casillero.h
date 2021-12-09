@@ -64,6 +64,18 @@ class Casillero {
 	//post: Actualiza el valor de 'esta_vacio'.
 	void desocupar_casillero();
 
+	bool hay_jugador1();
+
+	void ocupar_jugador1();
+
+	void desocupar_jugador1();
+
+	bool hay_jugador2();
+
+	void ocupar_jugador2();
+
+	void desocupar_jugador2();
+
 	void iluminar_casillero();
 
 	void desiluminar_casillero();
