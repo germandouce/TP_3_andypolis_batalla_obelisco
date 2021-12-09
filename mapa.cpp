@@ -351,7 +351,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	return puede_llover_mas;
 }
 
-void Mapa::moverse() {
+void Mapa::moverse(bool es_jugador2) {
 	
 	int fila_origen;
 	int columna_origen;
@@ -368,16 +368,27 @@ void Mapa::moverse() {
 	origen = fila_origen * filas + columna_origen + 1;
 	destino = fila_destino * filas + columna_destino + 1;
 
-	grafo -> calcular_camino_minimo_dijsktra(origen, destino);
+	grafo -> calcular_camino_minimo_dijsktra(origen, destino, matriz, es_jugador2);
 	
 	Lista* lista_vertices = grafo -> devolver_lista_vertices();
+	int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
-	imprimir_camino_recorrido(lista_vertices, origen, destino);
+	if (distancia != INFINITO) {
+		imprimir_camino_recorrido(lista_vertices, origen, destino, es_jugador2);
+		ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+		cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
+		cout << endl;
 
+	}
+	else {
+		cout << ERROR_COLOR << "El Jugador no puede llegar a la coordenada elegida." << END_COLOR << endl;
+		cout << endl;
+	}
+	
 	grafo -> reiniciar_vector_vertices();
 }
 
-void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino) {
+void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino, bool es_jugador2) {
 
 	int fila;
 	int columna;
@@ -389,12 +400,14 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int dest
 
 	if (destino != origen) {
 		int destino = nodo -> obtener_anterior();
-		imprimir_camino_recorrido(lista_vertices, origen, destino);
+		imprimir_camino_recorrido(lista_vertices, origen, destino, es_jugador2);
 	}
 	else {
 		cout << endl;
 		cout << SUCESS_COLOR << "El Jugador esta pensando cual es camino mas conveniente..." << END_COLOR << endl;
 	}
+
+	ocupar_jugador(fila, columna, es_jugador2);
 
 	print_lento(ESPERA);
 
@@ -402,6 +415,8 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, int origen, int dest
 	system(CLR_SCREEN);
 	imprimir_mapa();
 	matriz[fila][columna] -> desiluminar_casillero();
+
+	desocupar_jugador(fila, columna, es_jugador2);
 }
 
 void Mapa::print_lento(unsigned int tiempo) {
@@ -410,6 +425,26 @@ void Mapa::print_lento(unsigned int tiempo) {
     #else
         usleep(tiempo);
     #endif
+}
+
+void Mapa::ocupar_jugador(int fila, int columna, bool es_jugador2) {
+
+	if (es_jugador2) {
+		matriz[fila][columna] -> ocupar_jugador2();
+	}
+	else {
+		matriz[fila][columna] -> ocupar_jugador1();
+	}
+}
+
+void Mapa::desocupar_jugador(int fila, int columna, bool es_jugador2) {
+
+	if (es_jugador2) {
+		matriz[fila][columna] -> desocupar_jugador2();
+	}
+	else {
+		matriz[fila][columna] -> desocupar_jugador1();
+	}
 }
 
 void Mapa::borrar_casillero(Casillero* casillero) {

@@ -136,11 +136,15 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse();
+	void moverse(bool es_jugador2);
 
-	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino);
+	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino, bool es_jugador2);
 
 	void print_lento(unsigned int tiempo);
+
+	void ocupar_jugador(int fila, int columna, bool es_jugador2);
+
+	void desocupar_jugador(int fila, int columna, bool es_jugador2);
 
 	//pre: -
     //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.

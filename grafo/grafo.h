@@ -2,6 +2,7 @@
 #define GRAFO_H
 
 #include "lista.h"
+#include "../casilleros/casillero.h"
 
 const int PRIMER_ELEMENTO = 1;
 
@@ -13,9 +14,11 @@ const string G_TERRENO = "T";
 
 const int PESO_CAMINO = 4;
 const int PESO_BETUN = 0;
-const int PESO_LAGO = 2; // el peso del jugador 2 es 5
-const int PESO_MUELLE = 5; //el peso del jugador 2 es 2
+const int PESO_LAGO = 2; 
+const int PESO_MUELLE = 5; 
 const int PESO_TERRENO = 25;
+const int DIFERENCIA_LAGO = 3;
+const int DIFERENCIA_MUELLE = 3;
 
 const int DISTANCIA_INICIAL_ORIGEN = 0;
 
@@ -36,7 +39,7 @@ class Grafo {
 
     Lista* crear_lista_a_recorrer(int origen);
 
-    void recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente);
+    void recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, bool es_jugador2);
 
     bool no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados);
 
@@ -52,7 +55,11 @@ class Grafo {
 
     void agregar_camino(int origen, int destino, int peso);
 
-    void calcular_camino_minimo_dijsktra(int origen, int destino);
+    void calcular_camino_minimo_dijsktra(int origen, int destino, Casillero*** matriz, bool es_jugador2);
+
+    bool existe_edificio(int fila, int columna, Casillero*** matriz);
+
+    bool esta_atrapado(Casillero*** matriz, int num_nodo);
 
     void reiniciar_vector_vertices();
         
