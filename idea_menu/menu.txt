@@ -21,7 +21,7 @@ void gotoxy(int x, int y)
 using namespace std;
 
 void mostrar_bienvenida() {
-    system("cls");
+    //system("cls");
     cout << "Bienvenido al sistema de construccion de edificios de Andypolis." << endl;
     cout << "El siguiente menu lo guiara a traves de las operaciones disponibles." << endl;
     cout << "Debe ingresar los numeros correspondientes a las operaciones requeridas." << endl;
@@ -47,25 +47,25 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
 
         switch (opcion_elegida) {
             case 1:
-                system("cls");
+                //system("cls");
                 cout << "hola 1" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //verificar_construccion(mapa, vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
                 break;
             case 2:
-                system("cls");
+                //system("cls");
                 cout << "hola 2" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //mostrar_edificios_construidos(vector_edificios, vector_ubicaciones);
                 break;
             case 3:
-                system("cls");
+               // system("cls");
                 cout << "hola 3" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //verificar_demolicion(mapa, vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
                 break;
             case 4:
-                system("cls");
+               // system("cls");
                 cout << "hola 4" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //ATTACAR
@@ -78,7 +78,7 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
                 //Volver al menú.
                 break;
             case 5:
-                system("cls");
+                //system("cls");
                 cout << "hola 5" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //REPARAR
@@ -91,7 +91,7 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
                 //Volver al menú.
                 break;
             case 6:
-                system("cls");
+              //  system("cls");
                 cout << "hola 6" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //COMPRAR BOMBAS
@@ -103,19 +103,19 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
                 //De lo contrario volver al menu (sin realizar compra).
                 break;
             case 7:
-                system("cls");
+              //  system("cls");
                 cout << "hola 7" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //mapa -> consultar_casillero();
                 break;
             case 8:
-                system("cls");
+               // system("cls");
                 cout << "hola 8" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //mostrar_inventario(vector_materiales);
                 break;
             case 9:
-                system("cls");
+               // system("cls");
                 cout << "hola 9" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
 
@@ -124,13 +124,13 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
                 //al menú (así se le da el tiempo que necesite para ver su inventario).
                 break;
             case 10:
-                system("cls");
+               // system("cls");
                 cout << "hola 10" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //recolectar_recursos_producidos(vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
                 break;
             case 11:
-                system("cls");
+               // system("cls");
                 cout << "hola 11" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //MOVERSE
@@ -144,31 +144,33 @@ void menu_principal(Jugador* jug_turno, Jugador* jug_secundario) {
                 //Volver al menú.
                 break;
             case 12:
-                system("cls");
+               // system("cls");
                 cout << "hola 12" << endl;
                 cout << "ENTER PARA VOLVER A MENU" << endl;
                 //FINALIZAR TURNO
                 //Verifica energía usuario (si E == 0 finaliza turno y avisa al usuario).
                 //Consulta antes de realizar acción.
                 //Se guarda E no usada. Se le agregan 50 de Energia mientras >100 E. Si E > 100 se pierde la E sobrante.
-                jug_turno->
+                jug_turno->terminar_truno();
+                repite = false;
                 break;
             case 13:
-                system("cls");
+              //  system("cls");
                 //guardar_materiales(vector_materiales);
                 //guardar_ubicaciones(vector_ubicaciones);
                 //mapa -> borrar();
                 //delete mapa;
+                jug_turno->salir_del_juego();
                 cout << "-Se han guardado exitosamente los cambios efectuados!" << endl;
                 cout << "DOBLE ENTER PARA SALIR DEL PROGRAMA" << endl;
                 repite = false;
                 break;
         }
-        cin.get();
+        // cin.get();
 
     } while(repite);
 
-    cin.get();
+    // cin.get();
 }
 
 int menu(const char *titulo, const char *opciones[], int numero_opciones, const char *sub_titulo){
@@ -177,7 +179,7 @@ int menu(const char *titulo, const char *opciones[], int numero_opciones, const 
         bool repite = true;
 
         do {
-            system("cls");
+            //system("cls");
 
             gotoxy(5, 5 + opcion_elegida); cout << "-->";
 

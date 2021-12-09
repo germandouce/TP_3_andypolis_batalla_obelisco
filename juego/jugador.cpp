@@ -7,7 +7,7 @@ Jugador::Jugador(){
 
     // this -> Vector<Material>* inventario;
     // this -> Vector<Objetivo>* objetivos;
-    // this -> Vector<Edificio>* edificios;
+    //this -> Vector<Edificio>* edificios;
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
@@ -25,12 +25,13 @@ Jugador::Jugador(){
 
 void Jugador::pedir_coordenadas(){
     
-    cout<<"¡Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
-    <<"Por favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
-    cout<<"Ingrese la fila:"<<endl;
+    cout<<"Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
+    <<"\nPor favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
+    cout<<"Ingrese la fila: ";
     cin >>fila;
-    cout<<"Ingrese la columna:"<<endl;
+    cout<<"Ingrese la columna: ";
     cin >>columna;
+    cout<<endl;
 }
 
 void Jugador::asignar_coordenadas(int fila, int columna){
@@ -71,7 +72,6 @@ int Jugador::obtener_energia(){
 void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
 
     for (int i = 0; i < 3; i++) {
-        //const int objetivo; COMO ES ESTO NICO??? AYUDAAAAAA 
         switch (objetivo) {
             case COMPRAR_ANDYPOLIS:
                 if (andycoins_acumulados = 100000){
@@ -146,7 +146,7 @@ bool Jugador::gano(){
     return gano;
 }
 
-bool Jugador::sin_energia(){
+bool Jugador::esta_sin_energia(){
     return (energia == 0);
 }
 
@@ -172,4 +172,18 @@ bool Jugador::quiere_salir_del_juego(){
 
 void Jugador:: sumar_energia(int energia){
     this->energia += energia;
+}
+
+void Jugador::esta_obelisco_construido(){
+    if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() == 1){
+       obelisco_construido = true;
+    }  
+}
+
+Registro_edificios* Jugador::devolver_resgitro_edificios(){
+    return registro_edificios;
+}
+
+Inventario* Jugador::devolver_inventario(){
+    return inventario;
 }
