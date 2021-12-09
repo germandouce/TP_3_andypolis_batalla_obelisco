@@ -85,15 +85,22 @@ bool Grafo::no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int
 
 void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, bool es_jugador2) {
 
-	if (matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] == PESO_LAGO) {
-		matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] += es_jugador2 * DIFERENCIA_LAGO;
+	int costo_terreno = matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
+
+	int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila() - 1;
+	int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna() - 1;
+
+	string tipo_terreno = matriz_terrenos[fila][columna];
+
+	if (costo_terreno == PESO_LAGO && tipo_terreno == G_LAGO) {
+		costo_terreno += es_jugador2 * DIFERENCIA_LAGO;
 	}
-	else if (matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] == PESO_MUELLE) {
-		matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1] -= es_jugador2 * DIFERENCIA_MUELLE;
+	else if (costo_terreno == PESO_MUELLE && tipo_terreno == G_MUELLE) {
+		costo_terreno -= es_jugador2 * DIFERENCIA_MUELLE;
 	}
 
 	int peso_anterior = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen();
-	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
+	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + costo_terreno;
 
 	if (peso_nodo < peso_anterior) {
 		

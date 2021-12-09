@@ -7,11 +7,6 @@
 #include "../registro_edificios/edificio.h"
 #include "../materiales/material.h"
 
-
-const string CONSTRUIBLE = "construible";
-const string TRANSITABLE = "transitable";
-const string INACCESIBLE = "inaccesible";
-
 const string TERRENO = "T";
 const string LAGO = "L";
 const string CAMINO = "C";
@@ -87,10 +82,14 @@ class Casillero {
 	//		Sino, imprime un mensaje.
 	virtual void construir_edificio(Edificio* edificio) = 0;
 
+	virtual Edificio* obtener_edificio() = 0;
+
 	//pre: -
 	//post: Coloca el Material en el Casillero si este es transitable.
 	//		Sino, imprime un mensaje.
 	virtual void colocar_material(Material* material) = 0;
+
+	virtual Material* obtener_material() = 0;
 
 	//pre: -
 	//post: Muestra información sobre el Casillero y sobre lo que contiene.

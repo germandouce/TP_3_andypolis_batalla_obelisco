@@ -10,6 +10,14 @@ void Casillero_transitable::colocar_material(Material* material) {
     this -> material = material;
 }
 
+Edificio* Casillero_transitable::obtener_edificio() {
+    return nullptr;
+}
+
+Material* Casillero_transitable::obtener_material() {
+    return material;
+}
+
 void Casillero_transitable::mostrar() {
     if (!ocupado) {
         cout << SUCESS_COLOR << "-Soy un casillero transitable y me encuentro vacio." << END_COLOR << endl;

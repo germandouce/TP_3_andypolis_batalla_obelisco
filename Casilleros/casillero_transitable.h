@@ -22,6 +22,10 @@ class Casillero_transitable: public Casillero {
 
 	void colocar_material(Material* material);
 	
+	Edificio* obtener_edificio();
+
+	Material* obtener_material();
+
 	void mostrar();
 
 	void imprimir_casillero();

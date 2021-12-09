@@ -17,7 +17,7 @@ void mostrar_menu();
 
 //pre: -
 //post: Procesa la opción elegida y realiza la operación requerida.
-void procesar_opcion(int opcion_elegida, Mapa* mapa);
+void procesar_opcion(int opcion_elegida, Mapa* mapa, Inventario * inventario);
 
 //pre: -
 //post: Devuelve True o False dependiendo si la opción elegida es válida o no.

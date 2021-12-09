@@ -10,6 +10,14 @@ void Casillero_construible::construir_edificio(Edificio* edificio) {
 
 void Casillero_construible::colocar_material(Material* material) {}
 
+Edificio* Casillero_construible::obtener_edificio() {
+    return edificio;
+}
+
+Material* Casillero_construible::obtener_material() {
+    return nullptr;
+}
+
 void Casillero_construible::mostrar() {
     if (!ocupado) {
         cout << SUCESS_COLOR << "-Soy un casillero construible y me encuentro vacio." << END_COLOR << endl;

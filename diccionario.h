@@ -30,6 +30,9 @@ class Diccionario {
     //Constructor de dicionario
     Diccionario();
 
+    //Destructor de diccionario
+    ~Diccionario();
+
     // PRE: Recibe un edificio
     // POST: Inserta un edificio en el diccionario
     void agregar_edificio(Edificio* edificio);
@@ -66,9 +69,6 @@ class Diccionario {
     // PRE: Recibe el nodo
     // POST: Borra los nodos derechos e izquierdos en cuestion
     void borrar_todo(Nodo_dict* nodo);
-
-    //Destructor de diccionario
-    ~Diccionario();
 };
 
 #endif //DICCIONARIO_H

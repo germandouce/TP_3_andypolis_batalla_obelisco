@@ -8,6 +8,7 @@
 #include "system_clear.h"
 
 #include "grafo/grafo.h"
+#include "inventario/inventario.h"
 
 #include "materiales/piedra.h"
 #include "materiales/madera.h"
@@ -91,10 +92,6 @@ class Mapa {
 	~Mapa();
 
 	//pre: -
-    //post: Libera por completo toda la memoria dinámica utilizada por el Mapa y sus Casilleros.
-	void borrar();
-
-	//pre: -
     //post: Devuelve la cantidad de filas del Mapa.
 	int obtener_filas();
 
@@ -136,9 +133,11 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse(bool es_jugador2);
+	void moverse(Inventario* inventario, bool es_jugador2);
 
-	void imprimir_camino_recorrido(Lista* lista_vertices, int origen, int destino, bool es_jugador2);
+	bool es_movimiento_valido(int fila, int columna);
+
+	void imprimir_camino_recorrido(Lista* lista_vertices, Inventario* inventario, int origen, int destino, bool es_jugador2);
 
 	void print_lento(unsigned int tiempo);
 
@@ -146,9 +145,7 @@ class Mapa {
 
 	void desocupar_jugador(int fila, int columna, bool es_jugador2);
 
-	//pre: -
-    //post: Libera la memoria dinámica utilizada para almacenar al Casillero ingresado.
-	void borrar_casillero(Casillero* casillero);
+	void recolectar_recursos(int fila, int columna, Inventario* inventario);
 
 	//pre: -
     //post: Pide al usuario que ingrese una fila y una columna, y muestra información del Casillero

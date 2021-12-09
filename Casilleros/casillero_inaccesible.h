@@ -17,6 +17,10 @@ class Casillero_inaccesible: public Casillero {
 	void construir_edificio(Edificio* edificio);
 
 	void colocar_material(Material* material);
+
+	Edificio* obtener_edificio();
+
+	Material* obtener_material();
 	
 	void mostrar();
 
