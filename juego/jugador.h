@@ -28,6 +28,7 @@ class Jugador {
     //Vector<Objetivo>* objetivos;
     int objetivos[3];
     //Vector<Edificio>* edificios;
+    Inventario* inventario;
     Registro_edificios * registro_edificios;
     int objetivos_secundarios_cumplidos;
     int energia;
@@ -144,6 +145,11 @@ class Jugador {
     //PRE:-
     //POST:Devuelve un puntero al registro de edificios del jugador
     Registro_edificios* devolver_resgitro_edificios();
+
+    //Devolver inventario
+    //PRE:-
+    //POST:Devuelve un puntero al inventario del jugador
+    Inventario* devolver_inventario();
     
 };
 

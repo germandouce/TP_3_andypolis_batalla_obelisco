@@ -177,10 +177,13 @@ void Jugador:: sumar_energia(int energia){
 void Jugador::esta_obelisco_construido(){
     if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() == 1){
        obelisco_construido = true;
-    }
-    
+    }  
 }
 
 Registro_edificios* Jugador::devolver_resgitro_edificios(){
     return registro_edificios;
+}
+
+Inventario* Jugador::devolver_inventario(){
+    return inventario;
 }
