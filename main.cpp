@@ -78,10 +78,10 @@ int main() {
 
         while (!alguien_gano && !quiere_salir){
             
-            bool alguien_gano = false;
-            bool sin_energia = false;
-            bool quiere_salir = false;
-            bool quiere_terminar_turno = false;
+            alguien_gano = false;
+            quiere_salir = false;
+            quiere_terminar_turno = false;
+            sin_energia = false;
         
             if ( jug_1->es_su_turno() ){ // turnos impares puese si el resto es 0 == false
                 jug_turno = jug_1;
