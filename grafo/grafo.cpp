@@ -84,17 +84,15 @@ void Grafo::recorrer_grafo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visi
 		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
 		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
 		
-		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
-			&& !existe_edificio(fila, columna, mapa)) {
+		if (!existe_edificio(fila, columna, mapa)){
+			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)) {
+				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
+			}
 
-			recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
-		}
-
-		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
-			&& !existe_edificio(fila, columna, mapa)) {
-
-			posicion++;
-			nodos_a_recorrer[posicion] = vector_adyacentes[i];
+			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)){
+				posicion++;
+				nodos_a_recorrer[posicion] = vector_adyacentes[i];
+			}
 		}
 	}
 	visitados++;
