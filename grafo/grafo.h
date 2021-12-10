@@ -28,7 +28,9 @@ class Grafo {
 
     //pre: cantidad de nodos > num_nodo_raiz > 0,cantidad de nodos > num_nodo_adyacente > 0, 1 > es_jugador2 > 0.
     //post: Actualiza los atributos de nodo: anterior(su nodo predecesor) y distancia_origen(representa la mejor distancia desde del origen).
-    void recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero*** mapa, bool es_jugador2);
+    void actualizar_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero*** mapa, bool es_jugador2);
+
+    void recorrer_nodo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visitados,  Casillero*** mapa, bool es_jugador2, int &posicion, int num_nodo_adyacente);
 
     void recorrer_grafo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visitados,  Casillero*** mapa, bool es_jugador2, int &posicion);
     

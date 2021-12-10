@@ -34,7 +34,7 @@ bool Grafo::esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int ca
 	return num_nodo_adyacente == nodos_a_recorrer[posicion];
 }
 
-void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero*** mapa, bool es_jugador2) {
+void Grafo::actualizar_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero*** mapa, bool es_jugador2) {
 
 	int peso = matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
 
@@ -52,6 +52,23 @@ void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero**
 		
 		lista_vertices -> devolver_nodo(num_nodo_adyacente) -> asignar_distancia_minima(peso_nodo);
 		lista_vertices -> devolver_nodo(num_nodo_adyacente) -> asignar_anterior(num_nodo_raiz);
+	}
+}
+
+void Grafo::recorrer_nodo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visitados,  Casillero*** mapa, bool es_jugador2, int &posicion, int num_nodo_adyacente){
+	
+	int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
+	int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
+
+	if (!existe_edificio(fila, columna, mapa)){
+		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)) {
+			actualizar_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
+			}
+
+		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)){
+			posicion++;
+			nodos_a_recorrer[posicion] = num_nodo_adyacente;
+		}
 	}
 }
 
@@ -78,22 +95,8 @@ void Grafo::recorrer_grafo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visi
 	int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
 	
 	for (int i = 0; i < cantidad_nodos_adyacentes; i++) {
-
 		int num_nodo_adyacente = vector_adyacentes[i];
-
-		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
-		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
-		
-		if (!existe_edificio(fila, columna, mapa)){
-			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)) {
-				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
-			}
-
-			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)){
-				posicion++;
-				nodos_a_recorrer[posicion] = vector_adyacentes[i];
-			}
-		}
+		recorrer_nodo(num_nodo_raiz, nodos_a_recorrer, visitados, mapa, es_jugador2, posicion, num_nodo_adyacente);
 	}
 	visitados++;
 	ordenar_vector_distancia_min(nodos_a_recorrer, visitados, posicion);
