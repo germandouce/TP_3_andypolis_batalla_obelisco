@@ -8,5 +8,5 @@ Edad_piedra::Edad_piedra() : Objetivo() {
 }
 
 bool Edad_piedra::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
-    //return (cantidad_piedras_en_inventario == 5000);
+    return true;
 }

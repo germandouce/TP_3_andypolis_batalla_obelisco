@@ -8,5 +8,5 @@ Armado::Armado() : Objetivo() {
 }
 
 bool Armado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
-    //return true;
+    return true;
 }

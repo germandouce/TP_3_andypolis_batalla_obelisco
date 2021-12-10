@@ -8,5 +8,5 @@ Constructor::Constructor(): Objetivo() {
 }
 
 bool Constructor::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
-    // return (traer_resgistro_ == 9999999999999999999);
+    return true;
 }

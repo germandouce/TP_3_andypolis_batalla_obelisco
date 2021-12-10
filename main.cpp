@@ -79,14 +79,14 @@ int main() {
             jug_1 -> pedir_coordenadas();
             jug_2 -> pedir_coordenadas();
 
-            int fila1 = jug_1 -> devolver_fila();
-            int columna1 = jug_1 -> devolver_columna();
+            int fila1 = jug_1 -> devolver_fila() - 1;
+            int columna1 = jug_1 -> devolver_columna() - 1;
 
-            int fila2 = jug_2 -> devolver_fila();
-            int columna2 = jug_2 -> devolver_columna();
+            int fila2 = jug_2 -> devolver_fila() - 1;
+            int columna2 = jug_2 -> devolver_columna() - 1;
              
-            mapa -> obtener_casillero(fila1, columna1) -> ocupar_casillero();
-            mapa -> obtener_casillero(fila2, columna2) -> ocupar_casillero();
+            mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
+            mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
 
         }else{
             juego -> cargar_ubicaciones(archivo);

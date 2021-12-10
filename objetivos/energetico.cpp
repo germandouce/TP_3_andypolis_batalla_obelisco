@@ -8,6 +8,5 @@ Energetico::Energetico(): Objetivo() {
 }
 
 bool Energetico::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
-    //return( energia == 100);
-    // return true
+    return true;
 }
