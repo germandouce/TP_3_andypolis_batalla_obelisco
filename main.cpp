@@ -1,5 +1,6 @@
 #include ".\menus\menu_nueva_partida.h"
 #include ".\menus\menu_principal.h"
+#include<iostream>
 
 using namespace std;
 
@@ -39,12 +40,12 @@ int main() {
         nueva_partida = false;
     }
 
-    /*if (!nueva_partida) {
+    if (!nueva_partida) {
         if (juego -> es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
             juego -> cargar_inventario(archivo);
             inventario_bien_cargado = true;
         }
-    }*/
+    }
     
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
         

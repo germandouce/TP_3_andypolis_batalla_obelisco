@@ -84,27 +84,12 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
 
     while (ubicaciones >> nombre_elemento) {
 
-        
-
-        cout << nombre_elemento << endl;
-
         fila = leer_palabra_compuesta(ubicaciones, nombre_elemento, OPCION_PARENTESIS);
-    
-        cout << fila << endl;
-        
         fila = limpiar_string(fila, POSICION_INICIAL_FILA, TOPE_CADENA_FILA);
 
-        cout << fila << endl;
-
         ubicaciones >> columna;
-        
-        cout << columna << endl;
-
+    
         columna = limpiar_string(columna, POSICION_INICIAL_COLUMNA, TOPE_CADENA_COLUMNA);
-
-        cout << columna << endl;
-
-        cout << nombre_elemento << endl;
 
         if (nombre_elemento == "1") {
             jugador = jugador1;
