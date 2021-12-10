@@ -1,7 +1,7 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
 #include <string>
-#include "Registro_edificios.h"
+#include "../registro_edificios/Registro_edificios.h"
 
 using namespace std;
 
