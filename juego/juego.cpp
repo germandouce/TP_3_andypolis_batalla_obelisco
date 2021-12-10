@@ -448,3 +448,6 @@ void Juego::pedir_columna(int &columna) {
     cin.clear();
     cin.ignore(100, '\n');
 }
+Diccionario* Juego:: devolver_diccionario(){
+    return diccionario;
+}

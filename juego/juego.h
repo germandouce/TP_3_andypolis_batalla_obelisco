@@ -173,6 +173,10 @@ class Juego {
     //POST:
     void pedir_columna(int &columna);
 
+    //PRE:
+    //POST: devuelve diccionario.
+    Diccionario* devolver_diccionario();
+
     //Devolver mapa
     //PRE:
     //POST:

@@ -1,7 +1,7 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
 #include <string>
-#include "juegojugador.h"
+#include "Registro_edificios.h"
 
 using namespace std;
 
@@ -98,15 +98,25 @@ public:
     //POS:  devuelve true si es valida  la cantidad a cambiar de piedra.
     bool cambio_cantidad_piedra_valida( int cantidad_consultada);
 
-    void consultar_porcentaje_material(string nombre_material ,int numero_porcentaje, Diccionario*diccionario, Jugador*jugador,int fila , int columna);
+    //PRE: juego devuelve diccionario
+    //POS: verifica que cuentes con el porcentaje de la cantidad del material consultaod
+    void consultar_porcentaje_material(string nombre_material ,int numero_porcentaje,Registro_edificios*registro_edificios,int fila , int columna);
 
+    //PRE:
+    //POS: devuelve true si el porcentaje consultado es positivo.
     bool porcentaje_concultado_valido(float porcentaje_consultado);
 
-    bool porcentaje_de_metal_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+    //PRE: el porcentaje consultado debe ser valido.
+    //POS: devuelve true si contas con el procentaje de la cantidad de metal requerido.
+    bool porcentaje_de_metal_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
-    bool porcentaje_de_mader_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+    //PRE: el porcentaje consultado debe ser valido.
+    //POS: devuelve true si contas con el procentaje de la cantidad de madera requerida.
+    bool porcentaje_de_madera_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
-    bool porcentaje_de_piedra_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+    //PRE: el porcentaje consultado debe ser valido.
+    //POS: devuelve true si contas con el procentaje de la cantidad de piedra requerida.
+    bool porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
 
 

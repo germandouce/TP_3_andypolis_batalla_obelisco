@@ -1,7 +1,6 @@
 #include "inventario.h"
 #include <iostream>
 
-
 using namespace std;
 
 Inventario::Inventario(){ 
@@ -156,26 +155,25 @@ void Inventario::actualizar_largo_de_inventario(){
     cantidad_elementos = cantidad_elementos+1;
 }
 
-void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje, Diccionario*diccionario, Jugador*jugador,int fila , int columna){
-    string nombre_edificio = jugador->devolver_registro_edificios()->buscar_edificio_en_registro(fila, columna)->obtener_nombre();
+void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje,Registro_edificios*registro_edificios,int fila , int columna){
     float porcentaje_usar = numero_porcentaje/100;
     if (porcentaje_concultado_valido(porcentaje_usar)){
         if (nombre_material == I_MADERA){
-            if (porcentaje_de_madera_existente(nombre_edificio,porcentaje_usar,diccionario))
+            if (porcentaje_de_madera_existente(porcentaje_usar,registro_edificios,fila,columna))
                 cout << "Contas con la cantidad de madera necesaria."<<endl;
             else{
                 cout << "No contas con la cantidad de madera necesaria."<<endl;
                 }
             }
         else if (nombre_material == I_PIEDRA){
-            if (porcentaje_de_piedra_existente(nombre_edificio,porcentaje_usar,diccionario))
+            if (porcentaje_de_piedra_existente(porcentaje_usar,registro_edificios, fila, columna))
                 cout << "Contas con la cantidad de piedra necesaria."<<endl;
             else{
                 cout << "No contas con la cantidad de piedra necesaria."<<endl;
                 }
             }
         else if (nombre_material == I_METAL){
-            if (porcentaje_de_metal_existente(nombre_edificio,porcentaje_usar,diccionario))
+            if (porcentaje_de_metal_existente(porcentaje_usar,registro_edificios, fila, columna))
                 cout << "Contas con la cantidad de metal necesaria."<<endl;
             else{
                 cout << "No contas con la cantidad de metal necesario."<<endl;
@@ -186,18 +184,18 @@ void Inventario::consultar_porcentaje_material(string nombre_material ,int numer
          }
 }
 
-bool Inventario::porcentaje_de_madera_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
-    float cantidad_madera_requerida = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_madera()*porcentaje_usar;
+bool Inventario::porcentaje_de_madera_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    float cantidad_madera_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_madera()*porcentaje_usar;
     return ((float)cant_madera >= cantidad_madera_requerida);
 }
 
-bool Inventario::porcentaje_de_piedra_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
-    float cantidad_de_piedra_requerida = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_piedra()*porcentaje_usar;
+bool Inventario::porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    float cantidad_de_piedra_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_piedra()*porcentaje_usar;
     return ((float)cant_piedra >= cantidad_piedra_requerida);
 }
 
-bool Inventario::porcentaje_de_metal_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
-    float cantidad_de_metal_requerido = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_metal()*porcentaje_usar;
+bool Inventario::porcentaje_de_metal_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    float cantidad_de_metal_requerido =registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_metal()*porcentaje_usar;
     return ((float)cant_metal >= cantidad_metal_requerido);
 }
 
