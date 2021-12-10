@@ -224,7 +224,7 @@ void Juego::asignar_objetivos(Jugador *jugador) {
         
         int numero_objetivo = generar_numero_random(1,10);
         
-        if ( vector_objetivos_jug[i]) {
+        if (vector_objetivos_jug[i] == numero_objetivo) {
             ya_toco = false;   
             for(int i = 0; i <cantidad; i++){
                 vector_objetivos_jug[i] == numero_objetivo;
