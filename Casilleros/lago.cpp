@@ -3,6 +3,7 @@
 Lago::Lago(int fila, int columna) {
     this -> fila = fila;
 	this -> columna = columna;
+	this -> peso = PESO_LAGO;
 	this -> tipo_casillero = LAGO;
 	this -> ocupado = false;
 	this -> iluminado = false;

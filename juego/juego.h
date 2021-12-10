@@ -16,7 +16,7 @@ class Juego{
 private:
     Mapa * mapa;
     //Diccionario * diccionario_edificios;
-    //string objetivos[10];
+    string objetivos[10];
 
 public:
     
@@ -37,6 +37,9 @@ public:
     //
     //
     void cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,Inventario* inventario_jugador_2);
+    
+    void cargar_vector_de_objetivos();
+    
     //es archivo legible
     //PRE: 
     //POST: Devuelve true si el archivo existe y no esta vacio. Si no existe, no lo llega a abrir. Si existe
@@ -80,14 +83,10 @@ public:
     //POST: Asigna objetivos al jugador
     void asignar_objetivos(Jugador * jugador);
 
-    //
-    //
-    //
-    // void turnos();
-
     //Limpiar string
-    //
-    //
+    //PRE: Receibe una string con la cadena a limpiar, un entero con la posicion incicial,
+    // y un string con el tope
+    //POST: Devuelve un entero con el valor del numero leido.
     int limpiar_string(string cadena, int posicion_inicial, char str_tope);
 
 };

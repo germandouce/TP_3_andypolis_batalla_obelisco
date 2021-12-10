@@ -14,7 +14,7 @@ class Nodo_dict {
     Nodo_dict* izquierdo;
     Nodo_dict* derecho;
     Nodo_dict* padre;
-    int id;
+    string clave;
 
     public:
 
@@ -31,8 +31,8 @@ class Nodo_dict {
     Edificio* devolver_edificio();
 
     // PRE: -
-    // POST: Devuelve el ID del edificio
-    int devolver_id();
+    // POST: Devuelve la clave del edificio
+    string devolver_clave();
 
     // PRE: Recibe un edificio
     // POST: coloca el edificio en el nodo

@@ -13,7 +13,7 @@ Nodo_dict* Diccionario::agregar_edificio(Nodo_dict* nodo, Edificio* edificio) {
     if (nodo == nullptr) {
         nodo = new Nodo_dict(edificio);
     }
-    else if (edificio -> obtener_diminutivo()[0] > nodo -> devolver_id()) {
+    else if (edificio -> obtener_nombre() > nodo -> devolver_clave()) {
         nodo -> colocar_nodo_derecho(agregar_edificio(nodo -> devolver_nodo_derecho(), edificio), nodo);
     }
     else {
@@ -25,9 +25,7 @@ Nodo_dict* Diccionario::agregar_edificio(Nodo_dict* nodo, Edificio* edificio) {
 
 Edificio* Diccionario::buscar_edificio(string nombre_edificio) {
     
-    int id = asociar_nombre_id(nombre_edificio);
-    
-    Nodo_dict* nodo = buscar(this -> origen, id);
+    Nodo_dict* nodo = buscar_edificio(this -> origen, nombre_edificio);
 
     if (nodo != nullptr) {
         return nodo -> devolver_edificio();
@@ -36,50 +34,15 @@ Edificio* Diccionario::buscar_edificio(string nombre_edificio) {
     return nullptr;
 }
 
-int Diccionario::asociar_nombre_id(string nombre_edificio) {
+Nodo_dict* Diccionario::buscar_edificio(Nodo_dict* nodo, string clave) {
 
-    int id = -1;
-
-    if (nombre_edificio == A) {
-        id = ASCII_A;
-    }
-
-    if (nombre_edificio == E) {
-        id = ASCII_E;
-    }
-
-    if (nombre_edificio == F) {
-        id = ASCII_F;
-    }
-
-    if (nombre_edificio == G) {
-        id = ASCII_G;
-    }
-
-    if (nombre_edificio == M) {
-        id = ASCII_M;
-    }
-
-    if (nombre_edificio == O) {
-        id = ASCII_O;
-    }
-
-    if (nombre_edificio == P) {
-        id = ASCII_P;
-    }
-
-    return id;
-}
-
-Nodo_dict* Diccionario::buscar(Nodo_dict* nodo, int id) {
-
-    if (nodo == nullptr || nodo -> devolver_id() == id)
+    if (nodo == nullptr || nodo -> devolver_clave() == clave)
         return nodo;
 
-    if (id > nodo -> devolver_id())
-        return buscar(nodo -> devolver_nodo_derecho(), id);
+    if (clave > nodo -> devolver_clave())
+        return buscar_edificio(nodo -> devolver_nodo_derecho(), clave);
 
-    return buscar(nodo -> devolver_nodo_izquierdo(), id);
+    return buscar_edificio(nodo -> devolver_nodo_izquierdo(), clave);
 }
 
 Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int fila, int columna) {
@@ -96,8 +59,7 @@ Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int fila, int
     return edificio;
 }
 
-Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, 
-int limite_construccion,int fila, int columna){
+Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion, int fila, int columna) {
 
     Edificio* edificio;
 

@@ -18,6 +18,10 @@ class Casillero_construible: public Casillero {
 
 	~Casillero_construible();
 
+	Edificio* obtener_edificio();
+
+	Material* obtener_material();
+
 	void construir_edificio(Edificio* edificio);
 
 	void colocar_material(Material* material);

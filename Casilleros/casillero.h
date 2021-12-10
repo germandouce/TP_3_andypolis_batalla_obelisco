@@ -7,16 +7,20 @@
 #include "../registro_edificios/edificio.h"
 #include "../materiales/material.h"
 
-
-const string CONSTRUIBLE = "construible";
-const string TRANSITABLE = "transitable";
-const string INACCESIBLE = "inaccesible";
-
 const string TERRENO = "T";
 const string LAGO = "L";
 const string CAMINO = "C";
 const string MUELLE = "M";
 const string BETUN = "B";
+
+const int PESO_CAMINO = 4;
+const int PESO_BETUN = 0;
+const int PESO_LAGO = 2; 
+const int PESO_MUELLE = 5; 
+const int PESO_TERRENO = 25;
+
+const int DIFERENCIA_LAGO = 3;
+const int DIFERENCIA_MUELLE = 3;
 
 const string JUGADOR1 = "J";
 const string JUGADOR2 = "U";
@@ -27,6 +31,7 @@ class Casillero {
 
 	int fila;
 	int columna;
+	int peso;
 	string tipo_casillero;
 	bool ocupado;
 	bool iluminado;
@@ -49,6 +54,12 @@ class Casillero {
 	int obtener_columna();
 
 	//pre: -
+	//post: Devuelve el peso del Casillero.
+	int obtener_peso_jugador1();
+
+	int obtener_peso_jugador2();
+
+	//pre: -
 	//post: Devuelve el tipo de casillero del Casillero.
 	string obtener_tipo_casillero();
 
@@ -64,6 +75,8 @@ class Casillero {
 	//post: Actualiza el valor de 'esta_vacio'.
 	void desocupar_casillero();
 
+	//pre: -
+	//post: Devuelve True si el Jugador 1 está ubicado en el Casillero. Sino devuelve False.
 	bool hay_jugador1();
 
 	void ocupar_jugador1();
@@ -87,10 +100,14 @@ class Casillero {
 	//		Sino, imprime un mensaje.
 	virtual void construir_edificio(Edificio* edificio) = 0;
 
+	virtual Edificio* obtener_edificio() = 0;
+
 	//pre: -
 	//post: Coloca el Material en el Casillero si este es transitable.
 	//		Sino, imprime un mensaje.
 	virtual void colocar_material(Material* material) = 0;
+
+	virtual Material* obtener_material() = 0;
 
 	//pre: -
 	//post: Muestra información sobre el Casillero y sobre lo que contiene.

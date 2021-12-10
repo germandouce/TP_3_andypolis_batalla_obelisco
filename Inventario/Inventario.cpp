@@ -1,4 +1,4 @@
-#include "Inventario.h"
+#include "inventario.h"
 #include <iostream>
 
 using namespace std;

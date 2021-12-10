@@ -20,14 +20,14 @@ void mostrar_menu() {
     cout << "4. Demoler un edificio por coordenada." << endl;
     cout << "5. Mostrar mapa." << endl;
     cout << "6. Consultar coordenada." << endl;
-    cout << "7. Mostrar inventario. (Moverse pa probar xd)" << endl;
-    cout << "8. Recolectar recursos producidos." << endl;
+    cout << "7. Mostrar inventario." << endl;
+    cout << "8. Moverse." << endl;
     cout << "9. Lluvia de recursos." << endl;
     cout << "10. Guardar y salir." << endl;
     cout << END_COLOR;
 }
 
-void procesar_opcion(int opcion_elegida, Mapa* mapa) {
+void procesar_opcion(int opcion_elegida, Mapa* mapa, Inventario* inventario) {
 
     switch (opcion_elegida) {
         case 1:
@@ -58,12 +58,11 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa) {
             break;
         case 7:
             system(CLR_SCREEN);
-            mapa -> moverse(true);
+            inventario -> mostrar_inventario();
             break;
         case 8:
             system(CLR_SCREEN);
-            //recolectar_recursos_producidos(vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
-            cout << endl;
+            mapa -> moverse(inventario, false);
             break;
         case 9:
             system(CLR_SCREEN);

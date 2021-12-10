@@ -1,6 +1,6 @@
 #ifndef REGISTRO_EDIFICIOS_NODO_REGISTRO_H
 #define REGISTRO_EDIFICIOS_NODO_REGISTRO_H
-#include "Edificio.h"
+#include "edificio.h"
 
 class Nodo_R{
 //Atributos

@@ -3,6 +3,7 @@
 Terreno::Terreno(int fila, int columna) {
     this -> fila = fila;
 	this -> columna = columna;
+	this -> peso = PESO_TERRENO;
 	this -> tipo_casillero = TERRENO;
 	this -> ocupado = false;
 	this -> iluminado = false;
