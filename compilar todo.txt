@@ -1,0 +1,1 @@
+g++ inventario/*.cpp registro_edificios/*.cpp materiales/*.cpp casilleros/*.cpp grafo/*.cpp *.cpp -o main
