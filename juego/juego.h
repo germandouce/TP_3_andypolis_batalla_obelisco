@@ -11,14 +11,21 @@ const string ARCHIVO_EDIFICIOS = "edificios.txt";
 const string ARCHIVO_MATERIALES = "materiales.txt";
 
 
-class Juego{
+const char PARENTESIS_CHAR = '(';
+const int OPCION_PARENTESIS = 0;
+const int OPCION_NUMEROS = 1;
 
-private:
-    Mapa * mapa;
-    //Diccionario * diccionario_edificios;
-    Vector<Objetivo> *objetivos;
+class Juego {
 
-public:
+    private:
+
+    Jugador* jugador1;
+    Jugador* jugador2;
+    Mapa* mapa;
+    Diccionario* diccionario;
+    Vector<Objetivo>* objetivos;
+
+    public:
     
     //Constructor de juego
     Juego();
@@ -36,10 +43,12 @@ public:
     //
     //
     //
-    void cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,Inventario* inventario_jugador_2);
+    void cargar_inventario(ifstream& inventario);
     
     void cargar_objetivos();
     
+    void agregar_edificio_al_registro(Edificio* edificio);
+
     //es archivo legible
     //PRE: 
     //POST: Devuelve true si el archivo existe y no esta vacio. Si no existe, no lo llega a abrir. Si existe
@@ -59,19 +68,19 @@ public:
     //Guardar edificio
     //PRE: Recibe el nombre del edificio y un punetro a edificio
     //POST: Instancia el edificio y lo guarda en el puntero recibido
-    void instanciar_edificio(string nombre_edificio, Edificio* edificio);
+    // void instanciar_edificio(string nombre_edificio, Edificio* edificio);
 
     //Guardar material
     //PRE: Recibe el nombre del material y un puntero a material
     //POST: instancia el material y lo guarda en el puntero recibido
-    void instanciar_material(string nombre_material, Material * material);
+    void instanciar_material(string nombre_material, Material* material);
 
     //Cargar ubicaciones
     //PRE: El acrhivo ubicaciones debe estar abierto. Recibe un puntero a jugador 1 y a jugador 2 y 
     //un objeto ifstream
     //POST: lee el archivo ubicaciones y carga sus datos en las listas de los edificios de cada jugador
     //y en el mapa colocando los materiales y edificios
-    void cargar_ubicaciones(ifstream& ubicaciones, Jugador * jug_1, Jugador * jug_2);
+    void cargar_ubicaciones(ifstream& ubicaciones);
 
     //Generar numero random
     //PRE: Recibe los enteros "min" y "max" con los valores limite (inclusives) entre los cuales se desea generar el numero random 
@@ -81,14 +90,39 @@ public:
     //Asignar objetivos
     //PRE:
     //POST: Asigna objetivos al jugador
-    void asignar_objetivos(Jugador * jugador);
+    void asignar_objetivos(Jugador* jugador);
 
     //Limpiar string
     //PRE: Receibe una string con la cadena a limpiar, un entero con la posicion incicial,
     // y un string con el tope
     //POST: Devuelve un entero con el valor del numero leido.
-    int limpiar_string(string cadena, int posicion_inicial, char str_tope);
+    string limpiar_string(string cadena, int posicion_inicial, char str_tope);
+    
+    //Cargar diccionario
+    //PRE: Recibe un objeto ifstream
+    //POST: Carga el diccionario
+    void cargar_diccionario(ifstream &archivo);
 
+    //Cargar edificio
+    //PRE: Recibe el nombre del edificio las cantidades de piedra madera y metal y limite max de construccion
+    //POST: Carga el edificio en el diccionario
+    void cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
+
+    //Leer palabra compuesta
+    //PRE:Recibe un objeto ifstream, el nombre del edificio y un entero con la opcion de si se queire
+    //evitar un numero o un parentesis
+    //POST: Lee las elmentos de mas de una palabra delimitados por un numero o un paretesis
+    string Juego::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
+
+    //Verificar tipo caracter
+    //PRE:Recibe una palabra y un entero que puede ser un ???? o un ??
+    //POST: Devuelve true si es un parentesis o false si es un numero
+    bool Juego::verificar_tipo_caracter(string palabra, int tipo_caracter);
+
+    //Es numero
+    //PRE: Recibe un string con la palabra
+    //POST: Devuelve true si es un numero o false en caso contrario
+    bool Juego::es_numero(string palabra);
 };
 
 #endif //JUEGO_H

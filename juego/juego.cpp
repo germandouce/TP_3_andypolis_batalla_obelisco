@@ -1,128 +1,88 @@
 #include "juego.h"
 
-Juego::Juego(){
+Juego::Juego() {
+    this -> jugador1 = new Jugador();
+    this -> jugador2 = new Jugador();
     this -> mapa = new Mapa();
-    this -> objetivos =0;
+    this -> diccionario = new Diccionario();
+    this -> objetivos = new Vector<Objetivo>;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
-    return ( archivo.peek() == ifstream::traits_type::eof() );
+    return (archivo.peek() == ifstream::traits_type::eof());
 }
 
-
-bool Juego::existe_archivo(ifstream& archivo,string nombre_archivo){
+bool Juego::existe_archivo(ifstream& archivo, string nombre_archivo) {
     archivo.open(nombre_archivo);
     return (archivo.is_open());
 }
 
-void Juego::instanciar_edificio(string nombre_edificio, Edificio* edificio){
-    if ( nombre_edificio == "mina"){
-        //edificio = new Mina();
+void Juego::instanciar_material(string nombre_material, Material* material){
+    if (nombre_material == S) {
+        material = new Piedra(PIEDRA_LLOVIDA);
     }
-    else if ( nombre_edificio == "mina oro"){
-        // edificio = new Mina_oro();
-
-    }else if ( nombre_edificio == "aseeradero"){
-        // edificio = new Aserradero();
+    else if (nombre_material == W) {
+        material = new Madera(MADERA_LLOVIDA);
     }
-    else if ( nombre_edificio == "fabrica"){
-        //edificio = new Fabrica();
+    else if (nombre_material == I) {
+        material = new Metal(METAL_LLOVIDO);
     }
-    else if ( nombre_edificio == "escuela"){
-        //edificio = new Escuela();
-    }
-    else if ( nombre_edificio == "planta electrica"){
-        //edificio = new Planta_electrica();
-    }
-    else{
-        //edificio = new Edificio_desonocido()
+    else if (nombre_material == C) {
+        material = new Andycoins(ANDYCOINS_LLOVIDO);
     }
 }
 
+void Juego::cargar_inventario(ifstream& inventario) {
 
-void Juego::instanciar_material(string nombre_material, Material * material){
-    if ( nombre_material == "piedra"){
-        material = new Piedra(100);
-    }
-    else if ( nombre_material == "madera"){
-        material = new Madera(50);
-    }
-    else if ( nombre_material == "metal"){
-        material = new Metal(50);
-    }
-    else if ( nombre_material == "andycoins"){
-        material = new Andycoins(250);
-    }
-    else{
-        //material = new Material_desconocido(1);
-    }
-}
+    string nombre;
+    string cantidad_1;
+    string cantidad_2;
 
+    Inventario* inventario_jugador_1 = jugador1 -> devolver_inventario();
+    Inventario* inventario_jugador_2 = jugador2 -> devolver_inventario();
 
-void Juego::cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,
-Inventario* inventario_jugador_2){
-    // bool procesar_archivo_materiales(){
-    // bool inventarios_actualizados;
-    // std::fstream archivo_materiales(PATH_MATERIALES, std::ios::in);
+    while(inventario >> nombre){
+        inventario >> cantidad_1;
+        inventario >> cantidad_2;
 
-    if(inventario.is_open()){
-
-        std::string nombre;
-        std::string cantidad_1;
-        std::string cantidad_2;
-
-        while(inventario >> nombre){
-            inventario >> cantidad_1;
-            inventario >> cantidad_2;
-
-            if (nombre == "Madera" || nombre == "madera"){
-                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
-                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-            }
-            else if (nombre == "Piedra" || nombre == "piedra"){
-                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
-                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-            }
-            else if (nombre == "Metal" || nombre == "metal"){
-                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
-                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-            }
-            else if (nombre == "Bombas" || nombre == "bombas"){
-                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
-                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-            }
-            else if (nombre == "Andycoins" || nombre == "andycoins"){
-                inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
-                inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-            }
-            inventario_jugador_1->actualizar_largo_de_inventario();
-            inventario_jugador_2->actualizar_largo_de_inventario();
+        if (nombre == W) {
+            inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
         }
-
-        inventario.close();
-        //inventarios_actualizados = true;
+        else if (nombre == S) {
+            inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+        }
+        else if (nombre == I) {
+            inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+        }
+        else if (nombre == B) {
+            inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+        }
+        else if (nombre == C) {
+            inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+        }
+        
+        inventario_jugador_1-> actualizar_largo_de_inventario();
+        inventario_jugador_2-> actualizar_largo_de_inventario();
     }
-    // else{
-    //     std::cout << "\nNo se encuentra archivo materiales.\n" << std::endl;
-    //     delete inventario_jugador_1;
-    //     delete inventario_jugador_2;
-    //     inventarios_actualizados = false;
-    // }
-    // return inventarios_actualizados;
+    inventario.close();
 }
 
-
-void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * jug_2){
+void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
 
     string nombre_elemento;
     string fila;
     string columna;
 
     Material * material;
-    Jugador* jugador;
     Edificio * edificio;
+    Jugador* jugador;
 
-    while (ubicaciones >> nombre_elemento){
+    while (ubicaciones >> nombre_elemento) {
         
         ubicaciones >> fila;   
         fila = limpiar_string(fila, POSICION_INICIAL_FILA, TOPE_CADENA_FILA);
@@ -130,35 +90,30 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones,Jugador * jug_1, Jugador * 
         ubicaciones >> columna;
         columna = limpiar_string(columna, POSICION_INICIAL_COLUMNA, TOPE_CADENA_COLUMNA);
 
-        if (nombre_elemento =="1" || nombre_elemento =="2"){
-            if (nombre_elemento == "1"){
-                jugador = jug_1;
-            }
-            if (nombre_elemento == "2"){
-                jugador = jug_2;
-            }
-            jugador ->asignar_coordenadas(stoi(fila), stoi(columna));
+        
+        if (nombre_elemento == "1") {
+            jugador = jugador1;
+            jugador -> asignar_coordenadas(stoi(fila), stoi(columna));
+        }
+        else if (nombre_elemento == "2") {
+            jugador = jugador2;
+            jugador -> asignar_coordenadas(stoi(fila), stoi(columna));
         }
         
-        if (nombre_elemento == "piedra" || nombre_elemento == "madera" ||
-        nombre_elemento == "metal" || nombre_elemento == "andycoins"){
-            
+        if (nombre_elemento == S || nombre_elemento == W || nombre_elemento == I || nombre_elemento == C) {
             instanciar_material(nombre_elemento, material);
-            //mapa -> obtener_matriz_casilleros()[fila][columna] -> colocar_material(material);
-
-        } else{
-            
-            //edificio = mapa->obtener_diccionario()->instanciar_edificio(nombre_elemento,);
-            instanciar_edificio(nombre_elemento, edificio);
-            jugador->agregar_edificio_al_registro(edificio);
-            //mapa -> obtener_matriz_casilleros()[fila][columna] -> agrgar_edificio(edificio);
+            mapa -> colocar_material(stoi(fila) - 1, stoi(columna) - 1, material);
+        }
+        else {
+            edificio = diccionario -> instanciar_edificio(nombre_elemento, stoi(fila), stoi(columna));
+            mapa -> construir_edificio(stoi(fila) - 1, stoi(columna) - 1, edificio);
+            jugador -> agregar_edificio_al_registro(edificio);
         }
     }
     ubicaciones.close();
 }
 
-
-int Juego::limpiar_string(string cadena, int posicion_inicial, char str_tope) {
+string Juego::limpiar_string(string cadena, int posicion_inicial, char str_tope) {
 
 	string numero;
 	string cifra;
@@ -174,33 +129,32 @@ int Juego::limpiar_string(string cadena, int posicion_inicial, char str_tope) {
 	    	numero = numero + cifra;
 	    }
 	}
-	return stoi(numero);
+	return numero;
 }
 
-// bool Juego::cargar_mapa(){
-//     bool bien_cargado = false;
-//     //logica para cragar el mapa
-//     return bien_cargado;
-// }
-
-bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo){
+bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo) {
     
     bool archivo_legible = false;
     
-    if ( existe_archivo(archivo, nombre_archivo) ){
-        if ( !archivo_vacio(archivo) ){
-            //cargar_ubicaciones(archivo, jug_1, jug_2);
+    if (existe_archivo(archivo, nombre_archivo) ){
+        if (!archivo_vacio(archivo) ) {
             archivo_legible = true; 
-        }else{
-        archivo.close();
+        }
+        else {
+            archivo.close();
         }   
     }
     return archivo_legible;
 }
 
-
 void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
+    
     Jugador * jugador;
+
+    jugador1 -> setear_numero_jugador(1);
+    jugador1 -> asignar_objetivo();
+
+
     for (int i = 1; i <3 ; i++){
         
         if (i == 1){
@@ -211,7 +165,7 @@ void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
             jugador = jug_2;
         }   
         jugador -> setear_numero_jugador(i);
-        asignar_objetivos(jugador);
+        asignar_objetivos();
     }
 }
 
@@ -246,29 +200,12 @@ void Juego::cargar_objetivos(){
 
 }
 
-// void Juego::turnos(){
-    
-//     // (int i = 1; i <3 ; i++){
-//     //     if (i = 1){
-//     //         jugador = jug_1;
-//     //     }
-//     //     else{
-//     //         jugador = jug_2;
-//     //     }   
-//     //     asignar_objetivos(jugador);
-//     //     jugador -> setear_numero_jugador(i);
-//     // }
-
-
-// }
-
-int Juego::generar_numero_random(int min, int max){
+int Juego::generar_numero_random(int min, int max) {
     int range = max + 1  - min;  
     return min + ( rand() % range);
 }
 
-void Juego::asignar_objetivos(Jugador *jugador){
-    int numero_objetivo;
+void Juego::asignar_objetivos(Jugador *jugador) {
 
     int vector_objetivos_jug[3];
 
@@ -276,8 +213,8 @@ void Juego::asignar_objetivos(Jugador *jugador){
 
     int objetivo_1 = generar_numero_random(1,10);
     
-    objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);    
-    jugador -> asignar_objetivo(objetivo_a_asignar, objetivo_1);
+    objetivo_a_asignar = objetivos -> obtener_dato(objetivo_1);    
+    jugador -> asignar_objetivo(objetivo_a_asignar);
     
     vector_objetivos_jug[0] = objetivo_1;
     
@@ -285,20 +222,110 @@ void Juego::asignar_objetivos(Jugador *jugador){
     int cantidad = 1;
     while(cantidad <= 2){
         
-        int objetivo = generar_numero_random(1,10);
+        int numero_objetivo = generar_numero_random(1,10);
         
-        ya_toco = false;   
-        for(int i = 0; i <cantidad; i++){
-            if ( vector_objetivos_jug[i] == objetivo ){
+        if ( vector_objetivos_jug[i]) {
+            ya_toco = false;   
+            for(int i = 0; i <cantidad; i++){
+                vector_objetivos_jug[i] == numero_objetivo;
                 ya_toco = true;
             }
         }
         if (!ya_toco){
             objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);
-            jugador -> asignar_objetivo(objetivo_a_asignar, cantidad);
+            jugador -> asignar_objetivo(objetivo_a_asignar);
             cantidad++;
         }
-
     }
+}
 
+void Juego::cargar_diccionario(ifstream &archivo) {
+
+    string nombre_edificio;
+	int piedra;
+	int madera;
+	int metal;
+    int limite_construccion;
+
+	while (archivo >> nombre_edificio) {
+
+		piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
+		archivo >> madera;
+		archivo >> metal;
+		archivo >> limite_construccion;
+
+		cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
+	}
+    archivo.close();
+}
+
+void Juego::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {
+
+	Edificio* edificio;
+
+	if (nombre_edificio == A) {
+		edificio = new Aserradero(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == E) {
+		edificio = new Escuela(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == F) {
+		edificio = new Fabrica(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == M) {
+		edificio = new Mina(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == G) {
+		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == O) {
+		edificio = new Obelisco(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+
+	if (nombre_edificio == P) {
+		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion, NULA, NULA);
+		diccionario -> agregar_edificio(edificio);
+	}
+}
+
+string Juego::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion) {
+	
+    string palabra_edificio = "";
+	archivo >> palabra_edificio;
+
+	while (!verificar_tipo_caracter(palabra_edificio, opcion)) {
+		nombre_edificio = nombre_edificio + " " + palabra_edificio;
+		archivo >> palabra_edificio;
+	}
+	return palabra_edificio;
+}
+
+bool Juego::verificar_tipo_caracter(string palabra, int tipo_caracter) {
+	
+    bool es_caracter_evaluado = false;
+
+	if (tipo_caracter == OPCION_NUMEROS) {
+		es_caracter_evaluado = es_numero(palabra);
+	}
+	else {
+		if (palabra[POSICION_INICIAL] == PARENTESIS_CHAR) {
+			es_caracter_evaluado = true;
+		}
+	}
+	return es_caracter_evaluado;
+}
+
+bool Juego::es_numero(string palabra) {
+	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
 }

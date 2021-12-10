@@ -52,6 +52,7 @@ const int ANDYCOINS = 3;
 const string S = "piedra";
 const string W = "madera";
 const string I = "metal";
+const string B = "bombas";
 const string C = "andycoins";
 
 const char TOPE_CADENA_FILA = ',';

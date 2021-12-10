@@ -34,12 +34,8 @@ class Jugador {
 
     private:    
 
-    int  numero_jugador;
-
-    // Vector<Material>* inventario;
-    //Vector<Objetivo>* objetivos;
-    Vector<Objetivo> *objetivos;
-    //Vector<Edificio>* edificios;
+    int numero_jugador;
+    Vector<Objetivo>* objetivos;
     Inventario* inventario;
     Registro_edificios * registro_edificios;
     int objetivos_secundarios_cumplidos;
@@ -86,7 +82,7 @@ class Jugador {
     //Asignar objetivos
     //PRE:
     //POST: Asigna 1 objetivo al jugador agregandolo a la lista de objetivos
-    void asignar_objetivo(Objetivo* objetivo_a_asignar, int posicion_objetivo);
+    void asignar_objetivo(Objetivo* objetivo_a_asignar);
 
     //Cargar el inventario
     //PRE:

@@ -4,10 +4,7 @@
 Jugador::Jugador(){
 
     this -> numero_jugador = 0;
-
-    // this -> Vector<Material>* inventario;
-    this -> objetivos = 0;
-    //this -> Vector<Edificio>* edificios;
+    this -> registro_edificios = new Registro_edificios();
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
@@ -19,8 +16,6 @@ Jugador::Jugador(){
 
     this -> en_juego = true;
     this -> su_turno = true;
-
-
 }
 
 void Jugador::pedir_coordenadas(){
@@ -47,9 +42,8 @@ int Jugador::devolver_numero_jugador(){
     return numero_jugador;
 }
 
-
-void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar, int posicion_objetivo){
-    objetivos->insertar_posicion(posicion_objetivo, objetivo_a_asignar);
+void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar) {
+    objetivos -> insertar_ultimo(objetivo_a_asignar);
 }
 
 void Jugador::agregar_material_a_inventario(){
@@ -58,6 +52,7 @@ void Jugador::agregar_material_a_inventario(){
 
 void Jugador::agregar_edificio_al_registro(Edificio* edificio){
     
+    devolver_resgitro_edificios()->agregar(edificio);
 }
 
 
