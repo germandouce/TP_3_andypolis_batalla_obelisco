@@ -7,6 +7,6 @@ Constructor::Constructor(): Objetivo() {
    //  this -> requisito = REQUISITO_CONSTRUCTOR;
 }
 
-bool comprobar_requisito(int traer_resgistro_){
-    return (traer_resgistro_ == 9999999999999999999);
+bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    // return (traer_resgistro_ == 9999999999999999999);
 }

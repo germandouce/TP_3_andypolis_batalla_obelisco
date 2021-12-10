@@ -7,6 +7,6 @@ Bombardero::Bombardero() : Objetivo() {
     this -> requisito = REQUISITO_BOMBARDERO;
 }
 
-bool comprobar_requisito(int cantidad_bombas_usadas) {
-    return(cantidad_bombas_usadas == 5 );
+bool Bombardero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
+    //return true;
 }

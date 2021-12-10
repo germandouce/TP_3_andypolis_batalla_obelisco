@@ -6,7 +6,7 @@
 class Constructor: public Objetivo {
     public:
     Constructor();
-    bool comprobar_requisito (int cant_edificios_distintos_construida);
+    bool comprobar_requisito (Inventario* inventario, Registro_edificios* registro_edificios);
 };
 
 #endif // CONSTRUCTOR_H_INCLUDED

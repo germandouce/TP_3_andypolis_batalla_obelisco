@@ -6,7 +6,7 @@
 class Energetico: public Objetivo {
     public:
     Energetico();
-    bool comprobar_requisito();
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
 };
 
 #endif // ENERGETICO_H_INCLUDED

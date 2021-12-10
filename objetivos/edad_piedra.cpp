@@ -7,6 +7,6 @@ Edad_piedra::Edad_piedra() : Objetivo() {
    //  this -> requisito = REQUISITO_EDAD_PIEDRA;
 }
 
-bool comprobar_requisito(int cantidad_piedras_en_inventario){
-    return (cantidad_piedras_en_inventario == 5000);
+bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    //return (cantidad_piedras_en_inventario == 5000);
 }

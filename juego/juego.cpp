@@ -147,26 +147,13 @@ bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo) {
     return archivo_legible;
 }
 
-void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
-    
-    Jugador * jugador;
+void Juego::crear_juego() {
 
     jugador1 -> setear_numero_jugador(1);
-    jugador1 -> asignar_objetivo();
+    asignar_objetivos(jugador1);
 
-
-    for (int i = 1; i <3 ; i++){
-        
-        if (i == 1){
-           
-            jugador = jug_1;
-        }
-        else{
-            jugador = jug_2;
-        }   
-        jugador -> setear_numero_jugador(i);
-        asignar_objetivos();
-    }
+    jugador2 -> setear_numero_jugador(2);
+    asignar_objetivos(jugador2);
 }
 
 void Juego::cargar_objetivos(){
@@ -197,7 +184,6 @@ void Juego::cargar_objetivos(){
 
     Objetivo *extremista = new Extremista();
     objetivos->insertar_ultimo(extremista);
-
 }
 
 int Juego::generar_numero_random(int min, int max) {
@@ -223,14 +209,13 @@ void Juego::asignar_objetivos(Jugador *jugador) {
     while(cantidad <= 2){
         
         int numero_objetivo = generar_numero_random(1,10);
-        
-        if (vector_objetivos_jug[i] == numero_objetivo) {
-            ya_toco = false;   
-            for(int i = 0; i <cantidad; i++){
-                vector_objetivos_jug[i] == numero_objetivo;
-                ya_toco = true;
-            }
+        ya_toco = false;
+
+        for(int i = 0; i <cantidad; i++){
+            vector_objetivos_jug[i] == numero_objetivo;
+            ya_toco = true;
         }
+
         if (!ya_toco){
             objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);
             jugador -> asignar_objetivo(objetivo_a_asignar);
@@ -328,4 +313,12 @@ bool Juego::verificar_tipo_caracter(string palabra, int tipo_caracter) {
 
 bool Juego::es_numero(string palabra) {
 	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
+}
+
+Jugador* Juego::devolver_jugador_1() {
+    return jugador1;
+}
+
+Jugador* Juego::devolver_jugador_2() {
+    return jugador2;
 }

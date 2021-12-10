@@ -7,6 +7,7 @@ Extremista::Extremista() : Objetivo() {
    //  this -> requisito = REQUISITO_EXTREMISTA;
 }
 
-bool Extremista::comprobar_requisito(int bombas_compradas){
-    return (bombas_compradas == 500);
+bool Extremista::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    // return (bombas_compradas == 500);
+   // return true
 }

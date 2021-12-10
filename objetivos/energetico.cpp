@@ -7,6 +7,7 @@ Energetico::Energetico(): Objetivo() {
    //  this -> requisito = REQUISITO_ENERGETICO;
 }
 
-bool comprobar_requisito(int energia){
-    return( energia == 100);
+bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    //return( energia == 100);
+    // return true
 }

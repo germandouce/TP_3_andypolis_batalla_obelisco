@@ -7,6 +7,6 @@ Armado::Armado() : Objetivo() {
     this -> requisito = REQUISITO_CONSTRUCTOR;
 }
 
-bool comprobar_requisito(int cantidad_bombas_actuales) {
-    return (cantidad_bombas_actuales == REQUISITO_ARMADO);
+bool Armado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
+    //return true;
 }

@@ -6,7 +6,8 @@ Minero::Minero(): Objetivo() {
     this -> identificador = MINERO;
    //  this -> requisito = REQUISITO_MINERO;
 }
-bool comprobar_requisito(int cantidad_minas, int cantidad_minas_oro){
-    return ( (cantidad_minas > 1 ) && (cantidad_minas_oro > 1) );
+bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    // return ( (cantidad_minas > 1 ) && (cantidad_minas_oro > 1) );
+    // return true;
 }
 

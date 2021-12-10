@@ -33,7 +33,7 @@ class Juego {
     //Inicia una nueva partida
     //PRE:-
     //POST:-
-    void crear_juego(Jugador * jug_1, Jugador * jug_2);
+    void crear_juego();
 
     //Cargar mapa
     //PRE:-
@@ -48,6 +48,17 @@ class Juego {
     void cargar_objetivos();
     
     void agregar_edificio_al_registro(Edificio* edificio);
+
+    ////Devolver jugador 2
+    //PRE:-
+    //POSR: Devuelve un puntero al jugador 1
+    Jugador* devolver_jugador_1();
+
+    //Devolver jugador 2
+    //PRE:-
+    //POST:Devuelve un puntero al jugador 2
+    Jugador* devolver_jugador_2();
+
 
     //es archivo legible
     //PRE: 

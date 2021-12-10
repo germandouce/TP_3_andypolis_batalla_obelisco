@@ -6,11 +6,10 @@ int main() {
     srand((unsigned)time(NULL)); // Semilla para generar números aleatorios.
         
     Juego *juego = new Juego();
-    
-    Jugador *jug_1 = new Jugador();
-    Jugador *jug_2 = new Jugador();
+    juego -> crear_juego();
 
-    juego -> crear_juego(jug_1, jug_2);
+    Jugador* jug_1 = juego-> devolver_jugador_1();
+    Jugador* jug_2 = juego -> devolver_jugador_2();
 
     ifstream archivo;
 
@@ -18,12 +17,12 @@ int main() {
     bool diccionario_edificios_bien_cargado = true;
     bool inventario_bien_cargado = true;
     
-    
+    /*
     if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA) ){
         //mapa->cargar_mapa(archivo,ARCHIVO_MAPA)
         mapa_bien_cargado = true;
     }
-    
+    */
     cout << "mitad archivos";
     
     // if (juego -> es_archivo_legible(archivo, ARCHIVO_EDIFICIOS) ){
@@ -36,9 +35,9 @@ int main() {
     //     bool inventario_bien_cargado = true;
     // }
     cout << "cargo archivos";
-    bool nueva_partida = false;
-  
-    nueva_partida = !( juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES) );
+   // bool nueva_partida = false;
+    bool mapa_bien_cargado = juego -> es_archivo_legible(archivo, ARCHIVO_MAPA);
+    bool nueva_partida = !( juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES) );
     
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
         
@@ -47,7 +46,7 @@ int main() {
         bool quiere_terminar_turno = false;
         bool sin_energia = false;        
         
-        if (nueva_partida ){
+        if (nueva_partida){
             int ingreso;
             int opcion_elegida;
             //proba de nuevo me olvide que el 
@@ -66,7 +65,7 @@ int main() {
             jug_2 -> pedir_coordenadas();
 
         }else{
-            juego -> cargar_ubicaciones(archivo, jug_1, jug_2);
+            juego -> cargar_ubicaciones(archivo);
         }
 
         cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;

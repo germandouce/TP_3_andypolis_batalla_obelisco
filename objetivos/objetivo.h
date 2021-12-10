@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 
+#include "../inventario/inventario.h"
+#include "../registro_edificios/registro_edificios.h"
+
 using namespace std;
 
 const int COMPRAR_ANDYPOLIS = 1;
@@ -50,7 +53,7 @@ class Objetivo {
     Objetivo();
     int obtener_identificador();
     void mostrar_descripcion();
-    virtual bool comprobar_requisito() = 0;
+    virtual bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) = 0;
     ~Objetivo();
 };
 

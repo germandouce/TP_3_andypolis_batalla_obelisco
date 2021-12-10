@@ -7,7 +7,7 @@ class Letrado: public Objetivo {
     public:
     Letrado();
     bool comprobar_requisito(int maximos_escuelas);
-    bool comprobar_requisito();
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
 };
 
 #endif // LETRADO_H_INCLUDED

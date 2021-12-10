@@ -7,6 +7,7 @@ Letrado::Letrado(): Letrado() {
    //  this -> requisito = REQUISITO_LETRADO;
 }
 
-bool comprobar_requisito(int cantidad_escuelas_construidas, int cantidad_max_escuelas){
-    return (cantidad_escuelas_construidas == cantidad_max_escuelas);
+bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+    // return (cantidad_escuelas_construidas == cantidad_max_escuelas);
+    //return true;
 }

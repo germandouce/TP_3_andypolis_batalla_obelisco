@@ -6,7 +6,7 @@
 class Bombardero: public Objetivo {
     public:
     Bombardero();
-    bool comprobar_requisito();
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
 };
 
 #endif // BOMBARDERO_H_INCLUDED

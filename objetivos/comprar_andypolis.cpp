@@ -7,6 +7,6 @@ Comprar_andypolis::Comprar_andypolis() : Objetivo() {
   //   this -> requisito = REQUISITO_COMPRAR_ANDYPOLIS;
 }
 
-bool comprobar_requisito(int cantidad_andycoins_acumulados){
-    return ( cantidad_andycoins_acumulados == 100000);
+bool Comprar_andypolis::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
+	//return true;
 }

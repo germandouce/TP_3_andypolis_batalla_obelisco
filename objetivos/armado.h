@@ -6,7 +6,7 @@
 class Armado: public Objetivo {
     public:
     Armado();
-    bool comprobar_requisito(int cantidad_bombas_actuales);
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
 };
 
 #endif // ARMADO_H_INCLUDED
