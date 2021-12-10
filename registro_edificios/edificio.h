@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-const string G = "mina oro";
+const string G = "mina de oro";
 const string M = "mina";
 const string A = "aserradero";
 const string F = "fabrica";

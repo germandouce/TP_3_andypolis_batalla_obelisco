@@ -1,78 +1,81 @@
 #include ".\menus\menu_nueva_partida.h"
 #include ".\menus\menu_principal.h"
 
+using namespace std;
+
 int main() {
     
     srand((unsigned)time(NULL)); // Semilla para generar números aleatorios.
 
-    cout << "abrio"<<endl;
-
     Juego *juego = new Juego();
 
-    cout << "cargar_objetivos"<< endl;
-
     juego -> cargar_objetivos();
-
-    cout << "objetivos cargados"<<endl;
     
     juego -> crear_juego();
 
-    cout << "juego creado"<<endl;
-
     Jugador* jug_1 = juego-> devolver_jugador_1();
     Jugador* jug_2 = juego -> devolver_jugador_2();
-
-    cout << "jugadores instanciados"<<endl;
+    Mapa* mapa = juego -> devolver_mapa();
 
     ifstream archivo;
 
     bool mapa_bien_cargado = false;
-    bool diccionario_edificios_bien_cargado = true;
-    bool inventario_bien_cargado = true;
+    bool nueva_partida = true;
+    bool diccionario_edificios_bien_cargado = false;
+    bool inventario_bien_cargado = false;
 
-    if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA) ){
+    if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA)) {
         juego -> devolver_mapa() -> cargar_mapa(archivo);
         mapa_bien_cargado = true;
     }
-    
-    cout << "mitad archivos";
-    
-    // if (juego -> es_archivo_legible(archivo, ARCHIVO_EDIFICIOS) ){
-    //     //registro_edificios->cargar_edificios(archivo, jug_1, jug_2);
-    //     bool diccionario_edificios_bien_cargado = true;
-    // }
 
-    // if (juego -> es_archivo_legible(archivo, ARCHIVO_MATERIALES) ){
-    //     //registro_edificios->cargar_edificios(archivo, jug_1, jug_2);
-    //     bool inventario_bien_cargado = true;
-    // }
-    cout << "cargo archivos";
-   // bool nueva_partida = false;
-    mapa_bien_cargado = juego -> es_archivo_legible(archivo, ARCHIVO_MAPA);
-    bool nueva_partida = !( juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES) );
+    if (juego -> es_archivo_legible(archivo, ARCHIVO_EDIFICIOS)) {
+        juego -> cargar_diccionario(archivo);
+        diccionario_edificios_bien_cargado = true;
+    }
+
+    if (juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES)) {
+        juego -> cargar_ubicaciones(archivo);
+        nueva_partida = false;
+    }
+
+    /*if (!nueva_partida) {
+        if (juego -> es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
+            juego -> cargar_inventario(archivo);
+            inventario_bien_cargado = true;
+        }
+    }*/
     
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
         
         bool alguien_gano = false;
         bool quiere_salir = false;
         bool quiere_terminar_turno = false;
-        bool sin_energia = false;        
+        bool sin_energia = false;    
         
-        if (nueva_partida){
+        if (nueva_partida) {
+            
             int ingreso;
             int opcion_elegida;
-            //proba de nuevo me olvide que el
+
             presentar_menu_np();
+
             cin >> opcion_elegida;
-            while (!opcion_valida_np(opcion_elegida)){
-                cout<<"Opcion no valida. Eliga nuevamente." <<endl;
-                cin>>opcion_elegida;}
-                
+            cin.clear();
+            cin.ignore(100, '\n');
+
+            while (!opcion_valida_np(opcion_elegida)) {
+                cout << "Opcion no valida. Eliga nuevamente." << endl;
+                cin >> opcion_elegida;
+                cin.clear();
+                cin.ignore(100, '\n');
+            }
+
             procesar_opcion_np(juego, opcion_elegida);
             
-            cout<<"Desea ser jugador 1 o 2 ? (ingrese 1 o 2): ";
+            cout << "Desea ser jugador 1 o 2 ? (ingrese 1 o 2): ";
             cin >> ingreso;
-            cout<<endl;
+            cout << endl;
 
             Mapa* mapa = juego -> devolver_mapa();
 
@@ -124,9 +127,11 @@ int main() {
                 //cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
                 
                 int opcion;
-                Mapa* mapa = juego -> devolver_mapa();
+
+                //system(CLR_SCREEN);
                 mapa -> imprimir_mapa();
                 presentar_menu();
+
                 cin >> opcion;
                 while (!opcion_valida(opcion)){
                     cout<<"Opcion no valida. Eliga nuevamente." <<endl;

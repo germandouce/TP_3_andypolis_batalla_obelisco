@@ -83,14 +83,29 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
     Jugador* jugador;
 
     while (ubicaciones >> nombre_elemento) {
+
         
-        ubicaciones >> fila;   
+
+        cout << nombre_elemento << endl;
+
+        fila = leer_palabra_compuesta(ubicaciones, nombre_elemento, OPCION_PARENTESIS);
+    
+        cout << fila << endl;
+        
         fila = limpiar_string(fila, POSICION_INICIAL_FILA, TOPE_CADENA_FILA);
 
+        cout << fila << endl;
+
         ubicaciones >> columna;
+        
+        cout << columna << endl;
+
         columna = limpiar_string(columna, POSICION_INICIAL_COLUMNA, TOPE_CADENA_COLUMNA);
 
-        
+        cout << columna << endl;
+
+        cout << nombre_elemento << endl;
+
         if (nombre_elemento == "1") {
             jugador = jugador1;
             jugador -> asignar_coordenadas(stoi(fila), stoi(columna));
@@ -104,7 +119,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
             instanciar_material(nombre_elemento, material);
             mapa -> colocar_material(stoi(fila) - 1, stoi(columna) - 1, material);
         }
-        else {
+        else if (nombre_elemento != "1" && nombre_elemento != "2") {
             edificio = diccionario -> instanciar_edificio(nombre_elemento, stoi(fila), stoi(columna));
             mapa -> construir_edificio(stoi(fila) - 1, stoi(columna) - 1, edificio);
             jugador -> agregar_edificio_al_registro(edificio);
@@ -271,7 +286,7 @@ void Juego::cargar_edificio(string nombre_edificio, int piedra, int madera, int 
 	}
 
 	if (nombre_edificio == G) {
-		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
+		edificio = new Mina_de_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
 		diccionario -> agregar_edificio(edificio);
 	}
 

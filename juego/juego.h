@@ -2,8 +2,11 @@
 #define JUEGO_H
 
 #include <ctime>
+#include <string>
 #include "..\mapa.h"
 #include "jugador.h"
+
+using namespace std;
 
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";

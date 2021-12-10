@@ -1,13 +1,4 @@
 #include "Registro_edificios.h"
-#include "Nodo_registro.h"
-#include "edificio.h"
-#include "planta_electrica.h"
-#include "obelisco.h"
-#include "mina.h"
-#include "mina_oro.h"
-#include "fabrica.h"
-#include "escuela.h"
-#include "aserradero.h"
 
 using namespace std;
 
@@ -121,7 +112,7 @@ void Registro_edificios::agregar(Edificio*edificio){
     }
 
     else if (nombre_edificio == G) {
-        nuevo = new Nodo_R(new Mina_oro(piedra, madera, metal, limite_construccion, fila, columna));
+        nuevo = new Nodo_R(new Mina_de_oro(piedra, madera, metal, limite_construccion, fila, columna));
         cantidad_minas_oro++;
     }
 

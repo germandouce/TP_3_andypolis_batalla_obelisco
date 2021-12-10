@@ -8,7 +8,7 @@
 #include "registro_edificios/escuela.h"
 #include "registro_edificios/fabrica.h"
 #include "registro_edificios/mina.h"
-#include "registro_edificios/mina_oro.h"
+#include "registro_edificios/mina_de_oro.h"
 #include "registro_edificios/obelisco.h"
 #include "registro_edificios/planta_electrica.h"
 

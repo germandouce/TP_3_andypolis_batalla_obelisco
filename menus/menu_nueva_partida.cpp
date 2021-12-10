@@ -4,17 +4,21 @@
 
 using namespace  std;
 
-void presentar_menu_np(){
-    cout<<"MENU MUEBA PARTIDA"<<endl;
-    cout<<"1) Modificar edificio por nombre."<<endl;
-    cout<<"2) Listar todos los edificios."<<endl;
-    cout<<"3) Mostrar mapa."<<endl;
-    cout<<"4) Comenzar partida."<<endl;
-    cout<<"5) Guardar y salir."<<endl;
-    cout<<"Eliga una opcion: "<<endl;
+void presentar_menu_np() {
+
+    system(CLR_SCREEN);
+    cout << ENTER_COLOR << "Puede elegir una de las siguiente opciones: " << END_COLOR << endl;
+    cout << endl;
+    cout << SUCESS_COLOR;
+    cout << "1) Modificar edificio por nombre." << endl;
+    cout << "2) Listar todos los edificios." << endl;
+    cout << "3) Mostrar mapa." << endl;
+    cout << "4) Comenzar partida." << endl;
+    cout << "5) Guardar y salir." << endl;
+    cout << END_COLOR;
 }
 
-void procesar_opcion_np(Juego* juego, int opcion){
+void procesar_opcion_np(Juego* juego, int opcion) {
 
     switch (opcion) {
         case MODIFICAR_EDIFICIO_X_NOMBRE:
@@ -40,4 +44,3 @@ void procesar_opcion_np(Juego* juego, int opcion){
 bool opcion_valida_np(int opcion) {
     return(opcion >= OPCION_MINIMA_NP && opcion <= OPCION_MAXIMA_NP);
 }
-

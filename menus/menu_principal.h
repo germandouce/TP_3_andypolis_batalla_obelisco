@@ -26,11 +26,10 @@ void presentar_menu();
 
 //pre: Se debe verificar que la opcion elegida sea valida
 //post: Procesa opcion elegida y la ejecuta
-void procesar_opcion(int opcion, Juego* juego,Jugador * jug_turno, Jugador * jug_secundario);
+void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_secundario);
 
 //pre: -
 //post: Verifica que la opcion elegida sea valida para ejecutar
 bool opcion_valida(int opcion);
-
 
 #endif //MENUS_MENU_PRINCIPAL_H

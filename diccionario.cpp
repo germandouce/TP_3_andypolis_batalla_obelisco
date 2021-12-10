@@ -80,7 +80,7 @@ Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, i
 	}
 
 	if (nombre_edificio == G) {
-		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, fila, columna);
+		edificio = new Mina_de_oro(piedra, madera, metal, limite_construccion, fila, columna);
 	}
 
 	if (nombre_edificio == O) {

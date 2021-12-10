@@ -1,0 +1,8 @@
+piedra (1, 1)
+madera (1, 2)
+1 (5, 5)
+escuela (4, 5)
+fabrica (5, 5)
+2 (10, 10)
+planta electrica (7, 2)
+mina de oro (13, 10)

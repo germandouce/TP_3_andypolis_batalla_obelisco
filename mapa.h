@@ -9,6 +9,7 @@
 
 #include "grafo/grafo.h"
 #include "inventario/inventario.h"
+#include "juego/jugador.h"
 
 #include "materiales/piedra.h"
 #include "materiales/madera.h"
@@ -130,7 +131,7 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse(Inventario* inventario, bool es_jugador2);
+	void moverse(Inventario* inventario, Jugador* jugador);
 
 	bool es_movimiento_valido(int fila, int columna);
 

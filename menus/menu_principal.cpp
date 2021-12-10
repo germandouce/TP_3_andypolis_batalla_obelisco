@@ -3,26 +3,30 @@
 
 using namespace  std;
 
-void presentar_menu(){
-    cout<<"MENU"<<endl;
-    cout<<"1) Construir edificio por nombre."<<endl;
-    cout<<"2) Listar los edificios construidos."<<endl;
-    cout<<"3) Demoler un edificio por coordenada."<<endl;
-    cout<<"4) Atacar un edificio por coordenada."<<endl;
-    cout<<"5) Reparar un edificio por coordenada."<<endl;
-    cout<<"6) Comprar bombas."<<endl;
-    cout<<"7) Consultar coordenada."<<endl;
-    cout<<"8) Mostrar inventario."<<endl;
-    cout<<"9) Mostrar objetivos."<<endl;
-    cout<<"10) Recolectar recursos producidos."<<endl;
-    cout<<"11) Moverse a una coordenada."<<endl;
-    cout<<"12) Finalizar turno."<<endl;
-    cout<<"13) Guardar y salir."<<endl;
-    cout<<"Eliga una opcion: "<<endl;
+void presentar_menu() {
+    cout << ENTER_COLOR << "Puede elegir una de las siguiente opciones: " << END_COLOR << endl;
+    cout << endl;
+    cout << SUCESS_COLOR;
+    cout << "1) Construir edificio por nombre." << endl;
+    cout << "2) Listar los edificios construidos." << endl;
+    cout << "3) Demoler un edificio por coordenada." << endl;
+    cout << "4) Atacar un edificio por coordenada." << endl;
+    cout << "5) Reparar un edificio por coordenada." << endl;
+    cout << "6) Comprar bombas." << endl;
+    cout << "7) Consultar coordenada." << endl;
+    cout << "8) Mostrar inventario." << endl;
+    cout << "9) Mostrar objetivos." << endl;
+    cout << "10) Recolectar recursos producidos." << endl;
+    cout << "11) Moverse a una coordenada." << endl;
+    cout << "12) Finalizar turno." << endl;
+    cout << "13) Guardar y salir." << endl;
+    cout << END_COLOR;
 }
 
+void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_secundario) {
 
-void procesar_opcion(int opcion, Juego* juego,Jugador * jug_turno, Jugador * jug_secundario){
+    //system(CLR_SCREEN);
+    Inventario* inventario = jug_turno -> devolver_inventario();
 
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
@@ -108,16 +112,7 @@ void procesar_opcion(int opcion, Juego* juego,Jugador * jug_turno, Jugador * jug
             //recolectar_recursos_producidos(vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
             break;
         case MOVERSE_A_UNA_COORDENADA:
-           //  system("cls");
-            cout << "hola 11" << endl;
-            cout << "ENTER PARA VOLVER A MENU" << endl;
-            //MOVERSE
-            //Pedir destino.
-            //Verificar caminos mínimos(tener en cuenta que sólo se permiten movimientos aledaños).
-            //Verificar energía usuario.
-            //Consultar al usuario si desea realizar dicha acción.
-            //Marcar camino realizado por el usuario.
-            //Volver al menú.
+            juego -> devolver_mapa() -> moverse(inventario, jug_turno);
             break;
         case FINALIZAR_TURNO:
            //  system("cls");
@@ -142,7 +137,6 @@ void procesar_opcion(int opcion, Juego* juego,Jugador * jug_turno, Jugador * jug
             break;
     }
 }
-
 
 bool opcion_valida(int opcion) {
     return(opcion >= OPCION_MINIMA && opcion <= OPCION_MAXIMA);

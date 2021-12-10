@@ -1,6 +1,15 @@
 #ifndef REGISTRO_EDIFICIOS_H
 #define REGISTRO_EDIFICIOS_H
+
 #include "Nodo_registro.h"
+#include "edificio.h"
+#include "planta_electrica.h"
+#include "obelisco.h"
+#include "mina.h"
+#include "mina_de_oro.h"
+#include "fabrica.h"
+#include "escuela.h"
+#include "aserradero.h"
 
 class Registro_edificios{
 

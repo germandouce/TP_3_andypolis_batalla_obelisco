@@ -293,17 +293,18 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 
 // MOVIMIENTO
 
-void Mapa::moverse(Inventario* inventario, bool es_jugador2) {
+void Mapa::moverse(Inventario* inventario, Jugador* jugador) {
 	
-	int fila_origen;
-	int columna_origen;
+	bool es_jugador2 = jugador -> devolver_numero_jugador() == NUMERO_JUGADOR2;
+
+	int fila_origen = jugador -> devolver_fila() - 1;
+	int columna_origen = jugador -> devolver_columna() - 1;
 	int origen;
 
 	int fila_destino;
 	int columna_destino;
 	int destino;
 	
-	pedir_coordenadas(fila_origen, columna_origen);
 	pedir_coordenadas(fila_destino, columna_destino);
 
 	if (es_movimiento_valido(fila_destino, columna_destino)) {
@@ -321,6 +322,9 @@ void Mapa::moverse(Inventario* inventario, bool es_jugador2) {
 		if (distancia != INFINITO) {
 			imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
 			ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+
+			jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
+
 			cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
 			cout << endl;
 
