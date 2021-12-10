@@ -1,6 +1,7 @@
 #ifndef INVENTARIO_H
 #define INVENTARIO_H
 #include <string>
+#include "juegojugador.h"
 
 using namespace std;
 
@@ -58,52 +59,56 @@ public:
     void cambiar_cantidad_elemento(string nombre_elemento, int cantidad_sumar_o_restar);
 
     //PRE: es valida la cantidad a cambiar.
-    //POS: cambia cantidad andycoins.
+    //POS: cambia cantidad andycoins en el inventario.
     void cambio_cantidad_andycoins(int cantidad);
 
     //PRE: es valida la cantidad a cambiar.
-    //POS: cam
+    //POS: cambia cantidad bombas en el inventario.
     void cambio_cantidad_bombas(int cantidad);
 
     //PRE: es valida la cantidad a cambiar.
-    //POS: cambia cantidad metal.
+    //POS: cambia cantidad metal en el inventario.
     void cambio_cantidad_metal(int cantidad);
 
-
-
     //PRE: es valida la cantidad a cambiar.
-    //POS: cambia cantidad madera.
+    //POS: cambia cantidad madera en el inventario.
     void cambio_cantidad_madera(int cantidad);
 
-
-
-
     //PRE: es valida la cantidad a cambiar.
-    //POS: cambia cantidad de piedra.
+    //POS: cambia cantidad de piedra en el inventario.
     void cambio_cantidad_piedra(int cantidad);
-
-
-
 
     //PRE:
     //POS: devuelve true si es valida la cantidad a cambiar a andypolis.
     bool cambio_cantidad_andycoins_valida( int cantidad_consultada);
 
     //PRE:
-    //POS: devuelve true si es valida  la cantidad 
+    //POS: devuelve true si es valida  la cantidad a cambiar de bombas.
     bool cambio_cantidad_bombas_valida( int cantidad_consultada);
 
     //PRE:
-    //POS:
+    //POS:  devuelve true si es valida  la cantidad a cambiar de madera.
     bool cambio_cantidad_madera_valida( int cantidad_consultada);
 
     //PRE:
-    //POS:
+    //POS:  devuelve true si es valida  la cantidad a cambiar de metal.
     bool cambio_cantidad_metal_valida( int cantidad_consultada);
 
     //PRE:
-    //POS:
+    //POS:  devuelve true si es valida  la cantidad a cambiar de piedra.
     bool cambio_cantidad_piedra_valida( int cantidad_consultada);
+
+    void consultar_porcentaje_material(string nombre_material ,int numero_porcentaje, Diccionario*diccionario, Jugador*jugador,int fila , int columna);
+
+    bool porcentaje_concultado_valido(float porcentaje_consultado);
+
+    bool porcentaje_de_metal_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+
+    bool porcentaje_de_mader_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+
+    bool porcentaje_de_piedra_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario);
+
+
 
     //DESTRUCTOR
     ~Inventario();

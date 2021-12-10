@@ -1,9 +1,10 @@
 #include "inventario.h"
 #include <iostream>
 
+
 using namespace std;
 
-Inventario::Inventario(){
+Inventario::Inventario(){ 
     cantidad_elementos = 0;
     cant_madera = 0;
     cant_piedra = 0;
@@ -55,28 +56,28 @@ void Inventario::mostrar_inventario() {
 }
 
 bool Inventario::cambio_cantidad_madera_valida( int cantidad_consultada){
-    return(cantidad_consultada > 0 &&  cant_madera > cantidad_consultada );
+    return(cant_madera > cantidad_consultada *(-1));
 }
 
 bool Inventario::cambio_cantidad_piedra_valida( int cantidad_consultada){
-    return(cantidad_consultada > 0 &&  cant_piedra > cantidad_consultada );
+    return(cant_piedra > cantidad_consultada*(-1) );
 }
 
 bool Inventario::cambio_cantidad_metal_valida( int cantidad_consultada){
-    return(cantidad_consultada > 0 &&  cant_metal > cantidad_consultada );
+    return(cant_metal > cantidad_consultada *(-1));
 }
 
 bool Inventario::cambio_cantidad_andycoins_valida( int cantidad_consultada){
-    return(cantidad_consultada > 0 &&  cant_andycoins > cantidad_consultada);
+    return(cant_andycoins > cantidad_consultada*(-1));
 }
 
 bool Inventario::cambio_cantidad_bombas_valida( int cantidad_consultada){
-    return(cantidad_consultada > 0 &&  cant_bombas > cantidad_consultada );
+    return(cant_bombas > cantidad_consultada*(-1));
 }
 
 
 void Inventario::cambio_cantidad_madera(int cantidad){
-    if (!cambio_cantidad_madera_valida(cantidad)){
+    if (cantidad < 0 && !cambio_cantidad_madera_valida(cantidad)){
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << endl;
     }
     else{
@@ -85,7 +86,7 @@ void Inventario::cambio_cantidad_madera(int cantidad){
     }
 }
 void Inventario::cambio_cantidad_piedra(int cantidad){
-    if (!cambio_cantidad_piedra_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_piedra_valida(cantidad)){
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
     }
     else{
@@ -94,7 +95,7 @@ void Inventario::cambio_cantidad_piedra(int cantidad){
     }
 }
 void Inventario::cambio_cantidad_metal(int cantidad){
-    if (!cambio_cantidad_metal_valida(cantidad)){
+    if (cantidad < 0 && !cambio_cantidad_metal_valida(cantidad)){
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
     }
     else{
@@ -104,7 +105,7 @@ void Inventario::cambio_cantidad_metal(int cantidad){
 }
 
 void Inventario::cambio_cantidad_bombas(int cantidad){
-    if (!cambio_cantidad_bombas_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_bombas_valida(cantidad)){
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
     }
     else{
@@ -114,7 +115,7 @@ void Inventario::cambio_cantidad_bombas(int cantidad){
 }
 
 void Inventario::cambio_cantidad_andycoins(int cantidad){
-    if (!cambio_cantidad_andycoins_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_andycoins_valida(cantidad)){
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
     }
     else{
@@ -125,23 +126,23 @@ void Inventario::cambio_cantidad_andycoins(int cantidad){
 
 void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_sumar_o_restar) {
     if (nombre_elemento == I_MADERA) {
-        cambio_cantidad_madera_valida(cantidad_sumar_o_restar);
+        cambio_cantidad_madera(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == I_PIEDRA){
-        cambio_cantidad_piedra_valida(cantidad_sumar_o_restar);
+        cambio_cantidad_piedra(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == I_METAL){
-        cambio_cantidad_metal_valida(cantidad_sumar_o_restar);
+        cambio_cantidad_metal(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == I_BOMBAS) {
-      cambio_cantidad_bombas_valida(cantidad_sumar_o_restar);
+      cambio_cantidad_bombas(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == I_ANDYCOINS) {
-        cambio_cantidad_andycoins_valida(cantidad_sumar_o_restar);
+        cambio_cantidad_andycoins(cantidad_sumar_o_restar);
     }
 
     else{
@@ -153,6 +154,55 @@ void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_
 
 void Inventario::actualizar_largo_de_inventario(){
     cantidad_elementos = cantidad_elementos+1;
+}
+
+void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje, Diccionario*diccionario, Jugador*jugador,int fila , int columna){
+    string nombre_edificio = jugador->devolver_registro_edificios()->buscar_edificio_en_registro(fila, columna)->obtener_nombre();
+    float porcentaje_usar = numero_porcentaje/100;
+    if (porcentaje_concultado_valido(porcentaje_usar)){
+        if (nombre_material == I_MADERA){
+            if (porcentaje_de_madera_existente(nombre_edificio,porcentaje_usar,diccionario))
+                cout << "Contas con la cantidad de madera necesaria."<<endl;
+            else{
+                cout << "No contas con la cantidad de madera necesaria."<<endl;
+                }
+            }
+        else if (nombre_material == I_PIEDRA){
+            if (porcentaje_de_piedra_existente(nombre_edificio,porcentaje_usar,diccionario))
+                cout << "Contas con la cantidad de piedra necesaria."<<endl;
+            else{
+                cout << "No contas con la cantidad de piedra necesaria."<<endl;
+                }
+            }
+        else if (nombre_material == I_METAL){
+            if (porcentaje_de_metal_existente(nombre_edificio,porcentaje_usar,diccionario))
+                cout << "Contas con la cantidad de metal necesaria."<<endl;
+            else{
+                cout << "No contas con la cantidad de metal necesario."<<endl;
+                }
+            }
+    }else{
+        cout << "Porcentaje consultado no valido." << endl;
+         }
+}
+
+bool Inventario::porcentaje_de_madera_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
+    float cantidad_madera_requerida = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_madera()*porcentaje_usar;
+    return ((float)cant_madera >= cantidad_madera_requerida);
+}
+
+bool Inventario::porcentaje_de_piedra_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
+    float cantidad_de_piedra_requerida = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_piedra()*porcentaje_usar;
+    return ((float)cant_piedra >= cantidad_piedra_requerida);
+}
+
+bool Inventario::porcentaje_de_metal_existente(string nom_edificio,float porcentaje_usar, Diccionario*diccionario){
+    float cantidad_de_metal_requerido = diccionario->buscar_edificio(nom_edificio)->obtener_cantidad_metal()*porcentaje_usar;
+    return ((float)cant_metal >= cantidad_metal_requerido);
+}
+
+bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
+    return(porcentaje_consultado > 0);
 }
 
 Inventario::~Inventario(){

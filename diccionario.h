@@ -2,6 +2,7 @@
 #define DICCIONARIO_H
 
 #include "nodo_dict.h"
+#include "diccionario.h"
 
 #include "registro_edificios/aserradero.h"
 #include "registro_edificios/escuela.h"
