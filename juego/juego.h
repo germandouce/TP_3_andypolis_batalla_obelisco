@@ -10,7 +10,6 @@ const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
 const string ARCHIVO_EDIFICIOS = "edificios.txt";
 const string ARCHIVO_MATERIALES = "materiales.txt";
 
-
 const char PARENTESIS_CHAR = '(';
 const int OPCION_PARENTESIS = 0;
 const int OPCION_NUMEROS = 1;
@@ -123,17 +122,46 @@ class Juego {
     //PRE:Recibe un objeto ifstream, el nombre del edificio y un entero con la opcion de si se queire
     //evitar un numero o un parentesis
     //POST: Lee las elmentos de mas de una palabra delimitados por un numero o un paretesis
-    string Juego::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
+    string leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
 
     //Verificar tipo caracter
     //PRE:Recibe una palabra y un entero que puede ser un ???? o un ??
     //POST: Devuelve true si es un parentesis o false si es un numero
-    bool Juego::verificar_tipo_caracter(string palabra, int tipo_caracter);
+    bool verificar_tipo_caracter(string palabra, int tipo_caracter);
 
     //Es numero
     //PRE: Recibe un string con la palabra
     //POST: Devuelve true si es un numero o false en caso contrario
-    bool Juego::es_numero(string palabra);
+    bool es_numero(string palabra);
+
+    Edificio* encontrar_edificio();
+
+    //
+    //
+    //
+    void mostrar_todos_edificios();
+
+    
+    //Verificar construccion
+    //PRE:-
+    //POST:-
+    void verificar_construccion();
+
+    //Confirmar construccion
+    //PRE:
+    //POST:
+    void confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir);
+
+    //Mostrar costo edificio
+    //PRE:-
+    //POST:
+    void mostrar_costo_edificio(Edificio* edificio_a_construir);
+
+    void pedir_coordenadas(int &fila, int &columna);
+
+    void pedir_fila(int &fila);
+
+    void pedir_columna(int &columna);
 };
 
 #endif //JUEGO_H

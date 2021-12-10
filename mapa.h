@@ -66,8 +66,7 @@ const int CANTIDAD_COORDENADAS = 2;
 const int FILA = 0;
 const int COLUMNA = 1;
 
-const int NULA =-1;
-
+const int NULA = -1;
 
 class Mapa {
 	
@@ -102,8 +101,6 @@ class Mapa {
 	//pre: Los valores ingresados deben cumplir que: 0 <= fila < filas y 0 <= columna < columnas.
     //post: Devuelve un puntero al Casillero ubicado en la fila y columna ingresadas.
 	Casillero* obtener_casillero(int fila, int columna);
-
-	Diccionario* obtener_diccionario();
 
 	//pre: Los valores ingresados deben cumplir que: 0 <= fila < filas y 0 <= columna < columnas.
     //post: Devuelve el tipo del Casillero ubicado en la fila y columna ingresadas.

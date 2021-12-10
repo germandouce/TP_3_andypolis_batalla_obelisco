@@ -322,3 +322,123 @@ Jugador* Juego::devolver_jugador_1() {
 Jugador* Juego::devolver_jugador_2() {
     return jugador2;
 }
+
+void Juego::mostrar_todos_edificios() {
+
+	cout << ENTER_COLOR << "Esta es la informacion de todos los edificios: " << END_COLOR << endl;
+    cout << endl;
+
+	diccionario -> mostrar_todos_edificios();
+}
+
+Edificio* Juego::encontrar_edificio() {
+
+    string nombre_ingresado;
+
+    cout << ENTER_COLOR << "Ingrese el nombre del edificio deseado: " << END_COLOR << endl;
+    
+    getline(cin, nombre_ingresado);
+    
+	Edificio* edificio_encontrado = diccionario -> buscar_edificio(nombre_ingresado);
+
+    if (edificio_encontrado == nullptr) {
+        cout << endl;
+        cout << ERROR_COLOR << "-El nombre del edificio ingresado es incorrecto." << END_COLOR << endl;
+    }
+    
+    return edificio_encontrado;
+}
+
+void Juego::verificar_construccion() {
+
+    Edificio* edificio_a_construir = encontrar_edificio();
+	int fila;
+	int columna;
+	bool verificacion = true;
+
+	if (edificio_a_construir != nullptr) {
+
+		pedir_coordenadas(fila, columna);
+			
+		if (mapa -> obtener_casillero(fila, columna) -> esta_ocupado()) {
+			cout << ERROR_COLOR << "-Las coordenadas ingresadas se encuentran ocupadas." << END_COLOR << endl;
+			verificacion = false;
+		}
+
+		if (verificacion) {
+			confirmar_construccion(fila, columna, edificio_a_construir);
+    	}
+	} 
+}
+
+void Juego::confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir) {
+
+    string respuesta;
+    string nombre_edificio = edificio_a_construir -> obtener_nombre();
+
+    system(CLR_SCREEN);
+    cout << ENTER_COLOR << "Esta seguro que desea construir un/a '" << nombre_edificio << "'?" << END_COLOR << endl;;
+    cout << SUCESS_COLOR << "Ingrese 'si' para confirmar." << END_COLOR << endl;
+    mostrar_costo_edificio(edificio_a_construir);
+    cin >> respuesta;
+    cout << endl;
+    
+    if (respuesta == "si") {
+        mapa -> construir_edificio(fila, columna, edificio_a_construir);
+        cout << SUCESS_COLOR << "-Se ha construido exitosamente un/a '" << nombre_edificio << "'." << END_COLOR << endl;
+    }
+    else {
+        cout << ERROR_COLOR << "-No se ha construido el edificio." << END_COLOR << endl;
+    }
+}
+
+void Juego::mostrar_costo_edificio(Edificio* edificio_a_construir) {
+    cout << endl;
+    cout << ENTER_COLOR << "Costos de construccion: " << END_COLOR << endl;
+    cout << SUCESS_COLOR;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_piedra() << " unidades de piedra." << endl;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_madera() << " unidades de madera." << endl;
+    cout << "-" << edificio_a_construir -> obtener_cantidad_metal() << " unidades de metal." << endl;
+    cout << END_COLOR << endl;
+}
+
+void Juego::pedir_coordenadas(int &fila, int &columna) {
+	
+	system(CLR_SCREEN);
+
+	pedir_fila(fila);
+
+    while (fila <= 0) {
+        system(CLR_SCREEN);
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << endl;
+        pedir_fila(fila);
+    }
+
+    pedir_columna(columna);
+
+    while (columna <= 0) {
+        system(CLR_SCREEN);
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << endl;
+        pedir_columna(columna);
+    }
+
+	fila = fila - 1;
+	columna = columna - 1;
+    cout << endl;
+}
+
+void Juego::pedir_fila(int &fila) {
+    cout << ENTER_COLOR << "Ingrese la fila del casillero deseado: " << END_COLOR << endl;
+    cin >> fila;
+    cin.clear();
+    cin.ignore(100, '\n');
+}
+
+void Juego::pedir_columna(int &columna) {
+    cout << ENTER_COLOR << "Ingrese la columna del casillero deseado: " << END_COLOR << endl;
+    cin >> columna;
+    cin.clear();
+    cin.ignore(100, '\n');
+}

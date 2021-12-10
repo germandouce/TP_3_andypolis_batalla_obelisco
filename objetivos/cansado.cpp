@@ -7,6 +7,6 @@ Cansado::Cansado() : Objetivo() {
   //   this -> requisito = REQUISITO_CANSADO;
 }
 
-bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
+bool Cansado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
 	//return true;
 }

@@ -36,7 +36,7 @@ int main() {
     // }
     cout << "cargo archivos";
    // bool nueva_partida = false;
-    bool mapa_bien_cargado = juego -> es_archivo_legible(archivo, ARCHIVO_MAPA);
+    mapa_bien_cargado = juego -> es_archivo_legible(archivo, ARCHIVO_MAPA);
     bool nueva_partida = !( juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES) );
     
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {

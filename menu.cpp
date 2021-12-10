@@ -32,7 +32,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa, Inventario* inventario) {
     switch (opcion_elegida) {
         case 1:
             system(CLR_SCREEN);
-            mapa -> verificar_construccion();
+            //mapa -> verificar_construccion();
             cout << endl;
             break;
         case 2:
@@ -41,7 +41,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa, Inventario* inventario) {
             break;
         case 3:
             system(CLR_SCREEN);
-            mapa -> mostrar_todos_edificios();
+            //mapa -> mostrar_todos_edificios();
             break;
         case 4:
             system(CLR_SCREEN);

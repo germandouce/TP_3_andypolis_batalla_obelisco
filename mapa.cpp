@@ -18,9 +18,6 @@ Mapa::~Mapa() {
 
 	delete grafo;
 	grafo = nullptr;
-	
-	delete diccionario;
-	diccionario = nullptr;
 }
 
 int Mapa::obtener_filas() {
@@ -33,10 +30,6 @@ int Mapa::obtener_columnas() {
 
 Casillero* Mapa::obtener_casillero(int fila, int columna) {
 	return matriz[fila][columna];
-}
-
-Diccionario* Mapa::obtener_diccionario() {
-	return diccionario;
 }
 
 string Mapa::obtener_tipo_casillero(int fila, int columna) {
@@ -159,14 +152,6 @@ void Mapa::imprimir_mapa() {
 		cout << ENTER_COLOR << " " << lineas_columnas << endl;
 	}
 	cout << END_COLOR << endl;
-}
-
-void Mapa::mostrar_todos_edificios() {
-
-	cout << ENTER_COLOR << "Esta es la informacion de todos los edificios: " << END_COLOR << endl;
-    cout << endl;
-
-	diccionario -> mostrar_todos_edificios();
 }
 
 void Mapa::consultar_casillero() {
@@ -461,77 +446,6 @@ void Mapa::recolectar_recursos(int fila, int columna, Inventario* inventario) {
 }
 
 // CONSTRUIR EDIFICIO
-
-Edificio* Mapa::encontrar_edificio() {
-
-    string nombre_ingresado;
-
-    cout << ENTER_COLOR << "Ingrese el nombre del edificio deseado: " << END_COLOR << endl;
-    
-    getline(cin, nombre_ingresado);
-    
-	Edificio* edificio_encontrado = diccionario -> buscar_edificio(nombre_ingresado);
-
-    if (edificio_encontrado == nullptr) {
-        cout << endl;
-        cout << ERROR_COLOR << "-El nombre del edificio ingresado es incorrecto." << END_COLOR << endl;
-    }
-    
-    return edificio_encontrado;
-}
-
-void Mapa::verificar_construccion() {
-
-    Edificio* edificio_a_construir = encontrar_edificio();
-	int fila;
-	int columna;
-	bool verificacion = true;
-
-	if (edificio_a_construir != nullptr) {
-
-		pedir_coordenadas(fila, columna);
-			
-		if (matriz[fila][columna] -> esta_ocupado()) {
-			cout << ERROR_COLOR << "-Las coordenadas ingresadas se encuentran ocupadas." << END_COLOR << endl;
-			verificacion = false;
-		}
-
-		if (verificacion) {
-			confirmar_construccion(fila, columna, edificio_a_construir);
-    	}
-	} 
-}
-
-void Mapa::confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir) {
-
-    string respuesta;
-    string nombre_edificio = edificio_a_construir -> obtener_nombre();
-
-    system(CLR_SCREEN);
-    cout << ENTER_COLOR << "Esta seguro que desea construir un/a '" << nombre_edificio << "'?" << END_COLOR << endl;;
-    cout << SUCESS_COLOR << "Ingrese 'si' para confirmar." << END_COLOR << endl;
-    mostrar_costo_edificio(edificio_a_construir);
-    cin >> respuesta;
-    cout << endl;
-    
-    if (respuesta == "si") {
-        construir_edificio(fila, columna, edificio_a_construir);
-        cout << SUCESS_COLOR << "-Se ha construido exitosamente un/a '" << nombre_edificio << "'." << END_COLOR << endl;
-    }
-    else {
-        cout << ERROR_COLOR << "-No se ha construido el edificio." << END_COLOR << endl;
-    }
-}
-
-void Mapa::mostrar_costo_edificio(Edificio* edificio_a_construir) {
-    cout << endl;
-    cout << ENTER_COLOR << "Costos de construccion: " << END_COLOR << endl;
-    cout << SUCESS_COLOR;
-    cout << "-" << edificio_a_construir -> obtener_cantidad_piedra() << " unidades de piedra." << endl;
-    cout << "-" << edificio_a_construir -> obtener_cantidad_madera() << " unidades de madera." << endl;
-    cout << "-" << edificio_a_construir -> obtener_cantidad_metal() << " unidades de metal." << endl;
-    cout << END_COLOR << endl;
-}
 
 void Mapa::construir_edificio(int fila, int columna, Edificio* edificio_a_construir) {
 	matriz[fila][columna] -> construir_edificio(edificio_a_construir);

@@ -64,7 +64,7 @@ int Jugador::obtener_energia(){
     return energia;
 }
 
-void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
+/*void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
 
     for (int i = 0; i < 3; i++) {
         switch (objetivo) {
@@ -129,7 +129,7 @@ void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int ca
                 break;  
             }
     }
-}
+}*/
 
 
 bool Jugador::gano(){
