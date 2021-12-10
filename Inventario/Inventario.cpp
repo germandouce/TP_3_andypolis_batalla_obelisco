@@ -54,56 +54,95 @@ void Inventario::mostrar_inventario() {
     cout << endl;
 }
 
+bool Inventario::cambio_cantidad_madera_valida( int cantidad_consultada){
+    return(cantidad > 0 &&  cant_madera > cantidad_sumar_o_restar *(-1));
+}
+
+bool Inventario::cambio_cantidad_piedra_valida( int cantidad_consultada){
+    return(cantidad > 0 &&  cant_piedra > cantidad_sumar_o_restar *(-1));
+}
+
+bool Inventario::cambio_cantidad_metal_valida( int cantidad_consultada){
+    return(cantidad > 0 &&  cant_metal > cantidad_sumar_o_restar *(-1));
+}
+
+bool Inventario::cambio_cantidad_andypolis_valida( int cantidad_consultada){
+    return(cantidad > 0 &&  cant_andycoins > cantidad_sumar_o_restar *(-1));
+}
+
+bool Inventario::cambio_cantidad_bombas_valida( int cantidad_consultada){
+    return(cantidad > 0 &&  cant_bombas > cantidad_sumar_o_restar *(-1));
+}
+
+
+void Inventario::cambio_cantidad_madera(int cantidad){
+    if (!cambio_cantidad_madera_valida(cantidad)){
+        cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << endl;
+    }
+    else{
+        int cantidad_actualizada = cant_madera + cantidad_sumar_o_restar;
+        cant_madera = cantidad_actualizada;
+    }
+}
+void Inventario::cambio_cantidad_piedra(int cantidad){
+    if (!cambio_cantidad_piedra_valida(cantidad)){
+        cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
+    }
+    else{
+        int cantidad_actualizada = cant_piedra + cantidad_sumar_o_restar;
+        cant_piedra = cantidad_actualizada;
+    }
+}
+void Inventario::cambio_cantidad_metal(int cantidad){
+    if (!cambio_cantidad_metal_valida(cantidad)){
+        cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
+    }
+    else{
+        int cantidad_actualizada = cant_metal + cantidad_sumar_o_restar;
+        cant_metal = cantidad_actualizada;
+    }
+}
+
+void Inventario::cambio_cantidad_bombas(int cantidad){
+    if (!cambio_cantidad_bombas_valida(cantidad)){
+        cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
+    }
+    else{
+        int cantidad_actualizada = cant_bombas + cantidad_sumar_o_restar;
+        cant_bombas = cantidad_actualizada;
+    }
+}
+
+void Inventario::cambio_cantidad_andycoins(int cantidad){
+    if (!cambio_cantidad_andycoins_valida(cantidad)){
+        cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
+    }
+    else{
+        int cantidad_actualizada = cant_andycoins + cantidad_sumar_o_restar;
+        cant_andycoins = cantidad_actualizada;
+    }
+}
+
 void Inventario::cambiar_cantidad_elemento(std::string nombre_elemento, int cantidad_sumar_o_restar) {
-    int cantidad_actualizada;
     if (nombre_elemento == "Madera" || nombre_elemento == "madera"){
-        if (cantidad_sumar_o_restar < 0 &&  cant_madera < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << endl;
-        }
-        else{
-            cantidad_actualizada = cant_madera + cantidad_sumar_o_restar;
-            cant_madera = cantidad_actualizada;
-        }
+        cambio_cantidad_valido_madera(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == "Piedra" || nombre_elemento == "piedra"){
-        if (cantidad_sumar_o_restar < 0 &&  cant_piedra < cantidad_sumar_o_restar *(-1) ){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
-        }
-        else {
-            cantidad_actualizada = cant_piedra + cantidad_sumar_o_restar;
-            cant_piedra = cantidad_actualizada;
-        }
+        cambio_cantidad_valido_piedra(cantidad_sumar_o_restar);
+      
     }
 
     else if (nombre_elemento == "Metal" || nombre_elemento == "metal"){
-        if (cantidad_sumar_o_restar < 0  && cant_metal < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
-        }
-        else {
-            cantidad_actualizada = cant_metal + cantidad_sumar_o_restar;
-            cant_metal = cantidad_actualizada;
-        }
+        cambio_cantidad_valido_metal(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == "Bombas" || nombre_elemento == "bombas"){
-        if (cantidad_sumar_o_restar < 0  && cant_bombas < cantidad_sumar_o_restar*(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
-        }
-        else {
-            cantidad_actualizada = cant_bombas + cantidad_sumar_o_restar;
-            cant_bombas = cantidad_actualizada;
-        }
+      cambio_cantidad_valido_bombas(cantidad_sumar_o_restar);
     }
 
     else if (nombre_elemento == "Andycoins" || nombre_elemento == "andycoins"){
-        if (cantidad_sumar_o_restar < 0  && cant_andycoins < cantidad_sumar_o_restar *(-1)){
-            cout<< "No se puede restarle " << cantidad_sumar_o_restar *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
-        }
-        else {
-            cantidad_actualizada = cant_andycoins + cantidad_sumar_o_restar;
-            cant_andycoins = cantidad_actualizada;
-        }
+        cambio_cantidad_valido_andycoins(cantidad_sumar_o_restar);
     }
 
     else{

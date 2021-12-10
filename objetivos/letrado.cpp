@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "letrado.h"
 
 Letrado::Letrado(): Letrado() {
     this -> nombre_objetivo = "Letrado";

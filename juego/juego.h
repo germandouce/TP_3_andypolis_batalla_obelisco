@@ -16,7 +16,7 @@ class Juego{
 private:
     Mapa * mapa;
     //Diccionario * diccionario_edificios;
-    string objetivos[10];
+    Vector<Objetivo> *objetivos;
 
 public:
     
@@ -38,7 +38,7 @@ public:
     //
     void cargar_inventario(ifstream& inventario,Inventario*inventario_jugador_1,Inventario* inventario_jugador_2);
     
-    void cargar_vector_de_objetivos();
+    void cargar_objetivos();
     
     //es archivo legible
     //PRE: 

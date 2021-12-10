@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "energetico.h"
 
 Energetico::Energetico(): Objetivo() {
     this -> nombre_objetivo = "Energetico";

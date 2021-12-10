@@ -6,7 +6,7 @@ Jugador::Jugador(){
     this -> numero_jugador = 0;
 
     // this -> Vector<Material>* inventario;
-    // this -> Vector<Objetivo>* objetivos;
+    this -> objetivos = 0;
     //this -> Vector<Edificio>* edificios;
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;
@@ -48,8 +48,8 @@ int Jugador::devolver_numero_jugador(){
 }
 
 
-void Jugador::asignar_objetivo(int objetivo, int numero_objetivo){
-    objetivos[numero_objetivo]  = objetivo;
+void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar, int posicion_objetivo){
+    objetivos->insertar_posicion(posicion_objetivo, objetivo_a_asignar);
 }
 
 void Jugador::agregar_material_a_inventario(){

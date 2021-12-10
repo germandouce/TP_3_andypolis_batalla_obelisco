@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "armado.h"
 
 Armado::Armado() : Objetivo() {
     this -> nombre_objetivo = "Constructor";

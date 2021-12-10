@@ -1,4 +1,4 @@
-#include "objetivo.h"
+#include "edad_piedra.h"
 
 Edad_piedra::Edad_piedra() : Objetivo() {
     this -> nombre_objetivo = "Edad de piedra";
