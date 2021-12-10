@@ -8,5 +8,5 @@ Comprar_andypolis::Comprar_andypolis() : Objetivo() {
 }
 
 bool Comprar_andypolis::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
-	//return true;
+	return true;
 }

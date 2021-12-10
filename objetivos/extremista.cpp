@@ -8,6 +8,5 @@ Extremista::Extremista() : Objetivo() {
 }
 
 bool Extremista::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
-    // return (bombas_compradas == 500);
-   // return true
+    return true;
 }

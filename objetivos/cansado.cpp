@@ -8,5 +8,5 @@ Cansado::Cansado() : Objetivo() {
 }
 
 bool Cansado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
-	//return true;
+	return true;
 }

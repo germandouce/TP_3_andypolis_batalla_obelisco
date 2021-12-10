@@ -8,5 +8,5 @@ Bombardero::Bombardero() : Objetivo() {
 }
 
 bool Bombardero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
-    //return true;
+    return true;
 }

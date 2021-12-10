@@ -2,6 +2,14 @@
 #define INVENTARIO_H
 #include <string>
 
+using namespace std;
+
+const string I_PIEDRA = "piedra";
+const string I_MADERA = "madera";
+const string I_METAL = "metal";
+const string I_BOMBAS = "bombas";
+const string I_ANDYCOINS = "andycoins";
+
 class Inventario {
     //ATRIBUTOS
 private:
@@ -47,7 +55,7 @@ public:
 
     //PRE: cantidad sumar o restar depende del signo. Si quiere restar inlcuir signo menos o negativo "-".
     //POS: busca elemento segun el nombre y le modifica su cantidad actual registrada en el inventario.
-    void cambiar_cantidad_elemento(std::string nombre_elemento, int cantidad_sumar_o_restar);
+    void cambiar_cantidad_elemento(string nombre_elemento, int cantidad_sumar_o_restar);
 
     //PRE: es valida la cantidad a cambiar.
     //POS: cambia cantidad andycoins.
@@ -55,76 +63,34 @@ public:
 
     //PRE: es valida la cantidad a cambiar.
     //POS: cam
-a cantidad bombas.a cantidad bombas.a cantidad bombas.a cantidad bombas    void cambio_cantidad_bombas(int cantidad);
+    void cambio_cantidad_bombas(int cantidad);
 
     //PRE: es valida la cantidad a cambiar.
     //POS: cambia cantidad metal.
     void cambio_cantidad_metal(int cantidad);
 
+
+
     //PRE: es valida la cantidad a cambiar.
     //POS: cambia cantidad madera.
     void cambio_cantidad_madera(int cantidad);
+
+
+
 
     //PRE: es valida la cantidad a cambiar.
     //POS: cambia cantidad de piedra.
     void cambio_cantidad_piedra(int cantidad);
 
+
+
+
     //PRE:
     //POS: devuelve true si es valida la cantidad a cambiar a andypolis.
-    bool cambio_cantidad_andypolis_valida( int cantidad_consultada);
+    bool cambio_cantidad_andycoins_valida( int cantidad_consultada);
 
     //PRE:
     //POS: devuelve true si es valida  la cantidad 
-.sabmob a ed raibmac 
-.sabmob a ed raibmac 
-.sabmob a ed raibmac 
-.sabmob a  devuelve true si es valida la cantidad a cambiar a madera.ed raibmac 
-.sab devuelve true si es valida la cantidad a cambiar a andypolis.mob a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmob a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmob devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
-sab devuelve true si es valida la cantidad a cambiar a andypolismetalmopiedrab devuelve true si es valida la cantidad a cambiar a andypolis. a ed raibmac 
- ed raibmac 
     bool cambio_cantidad_bombas_valida( int cantidad_consultada);
 
     //PRE:

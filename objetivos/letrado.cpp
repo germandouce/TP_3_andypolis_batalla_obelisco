@@ -8,6 +8,5 @@ Letrado::Letrado(): Objetivo() {
 }
 
 bool Letrado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
-    // return (cantidad_escuelas_construidas == cantidad_max_escuelas);
-    //return true;
+    return true;
 }
