@@ -8,5 +8,5 @@ Constructor::Constructor(): Objetivo() {
 }
 
 bool comprobar_requisito(int traer_resgistro_){
-    return (traer_resgistro_ = 9999999999999999999);
+    return (traer_resgistro_ == 9999999999999999999);
 }

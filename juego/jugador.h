@@ -4,6 +4,18 @@
 #include <string>
 #include "..\registro_edificios\registro_edificios.h"
 #include "..\inventario\inventario.h"
+#include "..\vector.h"
+
+#include "..\objetivos\armado.h"
+#include "..\objetivos\bombardero.h"
+#include "..\objetivos\cansado.h"
+#include "..\objetivos\comprar_andypolis.h"
+#include "..\objetivos\constructor.h"
+#include "..\objetivos\edad_piedra.h"
+#include "..\objetivos\energetico.h"
+#include "..\objetivos\extremista.h"
+#include "..\objetivos\letrado.h"
+#include "..\objetivos\minero.h"
 
 const int COMPRAR_ANDYPOLIS = 1;
 const int EDAD_PIEDRA = 2;
@@ -26,7 +38,7 @@ class Jugador {
 
     // Vector<Material>* inventario;
     //Vector<Objetivo>* objetivos;
-    int objetivos[3];
+    Vector<Objetivo> *objetivos;
     //Vector<Edificio>* edificios;
     Inventario* inventario;
     Registro_edificios * registro_edificios;
@@ -74,7 +86,7 @@ class Jugador {
     //Asignar objetivos
     //PRE:
     //POST: Asigna 1 objetivo al jugador agregandolo a la lista de objetivos
-    void asignar_objetivo(int objetivo, int numero_objetivo);
+    void asignar_objetivo(Objetivo* objetivo_a_asignar, int posicion_objetivo);
 
     //Cargar el inventario
     //PRE:

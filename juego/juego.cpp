@@ -2,7 +2,7 @@
 
 Juego::Juego(){
     this -> mapa = new Mapa();
-    this -> objetivo =0;
+    this -> objetivos =0;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
@@ -215,10 +215,35 @@ void Juego::crear_juego(Jugador * jug_1, Jugador * jug_2){
     }
 }
 
-void Juego::cargar_vector_de_objetivos(){
-    for (int i = 0; i <10; i++){
-        //this -> objetivos[i] = 1;
-    };
+void Juego::cargar_objetivos(){
+
+    Objetivo *edad_piedra = new Edad_piedra();
+    objetivos->insertar_ultimo(edad_piedra);
+
+    Objetivo *bombardero = new Bombardero();
+    objetivos->insertar_ultimo(bombardero);
+
+    Objetivo *energetico = new Energetico();
+    objetivos->insertar_ultimo(energetico);
+
+    Objetivo *letrado = new Letrado();
+    objetivos->insertar_ultimo(letrado);
+
+    Objetivo *minero = new Minero();
+    objetivos -> insertar_ultimo(minero);
+
+    Objetivo *cansado = new Cansado();
+    objetivos->insertar_ultimo(cansado);
+
+    Objetivo *constructor = new Constructor();
+    objetivos->insertar_ultimo(constructor);
+
+    Objetivo *armado = new Armado();
+    objetivos->insertar_ultimo(armado);
+
+    Objetivo *extremista = new Extremista();
+    objetivos->insertar_ultimo(extremista);
+
 }
 
 // void Juego::turnos(){
@@ -243,18 +268,20 @@ int Juego::generar_numero_random(int min, int max){
 }
 
 void Juego::asignar_objetivos(Jugador *jugador){
-    int objetivo;
+    int numero_objetivo;
 
     int vector_objetivos_jug_1[3];
     int vector_objetivos_jug_2[3];
 
+    Objetivo *objetivo_a_asignar;
+
     for(int i = 0; i < 3; i++){
 
-        objetivo = generar_numero_random(1,10);
+        numero_objetivo = generar_numero_random(1,10);
         
-
-
-        jugador -> asignar_objetivo(objetivo, i );
+        objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);
+        
+        jugador -> asignar_objetivo(objetivo_a_asignar, i);
     }
 
 }
