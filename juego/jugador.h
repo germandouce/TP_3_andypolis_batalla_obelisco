@@ -17,16 +17,16 @@
 #include "..\objetivos\letrado.h"
 #include "..\objetivos\minero.h"
 
-const int COMPRAR_ANDYPOLIS = 1;
-const int EDAD_PIEDRA = 2;
-const int BOMBARDERO = 3;
-const int ENERGETICO = 4;
-const int LETRADO = 5;
-const int MINERO = 6;
-const int CANSADO = 7;
-const int CONSTRUCTOR = 8;
-const int ARMARDO = 9;
-const int EXTREMISTA = 10;
+// const int COMPRAR_ANDYPOLIS = 1;
+// const int EDAD_PIEDRA = 2;
+// const int BOMBARDERO = 3;
+// const int ENERGETICO = 4;
+// const int LETRADO = 5;
+// const int MINERO = 6;
+// const int CANSADO = 7;
+// const int CONSTRUCTOR = 8;
+// const int ARMARDO = 9;
+// const int EXTREMISTA = 10;
 
 using namespace std;
 

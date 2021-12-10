@@ -90,8 +90,6 @@ void Mapa::asignar_atributos(int filas, int columnas) {
     for (int i = 0; i < filas; i++) {
         matriz[i] = new Casillero* [columnas];
     }
-
-	diccionario = new Diccionario();
 }
 
 Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero) {
@@ -119,66 +117,6 @@ Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero
 	}
 
 	return casillero_devuelto;
-}
-
-void Mapa::cargar_diccionario(ifstream &archivo) {
-
-    string nombre_edificio;
-	int piedra;
-	int madera;
-	int metal;
-    int limite_construccion;
-
-	while (archivo >> nombre_edificio) {
-
-		piedra = stoi(leer_palabra_compuesta(archivo, nombre_edificio, OPCION_NUMEROS));
-		archivo >> madera;
-		archivo >> metal;
-		archivo >> limite_construccion;
-
-		cargar_edificio(nombre_edificio, piedra, madera, metal, limite_construccion);
-	}
-    archivo.close();
-}
-
-void Mapa::cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion) {
-
-	Edificio* edificio;
-
-	if (nombre_edificio == A) {
-		edificio = new Aserradero(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == E) {
-		edificio = new Escuela(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == F) {
-		edificio = new Fabrica(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == M) {
-		edificio = new Mina(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == G) {
-		edificio = new Mina_oro(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == O) {
-		edificio = new Obelisco(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
-
-	if (nombre_edificio == P) {
-		edificio = new Planta_electrica(piedra, madera, metal, limite_construccion, NULA, NULA);
-		diccionario -> agregar_edificio(edificio);
-	}
 }
 
 // FUNCIONALIDADES
@@ -648,37 +586,6 @@ void Mapa::sumar_casillero_por_tipo(string tipo_casillero) {
 	if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
 		transitables_disponibles++;
 	}
-}
-
-string Mapa::leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion) {
-	
-    string palabra_edificio = "";
-	archivo >> palabra_edificio;
-
-	while (!verificar_tipo_caracter(palabra_edificio, opcion)) {
-		nombre_edificio = nombre_edificio + " " + palabra_edificio;
-		archivo >> palabra_edificio;
-	}
-	return palabra_edificio;
-}
-
-bool Mapa::verificar_tipo_caracter(string palabra, int tipo_caracter) {
-	
-    bool es_caracter_evaluado = false;
-
-	if (tipo_caracter == OPCION_NUMEROS) {
-		es_caracter_evaluado = es_numero(palabra);
-	}
-	else {
-		if (palabra[POSICION_INICIAL] == PARENTESIS_CHAR) {
-			es_caracter_evaluado = true;
-		}
-	}
-	return es_caracter_evaluado;
-}
-
-bool Mapa::es_numero(string palabra) {
-	return (ASCII_NUM_CERO <= palabra[POSICION_INICIAL] && palabra[POSICION_INICIAL] <= ASCII_NUM_NUEVE);
 }
 
 Material* Mapa::llover_material_aleatorio(int &material_llovido) {

@@ -22,9 +22,9 @@
 #include "casilleros/muelle.h"
 #include "casilleros/betun.h"
 
-const char PARENTESIS_CHAR = '(';
-const int OPCION_PARENTESIS = 0;
-const int OPCION_NUMEROS = 1;
+// const char PARENTESIS_CHAR = '(';
+// const int OPCION_PARENTESIS = 0;
+// const int OPCION_NUMEROS = 1;
 const int POSICION_INICIAL = 0;
 const int ZERO = 0;
 
@@ -81,7 +81,6 @@ class Mapa {
 	
 	Casillero*** matriz;
 	Grafo* grafo;
-	Diccionario* diccionario;
 
 	public:
 
