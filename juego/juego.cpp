@@ -270,18 +270,35 @@ int Juego::generar_numero_random(int min, int max){
 void Juego::asignar_objetivos(Jugador *jugador){
     int numero_objetivo;
 
-    int vector_objetivos_jug_1[3];
-    int vector_objetivos_jug_2[3];
+    int vector_objetivos_jug[3];
 
     Objetivo *objetivo_a_asignar;
 
-    for(int i = 0; i < 3; i++){
+    int objetivo_1 = generar_numero_random(1,10);
+    
+    objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);    
+    jugador -> asignar_objetivo(objetivo_a_asignar, objetivo_1);
+    
+    vector_objetivos_jug[0] = objetivo_1;
+    
+    bool ya_toco;
+    int cantidad = 1;
+    while(cantidad <= 2){
+        
+        int objetivo = generar_numero_random(1,10);
+        
+        ya_toco = false;   
+        for(int i = 0; i <cantidad; i++){
+            if ( vector_objetivos_jug[i] == objetivo ){
+                ya_toco = true;
+            }
+        }
+        if (!ya_toco){
+            objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);
+            jugador -> asignar_objetivo(objetivo_a_asignar, cantidad);
+            cantidad++;
+        }
 
-        numero_objetivo = generar_numero_random(1,10);
-        
-        objetivo_a_asignar = objetivos->obtener_dato(numero_objetivo);
-        
-        jugador -> asignar_objetivo(objetivo_a_asignar, i);
     }
 
 }
