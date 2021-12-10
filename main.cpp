@@ -4,19 +4,32 @@
 int main() {
     
     srand((unsigned)time(NULL)); // Semilla para generar números aleatorios.
-        
+
+    cout << "abrio"<<endl;
+
     Juego *juego = new Juego();
+
+    cout << "cargar_objetivos"<< endl;
+
+    juego -> cargar_objetivos();
+
+    cout << "objetivos cargados"<<endl;
+    
     juego -> crear_juego();
+
+    cout << "juego creado"<<endl;
 
     Jugador* jug_1 = juego-> devolver_jugador_1();
     Jugador* jug_2 = juego -> devolver_jugador_2();
+
+    cout << "jugadores instanciados"<<endl;
 
     ifstream archivo;
 
     bool mapa_bien_cargado = false;
     bool diccionario_edificios_bien_cargado = true;
     bool inventario_bien_cargado = true;
-    
+
     /*
     if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA) ){
         //mapa->cargar_mapa(archivo,ARCHIVO_MAPA)

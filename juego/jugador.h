@@ -2,8 +2,6 @@
 #define JUGADOR_H
 
 #include <string>
-#include "..\registro_edificios\registro_edificios.h"
-#include "..\inventario\inventario.h"
 #include "..\vector.h"
 
 #include "..\objetivos\armado.h"

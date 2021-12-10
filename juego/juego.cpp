@@ -148,7 +148,7 @@ bool Juego::es_archivo_legible(ifstream& archivo, string nombre_archivo) {
 }
 
 void Juego::crear_juego() {
-
+    
     jugador1 -> setear_numero_jugador(1);
     asignar_objetivos(jugador1);
 
@@ -191,13 +191,13 @@ int Juego::generar_numero_random(int min, int max) {
     return min + ( rand() % range);
 }
 
-void Juego::asignar_objetivos(Jugador *jugador) {
+void Juego::asignar_objetivos(Jugador* jugador) {
 
     int vector_objetivos_jug[3];
 
-    Objetivo *objetivo_a_asignar;
+    Objetivo* objetivo_a_asignar;
 
-    int objetivo_1 = generar_numero_random(1,10);
+    int objetivo_1 = generar_numero_random(0,9);
     
     objetivo_a_asignar = objetivos -> obtener_dato(objetivo_1);    
     jugador -> asignar_objetivo(objetivo_a_asignar);
@@ -208,12 +208,14 @@ void Juego::asignar_objetivos(Jugador *jugador) {
     int cantidad = 1;
     while(cantidad <= 2){
         
-        int numero_objetivo = generar_numero_random(1,10);
+        int numero_objetivo = generar_numero_random(0,9);
         ya_toco = false;
 
         for(int i = 0; i <cantidad; i++){
-            vector_objetivos_jug[i] == numero_objetivo;
-            ya_toco = true;
+            if(vector_objetivos_jug[i] == numero_objetivo){
+                cout<<vector_objetivos_jug[i];
+                ya_toco = true;
+            }
         }
 
         if (!ya_toco){
