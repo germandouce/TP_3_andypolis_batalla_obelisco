@@ -72,6 +72,29 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 	}
 }
 
+void Grafo::recorrer_nodos_adyacentes(int cantidad_nodos_adyacentes, int* &vector_adyacentes, int num_nodo_raiz, int* &nodos_a_recorrer, int &visitados,  Casillero*** mapa, bool es_jugador2, int &posicion) {
+	for (int i = 0; i < cantidad_nodos_adyacentes; i++) {
+
+		int num_nodo_adyacente = vector_adyacentes[i];
+
+		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
+		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
+		
+		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
+			&& !existe_edificio(fila, columna, mapa)) {
+
+			recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
+		}
+
+		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
+			&& !existe_edificio(fila, columna, mapa)) {
+
+			posicion++;
+			nodos_a_recorrer[posicion] = vector_adyacentes[i];
+		}
+	}
+}
+
 void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero*** mapa, bool es_jugador2) {
 
 	int cantidad_edificios = 0;
@@ -90,26 +113,7 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero**
 	bool atrapado = esta_atrapado(mapa, num_nodo_raiz);
 
 	while (visitados != (lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios) && !atrapado) {
-		for (int i = 0; i < cantidad_nodos_adyacentes; i++) {
-
-			int num_nodo_adyacente = vector_adyacentes[i];
-
-			int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
-			int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
-		
-			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
-				&& !existe_edificio(fila, columna, mapa)) {
-
-				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
-			}
-
-			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
-				&& !existe_edificio(fila, columna, mapa)) {
-
-				posicion++;
-				nodos_a_recorrer[posicion] = vector_adyacentes[i];
-			}
-		}
+		recorrer_nodos_adyacentes(cantidad_nodos_adyacentes,  vector_adyacentes, num_nodo_raiz, nodos_a_recorrer, visitados, mapa, es_jugador2, posicion);
 
 		visitados++;
 		ordenar_vector_distancia_min(nodos_a_recorrer, visitados, posicion);
