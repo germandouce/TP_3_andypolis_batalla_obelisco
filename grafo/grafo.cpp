@@ -1,6 +1,6 @@
 #include "grafo.h"
 
-Grafo::Grafo(int cantidad_filas, int cantidad_columnas) {
+Grafo::Grafo(int cantidad_filas, int cantidad_columnas, Casillero*** mapa) {
 	
 	int num_nodo = PRIMER_ELEMENTO;
 	lista_vertices = new Lista();
@@ -18,61 +18,12 @@ Grafo::Grafo(int cantidad_filas, int cantidad_columnas) {
 
    for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++) {
 	   matriz_adyacencia[i] = new int [lista_vertices -> obtener_cantidad_elementos()];
-   }
+   	}
 
-   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
+	cargar_matriz_adyacencia(cantidad_filas, cantidad_columnas, mapa);
 }
 
-Grafo::Grafo(Lista* lista_vertices) {
-
-   this -> lista_vertices = lista_vertices;
-
-   matriz_adyacencia = new int* [lista_vertices -> obtener_cantidad_elementos()];
-
-   for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos(); i++) {
-	   matriz_adyacencia[i] = new int [lista_vertices -> obtener_cantidad_elementos()];
-	}
-
-   int cantidad_filas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_filas();
-   int cantidad_columnas = lista_vertices -> devolver_nodo(PRIMER_ELEMENTO) -> obtener_vertice() -> obtener_cantidad_columnas();
-   
-   inicializar_matriz_terrenos(cantidad_filas, cantidad_columnas);
-}
-
-
-void Grafo::inicializar_matriz_terrenos(int cantidad_filas, int cantidad_columnas) {
-	
-	matriz_terrenos = new string* [cantidad_filas];
-	
-	for (int i = 0; i < cantidad_filas; i++) {
-		matriz_terrenos[i] = new string [cantidad_columnas];
-	}
-}
-
-bool Grafo::no_fue_visitado(int num_nodo_adyacente, Lista* nodos_visitados) {
-	int i = 1;
-	int num_nodo_visitados;
-	int cantidad_nodos_visitados;
-
-	if (nodos_visitados -> obtener_cantidad_elementos() != 0) {
-		num_nodo_visitados = nodos_visitados -> devolver_nodo(i) -> obtener_vertice() -> obtener_numero_vertice();
-		cantidad_nodos_visitados = nodos_visitados -> obtener_cantidad_elementos();
-	}
-	else {
-		num_nodo_visitados = 0;
-		cantidad_nodos_visitados = 0;
-	}
-
-	while (num_nodo_adyacente != num_nodo_visitados && i < cantidad_nodos_visitados) {
-		i++;
-		num_nodo_visitados = nodos_visitados -> devolver_nodo(i) -> obtener_vertice() -> obtener_numero_vertice();
-		cantidad_nodos_visitados = nodos_visitados -> obtener_cantidad_elementos();
-	}
-
-	return (num_nodo_adyacente != num_nodo_visitados);
-}
-
-bool Grafo::no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int cantidad_elementos) {
+bool Grafo::esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int cantidad_elementos) {
 		
 	int posicion = 0;
 
@@ -80,27 +31,22 @@ bool Grafo::no_esta_en_vector(int num_nodo_adyacente, int* nodos_a_recorrer, int
 		posicion++;
 	}
 
-	return (num_nodo_adyacente != nodos_a_recorrer[posicion]);
+	return num_nodo_adyacente == nodos_a_recorrer[posicion];
 }
 
-void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, bool es_jugador2) {
+void Grafo::recorrer_nodo(int num_nodo_raiz, int num_nodo_adyacente, Casillero*** mapa, bool es_jugador2) {
 
-	int costo_terreno = matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
+	int peso = matriz_adyacencia[num_nodo_raiz - 1][num_nodo_adyacente - 1];
 
 	int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila() - 1;
 	int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna() - 1;
 
-	string tipo_terreno = matriz_terrenos[fila][columna];
-
-	if (costo_terreno == PESO_LAGO && tipo_terreno == G_LAGO) {
-		costo_terreno += es_jugador2 * DIFERENCIA_LAGO;
-	}
-	else if (costo_terreno == PESO_MUELLE && tipo_terreno == G_MUELLE) {
-		costo_terreno -= es_jugador2 * DIFERENCIA_MUELLE;
+	if (es_jugador2) {
+		peso = mapa[fila][columna] -> obtener_peso_jugador2();
 	}
 
 	int peso_anterior = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_distancia_minima_origen();
-	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + costo_terreno;
+	int peso_nodo  = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_distancia_minima_origen() + peso;
 
 	if (peso_nodo < peso_anterior) {
 		
@@ -126,7 +72,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 	}
 }
 
-void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero*** matriz, bool es_jugador2) {
+void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero*** mapa, bool es_jugador2) {
 
 	int cantidad_edificios = 0;
 	int posicion = 0;
@@ -141,7 +87,7 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero**
 	int num_nodo_raiz = origen;
 	int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
 
-	bool atrapado = esta_atrapado(matriz, num_nodo_raiz);
+	bool atrapado = esta_atrapado(mapa, num_nodo_raiz);
 
 	while (visitados != (lista_vertices -> obtener_cantidad_elementos() - cantidad_edificios) && !atrapado) {
 		for (int i = 0; i < cantidad_nodos_adyacentes; i++) {
@@ -151,14 +97,14 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero**
 			int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
 			int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
 		
-			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
-				&& !existe_edificio(fila, columna, matriz)) {
+			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)
+				&& !existe_edificio(fila, columna, mapa)) {
 
-				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, es_jugador2);
+				recorrer_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
 			}
 
-			if (no_esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
-				&& !existe_edificio(fila, columna, matriz)) {
+			if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)
+				&& !existe_edificio(fila, columna, mapa)) {
 
 				posicion++;
 				nodos_a_recorrer[posicion] = vector_adyacentes[i];
@@ -174,7 +120,7 @@ void Grafo::calcular_camino_minimo_dijsktra(int origen, int destino, Casillero**
 	}
 }
 
-bool Grafo::esta_atrapado(Casillero*** matriz, int num_nodo) {
+bool Grafo::esta_atrapado(Casillero*** mapa, int num_nodo) {
 	
 	bool esta_atrapado = true;
 	int i = 0;
@@ -187,7 +133,7 @@ bool Grafo::esta_atrapado(Casillero*** matriz, int num_nodo) {
 		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
 		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
 		
-		if(!existe_edificio(fila, columna, matriz)) {
+		if(!existe_edificio(fila, columna, mapa)) {
 			esta_atrapado = false;
 		}
 
@@ -196,10 +142,10 @@ bool Grafo::esta_atrapado(Casillero*** matriz, int num_nodo) {
 	return esta_atrapado;
 }
 
-bool Grafo::existe_edificio(int fila, int columna, Casillero*** matriz) {
+bool Grafo::existe_edificio(int fila, int columna, Casillero*** mapa) {
 
-	if (matriz[fila - 1][columna - 1] -> obtener_tipo_casillero() == G_TERRENO) {
-		return matriz[fila - 1][columna - 1] -> esta_ocupado();
+	if (mapa[fila - 1][columna - 1] -> obtener_tipo_casillero() == G_TERRENO) {
+		return mapa[fila - 1][columna - 1] -> esta_ocupado();
 	}
 	return false;
 }
@@ -220,7 +166,7 @@ void Grafo::agregar_camino(int origen, int destino, int peso) {
     matriz_adyacencia[origen][destino] = peso;     
 }
 
-void Grafo::cargar_matriz_adyacencia(int cantidad_filas, int cantidad_columnas) {
+void Grafo::cargar_matriz_adyacencia(int cantidad_filas, int cantidad_columnas, Casillero*** mapa) {
 	
 	for (int i = 0; i < lista_vertices -> obtener_cantidad_elementos() ; i++) {
 		
@@ -235,7 +181,7 @@ void Grafo::cargar_matriz_adyacencia(int cantidad_filas, int cantidad_columnas) 
 
     			int fila = nodo_adyacente -> obtener_vertice() -> obtener_fila();
     			int columna = nodo_adyacente -> obtener_vertice() -> obtener_columna();
-    			int peso = transformar_terreno_a_peso(matriz_terrenos[fila - 1][columna - 1]);
+    			int peso = mapa[fila - 1][columna - 1] -> obtener_peso_jugador1();
 
     			matriz_adyacencia[i][j] = peso;
     			k++;
@@ -268,33 +214,6 @@ void Grafo::mostrar_matriz_adyacencia() {
     	}
     }
     cout << "" << endl;
-}
-
-int Grafo::transformar_terreno_a_peso(string tipo_terreno) {
-    
-	int peso;
-    
-    if (tipo_terreno == G_CAMINO) {
-        peso = PESO_CAMINO;
-    }
-    else if (tipo_terreno == G_BETUN) {
-        peso = PESO_BETUN;
-    }
-    else if (tipo_terreno == G_LAGO) {
-        peso = PESO_LAGO;
-    }
-    else if (tipo_terreno == G_MUELLE) {
-        peso = PESO_MUELLE;
-    }
-    else {
-        peso = PESO_TERRENO;
-    }
-
-    return peso;
-}
-
-string** Grafo::devolver_matriz_terrenos() {
-	return matriz_terrenos;
 }
 
 void Grafo::liberar_matriz_de_adyacencia() {

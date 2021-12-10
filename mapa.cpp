@@ -63,8 +63,6 @@ void Mapa::cargar_mapa(ifstream& archivo) {
     archivo >> columnas;
 
     asignar_atributos(filas, columnas);
-
-	string** matriz_terrenos = grafo -> devolver_matriz_terrenos();
         
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
@@ -73,12 +71,10 @@ void Mapa::cargar_mapa(ifstream& archivo) {
             Casillero* casillero = crear_subcasillero(i, j, tipo_casillero);
             cargar_casillero(i, j, casillero);
             sumar_casillero_por_tipo(tipo_casillero);
-
-			matriz_terrenos[i][j] = tipo_casillero;
         }
     }
 
-	grafo -> cargar_matriz_adyacencia(filas, columnas);
+	grafo = new Grafo(filas, columnas, matriz);
 	archivo.close();
 }  
 
@@ -86,16 +82,16 @@ void Mapa::asignar_atributos(int filas, int columnas) {
 	
 	this -> filas = filas;
 	this -> columnas = columnas;
-	this -> transitables_disponibles = 0;
 	
-	this -> matriz = new Casillero** [filas];
+	transitables_disponibles = 0;
+	
+	matriz = new Casillero** [filas];
 
     for (int i = 0; i < filas; i++) {
         matriz[i] = new Casillero* [columnas];
     }
-	
-	this -> grafo = new Grafo(filas, columnas);
-	this -> diccionario = new Diccionario();
+
+	diccionario = new Diccionario();
 }
 
 Casillero* Mapa::crear_subcasillero(int fila, int columna, string tipo_casillero) {

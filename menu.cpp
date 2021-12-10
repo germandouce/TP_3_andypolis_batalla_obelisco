@@ -62,7 +62,7 @@ void procesar_opcion(int opcion_elegida, Mapa* mapa, Inventario* inventario) {
             break;
         case 8:
             system(CLR_SCREEN);
-            mapa -> moverse(inventario, true);
+            mapa -> moverse(inventario, false);
             break;
         case 9:
             system(CLR_SCREEN);

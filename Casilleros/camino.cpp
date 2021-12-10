@@ -3,6 +3,7 @@
 Camino::Camino(int fila, int columna) {
     this -> fila = fila;
 	this -> columna = columna;
+	this -> peso = PESO_CAMINO;
 	this -> tipo_casillero = CAMINO;
 	this -> ocupado = false;
 	this -> iluminado = false;

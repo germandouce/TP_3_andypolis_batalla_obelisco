@@ -3,6 +3,7 @@
 Betun::Betun(int fila, int columna) {
     this -> fila = fila;
 	this -> columna = columna;
+	this -> peso = PESO_BETUN;
 	this -> tipo_casillero = BETUN;
 	this -> ocupado = false;
 	this -> iluminado = false;
