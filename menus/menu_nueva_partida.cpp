@@ -14,7 +14,7 @@ void presentar_menu_np(){
     cout<<"Eliga una opcion: "<<endl;
 }
 
-void procesar_opcion_np(int opcion){
+void procesar_opcion_np(Juego* juego, int opcion){
 
     switch (opcion) {
         case MODIFICAR_EDIFICIO_X_NOMBRE:
@@ -27,7 +27,7 @@ void procesar_opcion_np(int opcion){
             //system("cls");
             break;
         case MOSTRAR_MAPA:
-            //system("cls");
+            juego -> devolver_mapa() -> imprimir_mapa();
             break;
         case COMENZAR_PARTIDA:
             //system("cls");

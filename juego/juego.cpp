@@ -325,6 +325,10 @@ Jugador* Juego::devolver_jugador_2() {
     return jugador2;
 }
 
+Mapa* Juego::devolver_mapa(){
+    return mapa;
+}
+
 void Juego::mostrar_todos_edificios() {
 
 	cout << ENTER_COLOR << "Esta es la informacion de todos los edificios: " << END_COLOR << endl;

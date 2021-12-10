@@ -30,12 +30,11 @@ int main() {
     bool diccionario_edificios_bien_cargado = true;
     bool inventario_bien_cargado = true;
 
-    /*
     if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA) ){
-        //mapa->cargar_mapa(archivo,ARCHIVO_MAPA)
+        juego -> devolver_mapa() -> cargar_mapa(archivo);
         mapa_bien_cargado = true;
     }
-    */
+    
     cout << "mitad archivos";
     
     // if (juego -> es_archivo_legible(archivo, ARCHIVO_EDIFICIOS) ){
@@ -62,20 +61,32 @@ int main() {
         if (nueva_partida){
             int ingreso;
             int opcion_elegida;
-            //proba de nuevo me olvide que el 
+            //proba de nuevo me olvide que el
             presentar_menu_np();
             cin >> opcion_elegida;
             while (!opcion_valida_np(opcion_elegida)){
                 cout<<"Opcion no valida. Eliga nuevamente." <<endl;
                 cin>>opcion_elegida;}
                 
-            procesar_opcion_np(opcion_elegida);
+            procesar_opcion_np(juego, opcion_elegida);
             
             cout<<"Desea ser jugador 1 o 2 ? (ingrese 1 o 2): ";
             cin >> ingreso;
             cout<<endl;
+
+            Mapa* mapa = juego -> devolver_mapa();
+
             jug_1 -> pedir_coordenadas();
             jug_2 -> pedir_coordenadas();
+
+            int fila1 = jug_1 -> devolver_fila();
+            int columna1 = jug_1 -> devolver_columna();
+
+            int fila2 = jug_2 -> devolver_fila();
+            int columna2 = jug_2 -> devolver_columna();
+             
+            mapa -> obtener_casillero(fila1, columna1) -> ocupar_casillero();
+            mapa -> obtener_casillero(fila2, columna2) -> ocupar_casillero();
 
         }else{
             juego -> cargar_ubicaciones(archivo);
@@ -113,6 +124,8 @@ int main() {
                 //cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
                 
                 int opcion;
+                Mapa* mapa = juego -> devolver_mapa();
+                mapa -> imprimir_mapa();
                 presentar_menu();
                 cin >> opcion;
                 while (!opcion_valida(opcion)){

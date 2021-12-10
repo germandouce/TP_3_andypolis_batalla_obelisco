@@ -67,6 +67,16 @@ class Jugador {
     //POST: Asigna al jugador en los atributos las coordenadas correspondientes.
     void asignar_coordenadas(int fila, int columna);
 
+    //Devolver fila
+    //PRE:-
+    //POST: Devuelve un entero con la fila
+    int devolver_fila();
+
+    //Devolver columna
+    //PRE:-
+    //POST: Devuelve un entero con la columna
+    int devolver_columna();
+
     //Setear numero jugador
     //PRE:Recibe un entero con el numero de jugador
     //POST:Modifica el atributo numero de jugador colocandole el numero que se pase por parametro

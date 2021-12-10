@@ -156,12 +156,27 @@ class Juego {
     //PRE:-
     //POST:
     void mostrar_costo_edificio(Edificio* edificio_a_construir);
-
+    
+    //Devolver mapa
+    //PRE:
+    //POST:
     void pedir_coordenadas(int &fila, int &columna);
 
+    //Devolver mapa
+    //PRE:
+    //POST:
     void pedir_fila(int &fila);
 
+    
+    //Devolver mapa
+    //PRE:
+    //POST:
     void pedir_columna(int &columna);
+
+    //Devolver mapa
+    //PRE:
+    //POST:
+    Mapa* devolver_mapa();
 };
 
 #endif //JUEGO_H

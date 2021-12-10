@@ -18,7 +18,7 @@ void presentar_menu_np();
 
 //pre: Se debe verificar que la opcion elegida sea valida
 //post: Procesa opcion elegida y la ejecuta
-void procesar_opcion_np(int opcion);
+void procesar_opcion_np(Juego* juego, int opcion);
 
 //pre: -
 //post: Verifica que la opcion elegida sea valida para ejecutar

@@ -35,6 +35,14 @@ void Jugador::asignar_coordenadas(int fila, int columna){
     this -> columna = columna;
 }
 
+int Jugador::devolver_fila(){
+    return fila;
+}
+
+int Jugador::devolver_columna(){
+    return columna;
+}
+
 void Jugador::setear_numero_jugador(int numero_jugador){
     this -> numero_jugador = numero_jugador;
 }
