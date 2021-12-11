@@ -148,6 +148,8 @@ class Mapa {
     //post: Construye el Edificio en la fila y columna ingresadas si esta no está ocupada.
 	void construir_edificio(int fila, int columna, Edificio* edificio_a_construir);
 	
+	Casillero*** devolver_matriz();
+
 	private:
 
 	//pre: El 'tipo_casillero' es un tipo de Casillero válido.

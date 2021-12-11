@@ -75,72 +75,76 @@ int Jugador::obtener_energia(){
     return energia;
 }
 
-/*void Jugador::verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios) {
-
+void Jugador::mostrar_objetivos(){
     for (int i = 0; i < 3; i++) {
-        switch (objetivo) {
-            case COMPRAR_ANDYPOLIS:
-                if (andycoins_acumulados = 100000){
-                    objetivos_secundarios_cumplidos++;
-                }
-                break;
-
-            case EDAD_PIEDRA:
-                //if (vector_inventario->obteer_cantidad("piedra") == 50000){
-                    objetivos_secundarios_cumplidos++;
-                //}
-                break;
-
-            case BOMBARDERO:
-                if (bombas_usadas = 5){
-                    objetivos_secundarios_cumplidos++;
-                }
-                break;
-                
-            case ENERGETICO:
-                if (energia == 100){
-                    objetivos_secundarios_cumplidos++;
-                }
-                break;
-
-            case LETRADO:
-                // if (registro_edificios->obetner_cantidad_escuelas() = mapa->dict("escuela")->obtener_maxima_cantidad()){
-                //     objetivos_secundarios_cumplidos++;
-                // }
-                break;
-
-            case MINERO:
-                // if (registro_edificios->obetner_cantidad_mina() && registro_edificios->obetner_cantidad_mina_oro){
-                //     objetivos_secundarios_cumplidos++;
-                // }
-                break;
-
-            case CANSADO:
-                if (energia = 0){
-                    objetivos_secundarios_cumplidos++;
-                }
-                break;
-
-            case CONSTRUCTOR:
-                // if (andycoins_acumulados = 100000){
-                //     objetivos_secundarios_cumplidos++;
-                // } 
-                // break;
-
-            case ARMARDO:
-                // if (inventario->obtener_cantidad_bombas == 10){
-                //     objetivos_secundarios_cumplidos++;
-                // } 
-                // break;
-
-            case EXTREMISTA:
-                if (bombas_compradas= 5000){
-                    objetivos_secundarios_cumplidos++;
-                }
-                break;  
-            }
+        objetivos->obtener_dato(i)->mostrar_descripcion();
     }
-}*/
+}
+
+void Jugador::verificar_objetivos() {
+        // switch (objetivo) {
+        //     case COMPRAR_ANDYPOLIS:
+        //         if (andycoins_acumulados = 100000){
+        //             objetivos_secundarios_cumplidos++;
+        //         }
+            //     break;
+
+            // case EDAD_PIEDRA:
+            //     //if (vector_inventario->obteer_cantidad("piedra") == 50000){
+            //         objetivos_secundarios_cumplidos++;
+            //     //}
+            //     break;
+
+            // case BOMBARDERO:
+            //     if (bombas_usadas = 5){
+            //         objetivos_secundarios_cumplidos++;
+            //     }
+            //     break;
+                
+            // // case ENERGETICO:
+            // //     if (energia == 100){
+            // //         objetivos_secundarios_cumplidos++;
+            // //     }
+            // //     break;
+
+            // // case LETRADO:
+            // //     // if (registro_edificios->obetner_cantidad_escuelas() = mapa->dict("escuela")->obtener_maxima_cantidad()){
+            // //     //     objetivos_secundarios_cumplidos++;
+            // //     // }
+            // //     break;
+
+            // // case MINERO:
+            // //     // if (registro_edificios->obetner_cantidad_mina() && registro_edificios->obetner_cantidad_mina_oro){
+            // //     //     objetivos_secundarios_cumplidos++;
+            // //     // }
+            // //     break;
+
+            // // case CANSADO:
+            // //     if (energia = 0){
+            // //         objetivos_secundarios_cumplidos++;
+            // //     }
+            // //     break;
+
+            // // case CONSTRUCTOR:
+            // //     // if (andycoins_acumulados = 100000){
+            // //     //     objetivos_secundarios_cumplidos++;
+            // //     // } 
+            // //     // break;
+
+            // // case ARMARDO:
+            // //     // if (inventario->obtener_cantidad_bombas == 10){
+            // //     //     objetivos_secundarios_cumplidos++;
+            // //     // } 
+            // //     // break;
+
+            // // case EXTREMISTA:
+            // //     if (bombas_compradas= 5000){
+            // //         objetivos_secundarios_cumplidos++;
+            // //     }
+            // //     break;  
+    //         }
+    // }
+}
 
 
 bool Jugador::gano(){
@@ -261,6 +265,7 @@ void Jugador::opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casil
                     mapa[fila][columna] -> construir_edificio(edificio_a_construir);
                     mapa[fila][columna] -> ocupar_casillero();
                     registro_edificios -> agregar(edificio_a_construir);
+                    cambia_cantidades_inventario(madera, piedra, metal);
                 }
             }
             else {
@@ -314,4 +319,10 @@ void Jugador::pedir_columna(int &columna) {
     cin >> columna;
     cin.clear();
     cin.ignore(100, '\n');
+}
+
+void Jugador::cambia_cantidades_inventario(int madera, int piedra, int metal){
+    inventario->cambiar_cantidad_elemento("madera", madera);
+    inventario->cambiar_cantidad_elemento("piedra", piedra);
+    inventario->cambiar_cantidad_elemento("metal", metal);
 }

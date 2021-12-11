@@ -455,6 +455,10 @@ void Mapa::construir_edificio(int fila, int columna, Edificio* edificio_a_constr
 	matriz[fila][columna] -> ocupar_casillero();
 }
 
+Casillero*** Mapa::devolver_matriz(){
+	return matriz;
+}
+
 // METODOS PRIVADOS
 
 void Mapa::pedir_coordenadas(int &fila, int &columna) {

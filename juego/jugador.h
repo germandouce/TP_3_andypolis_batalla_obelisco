@@ -1,6 +1,7 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+#include <iostream>
 #include <string>
 #include "../diccionario.h"
 #include "../Casilleros/casillero.h"
@@ -97,10 +98,16 @@ class Jugador {
     //POST: Lee el archivo de edificios y va cargandolos en el registro
     void agregar_edificio_al_registro(Edificio* edificio);
 
+    //Mostrar objetivos
+    //PRE:-
+    //POST: Muestra por pantalla los objetivos del jugador
+    void mostrar_objetivos();
+
+
     //Verificar objetivos
     //PRE:
     //POST: verifica si cumplio sus objetivos 
-    void verificar_objetivos(int objetivo, int escuelas_construidas, int cantidad_minas, int distintos_edificios);
+    void verificar_objetivos();
 
     //Gnao
     //PRE:-
@@ -193,6 +200,8 @@ class Jugador {
     //PRE:-
     //POST
     void pedir_fila(int &fila);
+
+    void cambia_cantidades_inventario(int madera, int piedra, int metal);
 };
 
 #endif // JUGADOR_H

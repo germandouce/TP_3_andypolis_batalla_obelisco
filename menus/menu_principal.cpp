@@ -28,14 +28,16 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
     //system(CLR_SCREEN);
     Inventario* inventario = jug_turno -> devolver_inventario();
     Registro_edificios* Registro_edificios = jug_turno-> devolver_resgitro_edificios();
-
+    
+    Casillero***mapa = juego-> devolver_mapa()->devolver_matriz();
+    
+    Diccionario * diccionario = juego->devolver_diccionario();
+    
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
-            // system("cls");
-            //verificar_construccion(mapa, vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
+            jug_turno->opcion_construir_edificio_x_nombre(diccionario,mapa);
             break;
         case LISTAR_EDIFICIOS_CONSTRUIDOS:
-            // system("cls");
             jug_turno->devolver_resgitro_edificios()->mostrar_registro_edificios();
             break;
         case DEMOLER_EDIFICIO_X_COORDENDA:
@@ -81,11 +83,10 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
             jug_turno -> devolver_inventario() -> mostrar_inventario();
             break;
         case MOSTRAR_OBJETIVOS:
-           //  system("cls");
-            //Mostrar_objetivos primarios y secudarios.
+           //system("cls");
+            jug_turno -> mostrar_objetivos();
             //Podemos agregar una tecla que pregunte si desea volver
             //al menu (asa se le da el tiempo que necesite para ver su inventario).
-            break;
         case RECOLECTAR_RECURSOS_PRODUCIDOS:
           //   system("cls");
             juego -> devolver_mapa() -> llover();

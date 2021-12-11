@@ -63,7 +63,7 @@ int main() {
         jug_secundario = jug_1;
 
         int turnos_sin_llover = 0;
-
+        mapa->llover();
         while (!alguien_gano && !quiere_salir){
             
             alguien_gano = false;
@@ -84,7 +84,7 @@ int main() {
             
             
             turnos_sin_llover++;
-            if (turnos_sin_llover == (4 + 1)){
+            if (turnos_sin_llover == (2 + 1)){
                 mapa -> llover();
                 turnos_sin_llover = 0;
             }
