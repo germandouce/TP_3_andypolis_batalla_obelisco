@@ -12,11 +12,11 @@
 #include "materiales/andycoins.h"
 #include "materiales/bombas.h"
 
-#include "casilleros/terreno.h"
-#include "casilleros/lago.h"
-#include "casilleros/camino.h"
-#include "casilleros/muelle.h"
-#include "casilleros/betun.h"
+#include "Casilleros/terreno.h"
+#include "Casilleros/lago.h"
+#include "Casilleros/camino.h"
+#include "Casilleros/muelle.h"
+#include "Casilleros/betun.h"
 
 const int POSICION_INICIAL = 0;
 const int ZERO = 0;

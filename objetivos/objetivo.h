@@ -4,8 +4,8 @@
 #include <iostream>
 #include <string>
 
-#include "../inventario/inventario.h"
-#include "../registro_edificios/registro_edificios.h"
+#include "../Inventario/Inventario.h"
+#include "../registro_edificios/Registro_edificios.h"
 
 using namespace std;
 

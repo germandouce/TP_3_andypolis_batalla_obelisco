@@ -1,5 +1,5 @@
-#include ".\menus\menu_nueva_partida.h"
-#include ".\menus\menu_principal.h"
+#include "./menus/menu_nueva_partida.h"
+#include "./menus/menu_principal.h"
 #include <iostream>
 
 using namespace std;
@@ -52,6 +52,7 @@ int main() {
                 }
                 procesar_opcion_np(juego, opcion_elegida);
             }
+
             juego -> posicionar_jugadores(jug_1, jug_2, mapa);
         }
 

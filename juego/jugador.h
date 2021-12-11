@@ -3,20 +3,20 @@
 
 #include <string>
 #include "../diccionario.h"
-#include "../casilleros/casillero.h"
+#include "../Casilleros/casillero.h"
 #include "../vector.h"
 #include "../Inventario/Inventario.h"
 
-#include "..\objetivos\armado.h"
-#include "..\objetivos\bombardero.h"
-#include "..\objetivos\cansado.h"
-#include "..\objetivos\comprar_andypolis.h"
-#include "..\objetivos\constructor.h"
-#include "..\objetivos\edad_piedra.h"
-#include "..\objetivos\energetico.h"
-#include "..\objetivos\extremista.h"
-#include "..\objetivos\letrado.h"
-#include "..\objetivos\minero.h"
+#include "../objetivos/armado.h"
+#include "../objetivos/bombardero.h"
+#include "../objetivos/cansado.h"
+#include "../objetivos/comprar_andypolis.h"
+#include "../objetivos/constructor.h"
+#include "../objetivos/edad_piedra.h"
+#include "../objetivos/energetico.h"
+#include "../objetivos/extremista.h"
+#include "../objetivos/letrado.h"
+#include "../objetivos/minero.h"
 
 const int NUMERO_JUGADOR1 = 1;
 const int NUMERO_JUGADOR2 = 2;

@@ -1,7 +1,7 @@
 #ifndef MENUS_MENU_NUEVA_PARTIDA_H
 #define MENUS_MENU_NUEVA_PARTIDA_H
 
-#include "..\juego\juego.h"
+#include "../juego/juego.h"
 
 const int OPCION_MINIMA_NP = 0;
 const int OPCION_MAXIMA_NP = 5;

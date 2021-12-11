@@ -44,9 +44,9 @@ class Juego {
     //POST:-
     void crear_juego();
 
-    void leer_archivos(Mapa* mapa, int &archivos_cargados, bool nueva_partida);
+    void leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partida);
 
-    void posicionar_jugadores(Jugador* jug_1, Jugador* jug_2, Mapa* mapa);
+    void posicionar_jugadores(Jugador* jug_1, Jugador* jug_2, Mapa* &mapa);
 
     //Cargar mapa
     //PRE:-

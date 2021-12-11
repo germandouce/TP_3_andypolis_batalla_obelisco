@@ -2,7 +2,7 @@
 #define GRAFO_H
 
 #include "lista.h"
-#include "../casilleros/casillero.h"
+#include "../Casilleros/casillero.h"
 
 const int PRIMER_ELEMENTO = 1;
 

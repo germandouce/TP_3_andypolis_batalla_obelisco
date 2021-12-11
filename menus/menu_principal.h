@@ -1,7 +1,7 @@
 #ifndef MENUS_MENU_PRINCIPAL_H
 #define MENUS_MENU_PRINCIPAL_H
 
-#include "..\juego\juego.h"
+#include "../juego/juego.h"
 
 const int OPCION_MINIMA = 1;
 const int OPCION_MAXIMA = 13;
