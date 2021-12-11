@@ -9,7 +9,7 @@ Constructor::Constructor(): Objetivo() {
 
 bool Constructor::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return registro_edificios->al_menos_uno_de_cada_tipo_construidos();
+    return registro_edificios->al_menos_uno_de_cada_tipo();
 }
 
 void Constructor::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
