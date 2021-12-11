@@ -6,7 +6,12 @@ Minero::Minero(): Objetivo() {
     this -> identificador = MINERO;
    //  this -> requisito = REQUISITO_MINERO;
 }
-bool Minero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+bool Minero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
     return true;
 }
 
+void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
+    diccionario -> buscar_edificio("mina")->obtener_maximo_construir();
+}

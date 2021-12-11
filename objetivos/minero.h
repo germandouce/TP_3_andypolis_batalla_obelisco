@@ -5,8 +5,15 @@
 
 class Minero: public Objetivo {
     public:
+    
     Minero();
-    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
+    
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+    Diccionario *diccionario, int energia);
+    
+    void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios,
+     Diccionario *diccionario, int energia);
+
 };
 
 #endif // MINEROO_H_INCLUDED

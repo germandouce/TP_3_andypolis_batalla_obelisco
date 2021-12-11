@@ -7,6 +7,12 @@ Cansado::Cansado() : Objetivo() {
   //   this -> requisito = REQUISITO_CANSADO;
 }
 
-bool Cansado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) {
-	return true;
+bool Cansado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
+  return (energia == REQUISITO_CANSADO);
+}
+
+void Cansado::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
+  cout<<"deberias consumir "<< energia <<" de energia para completar este  objetivo";
 }

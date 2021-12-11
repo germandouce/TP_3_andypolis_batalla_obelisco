@@ -6,11 +6,12 @@
 
 #include "../Inventario/Inventario.h"
 #include "../registro_edificios/Registro_edificios.h"
+#include  "../diccionario.h"
 
 using namespace std;
 
 const int COMPRAR_ANDYPOLIS = 1;
-// const int REQUISITO_COMPRAR_ANDYPOLIS = 100000;
+const int REQUISITO_COMPRAR_ANDYPOLIS = 100000;
 
 const int EDAD_PIEDRA = 2;
 // const int REQUISITO_EDAD_PIEDRA = 50000;
@@ -28,7 +29,7 @@ const int MINERO = 6;
 // const int REQUISITO_MINERO = 2;
 
 const int CANSADO = 7;
-// const int REQUISITO_CANSADO = 0;
+const int REQUISITO_CANSADO = 0;
 
 const int CONSTRUCTOR = 8;
 const int REQUISITO_CONSTRUCTOR = 7;
@@ -53,8 +54,10 @@ class Objetivo {
     Objetivo();
     int obtener_identificador();
     void mostrar_descripcion();
-    virtual bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios) = 0;
+    virtual bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, int energia) = 0;
+    virtual void mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, Diccionario *diccionario, int energia) = 0;
     ~Objetivo();
+
 };
 
 #endif // OBJETIVO_H_INCLUDED

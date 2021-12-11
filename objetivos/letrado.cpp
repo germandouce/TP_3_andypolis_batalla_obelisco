@@ -7,6 +7,7 @@ Letrado::Letrado(): Objetivo() {
    //  this -> requisito = REQUISITO_LETRADO;
 }
 
-bool Letrado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+bool Letrado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
     return true;
 }

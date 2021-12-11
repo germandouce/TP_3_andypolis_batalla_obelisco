@@ -142,25 +142,29 @@ void Juego::cargar_inventario(ifstream& inventario) {
         inventario >> cantidad_1;
         inventario >> cantidad_2;
 
-        if (nombre == W) {
+        if (nombre == I_MADERA) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
         }
-        else if (nombre == S) {
+        else if (nombre == I_PIEDRA) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
         }
-        else if (nombre == I) {
+        else if (nombre == I_METAL) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
         }
-        else if (nombre == B) {
+        else if (nombre == I_BOMBAS) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_1->actualizar_cant_anterior_elemento(I_BOMBAS);
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            inventario_jugador_2->actualizar_cant_anterior_elemento(I_BOMBAS);
         }
-        else if (nombre == C) {
+        else if (nombre == I_ANDYCOINS) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
+            inventario_jugador_1->actualizar_cant_anterior_elemento(I_ANDYCOINS);
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
+            inventario_jugador_2->actualizar_cant_anterior_elemento(I_ANDYCOINS);
         }   
         inventario_jugador_1-> actualizar_largo_de_inventario();
         inventario_jugador_2-> actualizar_largo_de_inventario();

@@ -7,6 +7,7 @@ Energetico::Energetico(): Objetivo() {
    //  this -> requisito = REQUISITO_ENERGETICO;
 }
 
-bool Energetico::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+bool Energetico::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
     return true;
 }

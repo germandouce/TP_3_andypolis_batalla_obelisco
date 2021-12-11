@@ -7,6 +7,12 @@ Edad_piedra::Edad_piedra() : Objetivo() {
    //  this -> requisito = REQUISITO_EDAD_PIEDRA;
 }
 
-bool Edad_piedra::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios){
+bool Edad_piedra::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
     return true;
+}
+
+void Edad_piedra::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
+    // return true;
 }

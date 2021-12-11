@@ -76,6 +76,13 @@ int Jugador::obtener_energia(){
 }
 
 void Jugador::mostrar_objetivos(){
+
+    cout<<"Sus objetivos secundarios son los siguientes"<<endl;
+    cout<<"Construir un obelisco: ";
+    if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() != 1){
+        cout<<"No completado";
+    }
+    
     for (int i = 0; i < 3; i++) {
         objetivos->obtener_dato(i)->mostrar_descripcion();
     }
@@ -265,7 +272,7 @@ void Jugador::opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casil
                     mapa[fila][columna] -> construir_edificio(edificio_a_construir);
                     mapa[fila][columna] -> ocupar_casillero();
                     registro_edificios -> agregar(edificio_a_construir);
-                    cambia_cantidades_inventario(madera, piedra, metal);
+                    cambia_cantidades_inventario(-madera,-piedra, -metal);
                 }
             }
             else {

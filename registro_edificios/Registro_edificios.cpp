@@ -274,3 +274,5 @@ int Registro_edificios::obtener_edificios_construidos(string nombre_edificio) {
     
     return cantidad_construida;     
 }
+
+bool

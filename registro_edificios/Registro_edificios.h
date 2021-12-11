@@ -103,6 +103,23 @@ public:
 
     int obtener_edificios_construidos(string nombre_edificio);
 
+    bool al_menos_un_obelisco();
+
+    bool al_menos_una_mina();
+
+    bool al_menos_una_fabrica();
+    
+    bool al_menos_un_aserradero();
+
+    bool al_menos_una_mina_oro();
+
+    bool al_menos_una_planta_electrica();   
+    
+    bool al_menos_una_escuela();
+
+    bool al_menos_uno_de_cada_tipo_construidos();
+  
+
     //DESTRUCTOR
     ~Registro_edificios();
 };

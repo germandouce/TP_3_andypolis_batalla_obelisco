@@ -6,7 +6,8 @@
 class Extremista: public Objetivo {
     public:
     Extremista();
-    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios);
+    bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
+    Diccionario *diccionario, int energia);
 };
 
 #endif // EXTREMISTA_H_INCLUDED
