@@ -140,5 +140,6 @@ Vertice* Nodo::obtener_vertice(){
 }
 
 Nodo::~Nodo() {
+	delete[] vector_adyacentes;
     delete vertice;
 }

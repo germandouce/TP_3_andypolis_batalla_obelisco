@@ -230,3 +230,8 @@ void Grafo::liberar_matriz_de_adyacencia() {
 Lista* Grafo::devolver_lista_vertices(){
 	return lista_vertices;
 }
+
+Grafo::~Grafo() {
+	liberar_matriz_de_adyacencia();
+	delete lista_vertices;
+}

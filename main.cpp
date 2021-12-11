@@ -19,37 +19,12 @@ int main() {
     Jugador* jug_1 = juego-> devolver_jugador_1();
     Jugador* jug_2 = juego -> devolver_jugador_2();
 
-    ifstream archivo;
-
-    bool mapa_bien_cargado = false;
     bool nueva_partida = true;
-    bool diccionario_edificios_bien_cargado = false;
-    bool inventario_bien_cargado = true;
+    int archivos_cargados = 0;
 
-    if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA)) {
-        juego -> devolver_mapa() -> cargar_mapa(archivo);
-        mapa = juego -> devolver_mapa();  
-        mapa_bien_cargado = true;
-    }
+    juego -> leer_archivos(mapa, archivos_cargados, nueva_partida);
 
-    if (juego -> es_archivo_legible(archivo, ARCHIVO_EDIFICIOS)) {
-        juego -> cargar_diccionario(archivo);
-        diccionario_edificios_bien_cargado = true;
-    }
-
-    if (juego -> es_archivo_legible(archivo, ARCHIVO_UBICACIONES)) {
-        juego -> cargar_ubicaciones(archivo);
-        nueva_partida = false;
-    }
-
-    if (!nueva_partida) {
-        if (juego -> es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
-            juego -> cargar_inventario(archivo);
-            inventario_bien_cargado = true;
-        }
-    }
-
-    if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
+    if (archivos_cargados == CONTINUAR_PARTIDA) {
         
         bool alguien_gano = false;
         bool quiere_salir = false;
@@ -57,52 +32,36 @@ int main() {
         bool sin_energia = false;
         
         if (nueva_partida) {
-                
-            int ingreso;
+
             int opcion_elegida;
+            
+            system(CLR_SCREEN);
+            while (opcion_elegida != COMENZAR_PARTIDA) {
 
-            presentar_menu_np();
+                presentar_menu_np();
 
-            cin >> opcion_elegida;
-            cin.clear();
-            cin.ignore(100, '\n');
-
-            while (!opcion_valida_np(opcion_elegida)) {
-                cout << "Opcion no valida. Eliga nuevamente." << endl;
                 cin >> opcion_elegida;
                 cin.clear();
                 cin.ignore(100, '\n');
+
+                while (!opcion_valida_np(opcion_elegida)) {
+                    cout << ERROR_COLOR << "Opcion no valida. Eliga nuevamente." << END_COLOR << endl;
+                    cin >> opcion_elegida;
+                    cin.clear();
+                    cin.ignore(100, '\n');
+                }
+                procesar_opcion_np(juego, opcion_elegida);
             }
-
-            procesar_opcion_np(juego, opcion_elegida);
-            
-            cout << "Desea ser jugador 1 o 2 ? (ingrese 1 o 2): ";
-            cin >> ingreso;
-            cout << endl;
-
-            jug_1 -> pedir_coordenadas();
-            jug_2 -> pedir_coordenadas();
-
-            int fila1 = jug_1 -> devolver_fila() - 1;
-            int columna1 = jug_1 -> devolver_columna() - 1;
-
-            int fila2 = jug_2 -> devolver_fila() - 1;
-            int columna2 = jug_2 -> devolver_columna() - 1;
-             
-            mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
-            mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
-
-        }else{
-            //juego -> cargar_ubicaciones(archivo);
+            juego -> posicionar_jugadores(jug_1, jug_2, mapa);
         }
-
-        cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
 
         Jugador* jug_turno;
         Jugador* jug_secundario;        
 
         jug_turno = jug_2;
         jug_secundario = jug_1;
+
+        int turnos_sin_llover = 0;
 
         while (!alguien_gano && !quiere_salir){
             
@@ -111,21 +70,26 @@ int main() {
             quiere_terminar_turno = false;
             sin_energia = false;
         
-            if ( jug_1->es_su_turno() ){ // turnos impares puese si el resto es 0 == false
+            if (jug_1 -> es_su_turno()) { 
                 jug_turno = jug_1;
                 jug_secundario = jug_2;
             }
-            else{ //turnos pares
+            else {
                 jug_turno = jug_2;
                 jug_secundario = jug_1;
-
             } 
-            //sin_energia = false;
-            cout <<"\nTURNO DE JUGADOR "<< jug_turno-> devolver_numero_jugador() <<endl;
-            //cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;
+
+            cout <<"TURNO DEL JUGADOR "<< jug_turno-> devolver_numero_jugador() <<endl;
             
-            while( !alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir ){
-                //cout <<"\nOLAAAA "<< jug_turno-> devolver_numero_jugador() <<endl;
+            
+            turnos_sin_llover++;
+            if (turnos_sin_llover == (4 + 1)){
+                mapa -> llover();
+                turnos_sin_llover = 0;
+            }
+
+            //comienzo de turno
+            while (!alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir) {
                 
                 int opcion;
 
@@ -134,9 +98,16 @@ int main() {
                 presentar_menu();
 
                 cin >> opcion;
-                while (!opcion_valida(opcion)){
-                    cout<<"Opcion no valida. Eliga nuevamente." <<endl;
-                    cin>>opcion;} // ahi estan los 2 hechos
+                cin.clear();
+                cin.ignore(100, '\n');
+
+                while (!opcion_valida(opcion)) {
+                    cout << "Opcion no valida. Eliga nuevamente." << endl;
+                    cin >> opcion;
+                    cin.clear();
+                    cin.ignore(100, '\n');
+                }
+
                 procesar_opcion(opcion ,juego, jug_turno, jug_secundario);
                 
                 sin_energia = jug_turno ->esta_sin_energia();

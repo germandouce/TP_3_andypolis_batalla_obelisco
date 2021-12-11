@@ -2,7 +2,10 @@
 #define JUGADOR_H
 
 #include <string>
-#include "..\vector.h"
+#include "../diccionario.h"
+#include "../casilleros/casillero.h"
+#include "../vector.h"
+#include "../Inventario/Inventario.h"
 
 #include "..\objetivos\armado.h"
 #include "..\objetivos\bombardero.h"
@@ -52,7 +55,7 @@ class Jugador {
     //Pedir coordenadas
     //PRE:-
     //POST: Pide las coordenadas en las q quiere ubicarse al jugador
-    void pedir_coordenadas();
+    void ubicar_jugador();
     
     //Asignar coordenadas
     //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.
@@ -158,7 +161,38 @@ class Jugador {
     //PRE:-
     //POST:Devuelve un puntero al inventario del jugador
     Inventario* devolver_inventario();
+
+    //PRE:-
+    //POST
+    void opcion_demoler_edificio_x_coordenada();
+
+    //PRE:-
+    //POST
+    bool acepta_realizar_accion();
+
+    //PRE:-
+    //POST
+    bool puede_construir_edificio(int piedra, int madera, int metal);
+
+    //PRE:-
+    //POST
+    bool encuentra_edificio(Diccionario* diccionario, string nombre_edificio_buscar);
+
+    //PRE:-
+    //POST
+    void opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casillero*** mapa);
+
+    //PRE:-
+    //POST
+    void pedir_coordenadas(int &fila, int &columna);
     
+    //PRE:-
+    //POST
+    void pedir_columna(int &columna);
+
+    //PRE:-
+    //POST
+    void pedir_fila(int &fila);
 };
 
 #endif // JUGADOR_H

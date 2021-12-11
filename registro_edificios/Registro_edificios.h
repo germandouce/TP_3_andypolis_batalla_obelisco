@@ -11,6 +11,8 @@
 #include "escuela.h"
 #include "aserradero.h"
 
+const int NO_EXISTE = 999999;
+
 class Registro_edificios{
 
 //ATRIBUTOS
@@ -98,6 +100,8 @@ public:
     //post: devueve puntero a nodo pedido segun posicion en el registro si confirma validez de posicion pedida/consultada.
     // En caso de que esta no sea valida infoorma y devulve un nullptr.
     Nodo_R* obtener_nodo(int pos);
+
+    int obtener_edificios_construidos(string nombre_edificio);
 
     //DESTRUCTOR
     ~Registro_edificios();

@@ -108,6 +108,25 @@ void Diccionario::mostrar_todos_edificios(Nodo_dict* nodo) {
     }
 }
 
+void Diccionario::modificar_valores_edificios() {
+
+    string nombre_edificio;
+
+    system(CLR_SCREEN);
+    cout << ENTER_COLOR << "Ingrese el nombre del Edificio que desea modificar: " << END_COLOR << endl;
+    cin >> nombre_edificio;
+
+    Edificio* edificio = buscar_edificio(nombre_edificio);
+
+    if (edificio != nullptr) {
+        edificio -> modificar_cantidades_edificio();
+    }
+    else {
+        cout << ERROR_COLOR << "El Edificio ingresado no existe." << END_COLOR << endl;
+        cout << endl;
+    }
+}
+
 void Diccionario::borrar_todo(Nodo_dict* nodo) {
     
     if (nodo == NULL) {

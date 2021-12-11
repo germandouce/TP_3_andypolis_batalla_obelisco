@@ -8,6 +8,99 @@ Juego::Juego() {
     this -> objetivos = new Vector<Objetivo>;
 }
 
+/*
+void Juego::turno_jugador(bool &alguien_gano, bool &sin_energia, bool &quiere_terminar_turno, bool &quiere_salir, ){
+    while (!alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir) {
+                
+                int opcion;
+
+                //system(CLR_SCREEN);
+                mapa -> imprimir_mapa();
+                presentar_menu();
+
+                cin >> opcion;
+                cin.clear();
+                cin.ignore(100, '\n');
+
+                while (!opcion_valida(opcion)) {
+                    cout << "Opcion no valida. Eliga nuevamente." << endl;
+                    cin >> opcion;
+                    cin.clear();
+                    cin.ignore(100, '\n');
+                }
+
+                procesar_opcion(opcion ,juego, jug_turno, jug_secundario);
+                
+                sin_energia = jug_turno ->esta_sin_energia();
+                alguien_gano = jug_turno ->gano();
+                quiere_salir = jug_turno -> quiere_salir_del_juego();
+                quiere_terminar_turno = ! ( jug_turno -> es_su_turno() );
+            }
+}
+*/
+
+
+void Juego::leer_archivos(Mapa* mapa, int &archivos_cargados, bool nueva_partida) {
+    
+    ifstream archivo;
+
+    if (es_archivo_legible(archivo, ARCHIVO_MAPA)) {
+        devolver_mapa() -> cargar_mapa(archivo);
+        mapa = devolver_mapa();  
+        archivos_cargados++;
+    }
+
+    if (es_archivo_legible(archivo, ARCHIVO_EDIFICIOS)) {
+        cargar_diccionario(archivo);
+        archivos_cargados++;
+    }
+
+    if (es_archivo_legible(archivo, ARCHIVO_UBICACIONES)) {
+        cargar_ubicaciones(archivo);
+        nueva_partida = false;
+    }
+
+    if (!nueva_partida) {
+        if (es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
+            cargar_inventario(archivo);
+        }
+    }
+}
+
+void Juego::posicionar_jugadores(Jugador* jug_1, Jugador* jug_2, Mapa* mapa) {
+
+    int ingreso;
+
+    cout << ENTER_COLOR << "Desea ser Jugador 1 o el Jugador 2? Ingrese 1 o 2:" << END_COLOR << endl;
+    cin >> ingreso;
+    cin.clear();
+    cin.ignore(100, '\n');
+
+    while(ingreso != PRIMER_JUGADOR && ingreso != SEGUNDO_JUGADOR) {
+        cout << ERROR_COLOR << "La opcion ingresada es invalida. Intente de nuevo." << END_COLOR << endl;
+        cout << endl;
+        cout << ENTER_COLOR << "Desea ser Jugador 1 o el Jugador 2? Ingrese 1 o 2:" << END_COLOR << endl;
+        cin >> ingreso;
+        cin.clear();
+        cin.ignore(100, '\n');
+    }
+
+    jug_1 -> setear_numero_jugador(ingreso);
+    jug_2 -> setear_numero_jugador(DIFERENCIA_JUGADORES - ingreso);
+
+    jug_1 -> ubicar_jugador();
+    jug_2 -> ubicar_jugador();
+
+    int fila1 = jug_1 -> devolver_fila() - 1;
+    int columna1 = jug_1 -> devolver_columna() - 1;
+
+    int fila2 = jug_2 -> devolver_fila() - 1;
+    int columna2 = jug_2 -> devolver_columna() - 1;
+        
+    mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
+    mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
+}
+
 bool Juego::archivo_vacio(ifstream& archivo){
     return (archivo.peek() == ifstream::traits_type::eof());
 }
@@ -106,13 +199,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         }
         
         if (nombre_elemento == S || nombre_elemento == W || nombre_elemento == I || nombre_elemento == C) {
-
-            cout << nombre_elemento << endl;
-
             material = instanciar_material(nombre_elemento);
-
-            cout << material -> obtener_nombre() << endl;
-
             mapa -> colocar_material(stoi(fila) - 1, stoi(columna) - 1, material);
         }
         else if (nombre_elemento != "1" && nombre_elemento != "2") {
@@ -459,6 +546,7 @@ void Juego::pedir_columna(int &columna) {
     cin.clear();
     cin.ignore(100, '\n');
 }
+
 Diccionario* Juego:: devolver_diccionario(){
     return diccionario;
 }

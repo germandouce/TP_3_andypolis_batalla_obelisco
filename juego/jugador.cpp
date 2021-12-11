@@ -1,7 +1,6 @@
 #include "jugador.h"
-#include "..\inventario\inventario.h"
 
-Jugador::Jugador(){
+Jugador::Jugador() {
 
     this -> numero_jugador = 0;
     this -> registro_edificios = new Registro_edificios();
@@ -20,7 +19,7 @@ Jugador::Jugador(){
     this -> su_turno = true;
 }
 
-void Jugador::pedir_coordenadas(){
+void Jugador::ubicar_jugador() {
     
     cout<<"Hola jugador "<< devolver_numero_jugador()<<"!" <<endl
     <<"\nPor favor, ingrese las coordenadas en las que desea ubicarse:"<<endl;
@@ -29,6 +28,8 @@ void Jugador::pedir_coordenadas(){
     cout<<"Ingrese la columna: ";
     cin >>columna;
     cout<<endl;
+
+    asignar_coordenadas(fila, columna);
 }
 
 void Jugador::asignar_coordenadas(int fila, int columna){
@@ -191,4 +192,126 @@ Registro_edificios* Jugador::devolver_resgitro_edificios(){
 
 Inventario* Jugador::devolver_inventario(){
     return inventario;
+}
+
+void Jugador::opcion_demoler_edificio_x_coordenada() {
+    cout<< "Energia actual : " << obtener_energia() << endl;
+    cout <<" Ingrese coordenadas del edificios a demoler"<<endl;
+    int fila;
+    cout<< "Ingrese numero de fila: ";
+    cin >> fila;
+    int columna;
+    cout << "Ingrese numero de columna: ";
+    cin >> columna;
+    devolver_resgitro_edificios()->eliminar(fila, columna);
+}
+
+bool Jugador::encuentra_edificio(Diccionario* diccionario, string nombre_edificio_buscar) {
+    return (diccionario -> buscar_edificio(nombre_edificio_buscar) != nullptr);
+}
+
+bool Jugador::puede_construir_edificio(int piedra, int madera, int metal) {
+
+    bool piedra_suficiente = inventario -> hay_piedra_suficiente(piedra);
+    bool madera_suficiente = inventario -> hay_madera_suficiente(madera);
+    bool metal_suficiente = inventario -> hay_metal_suficiente(metal);
+
+    return piedra_suficiente && madera_suficiente && metal_suficiente;
+}
+
+bool Jugador::acepta_realizar_accion() {
+    string eleccion;
+    cout << "Desea realizar esta accion? Ingrese 'Si' o 'si para confirmar." << endl;
+    cin >> eleccion;
+    return (eleccion == "Si" || eleccion == "si");
+}
+
+void Jugador::opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casillero*** mapa) {
+    
+    string nombre_edificio_construir;
+    cout << "Ingrese nombre edificio que desea construir: ";
+    cin >> nombre_edificio_construir;
+
+    Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
+    Edificio* edificio_a_construir;
+
+    if (edificio_consultado != nullptr) {
+        
+        int piedra = edificio_consultado -> obtener_cantidad_piedra();
+        int madera = edificio_consultado -> obtener_cantidad_madera();
+        int metal = edificio_consultado -> obtener_cantidad_metal();
+
+        int construidos = registro_edificios -> obtener_edificios_construidos(nombre_edificio_construir);
+        int limite = edificio_a_construir -> obtener_maximo_construir();
+
+        if (puede_construir_edificio(piedra, madera, metal) && construidos < limite) {
+
+            if (acepta_realizar_accion()) {
+
+                int fila;
+                int columna;
+                
+                pedir_coordenadas(fila, columna);
+
+                bool esta_ocupado = mapa[fila][columna] -> esta_ocupado();
+                string tipo_casillero = mapa[fila][columna] -> obtener_tipo_casillero();
+
+                if (!esta_ocupado && tipo_casillero == TERRENO) {
+                    edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio_construir, fila, columna);
+                    mapa[fila][columna] -> construir_edificio(edificio_a_construir);
+                    mapa[fila][columna] -> ocupar_casillero();
+                    registro_edificios -> agregar(edificio_a_construir);
+                }
+            }
+            else {
+                cout << "No se ha construido el Edificio." << endl;
+                cout << endl;
+            }
+        }
+        else {
+            cout << "No cumples con los requisitos necesarios para construir el Edificio." << endl;
+            cout << endl;
+        }
+    }
+}
+
+void Jugador::pedir_coordenadas(int &fila, int &columna) {
+	
+	system(CLR_SCREEN);
+
+	pedir_fila(fila);
+
+    while (fila <= 0) {
+        system(CLR_SCREEN);
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << endl;
+        pedir_fila(fila);
+    }
+
+    pedir_columna(columna);
+
+    while (columna <= 0) {
+        system(CLR_SCREEN);
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << endl;
+        pedir_columna(columna);
+    }
+
+	fila = fila - 1;
+	columna = columna - 1;
+    cout << endl;
+}
+
+void Jugador::pedir_fila(int &fila) {
+    cout << ENTER_COLOR << "Ingrese la fila del casillero deseado: " << END_COLOR << endl;
+    cin >> fila;
+    cin.clear();
+    cin.ignore(100, '\n');
+}
+
+void Jugador::pedir_columna(int &columna) {
+    cout << ENTER_COLOR << "Ingrese la columna del casillero deseado: " << END_COLOR << endl;
+    cin >> columna;
+    cin.clear();
+    cin.ignore(100, '\n');
 }

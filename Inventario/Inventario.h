@@ -118,6 +118,13 @@ public:
     //POS: devuelve true si contas con el procentaje de la cantidad de piedra requerida.
     bool porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
+    bool hay_madera_suficiente(int cantidad_necesaria);
+
+    bool hay_metal_suficiente(int cantidad_necesaria);
+
+    bool hay_piedra_suficiente(int cantidad_necesaria);
+
+
 
 
     //DESTRUCTOR

@@ -42,7 +42,9 @@ class Diccionario {
     void mostrar_todos_edificios();
 
     void mostrar_todos_edificios(Nodo_dict* nodo);
-    
+
+    void modificar_valores_edificios();
+
     private:
 
     // PRE: Recibe un nodo y el edificio a insertar

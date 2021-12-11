@@ -242,3 +242,35 @@ Nodo_R* Registro_edificios::obtener_nodo(int pos) {
         return nullptr;
     }
 }
+
+int Registro_edificios::obtener_edificios_construidos(string nombre_edificio) {
+    
+    int cantidad_construida;
+    
+    if (nombre_edificio == M) {
+        cantidad_construida = obtener_cantidad_minas();
+    }
+    else if (nombre_edificio == O){
+        cantidad_construida = obtener_cantidad_obeliscos();
+    }
+    else if (nombre_edificio == P){
+        cantidad_construida = obtener_cantidad_plantas_electricas();
+    }
+    else if (nombre_edificio == E){
+        cantidad_construida = obtener_cantidad_escuelas();
+    }   
+    else if (nombre_edificio == G){
+        cantidad_construida = obtener_cantidad_minas_oro();
+    }
+    else if (nombre_edificio == F){
+        cantidad_construida = obtener_cantidad_fabricas();
+    }
+    else if (nombre_edificio == A){
+        cantidad_construida = obtener_cantidad_aserraderos();
+    }
+    else{
+        cantidad_construida = NO_EXISTE;
+    }
+    
+    return cantidad_construida;     
+}

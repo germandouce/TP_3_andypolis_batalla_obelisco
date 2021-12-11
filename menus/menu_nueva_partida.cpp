@@ -6,7 +6,6 @@ using namespace  std;
 
 void presentar_menu_np() {
 
-    system(CLR_SCREEN);
     cout << ENTER_COLOR << "Puede elegir una de las siguiente opciones: " << END_COLOR << endl;
     cout << endl;
     cout << SUCESS_COLOR;
@@ -22,23 +21,21 @@ void procesar_opcion_np(Juego* juego, int opcion) {
 
     switch (opcion) {
         case MODIFICAR_EDIFICIO_X_NOMBRE:
-            //system("cls");
-            cout << "hola 1" << endl;
-            cout << "ENTER PARA VOLVER A MENU" << endl;
-            //verificar_construccion(mapa, vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
+            juego -> devolver_diccionario() -> modificar_valores_edificios();
             break;
         case LISTAR_TODOS_LOS_EDIFICIOS:
-            //system("cls");
+            system(CLR_SCREEN);
+            juego -> devolver_diccionario() -> mostrar_todos_edificios();
             break;
         case MOSTRAR_MAPA:
             juego -> devolver_mapa() -> imprimir_mapa();
             break;
         case COMENZAR_PARTIDA:
-            //system("cls");
             break;
         case GUARDAR_SALIR:
             //system("cls");
-            break;}
+            break;
+    }
 }
 
 bool opcion_valida_np(int opcion) {

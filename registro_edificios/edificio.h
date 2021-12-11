@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <string>
+
+#include "../colores.h"
+#include "../system_clear.h"
+
 using namespace std;
 
 const string G = "mina de oro";
@@ -13,8 +17,16 @@ const string E = "escuela";
 const string O = "obelisco";
 const string P = "planta electrica";
 
+const string ASERRADERO = "A";
+const string ESCUELA = "E";
+const string FABRICA = "F";
+const string MINA_DE_ORO = "G";
+const string MINA = "M";
+const string OBELISCO = "O";
+const string PLANTA_ELECTRICA = "P";
+
 class Edificio {
-protected:
+    protected:
 
     string nombre;
     string diminutivo;
@@ -28,7 +40,7 @@ protected:
     int fila;
     int columna;
 
-public:
+    public:
 
     // Constructor
     // PRE: -
@@ -81,23 +93,6 @@ public:
     // POS: Devuelve la mitad del material, metodo utilizado en caso de eliminar el edificio.
     int obtener_mitad_metal();
 
-    // PRE: Que la cantidad maxima de edificios no sea menor que la cantidad de edificios construidos.
-    // POS: Devuelve una resta entre el maximo y la cantidad de edificios construidos, para saber cuantos 
-    //      mas puedo construir.
-    // int obtener_cuantos_puedo_construir();
-
-    // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
-    // POS: Devuelve la cantidad que se encuentran construidos en el mapa hasta el momento.
-    // int obtener_cantidad_construidos();
-
-    // PRE: En caso de que se pueda construir edificio sin superar el maximo.
-    // POS: suma 1 a la cantidad de edificios.
-    // void sumar_cantidad();
-
-    // PRE: En caso de que exista por lo menos 1 edificio creado.
-    // POS: Resta 1 a cantidad_edificios.
-    // void restar_cantidad();
-
     // PRE: -
     // POS: Por cada uno de los edificios muestra por pantalla su respectivo mensaje.
     virtual void mostrar_mensaje() = 0;
@@ -140,7 +135,7 @@ public:
 
     //PRE: pasamos edificio que queremos modificar las cantidades de los materiales requeridos
     //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.
-    void modificar_cantidades_edificio(Edificio*edificio);
+    void modificar_cantidades_edificio();
 
     // Destructor
     // PRE: -

@@ -34,23 +34,24 @@ public:
     Vertice(int numero_vertice, int cantidad_filas, int cantidad_columnas, int fila, int columna);
 
     //pre:
-    //post: devuelve el numero de vertice
+    //post: devuelve el numero de vertice.
     int obtener_numero_vertice();
 
     //pre:
-    //post: devuelve la cantidad de cantidad_filas
+    //post: devuelve la cantidad de cantidad_filas.
     int obtener_cantidad_filas();
 
     //pre:
-    //post: devuelve la cantidad de cantidad_columnas
+    //post: devuelve la cantidad de cantidad_columnas.
     int obtener_cantidad_columnas();
 
     //pre:
-    //post: devuelve la coordenada "x" que ocupa en la matriz
+    //post: devuelve la coordenada "x" que ocupa en la matriz.
     int obtener_fila();
 
     //pre:
-    //post: devuelve la coordena "y" que ocupa en la matriz
+    //post: devuelve la coordena "y" que ocupa en la matriz.
     int obtener_columna();
+
 };
 #endif //VERTICE_H

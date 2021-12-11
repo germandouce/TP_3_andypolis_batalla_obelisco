@@ -89,6 +89,10 @@ class Grafo {
     //pre:
     //post: Libera la matriz de adyacencia
     void liberar_matriz_de_adyacencia();
+
+    //pre:
+    //post: Desructor de edificio.
+    ~Grafo();
 };
 
 #endif //GRAFO_H

@@ -206,3 +206,15 @@ bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
 Inventario::~Inventario(){
 }
 
+bool Inventario:: hay_madera_suficiente(int cantidad_necesaria){
+    return (cant_madera >= cantidad_necesaria);
+}
+
+bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
+    return (cant_metal >= cantidad_necesaria);
+}
+
+bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
+    return (cant_piedra >= cantidad_necesaria);
+
+}

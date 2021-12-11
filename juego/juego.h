@@ -1,10 +1,11 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include <iostream>
 #include <ctime>
 #include <string>
-#include "..\mapa.h"
-#include "jugador.h"
+
+#include "../mapa.h"
 
 using namespace std;
 
@@ -16,6 +17,12 @@ const string ARCHIVO_MATERIALES = "materiales.txt";
 const char PARENTESIS_CHAR = '(';
 const int OPCION_PARENTESIS = 0;
 const int OPCION_NUMEROS = 1;
+
+const int PRIMER_JUGADOR = 1;
+const int SEGUNDO_JUGADOR = 2;
+const int DIFERENCIA_JUGADORES = 3;
+
+const int CONTINUAR_PARTIDA = 2;
 
 class Juego {
 
@@ -36,6 +43,10 @@ class Juego {
     //PRE:-
     //POST:-
     void crear_juego();
+
+    void leer_archivos(Mapa* mapa, int &archivos_cargados, bool nueva_partida);
+
+    void posicionar_jugadores(Jugador* jug_1, Jugador* jug_2, Mapa* mapa);
 
     //Cargar mapa
     //PRE:-

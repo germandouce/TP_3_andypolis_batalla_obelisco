@@ -90,7 +90,8 @@ void Edificio::reparar() {
 
 void Edificio::mostrar_toda_informacion() {
 
-    cout << "Se requieren los siguientes materiales para construir un/a '" << nombre << "': ";
+    cout << ENTER_COLOR << "Se requieren los siguientes materiales para construir un/a '" << nombre << "': " << END_COLOR;
+    cout << SUCESS_COLOR << endl;
     cout << "-" << cantidad_piedra << " unidades de piedra." << endl;
     cout << "-" << cantidad_madera << " unidades de madera." << endl;
     cout << "-" << cantidad_metal << " unidades de metal." << endl;
@@ -99,9 +100,8 @@ void Edificio::mostrar_toda_informacion() {
     if (diminutivo != "O") {
         cout << "-Produce " << brinda << " de " << obtener_material_brindado() << " cuando se recolecta." << endl;
     }
-    
-    cout << "-Construidos: " << "???" << "/";
-    cout << obtener_maximo_construir() << "." << endl;
+
+    cout << "-Se pueden construir un maximo de " << maximo_construir << "." << END_COLOR << endl;
     cout << endl;
 }
 
@@ -121,23 +121,46 @@ int Edificio::obtener_columna() {
     return columna;
 }
 
-void Edificio:: modificar_cantidades_edificio(Edificio*edificio){
-    if ( edificio->obtener_nombre() != "O"){
-        int cantidad_suma_resta_madera;
-        int cantidad_suma_resta_piedra;
-        int cantidad_suma_resta_metal;
-        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
-        cin >> cantidad_suma_resta_madera;
-        edificio->cantidad_madera = edificio->cantidad_madera + cantidad_suma_resta_madera;
-        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
-        cin >> cantidad_suma_resta_piedra;
-        edificio->cantidad_piedra = edificio->cantidad_piedra + cantidad_suma_resta_piedra;
-        cout << "Cantidad de madera a sumar o restar (incluir signo): ";
-        cin >> cantidad_suma_resta_metal;
-        edificio->cantidad_metal = edificio->cantidad_metal + cantidad_suma_resta_metal;
+void Edificio:: modificar_cantidades_edificio() {
+    
+    system(CLR_SCREEN);
+
+    if (diminutivo != OBELISCO) {
+
+        int nueva_cantidad_piedra;
+        int nueva_cantidad_madera;
+        int nueva_cantidad_metal;
+
+        cout << SUCESS_COLOR << "El costo anterior de piedra es de " << cantidad_piedra << "." << END_COLOR << endl;
+        cout << endl;
+        cout << ENTER_COLOR << "Ingrese el nuevo costo de piedra deseado: " << END_COLOR << endl;
+        
+        cin >> nueva_cantidad_piedra;
+        cantidad_piedra = nueva_cantidad_piedra;
+
+        cout << endl;
+        cout << SUCESS_COLOR << "El costo anterior de madera es " << cantidad_madera << "." << END_COLOR << endl;
+        cout << endl;
+        cout << ENTER_COLOR << "Ingrese el nuevo costo de madera deseado: " << END_COLOR << endl;
+        
+        cin >> nueva_cantidad_madera;
+        cantidad_madera = nueva_cantidad_madera;
+
+        cout << endl;
+        cout << SUCESS_COLOR << "El costo anterior de metal es " << cantidad_metal << "." << END_COLOR << endl;
+        cout << endl;
+        cout << ENTER_COLOR << "Ingrese el nuevo costo de metal deseado: " << END_COLOR << endl;
+        
+        cin >> nueva_cantidad_metal;
+        cantidad_metal = nueva_cantidad_metal;
+
+        system(CLR_SCREEN);
+        cout << SUCESS_COLOR << "Se han modificao los valores correctamente!" << END_COLOR << endl;
+        cout << endl;
     }
-    else{
-        cout<< "Obelisco no es un edificio modificable." << endl;
+    else {
+        cout << ERROR_COLOR << "El obelisco no es un edificio modificable." << END_COLOR << endl;
+        cout << endl;
     }
 }
 
