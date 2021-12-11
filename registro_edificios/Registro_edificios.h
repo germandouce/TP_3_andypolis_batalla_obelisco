@@ -117,7 +117,7 @@ public:
     
     bool al_menos_una_escuela();
 
-    bool al_menos_uno_de_cada_tipo_construidos();
+    bool al_menos_uno_de_cada_tipo();
   
 
     //DESTRUCTOR

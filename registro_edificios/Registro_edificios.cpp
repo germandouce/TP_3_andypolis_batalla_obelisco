@@ -275,4 +275,34 @@ int Registro_edificios::obtener_edificios_construidos(string nombre_edificio) {
     return cantidad_construida;     
 }
 
-bool
+bool Registro_edificios::al_menos_un_obelisco(){
+    return (obtener_cantidad_obeliscos() >= 0);
+}
+
+bool Registro_edificios::al_menos_una_mina(){
+    return (obtener_cantidad_minas() >= 0);
+}
+
+bool Registro_edificios::al_menos_una_fabrica(){
+    return (obtener_cantidad_fabricas() >=0);
+}
+
+bool Registro_edificios::al_menos_un_aserradero(){
+    return (obtener_cantidad_aserraderos() >= 0);
+}
+
+bool Registro_edificios::al_menos_una_mina_oro(){
+    return (obtener_cantidad_minas_oro() >= 0);
+}
+
+bool Registro_edificios::al_menos_una_planta_electrica(){
+    return  (obtener_cantidad_plantas_electricas() >= 0);
+}
+bool Registro_edificios::al_menos_una_escuela(){
+    return (obtener_cantidad_escuelas() >= 0);
+}
+
+bool Registro_edificios::al_menos_uno_de_cada_tipo(){
+    return (al_menos_un_aserradero() && al_menos_un_obelisco() && al_menos_una_escuela()
+    && al_menos_una_fabrica() && al_menos_una_mina_oro() && al_menos_una_mina() && al_menos_una_planta_electrica());
+}
