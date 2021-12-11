@@ -86,7 +86,7 @@ class Juego {
     //Guardar material
     //PRE: Recibe el nombre del material y un puntero a material
     //POST: instancia el material y lo guarda en el puntero recibido
-    void instanciar_material(string nombre_material, Material* material);
+    Material* instanciar_material(string nombre_material);
 
     //Cargar ubicaciones
     //PRE: El acrhivo ubicaciones debe estar abierto. Recibe un puntero a jugador 1 y a jugador 2 y 

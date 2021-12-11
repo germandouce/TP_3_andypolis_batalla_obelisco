@@ -17,7 +17,10 @@ bool Juego::existe_archivo(ifstream& archivo, string nombre_archivo) {
     return (archivo.is_open());
 }
 
-void Juego::instanciar_material(string nombre_material, Material* material){
+Material* Juego::instanciar_material(string nombre_material) {
+    
+    Material* material;
+    
     if (nombre_material == S) {
         material = new Piedra(PIEDRA_LLOVIDA);
     }
@@ -30,8 +33,9 @@ void Juego::instanciar_material(string nombre_material, Material* material){
     else if (nombre_material == C) {
         material = new Andycoins(ANDYCOINS_LLOVIDO);
     }
-}
 
+    return material;
+}
 void Juego::cargar_inventario(ifstream& inventario) {
 
     string nombre;
@@ -102,7 +106,13 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         }
         
         if (nombre_elemento == S || nombre_elemento == W || nombre_elemento == I || nombre_elemento == C) {
-            instanciar_material(nombre_elemento, material);
+
+            cout << nombre_elemento << endl;
+
+            material = instanciar_material(nombre_elemento);
+
+            cout << material -> obtener_nombre() << endl;
+
             mapa -> colocar_material(stoi(fila) - 1, stoi(columna) - 1, material);
         }
         else if (nombre_elemento != "1" && nombre_elemento != "2") {

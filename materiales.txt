@@ -1,5 +1,5 @@
 piedra 500 400
 madera 500 400
 metal 500 400
-bombas 500 400
+bombas 5 5
 andycoins 500 400

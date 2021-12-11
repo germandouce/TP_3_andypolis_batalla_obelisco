@@ -92,10 +92,7 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
             //mapa -> consultar_casillero();
             break;
         case MOSTRAR_INVENTARIO:
-           //  system("cls");
-            cout << "hola 8" << endl;
-            cout << "ENTER PARA VOLVER A MENU" << endl;
-            //mostrar_inventario(vector_materiales);
+            jug_turno -> devolver_inventario() -> mostrar_inventario();
             break;
         case MOSTRAR_OBJETIVOS:
            //  system("cls");
@@ -107,8 +104,7 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
             break;
         case RECOLECTAR_RECURSOS_PRODUCIDOS:
           //   system("cls");
-            cout << "hola 10" << endl;
-            cout << "ENTER PARA VOLVER A MENU" << endl;
+            juego -> devolver_mapa() -> llover();
             //recolectar_recursos_producidos(vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
             break;
         case MOVERSE_A_UNA_COORDENADA:
