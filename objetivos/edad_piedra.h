@@ -5,7 +5,9 @@
 
 class Edad_piedra: public Objetivo {
     public:
+    
     Edad_piedra();
+    
     bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
     Diccionario *diccionario, int energia);
 

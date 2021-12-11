@@ -9,5 +9,10 @@ Energetico::Energetico(): Objetivo() {
 
 bool Energetico::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return true;
+    energia == REQUISITO_ENERGETICO;
+}
+
+void Energetico::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
+Diccionario *diccionario, int energia){
+    cout<<"Te falta recuperar "<<REQUISITO_ENERGETICO - energia <<" de energia para cumplir este objetivo";
 }

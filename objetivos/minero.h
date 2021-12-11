@@ -11,8 +11,8 @@ class Minero: public Objetivo {
     bool comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
     Diccionario *diccionario, int energia);
     
-    void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios,
-     Diccionario *diccionario, int energia);
+    void mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios,
+    Diccionario *diccionario, int energia);
 
 };
 

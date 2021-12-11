@@ -4,14 +4,19 @@ Minero::Minero(): Objetivo() {
     this -> nombre_objetivo = "Minero";
     this -> descripcion = "Haber construido una mina de cada tipo.";
     this -> identificador = MINERO;
-   //  this -> requisito = REQUISITO_MINERO;
 }
 bool Minero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return true;
+    return (registro_edificios->al_menos_una_mina() && registro_edificios->al_menos_una_mina_oro() );
 }
 
 void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    diccionario -> buscar_edificio("mina")->obtener_maximo_construir();
+    cout<<"Te falta construir: "<<endl;
+    if (!registro_edificios->al_menos_una_mina()){
+        cout<<"una mina";
+    }
+    if (!registro_edificios->al_menos_una_mina_oro()){
+        cout<<"una mina de oro";
+    }
 }

@@ -9,10 +9,11 @@ Edad_piedra::Edad_piedra() : Objetivo() {
 
 bool Edad_piedra::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return true;
+    return inventario->devolver_cant_piedra() == REQUISITO_EDAD_PIEDRA ;
 }
 
 void Edad_piedra::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    // return true;
+    cout<<"Te faltan obetener "<< REQUISITO_EDAD_PIEDRA - inventario->devolver_cant_piedra() 
+    <<" piedras para cumplir este objetivo";
 }
