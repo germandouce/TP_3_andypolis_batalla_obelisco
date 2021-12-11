@@ -64,8 +64,7 @@ void Juego::cargar_inventario(ifstream& inventario) {
         else if (nombre == C) {
             inventario_jugador_1->cambiar_cantidad_elemento(nombre,stoi(cantidad_1));
             inventario_jugador_2->cambiar_cantidad_elemento(nombre,stoi(cantidad_2));
-        }
-        
+        }   
         inventario_jugador_1-> actualizar_largo_de_inventario();
         inventario_jugador_2-> actualizar_largo_de_inventario();
     }
@@ -94,10 +93,12 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         if (nombre_elemento == "1") {
             jugador = jugador1;
             jugador -> asignar_coordenadas(stoi(fila), stoi(columna));
+            mapa -> obtener_casillero(stoi(fila) - 1, stoi(columna) - 1) -> ocupar_jugador1();
         }
         else if (nombre_elemento == "2") {
             jugador = jugador2;
             jugador -> asignar_coordenadas(stoi(fila), stoi(columna));
+            mapa -> obtener_casillero(stoi(fila) - 1, stoi(columna) - 1) -> ocupar_jugador2();
         }
         
         if (nombre_elemento == S || nombre_elemento == W || nombre_elemento == I || nombre_elemento == C) {

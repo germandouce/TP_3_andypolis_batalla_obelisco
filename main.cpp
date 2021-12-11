@@ -1,6 +1,6 @@
 #include ".\menus\menu_nueva_partida.h"
 #include ".\menus\menu_principal.h"
-#include<iostream>
+#include <iostream>
 
 using namespace std;
 
@@ -14,19 +14,21 @@ int main() {
     
     juego -> crear_juego();
 
+    Mapa* mapa;
+
     Jugador* jug_1 = juego-> devolver_jugador_1();
     Jugador* jug_2 = juego -> devolver_jugador_2();
-    Mapa* mapa = juego -> devolver_mapa();
 
     ifstream archivo;
 
     bool mapa_bien_cargado = false;
     bool nueva_partida = true;
     bool diccionario_edificios_bien_cargado = false;
-    bool inventario_bien_cargado = false;
+    bool inventario_bien_cargado = true;
 
     if (juego -> es_archivo_legible(archivo, ARCHIVO_MAPA)) {
         juego -> devolver_mapa() -> cargar_mapa(archivo);
+        mapa = juego -> devolver_mapa();  
         mapa_bien_cargado = true;
     }
 
@@ -46,16 +48,16 @@ int main() {
             inventario_bien_cargado = true;
         }
     }
-    
+
     if (mapa_bien_cargado && diccionario_edificios_bien_cargado && inventario_bien_cargado) {
         
         bool alguien_gano = false;
         bool quiere_salir = false;
         bool quiere_terminar_turno = false;
-        bool sin_energia = false;    
+        bool sin_energia = false;
         
         if (nueva_partida) {
-            
+                
             int ingreso;
             int opcion_elegida;
 
@@ -78,8 +80,6 @@ int main() {
             cin >> ingreso;
             cout << endl;
 
-            Mapa* mapa = juego -> devolver_mapa();
-
             jug_1 -> pedir_coordenadas();
             jug_2 -> pedir_coordenadas();
 
@@ -93,7 +93,7 @@ int main() {
             mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
 
         }else{
-            juego -> cargar_ubicaciones(archivo);
+            //juego -> cargar_ubicaciones(archivo);
         }
 
         cout << alguien_gano <<sin_energia <<quiere_salir <<quiere_terminar_turno <<endl;

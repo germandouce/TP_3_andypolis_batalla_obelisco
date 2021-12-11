@@ -5,6 +5,7 @@ Jugador::Jugador(){
 
     this -> numero_jugador = 0;
     this -> registro_edificios = new Registro_edificios();
+    this -> inventario = new Inventario();
     this -> objetivos = new Vector<Objetivo>;
     this -> objetivos_secundarios_cumplidos = 0;
     this -> energia = 50;

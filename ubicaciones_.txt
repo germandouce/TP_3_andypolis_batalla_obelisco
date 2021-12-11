@@ -1,8 +1,0 @@
-piedra (1, 1)
-madera (1, 2)
-1 (5, 5)
-escuela (4, 5)
-fabrica (5, 5)
-2 (10, 10)
-escuela (13, 5)
-fabrica (13, 10)

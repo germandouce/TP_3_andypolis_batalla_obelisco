@@ -125,7 +125,6 @@ void Mapa::imprimir_mapa() {
 	cout << END_COLOR << endl;
 
 	for (int c = 0; c < columnas; c++) {
-
 		if (c > 8) {
 			espacios = "  ";
 		}
