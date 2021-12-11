@@ -8,8 +8,9 @@ Inventario::Inventario(){
     cant_madera = 0;
     cant_piedra = 0;
     cant_metal = 0;
-    cant_andycoins = 0;
-    cant_bombas = 0;
+    cant_andycoins = cant_anterior_andycoins = 0;
+    cant_bombas = cant_anterior_bombas = 0;
+
 }
 
 int Inventario::devolver_cant_madera(){
@@ -30,6 +31,14 @@ int Inventario::devolver_cant_andycoins(){
 
 int Inventario::devolver_cant_bombas(){
     return cant_bombas;
+}
+
+int Inventario::devolver_cant_anterior_andycoins(){
+    return cant_anterior_andycoins;
+}
+
+int Inventario::devolver_cant_anterior_bombas(){
+    return cant_anterior_bombas;
 }
 
 void Inventario::mostrar_inventario() {
@@ -203,9 +212,6 @@ bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
     return(porcentaje_consultado > 0);
 }
 
-Inventario::~Inventario(){
-}
-
 bool Inventario:: hay_madera_suficiente(int cantidad_necesaria){
     return (cant_madera >= cantidad_necesaria);
 }
@@ -217,4 +223,19 @@ bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
 bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
     return (cant_piedra >= cantidad_necesaria);
 
+}
+void Inventario:: actualizar_cant_anterior_elemento(string elemento){
+    else if (elemento == I_BOMBAS) {
+        cant_anterior_bombas = cant_bombas;
+    }
+    else if (elemento == I_ANDYCOINS) {
+        cant_anterior_andycoins = cant_andycoins;
+    }
+    else{
+        cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
+    }
+}
+
+
+Inventario::~Inventario(){
 }

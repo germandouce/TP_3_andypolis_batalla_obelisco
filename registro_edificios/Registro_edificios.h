@@ -101,22 +101,40 @@ public:
     // En caso de que esta no sea valida infoorma y devulve un nullptr.
     Nodo_R* obtener_nodo(int pos);
 
+    //pre:
+    //post:
     int obtener_edificios_construidos(string nombre_edificio);
 
+    //pre:
+    //post: devuelve true si hay al menos 1 obelisco construida.
     bool al_menos_un_obelisco();
 
+    //pre:
+    //post: devuelve true si hay al menos 1 mina construida.
     bool al_menos_una_mina();
 
+    //pre:
+    //post: devuelve true si hay al menos 1 fabrica construida.
     bool al_menos_una_fabrica();
-    
+
+    //pre:
+    //post: devuelve true si hay al menos 1 aserradero construida.
     bool al_menos_un_aserradero();
 
+    //pre:
+    //post: devuelve true si hay al menos 1 mina de oro construida.
     bool al_menos_una_mina_oro();
 
-    bool al_menos_una_planta_electrica();   
-    
+    //pre:
+    //post: devuelve true si hay al menos 1 planta electrica construida.
+    bool al_menos_una_planta_electrica();
+
+    //pre:
+    //post: devuelve true si hay al menos 1 escuela construida.
     bool al_menos_una_escuela();
 
+    //pre:
+    //post: devuelve true si hay 1 edificio construido de cada tipo.
     bool al_menos_uno_de_cada_tipo();
   
 
