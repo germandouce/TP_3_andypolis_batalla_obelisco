@@ -225,14 +225,14 @@ bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
 
 }
 void Inventario:: actualizar_cant_anterior_elemento(string elemento){
-    else if (elemento == I_BOMBAS) {
+    if (elemento == I_BOMBAS) {
         cant_anterior_bombas = cant_bombas;
     }
     else if (elemento == I_ANDYCOINS) {
         cant_anterior_andycoins = cant_andycoins;
     }
     else{
-        cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
+        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
     }
 }
 
