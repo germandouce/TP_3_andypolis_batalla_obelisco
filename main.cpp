@@ -22,7 +22,7 @@ int main() {
     bool nueva_partida = true;
     int archivos_cargados = 0;
 
-    juego -> leer_archivos(mapa, archivos_cargados, nueva_partida);
+    juego -> leer_archivos(mapa, archivos_cargados, nueva_partida, jug_1, jug_2);
 
     if (archivos_cargados == CONTINUAR_PARTIDA) {
         

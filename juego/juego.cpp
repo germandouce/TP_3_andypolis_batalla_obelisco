@@ -40,7 +40,7 @@ void Juego::turno_jugador(bool &alguien_gano, bool &sin_energia, bool &quiere_te
 */
 
 
-void Juego::leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partida) {
+void Juego::leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partida, Jugador* &jug_1, Jugador* &jug_2) {
     
     ifstream archivo;
 
@@ -60,14 +60,14 @@ void Juego::leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partid
         nueva_partida = false;
     }
 
-    if (!nueva_partida) {
+   if (!nueva_partida) {
         if (es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
             cargar_inventario(archivo);
         }
     }
 }
 
-void Juego::posicionar_jugadores(Jugador* jug_1, Jugador* jug_2, Mapa* &mapa) {
+void Juego::posicionar_jugadores(Jugador* &jug_1, Jugador* &jug_2, Mapa* &mapa) {
 
     int ingreso;
 
