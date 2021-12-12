@@ -67,7 +67,7 @@ void Juego::jugar_partida() {
 
     while (!juego_terminado()) {
             
-        cambiar_turno();
+        //cambiar_turno();
 
         cout << "TURNO DEL JUGADOR " << jugador_turno -> devolver_numero_jugador() << endl;
             
