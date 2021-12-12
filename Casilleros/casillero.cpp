@@ -47,6 +47,10 @@ bool Casillero::esta_ocupado() {
 	return ocupado;
 }
 
+bool Casillero::esta_ocupado_jugador() {
+	return jugador1 || jugador2;
+}
+
 bool Casillero::hay_jugador1() {
 	return jugador1;
 }

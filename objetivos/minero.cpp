@@ -3,7 +3,6 @@
 Minero::Minero(): Objetivo() {
     this -> nombre_objetivo = MINERO;
     this -> descripcion = "Haber construido una mina de cada tipo.";
-    this -> identificador = MINERO;
 }
 bool Minero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){

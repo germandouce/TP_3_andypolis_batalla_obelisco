@@ -8,35 +8,32 @@
 
 using namespace std;
 
-const int COMPRAR_ANDYPOLIS = 1;
-const string NOMBRE_COMPRAR_ANDYPOLIS = "Comprar andypolis";
+const string COMPRAR_ANDYPOLIS = "Comprar andypolis";
+const int REQUISITO_COMPRAR_ANDYPOLIS = 100000;
 
-const int EDAD_PIEDRA = 2;
-const string NOMBRE_EDAD_PIEDRA = "Edad de piedra";
+const string EDAD_PIEDRA = "Edad de piedra";
+const int REQUISITO_EDAD_PIEDRA = 50000;
 
-const int BOMBARDERO = 3;
-const string NOMBRE_BOMBARDERO = "Bombardero";
+const string BOMBARDERO = "Bombardero";
+const int REQUISITO_BOMBARDERO = 5;
 
-const int ENERGETICO = 4;
-const string NOMBRE_ENERGETICO = "Energetico";
+const string ENERGETICO = "Energetico";
+const int REQUISITO_ENERGETICO = 100;
 
-const int LETRADO = 5;
-const string NOMBRE_LETRADO = "Letrado";
+const string LETRADO = "Letrado";
 
-const int MINERO = 6;
-const string NOMBRE_MINERO = "Minero";
+const string MINERO = "Minero";
 
-const int CANSADO = 7;
-const string NOMBRE_CANSADO = "Cansado";
+const string CANSADO = "Cansado";
+const int REQUISITO_CANSADO = 0;
 
-const int CONSTRUCTOR = 8;
-const string NOMBRE_MINERO = "Constructor";
+const string CONSTRUCTOR = "Constructor";
 
-const int ARMADO = 9;
-const string NOMBRE_ARMADO = "Armado";
+const string ARMADO = "Armado";
+const int REQUISITO_ARMADO = 10;
 
-const int EXTREMISTA = 10;
-const string NOMBRE_MINERO = "Extremisra";
+const string EXTREMISTA = "Extremista";
+const int REQUISITO_EXTREMISTA = 500;
 
 class Objetivo {
 
@@ -44,13 +41,10 @@ class Objetivo {
 
     string nombre_objetivo;
     string descripcion;
-    int identificador;
-    int requisito;
 
     public:
 
     Objetivo();
-    int obtener_identificador();
     
     void mostrar_descripcion();
     
@@ -63,7 +57,6 @@ class Objetivo {
     Diccionario *diccionario, int energia) = 0;
     
     ~Objetivo();
-
 };
 
 #endif // OBJETIVO_H_INCLUDED

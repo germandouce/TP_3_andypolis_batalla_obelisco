@@ -31,6 +31,10 @@ void Juego::elegir_opcion_menu_np() {
     }  
 }
 
+bool Juego::opcion_valida_np(int opcion) {
+    return(opcion >= OPCION_MINIMA_NP && opcion <= OPCION_MAXIMA_NP);
+}
+
 void Juego::cambiar_turno() {
     Jugador* jugador_auxiliar = jugador_turno;
     jugador_turno = jugador_secundario;
@@ -133,7 +137,7 @@ void Juego::leer_archivos(int &archivos_cargados, bool &nueva_partida) {
         }
     }
 }
- 
+  
 //void Juego::validar_ingreso_jugador(){}
 
 //achicar esta funcion
@@ -887,6 +891,7 @@ void Juego::procesar_opcion(int opcion) {
     
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
+            //falta verificar antes energia
             opcion_construir_edificio_x_nombre();
             break;
         case LISTAR_EDIFICIOS_CONSTRUIDOS:
@@ -896,22 +901,6 @@ void Juego::procesar_opcion(int opcion) {
             //system("cls");
             break;
         case ATACAR_EDIFICIO_X_COORDENADA:
-            //int fila =  pedir_fila();
-            //int columna = pedir_columna();
-            //system("cls");
-            //ATTACAR
-            //verificar existencia en mapa.
-            //Spottear edificio en el mapa.
-            //verificar que no sea nuestro:
-            //if(!es_nuestro_edificio(fila,columna));
-            //Ver tipo y estado de edificio para saber costo de destruccion.
-            //Verificar en inventario cant bombas:
-            //inventario -> devolver_cant_bombas();
-            //verificar energia:
-            //if(jugador_turno -> tiene_energia())
-            //cout<<"Tu energia actual: "<<jugador_turno -> obtener_energia() << endl;
-            //if(acepta_realizar_accion());
-            //Volver al menu.
             break;
         case REPARAR_EDIFICIO_X_COORDENADA :
             // system("cls");
@@ -992,3 +981,22 @@ void Juego::recolectar_recursos() {
 bool Juego::es_nuestro_edificio(int fila, int columna){
     return jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna);
 }
+
+//void Juego::demoler_edificio_x_coordenadas(){
+    //int costo = 15;
+    //int tu energia =jugador_turno -> obtener_energia();
+    //cout<<"Costo energetico : " << costo << endl;
+    //cout<<"Tu energia actual: "<< tu_energia << endl;
+    //if(jugador_turno -> tiene_energia() && tu_energia > costo )
+    //  int fila, columna;
+    //  pedir_coordenadas(fila, columna);
+    //bool ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
+    //bool es_jugador = mapa -> obtener_casillero(fila, columna) -> esta_ocupado_jugador();
+    //string tipo_casillero = mapa -> obtener_tipo_casillero();
+    //verificar_vida_actual_edificio.
+    //if(!es_nuestro_edificio(fila,columna));
+    //Ver tipo y estado de edificio para saber costo de destruccion.
+    //inventario -> devolver_cant_bombas();
+    //if(acepta_realizar_accion());
+    //Volver al menu.
+//}

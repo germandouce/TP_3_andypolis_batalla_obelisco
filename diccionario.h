@@ -2,7 +2,7 @@
 #define DICCIONARIO_H
 
 #include "nodo_dict.h"
-#include "../Inventario/Inventario.h"
+#include "Inventario/Inventario.h"
 
 class Diccionario {
     

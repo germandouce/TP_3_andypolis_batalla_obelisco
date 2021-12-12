@@ -43,8 +43,10 @@ int Jugador::devolver_numero_jugador(){
 }
 
 void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar) {
+    bool* cumplido = new bool;
+    *cumplido = false;
     objetivos -> insertar_ultimo(objetivo_a_asignar);
-    objetivos_cumplidos -> insertar_ultimo(false);
+    objetivos_cumplidos -> insertar_ultimo(cumplido);
 }
 
 bool Jugador::objetivo_cumplido(int numero_objetivo){

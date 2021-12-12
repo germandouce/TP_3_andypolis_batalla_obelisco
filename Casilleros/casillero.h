@@ -40,7 +40,7 @@ class Casillero {
 
 	public:
 
-	// Constructor sin parámetros. No se puede instanciar.
+	// Constructor sin parametros. No se puede instanciar.
 	//pre: -
 	//post: -
 	Casillero();
@@ -64,8 +64,10 @@ class Casillero {
 	string obtener_tipo_casillero();
 
 	//pre: -
-	//post: Devuelve True si está ocupado y False si no lo está.
+	//post: Devuelve True si esta ocupado y False si no lo esta.
 	bool esta_ocupado();
+
+	bool esta_ocupado_jugador();
 
 	//pre: -
 	//post: Actualiza el valor de 'esta_vacio'.
@@ -76,7 +78,7 @@ class Casillero {
 	void desocupar_casillero();
 
 	//pre: -
-	//post: Devuelve True si el Jugador 1 está ubicado en el Casillero. Sino devuelve False.
+	//post: Devuelve True si el Jugador 1 esta ubicado en el Casillero. Sino devuelve False.
 	bool hay_jugador1();
 
 	void ocupar_jugador1();
@@ -110,7 +112,7 @@ class Casillero {
 	virtual Material* obtener_material() = 0;
 
 	//pre: -
-	//post: Muestra información sobre el Casillero y sobre lo que contiene.
+	//post: Muestra informacion sobre el Casillero y sobre lo que contiene.
 	virtual void mostrar() = 0;
 
 	//pre: -
@@ -118,7 +120,7 @@ class Casillero {
 	virtual void imprimir_casillero() = 0;
 
 	//pre: -
-	//post: Devuelve 1 si el Casillero contiene algo, ó 0 si no contiene nada.
+	//post: Devuelve 1 si el Casillero contiene algo, o 0 si no contiene nada.
 	virtual int obtener_cantidad_contenida() = 0;
 
 	//pre: -

@@ -167,14 +167,6 @@ class Mapa {
 
 	bool es_numero(string palabra);
 
-	void cargar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion);
-
-	Edificio* encontrar_edificio();
-	
-	void confirmar_construccion(int fila, int columna, Edificio* edificio_a_construir);
-
-	void mostrar_costo_edificio(Edificio* edificio_a_construir);
-
 	Material* llover_material_aleatorio(int &material_llovido);
 
 	string obtener_tipo_material(int tipo_material);
