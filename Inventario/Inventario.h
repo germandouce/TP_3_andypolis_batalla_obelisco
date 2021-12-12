@@ -138,14 +138,10 @@ public:
 
     bool hay_piedra_suficiente(int cantidad_necesaria);
 
-
-
+    void recolectar_recursos(Registro_edificios* registro_edificios);
 
     //DESTRUCTOR
     ~Inventario();
-
-
 };
-
 
 #endif //INVENTARIO_INVENTARIO_H

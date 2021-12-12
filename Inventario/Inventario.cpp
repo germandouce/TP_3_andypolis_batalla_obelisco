@@ -226,4 +226,22 @@ void Inventario:: actualizar_cant_anterior_elemento(string elemento){
         cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
 }
 
+
+void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
+    int primero = 0;
+    int cantidad_edificios = registro_edificios -> obtener_cantidad_edificios();
+    Nodo_R *actual = registro_edificios -> obtener_nodo(primero);
+    
+    int cantidad;
+    string nombre_material;
+    
+    for (int i = 0 ; i < cantidad_edificios; i++) {
+        cantidad = actual -> obtener_edificio() -> obtener_cantidad_brindada();
+        nombre_material = actual -> obtener_edificio() -> obtener_nombre();
+        cambiar_cantidad_elemento(nombre_material,cantidad);
+        cout << "-Se han sumado " << cantidad << " de " << nombre_material << " al Inventario." << endl;
+        actual = actual -> obtener_siguiente();
+    }
+}
+
 Inventario::~Inventario() {}

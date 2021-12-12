@@ -310,20 +310,3 @@ bool Registro_edificios::al_menos_uno_de_cada_tipo(){
     return (al_menos_un_aserradero() && al_menos_un_obelisco() && al_menos_una_escuela()
     && al_menos_una_fabrica() && al_menos_una_mina_oro() && al_menos_una_mina() && al_menos_una_planta_electrica());
 }
-
-void Registro_edificios::recolectar_recursos(Inventario* inventario) {
-    
-    Nodo_R *actual;
-    actual = primero;
-    
-    int cantidad;
-    string nombre_material;
-    
-    for (int i = 0 ; i < cantidad_edificios; i++) {
-        cantidad = actual -> obtener_edificio() -> obtener_cantidad_brindada();
-        nombre_material = actual -> obtener_edificio() -> obtener_nombre();
-        inventario -> cambiar_cantidad_elemento(nombre_material,cantidad);
-        cout << "-Se han sumado " << cantidad << " de " << nombre_material << " al Inventario." << endl;
-        actual = actual -> obtener_siguiente();
-    }
-}

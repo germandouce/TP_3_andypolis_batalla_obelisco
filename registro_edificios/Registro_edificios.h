@@ -1,10 +1,8 @@
 #ifndef REGISTRO_EDIFICIOS_H
 #define REGISTRO_EDIFICIOS_H
 
-#include "../Inventario/Inventario.h"
 #include "Nodo_registro.h"
 
-#include "edificio.h"
 #include "planta_electrica.h"
 #include "obelisco.h"
 #include "mina.h"
@@ -138,8 +136,6 @@ public:
     //pre:
     //post: devuelve true si hay 1 edificio construido de cada tipo.
     bool al_menos_uno_de_cada_tipo();
-
-    void recolectar_recursos(Inventario* inventario);
 
     //DESTRUCTOR
     ~Registro_edificios();

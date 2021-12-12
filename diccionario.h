@@ -2,15 +2,7 @@
 #define DICCIONARIO_H
 
 #include "nodo_dict.h"
-#include "diccionario.h"
-
-#include "registro_edificios/aserradero.h"
-#include "registro_edificios/escuela.h"
-#include "registro_edificios/fabrica.h"
-#include "registro_edificios/mina.h"
-#include "registro_edificios/mina_de_oro.h"
-#include "registro_edificios/obelisco.h"
-#include "registro_edificios/planta_electrica.h"
+#include "../Inventario/Inventario.h"
 
 class Diccionario {
     
@@ -32,7 +24,7 @@ class Diccionario {
 
     // PRE : Recibe un id entre 2 valores limites, si son edificios,
     // entre 1 y 7 si son materiales, entre ??? y ???
-    // POST: devuelve true si el id se está en el diccionario
+    // POST: devuelve true si el id se esta en el diccionario
     Edificio* buscar_edificio(string nombre_edificio);
 
     Edificio* instanciar_edificio(string nombre_edificio, int fila, int columna);

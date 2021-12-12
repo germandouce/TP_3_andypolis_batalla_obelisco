@@ -247,7 +247,7 @@ class Juego {
     //Puede construir edificio
     //PRE:
     //POST:
-    bool puede_construir_edificio(int piedra, int madera, int metal, int construidos);
+    bool puede_construir_edificio(Edificio* edificio);
     
     //Acepta ralizar accion
     //PRE:
@@ -257,7 +257,7 @@ class Juego {
     //
     //PRE:
     //POS: 
-    void obtengo_cantidades_edificio(Edificio* edificio, int piedra, int madera, int metal, int construidos);
+    void obtengo_cantidades_edificio(Edificio* edificio, int &piedra, int &madera, int &metal, int &construidos);
 
     //Construye edificio
     //PRE: verificaciones hechas.
@@ -309,7 +309,6 @@ class Juego {
     //POST: verifica si cumplio sus objetivos 
     void verificar_objetivos(Jugador * jug_turno);
 
-
     // MENUS
 
     //pre: -
@@ -344,12 +343,22 @@ class Juego {
     //POS: 
     string pedir_nombre_edificio_construir();
 
+
+    void construir_edificio(string nombre_edificio);
+
+    void ubicar_edificio(Edificio* edificio_a_construir, int fila, int columna);
     //
     //PRE:
     //POS: 
     void llover();
 
     void recolectar_recursos();
+
+    bool es_nuestro_edificio(int fila, int columna);
+
+    bool respeta_limite(int construidos, int limite);
+
+    void verificar_objetivos();
 };
 
 #endif //JUEGO_H

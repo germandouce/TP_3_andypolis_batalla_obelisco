@@ -1,6 +1,6 @@
-#include "./menus/menu_nueva_partida.h"
-#include "./menus/menu_principal.h"
 #include <iostream>
+
+#include "juego/juego.h"
 
 using namespace std;
 

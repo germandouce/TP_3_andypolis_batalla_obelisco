@@ -68,7 +68,7 @@ void Jugador::mostrar_descripcion_objetivo(int numero_objetivo){
     objetivos->obtener_dato(numero_objetivo)->mostrar_descripcion();
 }
 
-void Jugador::mostrar_progreso_objetivo(int numero_objetivo, Inventario *inventario, Registro_edificios *registro_edificios, Diccionario *diccionario, int energia){
+void Jugador::mostrar_progreso_objetivo(int numero_objetivo, int energia, Diccionario* diccionario) {
     objetivos->obtener_dato(numero_objetivo)->mostrar_progreso(inventario, registro_edificios, diccionario, energia);
 }
 

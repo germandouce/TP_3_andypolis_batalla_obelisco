@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include "../diccionario.h"
-#include "../Casilleros/casillero.h"
 #include "../vector.h"
 
 #include "../objetivos/armado.h"
@@ -92,7 +90,7 @@ class Jugador {
     //mostrar progreso objetivo
     //PRE: Recibe un entero con el numero de objetivo 0 1 o 2
     //POST: muestra informacion acerca del progreso del objetivo
-    void mostrar_progreso_objetivo(int numero_objetivo, Inventario *inventario, Registro_edificios *registro_edificios, Diccionario *diccionario, int energia);
+    void mostrar_progreso_objetivo(int numero_objetivo, int energia, Diccionario* diccionario);
 
     //Cargar el inventario
     //PRE:
