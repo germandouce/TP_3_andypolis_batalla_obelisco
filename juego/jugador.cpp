@@ -68,7 +68,7 @@ void Jugador::mostrar_objetivos(){
     cout<<"Sus objetivos secundarios son los siguientes"<<endl;
     cout<<"Construir un obelisco: ";
     if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() != 1){
-        cout<<"No completado";
+        cout<<"No completado"<<endl;
     }
     
     for (int i = 0; i < 3; i++) {

@@ -90,27 +90,18 @@ void Juego::posicionar_jugadores(Jugador* &jug_1, Jugador* &jug_2, Mapa* &mapa) 
 
     // pedir_coordenadas()
     // pedir_coordenadas()
-    
-    
+
     ubicar_jugador(jug_1);
+    ubicar_jugador(jug_2);
+
     int fila1 = jug_1 -> devolver_fila();
     int columna1 = jug_1 -> devolver_columna();
-    mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
-        
-    cout<<"ocupe jugadores"<<endl;
-    
+
     int fila2 = jug_2 -> devolver_fila();
     int columna2 = jug_2 -> devolver_columna();
-    
-    while (fila2 == fila1 && columna2 == columna1){
-        ubicar_jugador(jug_2);
-        fila2 = jug_2 -> devolver_fila();
-        columna2 = jug_2 -> devolver_columna();
-    }
 
+    mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
     mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
-
-    cout<<"ocupe jugadores"<<endl;
 }
 
 bool Juego::archivo_vacio(ifstream& archivo){
