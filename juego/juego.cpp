@@ -595,18 +595,18 @@ void Juego::pedir_coordenadas(int &fila, int &columna) {
 
 	pedir_fila(fila);
 
-    while (fila <= 0 || fila > devolver_mapa()->obtener_filas() -1 ) {
+    while (fila <= 0 || fila >= devolver_mapa()->obtener_filas() -1 ) {
         system(CLR_SCREEN);
-        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo y no pasar los limites del mapa." << END_COLOR << endl;
         cout << endl;
         pedir_fila(fila);
     }
 
     pedir_columna(columna);
 
-    while (columna <= 0  || columna > devolver_mapa()->obtener_columnas() -1 ) {
+    while (columna <= 0  || columna >= devolver_mapa()->obtener_columnas() -1 ) {
         system(CLR_SCREEN);
-        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo y no pasar los limites del mapa." << END_COLOR << endl;
         cout << endl;
         pedir_columna(columna);
     }

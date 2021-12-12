@@ -467,7 +467,7 @@ void Mapa::pedir_coordenadas(int &fila, int &columna) {
 
 	pedir_fila(fila);
 
-    while (fila <= 0 && fila > filas-1) {
+    while (fila <= 0) {
         system(CLR_SCREEN);
         cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
         cout << endl;
@@ -476,30 +476,28 @@ void Mapa::pedir_coordenadas(int &fila, int &columna) {
 
     pedir_columna(columna);
 
-    while (columna <= 0 && columna > columnas-1) {
+    while (columna <= 0) {
         system(CLR_SCREEN);
         cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
         cout << endl;
         pedir_columna(columna);
     }
 
-	fila = fila - 1;
+	fila = fila -1;
 	columna = columna - 1;
     cout << endl;
 }
 
 void Mapa::pedir_fila(int &fila) {
-	while (fila <= 0 && fila > filas-1){
-		cout << ENTER_COLOR << "Ingrese la fila del casillero deseado: " << END_COLOR << endl;
-    	cin >> fila;}
+    cout << ENTER_COLOR << "Ingrese la fila del casillero deseado: " << END_COLOR << endl;
+    cin >> fila;
     cin.clear();
     cin.ignore(100, '\n');
 }
 
 void Mapa::pedir_columna(int &columna) {
-	while ( columna <= 0 && columna > columnas-1){
-		cout << ENTER_COLOR << "Ingrese la columna del casillero deseado: " << END_COLOR << endl;
-    	cin >> columna;}
+    cout << ENTER_COLOR << "Ingrese la columna del casillero deseado: " << END_COLOR << endl;
+    cin >> columna;
     cin.clear();
     cin.ignore(100, '\n');
 }
