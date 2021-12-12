@@ -5,4 +5,7 @@ SI COMPILAN CON EL SIGUIENTE COMANDO:
 
 g++ Casilleros/*.cpp grafo/*.cpp menus/*.cpp Inventario/*.cpp juego/*.cpp materiales/*.cpp objetivos/*.cpp registro_edificios/*.cpp  *.cpp -o main
 
+Si ubicacion esta vacio o no esta, no se lee materiales.
+
+
 Muchas gracias :) ! uwu

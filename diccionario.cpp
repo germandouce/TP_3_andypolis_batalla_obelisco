@@ -59,14 +59,15 @@ Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int fila, int
     return edificio;
 }
 
-Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion, int fila, int columna) {
+Edificio* Diccionario::instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite_construccion, 
+int fila, int columna) {
 
     Edificio* edificio;
 
     if (nombre_edificio == A) {
 		edificio = new Aserradero(piedra, madera, metal, limite_construccion, fila, columna);
 	}
-
+    //Esto es un if else    
 	if (nombre_edificio == E) {
 		edificio = new Escuela(piedra, madera, metal, limite_construccion,fila, columna);
 	}

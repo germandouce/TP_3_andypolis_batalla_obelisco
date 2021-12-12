@@ -77,9 +77,11 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
             break;
         case CONSULTAR_COORDENADA:
            //  system("cls");
-            //mapa -> consultar_casillero();
+           //AGREGAR A JUEGO ESTO DE ABAJO!!!
+            //juego->consultar_casillero();
             break;
         case MOSTRAR_INVENTARIO:
+         //AGREGAR A JUEGO ESTO DE ABAJO!!! MISMO QU ARRIBA!
             jug_turno -> devolver_inventario() -> mostrar_inventario();
             break;
         case MOSTRAR_OBJETIVOS:
@@ -89,6 +91,7 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
             //al menu (asa se le da el tiempo que necesite para ver su inventario).
         case RECOLECTAR_RECURSOS_PRODUCIDOS:
           //   system("cls");
+          //juego->llover()
             juego -> devolver_mapa() -> llover();
             //recolectar_recursos_producidos(vector_materiales, vector_edificios, vector_ubicaciones, posiciones_materiales);
             break;
