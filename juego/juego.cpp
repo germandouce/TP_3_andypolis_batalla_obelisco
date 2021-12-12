@@ -265,6 +265,9 @@ void Juego::crear_juego() {
 
 void Juego::cargar_objetivos(){
 
+    Objetivo *comprar_andypolis = new Comprar_andypolis();
+    objetivos->insertar_ultimo(comprar_andypolis);
+
     Objetivo *edad_piedra = new Edad_piedra();
     objetivos->insertar_ultimo(edad_piedra);
 

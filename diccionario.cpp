@@ -30,7 +30,7 @@ Edificio* Diccionario::buscar_edificio(string nombre_edificio) {
     if (nodo != nullptr) {
         return nodo -> devolver_edificio();
     }
-
+    cout << "No existe este edificio." << endl;
     return nullptr;
 }
 

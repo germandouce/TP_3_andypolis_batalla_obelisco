@@ -65,12 +65,15 @@ int Jugador::obtener_energia(){
 
 void Jugador::mostrar_objetivos(){
 
-    cout<<"Sus objetivos secundarios son los siguientes"<<endl;
+    cout<<"Sus objetivo primario es el siguiente: "<<endl;
     cout<<"Construir un obelisco: ";
     if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() != 1){
         cout<<"No completado"<<endl;
     }
-    
+    else{
+        cout<<"completado, ganaste el juego!";
+    }
+    cout<<"\nSus objetivos secundarios son los siguientes: \n"<<endl;
     for (int i = 0; i < 3; i++) {
         objetivos->obtener_dato(i)->mostrar_descripcion();
     }
