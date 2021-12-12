@@ -28,8 +28,8 @@ class Juego {
 
     private:
 
-    Jugador* jugador1;
-    Jugador* jugador2;
+    Jugador* jugador_turno;
+    Jugador* jugador_secundario;
     Mapa* mapa;
     Diccionario* diccionario;
     Vector<Objetivo>* objetivos;
@@ -44,9 +44,11 @@ class Juego {
     //POST:-
     void crear_juego();
 
-    void leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partida, Jugador* &jug_1, Jugador* &jug_2);
+    void cambiar_turno();
 
-    void posicionar_jugadores(Jugador* &jug_1, Jugador* &jug_2, Mapa* &mapa);
+    void leer_archivos(int &archivos_cargados, bool &nueva_partida);
+
+    void posicionar_jugadores();
 
     //Cargar mapa
     //PRE:-

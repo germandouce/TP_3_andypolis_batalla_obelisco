@@ -79,70 +79,18 @@ void Jugador::mostrar_objetivos(){
     }
 }
 
-void Jugador::verificar_objetivos() {
-        // switch (objetivo) {
-        //     case COMPRAR_ANDYPOLIS:
-        //         if (andycoins_acumulados = 100000){
-        //             objetivos_secundarios_cumplidos++;
-        //         }
-            //     break;
+// void Jugador::cumplir_un_objetivo_secundario(){
+//     objetivos_secundarios_cumplidos ++;
+// }
 
-            // case EDAD_PIEDRA:
-            //     //if (vector_inventario->obteer_cantidad("piedra") == 50000){
-            //         objetivos_secundarios_cumplidos++;
-            //     //}
-            //     break;
+// void Jugador::verificar_objetivos(Jugador *jug_turno) {
 
-            // case BOMBARDERO:
-            //     if (bombas_usadas = 5){
-            //         objetivos_secundarios_cumplidos++;
-            //     }
-            //     break;
-                
-            // // case ENERGETICO:
-            // //     if (energia == 100){
-            // //         objetivos_secundarios_cumplidos++;
-            // //     }
-            // //     break;
-
-            // // case LETRADO:
-            // //     // if (registro_edificios->obetner_cantidad_escuelas() = mapa->dict("escuela")->obtener_maxima_cantidad()){
-            // //     //     objetivos_secundarios_cumplidos++;
-            // //     // }
-            // //     break;
-
-            // // case MINERO:
-            // //     // if (registro_edificios->obetner_cantidad_mina() && registro_edificios->obetner_cantidad_mina_oro){
-            // //     //     objetivos_secundarios_cumplidos++;
-            // //     // }
-            // //     break;
-
-            // // case CANSADO:
-            // //     if (energia = 0){
-            // //         objetivos_secundarios_cumplidos++;
-            // //     }
-            // //     break;
-
-            // // case CONSTRUCTOR:
-            // //     // if (andycoins_acumulados = 100000){
-            // //     //     objetivos_secundarios_cumplidos++;
-            // //     // } 
-            // //     // break;
-
-            // // case ARMARDO:
-            // //     // if (inventario->obtener_cantidad_bombas == 10){
-            // //     //     objetivos_secundarios_cumplidos++;
-            // //     // } 
-            // //     // break;
-
-            // // case EXTREMISTA:
-            // //     if (bombas_compradas= 5000){
-            // //         objetivos_secundarios_cumplidos++;
-            // //     }
-            // //     break;  
-    //         }
-    // }
-}
+//     for (int i; i<2; i++){
+//         if (objetivos->obtener_dato(i)->comprobar_requisito(inventario, registro_edificios, diccionario, energia) ){
+//             jug_turno -> cumplir_un_objetivo_secundario();
+//         };
+//     }
+// }
 
 
 bool Jugador::gano(){

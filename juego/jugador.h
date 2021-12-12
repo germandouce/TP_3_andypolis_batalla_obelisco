@@ -98,11 +98,15 @@ class Jugador {
     //POST: Muestra por pantalla los objetivos del jugador
     void mostrar_objetivos();
 
+    //
+    //
+    //
+    // void cumplir_un_objetivo_secundario();
 
-    //Verificar objetivos
-    //PRE:
-    //POST: verifica si cumplio sus objetivos 
-    void verificar_objetivos();
+    // //Verificar objetivos
+    // //PRE:
+    // //POST: verifica si cumplio sus objetivos 
+    // void verificar_objetivos(Jugador * jug_turno);
 
     //Gnao
     //PRE:-

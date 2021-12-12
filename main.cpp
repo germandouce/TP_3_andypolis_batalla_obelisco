@@ -22,7 +22,7 @@ int main() {
     bool nueva_partida = true;
     int archivos_cargados = 0;
 
-    juego -> leer_archivos(mapa, archivos_cargados, nueva_partida, jug_1, jug_2);
+    juego -> leer_archivos(archivos_cargados, nueva_partida);
 
     if (archivos_cargados == CONTINUAR_PARTIDA) {
         
@@ -53,7 +53,7 @@ int main() {
                 procesar_opcion_np(juego, opcion_elegida);
             }
 
-            juego -> posicionar_jugadores(jug_1, jug_2, mapa);
+            juego -> posicionar_jugadores();
         }
 
         Jugador* jug_turno;

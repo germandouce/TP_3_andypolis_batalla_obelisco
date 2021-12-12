@@ -52,10 +52,12 @@ bool Casillero::hay_jugador1() {
 }
 
 void Casillero::ocupar_jugador1() {
+	ocupado = true;
 	jugador1 = true;
 }
 
 void Casillero::desocupar_jugador1() {
+	ocupado = false;
 	jugador1 = false;
 }
 
@@ -64,10 +66,12 @@ bool Casillero::hay_jugador2() {
 }
 
 void Casillero::ocupar_jugador2() {
+	ocupado = true;
 	jugador2 = true;
 }
 
 void Casillero::desocupar_jugador2() {
+	ocupado = false;
 	jugador2 = false;
 }
 

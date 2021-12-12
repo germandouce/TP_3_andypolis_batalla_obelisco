@@ -321,7 +321,6 @@ void Mapa::moverse(Inventario* inventario, Jugador* jugador) {
 		if (distancia != INFINITO) {
 			imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
 			ocupar_jugador(fila_destino, columna_destino, es_jugador2);
-			matriz[fila_destino][columna_destino] ->ocupar_casillero();
 			
 			jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
 

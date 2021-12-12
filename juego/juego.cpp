@@ -1,11 +1,55 @@
 #include "juego.h"
 
 Juego::Juego() {
-    this -> jugador1 = new Jugador();
-    this -> jugador2 = new Jugador();
+    this -> jugador_turno = new Jugador();
+    this -> jugador_secundario = new Jugador();
     this -> mapa = new Mapa();
     this -> diccionario = new Diccionario();
     this -> objetivos = new Vector<Objetivo>;
+}
+
+void Juego::cambiar_turno() {
+    Jugador* jugador_auxiliar = jugador_turno;
+    jugador_turno = jugador_secundario;
+    jugador_secundario = jugador_auxiliar;
+}
+
+bool juego_terminado(bool alguien_gano, bool quiere_salir){
+    return (!alguien_gano && !quiere_salir);
+}
+
+bool turno_terminado(bool alguien_gano, bool sin_energia, bool quiere_terminar_turno, bool quiere_salir){
+    return (!alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir)
+}
+
+Juego::jugar_turno() {
+    
+    while (!alguien_gano && !sin_energia && !quiere_terminar_turno && !quiere_salir) {
+         int opcion;
+
+        //system(CLR_SCREEN);
+        mapa -> imprimir_mapa();
+        presentar_menu();
+
+        cin >> opcion;
+        cin.clear();
+        cin.ignore(100, '\n');
+
+        while (!opcion_valida(opcion)) {
+            cout << "Opcion no valida. Eliga nuevamente." << endl;
+            cin >> opcion;
+            cin.clear();
+            cin.ignore(100, '\n');
+            }
+
+            procesar_opcion(opcion ,juego, jug_turno, jug_secundario);   
+
+            sin_energia = jug_turno ->esta_sin_energia();
+            alguien_gano = jug_turno ->gano();
+            quiere_salir = jug_turno -> quiere_salir_del_juego();
+            quiere_terminar_turno = ! ( jug_turno -> es_su_turno() );
+        }      
+
 }
 
 /*
@@ -39,14 +83,12 @@ void Juego::turno_jugador(bool &alguien_gano, bool &sin_energia, bool &quiere_te
 }
 */
 
-
-void Juego::leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partida, Jugador* &jug_1, Jugador* &jug_2) {
+void Juego::leer_archivos(int &archivos_cargados, bool &nueva_partida) {
     
     ifstream archivo;
 
     if (es_archivo_legible(archivo, ARCHIVO_MAPA)) {
-        devolver_mapa() -> cargar_mapa(archivo);
-        mapa = devolver_mapa();  
+        mapa -> cargar_mapa(archivo);  
         archivos_cargados++;
     }
 
@@ -60,14 +102,14 @@ void Juego::leer_archivos(Mapa* &mapa, int &archivos_cargados, bool nueva_partid
         nueva_partida = false;
     }
 
-//    if (!nueva_partida) {
+    if (!nueva_partida) {
         if (es_archivo_legible(archivo, ARCHIVO_MATERIALES)) {
             cargar_inventario(archivo);
         }
-    // }
+    }
 }
 
-void Juego::posicionar_jugadores(Jugador* &jug_1, Jugador* &jug_2, Mapa* &mapa) {
+void Juego::posicionar_jugadores() {
 
     int ingreso;
 
@@ -85,20 +127,20 @@ void Juego::posicionar_jugadores(Jugador* &jug_1, Jugador* &jug_2, Mapa* &mapa) 
         cin.ignore(100, '\n');
     }
 
-    jug_1 -> setear_numero_jugador(ingreso);
-    jug_2 -> setear_numero_jugador(DIFERENCIA_JUGADORES - ingreso);
+    jugador1 -> setear_numero_jugador(ingreso);
+    jugador2 -> setear_numero_jugador(DIFERENCIA_JUGADORES - ingreso);
 
     // pedir_coordenadas()
     // pedir_coordenadas()
 
-    ubicar_jugador(jug_1);
-    ubicar_jugador(jug_2);
+    ubicar_jugador(jugador1);
+    ubicar_jugador(jugador2);
 
-    int fila1 = jug_1 -> devolver_fila();
-    int columna1 = jug_1 -> devolver_columna();
+    int fila1 = jugador1 -> devolver_fila();
+    int columna1 = jugador1 -> devolver_columna();
 
-    int fila2 = jug_2 -> devolver_fila();
-    int columna2 = jug_2 -> devolver_columna();
+    int fila2 = jugador2 -> devolver_fila();
+    int columna2 = jugador2 -> devolver_columna();
 
     mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
     mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
