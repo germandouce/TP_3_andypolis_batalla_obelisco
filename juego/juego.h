@@ -232,12 +232,12 @@ class Juego {
     //Pedir coordenadas
     //PRE:-
     //POST: Pide las coordenadas en las q quiere ubicarse al jugador
-    void ubicar_jugador(Jugador*jug_turno);
+    void ubicar_jugador();
 
     //Pedir posicion
     //PRE:
     //POST:
-    void pedir_posicion(Jugador*jug_turno);
+    void pedir_posicion();
 
     //Opcion construir edificio por nombre
     //PRE:
