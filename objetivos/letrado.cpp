@@ -1,7 +1,7 @@
 #include "letrado.h"
 
 Letrado::Letrado(): Objetivo() {
-    this -> nombre_objetivo = "Letrado";
+    this -> nombre_objetivo = LETRADO;
     this -> descripcion = "Haber construido el maximo posible de escuelas";
     this -> identificador = LETRADO;
    //  this -> requisito = REQUISITO_LETRADO;

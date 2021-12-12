@@ -9,8 +9,12 @@ Objetivo::Objetivo() {
 
 Objetivo::~Objetivo() {}
 
+void Objetivo::mostrar_nombre_objetivo(){
+    cout<< nombre_objetivo<<": ";
+}
+
 int Objetivo::obtener_identificador(){
-    return this -> identificador;
+    return identificador;
 }
 
 void Objetivo::mostrar_descripcion(){

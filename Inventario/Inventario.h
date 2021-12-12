@@ -138,8 +138,6 @@ public:
 
     bool hay_piedra_suficiente(int cantidad_necesaria);
 
-    bool respeto_limite(int limite , int construidos);
-
 
 
 

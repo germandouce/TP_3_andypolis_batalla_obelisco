@@ -1,7 +1,7 @@
 #include "armado.h"
 
 Armado::Armado() : Objetivo() {
-    this -> nombre_objetivo = "Constructor";
+    this -> nombre_objetivo = CONSTRUCTOR;
     this -> descripcion = "Tener 10 bombas en el inventario.";
     this -> identificador = CONSTRUCTOR;
     this -> requisito = REQUISITO_CONSTRUCTOR;

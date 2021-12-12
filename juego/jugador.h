@@ -6,7 +6,6 @@
 #include "../diccionario.h"
 #include "../Casilleros/casillero.h"
 #include "../vector.h"
-#include "../Inventario/Inventario.h"
 
 #include "../objetivos/armado.h"
 #include "../objetivos/bombardero.h"
@@ -21,6 +20,7 @@
 
 const int NUMERO_JUGADOR1 = 1;
 const int NUMERO_JUGADOR2 = 2;
+const int ENERGIA_MAXIMA = 100;
 
 using namespace std;
 
@@ -29,15 +29,16 @@ class Jugador {
     private:    
 
     int numero_jugador;
+    
     Vector<Objetivo>* objetivos;
     Inventario* inventario;
     Registro_edificios* registro_edificios;
+    Vector<bool>* objetivos_cumplidos;
     int objetivos_secundarios_cumplidos;
     int energia;
     int andycoins_acumulados;
     int bombas_usadas;
     int bombas_compradas;
-    
     bool obelisco_construido;
 
     int fila;
@@ -83,6 +84,16 @@ class Jugador {
     //POST: Asigna 1 objetivo al jugador agregandolo a la lista de objetivos
     void asignar_objetivo(Objetivo* objetivo_a_asignar);
 
+    //Obejtivo cumplido
+    //PRE: Recibe un entero con el numero de objetivo 0 1 o 2
+    //POST: Devueleve true si esta cumplido false en caso contrario
+    bool objetivo_cumplido(int numero);
+
+    //mostrar progreso objetivo
+    //PRE: Recibe un entero con el numero de objetivo 0 1 o 2
+    //POST: muestra informacion acerca del progreso del objetivo
+    void mostrar_progreso_objetivo(int numero_objetivo, Inventario *inventario, Registro_edificios *registro_edificios, Diccionario *diccionario, int energia);
+
     //Cargar el inventario
     //PRE:
     //POST:-
@@ -93,20 +104,25 @@ class Jugador {
     //POST: Lee el archivo de edificios y va cargandolos en el registro
     void agregar_edificio_al_registro(Edificio* edificio);
 
-    //Mostrar objetivos
-    //PRE:-
-    //POST: Muestra por pantalla los objetivos del jugador
-    void mostrar_objetivos();
+    //mostrar nombre objetivo
+    //PRE: Recibe un enetero con el numero de objetivo
+    //POST: Muestra por pantalla el nombre del objetivo del jugador
+    void mostrar_nombre_objetivo(int numero_objetivo);
 
-    //
-    //
-    //
-    // void cumplir_un_objetivo_secundario();
+    //Mostrar descripcion objetivo
+    //PRE: Recibe un enetero con el numero de objetivo
+    //POST: Muestra por pantalla la descripcion del objetivo del jugador
+    void mostrar_descripcion_objetivo(int numero_objetivo);
 
-    // //Verificar objetivos
-    // //PRE:
-    // //POST: verifica si cumplio sus objetivos 
-    // void verificar_objetivos(Jugador * jug_turno);
+    //Cumplir objetivo secundario
+    //PRE:
+    //POST: Suma 1 a los objetivos secundarios cumplidos
+    void cumplir_un_objetivo_secundario();
+
+    //Cumplir objetivo
+    //PRE:
+    //POST: Coloca en true el objetivo numero_objetivo del vector objetivos_cumplidos del jugador
+    void cumplir_objetivo(int numero_objetivo);
 
     //Gnao
     //PRE:-
@@ -121,7 +137,7 @@ class Jugador {
     //Sin energia
     //PRE:-
     //POSR: Devuelve true si se quedo sin energia, false en caso constrario
-    bool esta_sin_energia();
+    bool tiene_energia();
 
     //Iniciar turno
     //PRE:-
@@ -131,7 +147,7 @@ class Jugador {
     //termianr turno
     //PRE:-
     //POST: cambia el valor de su turno a false
-    void terminar_truno();
+    void terminar_turno();
 
     //es su turno
     //PRE:-

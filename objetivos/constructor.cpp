@@ -1,7 +1,7 @@
 #include "constructor.h"
 
 Constructor::Constructor(): Objetivo() {
-    this -> nombre_objetivo = "Extremista";
+    this -> nombre_objetivo = EXTREMISTA;
     this -> descripcion = "Construir un edificio de cada tipo.";
     this -> identificador = CONSTRUCTOR;
    //  this -> requisito = REQUISITO_CONSTRUCTOR;

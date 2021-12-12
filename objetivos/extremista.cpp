@@ -1,7 +1,7 @@
 #include "extremista.h"
 
 Extremista::Extremista() : Objetivo() {
-    this -> nombre_objetivo = "Extremista";
+    this -> nombre_objetivo = EXTREMISTA;
     this -> descripcion = "Haber comprado 500 bombas en una partida.";
     this -> identificador = EXTREMISTA;
    //  this -> requisito = REQUISITO_EXTREMISTA;

@@ -7,6 +7,7 @@ Jugador::Jugador() {
     this -> inventario = new Inventario();
     this -> objetivos = new Vector<Objetivo>;
     this -> objetivos_secundarios_cumplidos = 0;
+    this -> objetivos_cumplidos = new Vector<bool>;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
     this -> bombas_usadas;
@@ -43,6 +44,11 @@ int Jugador::devolver_numero_jugador(){
 
 void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar) {
     objetivos -> insertar_ultimo(objetivo_a_asignar);
+    objetivos_cumplidos -> insertar_ultimo(false);
+}
+
+bool Jugador::objetivo_cumplido(int numero_objetivo){
+    return objetivos_cumplidos->obtener_dato(numero_objetivo);
 }
 
 void Jugador::agregar_material_a_inventario(){
@@ -54,44 +60,31 @@ void Jugador::agregar_edificio_al_registro(Edificio* edificio){
     devolver_resgitro_edificios()->agregar(edificio);
 }
 
+void Jugador::mostrar_nombre_objetivo(int numero_objetivo){
+    objetivos->obtener_dato(numero_objetivo)->mostrar_nombre_objetivo();
+}
 
-// Jugador::Jugador(Vector<Material>* inventario){
-    
-// }
+void Jugador::mostrar_descripcion_objetivo(int numero_objetivo){
+    objetivos->obtener_dato(numero_objetivo)->mostrar_descripcion();
+}
+
+void Jugador::mostrar_progreso_objetivo(int numero_objetivo, Inventario *inventario, Registro_edificios *registro_edificios, Diccionario *diccionario, int energia){
+    objetivos->obtener_dato(numero_objetivo)->mostrar_progreso(inventario, registro_edificios, diccionario, energia);
+}
 
 int Jugador::obtener_energia(){
     return energia;
 }
 
-void Jugador::mostrar_objetivos(){
-
-    cout<<"Sus objetivo primario es el siguiente: "<<endl;
-    cout<<"Construir un obelisco: ";
-    if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() != 1){
-        cout<<"No completado"<<endl;
-    }
-    else{
-        cout<<"completado, ganaste el juego!";
-    }
-    cout<<"\nSus objetivos secundarios son los siguientes: \n"<<endl;
-    for (int i = 0; i < 3; i++) {
-        objetivos->obtener_dato(i)->mostrar_descripcion();
-    }
+void Jugador::cumplir_un_objetivo_secundario(){
+    objetivos_secundarios_cumplidos++;
 }
 
-// void Jugador::cumplir_un_objetivo_secundario(){
-//     objetivos_secundarios_cumplidos ++;
-// }
-
-// void Jugador::verificar_objetivos(Jugador *jug_turno) {
-
-//     for (int i; i<2; i++){
-//         if (objetivos->obtener_dato(i)->comprobar_requisito(inventario, registro_edificios, diccionario, energia) ){
-//             jug_turno -> cumplir_un_objetivo_secundario();
-//         };
-//     }
-// }
-
+void Jugador::cumplir_objetivo(int numero_objetivo){
+    bool* cumplido = new bool;
+    *cumplido = true;
+    objetivos_cumplidos->insertar_posicion(numero_objetivo, cumplido);    
+}
 
 bool Jugador::gano(){
     bool gano = false;
@@ -102,15 +95,15 @@ bool Jugador::gano(){
     return gano;
 }
 
-bool Jugador::esta_sin_energia(){
-    return (energia == 0);
+bool Jugador::tiene_energia() {
+    return energia;
 }
 
 void Jugador::iniciar_turno(){
     su_turno = true;
 }
 
-void Jugador::terminar_truno(){
+void Jugador::terminar_turno(){
     su_turno = false;
 }
 
@@ -126,8 +119,13 @@ bool Jugador::quiere_salir_del_juego(){
     return !en_juego;
 }
 
-void Jugador:: sumar_energia(int energia){
-    this->energia += energia;
+void Jugador:: sumar_energia(int energia_ganada) {
+    if (energia + energia_ganada > ENERGIA_MAXIMA) {
+        energia += ENERGIA_MAXIMA;
+    }
+    else {
+        energia += energia_ganada;
+    }
 }
 
 void Jugador::esta_obelisco_construido(){

@@ -1,7 +1,7 @@
 #include "minero.h"
 
 Minero::Minero(): Objetivo() {
-    this -> nombre_objetivo = "Minero";
+    this -> nombre_objetivo = MINERO;
     this -> descripcion = "Haber construido una mina de cada tipo.";
     this -> identificador = MINERO;
 }

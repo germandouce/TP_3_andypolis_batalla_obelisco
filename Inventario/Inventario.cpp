@@ -194,20 +194,26 @@ bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
 }
 
 bool Inventario:: hay_madera_suficiente(int cantidad_necesaria){
-    if (cant_madera <cantidad_necesaria)
+    if (cant_madera <cantidad_necesaria){
         cout << "No hay madera suficiente."<<endl;
+        return false;
+    }
     else
         return true;}
 
 bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
-    if (cant_metal < cantidad_necesaria)
+    if (cant_metal < cantidad_necesaria){
         cout << "No hay metal suficiente." << endl;
+        return false;
+    }
     else
         return true;}
 
 bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
-    if (cant_piedra < cantidad_necesaria)
+    if (cant_piedra < cantidad_necesaria){
         cout << "No hay piedra suficiente."<< endl;
+        return false;
+    }
     else
         return true;}
 
@@ -217,15 +223,7 @@ void Inventario:: actualizar_cant_anterior_elemento(string elemento){
     else if (elemento == I_ANDYCOINS)
         cant_anterior_andycoins = cant_andycoins;
     else
-        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;}
-
-bool Inventario::respeto_limite(int limite, int construidos){
-    if ( construidos > limite)
-        cout << "No respeta limite de construcciones."<<endl;
-    else
-        return true;
+        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
 }
 
-
-Inventario::~Inventario(){
-}
+Inventario::~Inventario() {}

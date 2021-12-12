@@ -22,7 +22,34 @@ const int PRIMER_JUGADOR = 1;
 const int SEGUNDO_JUGADOR = 2;
 const int DIFERENCIA_JUGADORES = 3;
 
+const int TURNOS_PARA_LLOVER = 2;
 const int CONTINUAR_PARTIDA = 2;
+
+const int OPCION_MINIMA_NP = 0;
+const int OPCION_MAXIMA_NP = 5;
+
+const int MODIFICAR_EDIFICIO_X_NOMBRE = 1;
+const int LISTAR_TODOS_LOS_EDIFICIOS = 2;
+const int MOSTRAR_MAPA = 3;
+const int COMENZAR_PARTIDA = 4;
+const int GUARDAR_SALIR = 5;
+
+const int OPCION_MINIMA = 1;
+const int OPCION_MAXIMA = 13;
+
+const int CONSTRUIR_EDIFICIO_X_NOMBRE = 1;
+const int LISTAR_EDIFICIOS_CONSTRUIDOS = 2;
+const int DEMOLER_EDIFICIO_X_COORDENDA = 3;
+const int ATACAR_EDIFICIO_X_COORDENADA = 4;
+const int REPARAR_EDIFICIO_X_COORDENADA = 5;
+const int COMPRAR_BOMBAS = 6;
+const int CONSULTAR_COORDENADA = 7;
+const int MOSTRAR_INVENTARIO = 8;
+const int MOSTRAR_OBJETIVOS = 9;
+const int RECOLECTAR_RECURSOS_PRODUCIDOS = 10;
+const int MOVERSE_A_UNA_COORDENADA = 11;
+const int FINALIZAR_TURNO = 12;
+const int GUARDAR_Y_SALIR = 13;
 
 class Juego {
 
@@ -45,6 +72,10 @@ class Juego {
     void crear_juego();
 
     void cambiar_turno();
+
+    void jugar_turno();
+
+    void jugar_partida();
 
     void leer_archivos(int &archivos_cargados, bool &nueva_partida);
 
@@ -203,20 +234,122 @@ class Juego {
     //POST: Pide las coordenadas en las q quiere ubicarse al jugador
     void ubicar_jugador(Jugador*jug_turno);
 
+    //Pedir posicion
+    //PRE:
+    //POST:
     void pedir_posicion(Jugador*jug_turno);
 
-    void opcion_construir_edificio_x_nombre(Jugador*jug_turno);
+    //Opcion construir edificio por nombre
+    //PRE:
+    //POST:
+    void opcion_construir_edificio_x_nombre();
 
-    bool puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno, int limite, int construidos);
-
+    //Puede construir edificio
+    //PRE:
+    //POST:
+    bool puede_construir_edificio(int piedra, int madera, int metal, int construidos);
+    
+    //Acepta ralizar accion
+    //PRE:
+    //POS:
     bool acepta_realizar_accion();
 
-    void obtengo_cantidades_edificio(Edificio*edificio,Registro_edificios*registro_edificios, int piedra,int madera,
-                                     int metal, int limite, int construidos, string nombre_edificio);
+    //
+    //PRE:
+    //POS: 
+    void obtengo_cantidades_edificio(Edificio* edificio, int piedra, int madera, int metal, int construidos);
 
-    void construyo_edificio(Edificio*edificio,string nombre_edificio, int fila, int columna,
-                            Registro_edificios*registro_edificios, int piedra, int madera, int metal, Casillero***casillero, Jugador*jug_turno);
+    //Construye edificio
+    //PRE: verificaciones hechas.
+    //POS: construye edificio
+    void construyo_edificio(Edificio* edificio_a_construir, int fila, int columna);
 
+    //
+    //PRE:
+    //POS: 
+    bool turno_terminado();
+    
+    //
+    //PRE:
+    //POS: 
+    bool juego_terminado();
+
+    //
+    //PRE:
+    //POS: 
+    void mostrar_edificios_construidos();
+
+    //
+    //PRE:
+    //POS: 
+    void mostrar_inventario_en_pantalla();
+
+    //
+    //PRE:
+    //POS: 
+    void mostrar_objetivos_jugador();
+
+    //
+    //PRE:
+    //POS: 
+    void elegir_opcion_menu_np();
+
+    //
+    //PRE:
+    //POS: 
+    int devuelve_construidos_en_registro(string nombre_edificio);
+
+    //
+    //PRE:
+    //POS: 
+    void cumplir_un_objetivo_secundario();
+
+    //Verificar objetivos
+    //PRE:
+    //POST: verifica si cumplio sus objetivos 
+    void verificar_objetivos(Jugador * jug_turno);
+
+
+    // MENUS
+
+    //pre: -
+    //post: Imprime menu en pantalla
+    void presentar_menu_np();
+
+    //pre: Se debe verificar que la opcion elegida sea valida
+    //post: Procesa opcion elegida y la ejecuta
+    void procesar_opcion_np(int opcion);
+
+    //pre: -
+    //post: Verifica que la opcion elegida sea valida para ejecutar
+    bool opcion_valida_np(int opcion);
+
+    //
+    //PRE:
+    //POS: 
+    void presentar_menu();
+
+    //
+    //PRE:
+    //POS: 
+    void procesar_opcion(int opcion);
+
+    //
+    //PRE:
+    //POS: 
+    bool opcion_valida(int opcion);
+
+    //
+    //PRE:
+    //POS: 
+    string pedir_nombre_edificio_construir();
+
+    //
+    //PRE:
+    //POS: 
+    void llover();
+
+    void recolectar_recursos();
 };
 
 #endif //JUEGO_H

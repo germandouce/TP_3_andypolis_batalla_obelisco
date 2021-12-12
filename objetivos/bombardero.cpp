@@ -1,7 +1,7 @@
 #include "bombardero.h"
 
 Bombardero::Bombardero() : Objetivo() {
-    this -> nombre_objetivo = "Bombardero";
+    this -> nombre_objetivo = BOMBARDERO;
     this -> descripcion =  "Haber usado 5 bombas";
     this -> identificador = BOMBARDERO;
     this -> requisito = REQUISITO_BOMBARDERO;
