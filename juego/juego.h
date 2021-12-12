@@ -205,9 +205,15 @@ class Juego {
 
     void opcion_construir_edificio_x_nombre(Jugador*jug_turno);
 
-    bool puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno);
+    bool puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno, int limite, int construidos);
 
     bool acepta_realizar_accion();
+
+    void obtengo_cantidades_edificio(Edificio*edificio,Registro_edificios*registro_edificios, int piedra,int madera,
+                                     int metal, int limite, int construidos, string nombre_edificio);
+
+    void construyo_edificio(Edificio*edificio,string nombre_edificio, int fila, int columna,
+                            Registro_edificios*registro_edificios, int piedra, int madera, int metal, Casillero***casillero, Jugador*jug_turno);
 
 };
 

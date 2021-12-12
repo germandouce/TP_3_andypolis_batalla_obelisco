@@ -94,69 +94,50 @@ void Inventario::cambio_cantidad_madera(int cantidad){
     }
 }
 void Inventario::cambio_cantidad_piedra(int cantidad){
-    if (cantidad < 0 &&!cambio_cantidad_piedra_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_piedra_valida(cantidad))
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
-    }
     else{
         int cantidad_actualizada = cant_piedra + cantidad;
-        cant_piedra = cantidad_actualizada;
-    }
+        cant_piedra = cantidad_actualizada;}
 }
+
 void Inventario::cambio_cantidad_metal(int cantidad){
-    if (cantidad < 0 && !cambio_cantidad_metal_valida(cantidad)){
+    if (cantidad < 0 && !cambio_cantidad_metal_valida(cantidad))
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
-    }
     else{
         int cantidad_actualizada = cant_metal + cantidad;
-        cant_metal = cantidad_actualizada;
-    }
+        cant_metal = cantidad_actualizada;}
 }
 
 void Inventario::cambio_cantidad_bombas(int cantidad){
-    if (cantidad < 0 &&!cambio_cantidad_bombas_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_bombas_valida(cantidad))
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
-    }
     else{
         int cantidad_actualizada = cant_bombas + cantidad;
-        cant_bombas = cantidad_actualizada;
-    }
+        cant_bombas = cantidad_actualizada;}
 }
 
 void Inventario::cambio_cantidad_andycoins(int cantidad){
-    if (cantidad < 0 &&!cambio_cantidad_andycoins_valida(cantidad)){
+    if (cantidad < 0 &&!cambio_cantidad_andycoins_valida(cantidad))
         cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
-    }
     else{
         int cantidad_actualizada = cant_andycoins + cantidad;
-        cant_andycoins = cantidad_actualizada;
-    }
+        cant_andycoins = cantidad_actualizada;}
 }
 
 void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_sumar_o_restar) {
-    if (nombre_elemento == I_MADERA) {
+    if (nombre_elemento == I_MADERA)
         cambio_cantidad_madera(cantidad_sumar_o_restar);
-    }
-
-    else if (nombre_elemento == I_PIEDRA){
+    else if (nombre_elemento == I_PIEDRA)
         cambio_cantidad_piedra(cantidad_sumar_o_restar);
-    }
-
-    else if (nombre_elemento == I_METAL){
+    else if (nombre_elemento == I_METAL)
         cambio_cantidad_metal(cantidad_sumar_o_restar);
-    }
-
-    else if (nombre_elemento == I_BOMBAS) {
+    else if (nombre_elemento == I_BOMBAS)
       cambio_cantidad_bombas(cantidad_sumar_o_restar);
-    }
-
-    else if (nombre_elemento == I_ANDYCOINS) {
+    else if (nombre_elemento == I_ANDYCOINS)
         cambio_cantidad_andycoins(cantidad_sumar_o_restar);
-    }
-
-    else{
+    else
         cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
-    }
-
     cout<< endl;
 }
 
@@ -213,27 +194,36 @@ bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
 }
 
 bool Inventario:: hay_madera_suficiente(int cantidad_necesaria){
-    return (cant_madera >= cantidad_necesaria);
-}
+    if (cant_madera <cantidad_necesaria)
+        cout << "No hay madera suficiente."<<endl;
+    else
+        return true;}
 
 bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
-    return (cant_metal >= cantidad_necesaria);
-}
+    if (cant_metal < cantidad_necesaria)
+        cout << "No hay metal suficiente." << endl;
+    else
+        return true;}
 
 bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
-    return (cant_piedra >= cantidad_necesaria);
+    if (cant_piedra < cantidad_necesaria)
+        cout << "No hay piedra suficiente."<< endl;
+    else
+        return true;}
 
-}
 void Inventario:: actualizar_cant_anterior_elemento(string elemento){
-    if (elemento == I_BOMBAS) {
+    if (elemento == I_BOMBAS)
         cant_anterior_bombas = cant_bombas;
-    }
-    else if (elemento == I_ANDYCOINS) {
+    else if (elemento == I_ANDYCOINS)
         cant_anterior_andycoins = cant_andycoins;
-    }
-    else{
-        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
-    }
+    else
+        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;}
+
+bool Inventario::respeto_limite(int limite, int construidos){
+    if ( construidos > limite)
+        cout << "No respeta limite de construcciones."<<endl;
+    else
+        return true;
 }
 
 

@@ -626,7 +626,7 @@ void Juego::opcion_construir_edificio_x_nombre(Jugador*jug_turno) {
     Registro_edificios* registro_edificios = jug_turno -> devolver_resgitro_edificios();
     Inventario*inventario = jug_turno->devolver_inventario();
     Casillero ***casillero = devolver_mapa()->devolver_matriz();
-    
+
     string nombre_edificio_construir;
     cout << "Ingrese nombre edificio que desea construir: ";
     cin >> nombre_edificio_construir;
@@ -634,37 +634,23 @@ void Juego::opcion_construir_edificio_x_nombre(Jugador*jug_turno) {
     Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
     Edificio* edificio_a_construir;
 
+    int piedra,madera, metal, limite, construidos;
+
     if (edificio_consultado != nullptr) {
-        
-        int piedra = edificio_consultado -> obtener_cantidad_piedra();
-        int madera = edificio_consultado -> obtener_cantidad_madera();
-        int metal = edificio_consultado -> obtener_cantidad_metal();
+        obtengo_cantidades_edificio(edificio_consultado,registro_edificios, piedra, madera, metal, limite, construidos, nombre_edificio_construir);
 
-        int construidos =  registro_edificios-> obtener_edificios_construidos(nombre_edificio_construir);
-        int limite = edificio_consultado -> obtener_maximo_construir();
-
-        if (puede_construir_edificio(piedra, madera, metal, jug_turno) && construidos < limite) {
+        if (puede_construir_edificio(piedra, madera, metal, jug_turno, limite, construidos)){
 
             if (acepta_realizar_accion()) {
-
-                int fila;
-                int columna;
-                
+                int fila, columna;
                 pedir_coordenadas(fila, columna);
-
                 bool esta_ocupado = casillero[fila][columna] -> esta_ocupado();
                 string tipo_casillero = casillero[fila][columna] -> obtener_tipo_casillero();
 
-                if (!esta_ocupado && tipo_casillero == TERRENO) {
-                    edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio_construir, fila, columna);
-                    casillero[fila][columna] -> construir_edificio(edificio_a_construir);
-                    casillero[fila][columna] -> ocupar_casillero();
-                    registro_edificios -> agregar(edificio_a_construir);
-                    jug_turno -> cambia_cantidades_inventario(-madera,-piedra, -metal);
-                }
-                else{
+                if (!esta_ocupado && tipo_casillero == TERRENO)
+                    construyo_edificio(edificio_a_construir,nombre_edificio_construir,fila, columna,registro_edificios, piedra, madera, metal,casillero, jug_turno);
+                else
                     cout<<"Este casillero esta ocupado o no es un terreno"<<endl;
-                }
             }
             else {
                 cout << "No se ha construido el Edificio." << endl;
@@ -673,17 +659,37 @@ void Juego::opcion_construir_edificio_x_nombre(Jugador*jug_turno) {
         }
         else {
             cout << "No cumples con los requisitos necesarios para construir el Edificio." << endl;
-            cout << endl;
-        }
+            cout << endl;}
     }
 }
 
-bool Juego::puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno) {
-
-
+bool Juego::puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno, int limite, int construidos) {
+    bool limite_respetado = jug_turno -> devolver_inventario() -> respeto_limite(limite, construidos);
     bool piedra_suficiente = jug_turno -> devolver_inventario() -> hay_piedra_suficiente(piedra);
     bool madera_suficiente = jug_turno -> devolver_inventario() -> hay_madera_suficiente(madera);
     bool metal_suficiente = jug_turno -> devolver_inventario() -> hay_metal_suficiente(metal);
 
-    return piedra_suficiente && madera_suficiente && metal_suficiente;
+    return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado;
 }
+
+void Juego::obtengo_cantidades_edificio(Edificio*edificio,Registro_edificios*registro_edificios, int piedra,int madera, int metal,
+                                        int limite, int construidos, string nombre_edificio){
+    piedra = edificio -> obtener_cantidad_piedra();
+    madera = edificio -> obtener_cantidad_madera();
+    metal = edificio -> obtener_cantidad_metal();
+    construidos =  registro_edificios-> obtener_edificios_construidos(nombre_edificio);
+    limite = edificio -> obtener_maximo_construir();
+}
+
+void Juego::construyo_edificio(Edificio*edificio,string nombre_edificio, int fila, int columna,
+                               Registro_edificios*registro_edificios, int piedra, int madera, int metal, Casillero***casillero, Jugador*jug_turno){
+    edificio = diccionario -> instanciar_edificio(nombre_edificio, fila, columna);
+    casillero[fila][columna] -> construir_edificio(edificio);
+    casillero[fila][columna] -> ocupar_casillero();
+    registro_edificios -> agregar(edificio);
+    jug_turno -> cambia_cantidades_inventario(-madera,-piedra, -metal);
+
+}
+
+
+
