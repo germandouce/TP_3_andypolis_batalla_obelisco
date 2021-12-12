@@ -71,14 +71,29 @@ class Juego {
     //POST:-
     void crear_juego();
 
+    //
+    //PRE:-
+    //POST:
     void cambiar_turno();
 
+    //
+    //PRE:-
+    //POST:
     void jugar_turno();
 
+    //
+    //PRE:-
+    //POST:
     void jugar_partida();
 
+    //
+    //PRE:-
+    //POST:
     void leer_archivos(int &archivos_cargados, bool &nueva_partida);
 
+    //
+    //PRE:-
+    //POST:
     void posicionar_jugadores();
 
     //Cargar mapa
@@ -87,12 +102,18 @@ class Juego {
     bool cargar_mapa();
 
     //
-    //
-    //
+    //PRE:-
+    //POST:
     void cargar_inventario(ifstream& inventario);
     
+    //
+    //PRE:-
+    //POST:
     void cargar_objetivos();
-    
+
+    //
+    //PRE:-
+    //POST:
     void agregar_edificio_al_registro(Edificio* edificio);
 
     ////Devolver jugador 2
@@ -178,14 +199,19 @@ class Juego {
 
     //Es numero
     //PRE: Recibe un string con la palabra
+    
+    
     //POST: Devuelve true si es un numero o false en caso contrario
     bool es_numero(string palabra);
 
+    //
+    //PRE:-
+    //POST:
     Edificio* encontrar_edificio();
 
     //
-    //
-    //
+    //PRE:-
+    //POST:
     void mostrar_todos_edificios();
 
     
@@ -208,6 +234,11 @@ class Juego {
     //PRE:
     //POST:
     void pedir_coordenadas(int &fila, int &columna);
+
+    //
+    //PRE:-
+    //POST:
+    bool son_coordenadas_validas(int &fila, int &columna);
 
     //Devolver mapa
     //PRE:
@@ -343,22 +374,55 @@ class Juego {
     //POS: 
     string pedir_nombre_edificio_construir();
 
-
+    //
+    //PRE:-
+    //POST:
     void construir_edificio(string nombre_edificio);
 
+    //
+    //PRE:-
+    //POST:
     void ubicar_edificio(Edificio* edificio_a_construir, int fila, int columna);
+    
     //
     //PRE:
     //POS: 
     void llover();
-
+    
+    //
+    //PRE:
+    //POS:
     void recolectar_recursos();
 
+    //
+    //PRE:
+    //POS:
     bool es_nuestro_edificio(int fila, int columna);
 
+    //
+    //PRE:
+    //POS:
     bool respeta_limite(int construidos, int limite);
 
+    //
+    //PRE:
+    //POS:
     void verificar_objetivos();
+
+    //
+    //PRE:
+    //POS: muestra en pantalla costo y energia.
+    void costo_energia(int costo);
+   
+    //
+    //PRE:
+    //POS: devuelve true si tu_energia >= costo de accion.
+    bool alcanza_energia(int costo, int tu_energia);
+
+    //
+    //PRE: verificaciones hechas.
+    //POS: elimina el edificio segun coordenadas.
+    //void demoler_edificio_x_coordenadas();
 };
 
 #endif //JUEGO_H

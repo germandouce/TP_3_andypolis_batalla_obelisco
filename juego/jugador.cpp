@@ -129,6 +129,9 @@ void Jugador:: sumar_energia(int energia_ganada) {
         energia += energia_ganada;
     }
 }
+void Jugador::restar_energia(int costo){
+    int tu_energia =obtener_energia()-costo;
+}
 
 void Jugador::esta_obelisco_construido(){
     if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() == 1){

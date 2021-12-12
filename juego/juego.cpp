@@ -63,6 +63,8 @@ void Juego::jugar_partida() {
     
     int turnos_sin_llover = 0;
 
+    //cambiar_turno();
+
     while (!juego_terminado()) {
             
         cambiar_turno();
@@ -105,7 +107,7 @@ void Juego::jugar_turno() {
 
         procesar_opcion(opcion);
 
-        if (jugador_turno -> tiene_energia()) {
+        if (!jugador_turno -> tiene_energia()) {
             jugador_turno -> terminar_turno();
         } 
     }      
@@ -162,11 +164,11 @@ void Juego::posicionar_jugadores() {
     cambiar_turno();
     ubicar_jugador();
 
-    int fila1 = jugador_turno -> devolver_fila();
-    int columna1 = jugador_turno -> devolver_columna();
+    int fila1 = jugador_turno -> devolver_fila() - 1;
+    int columna1 = jugador_turno -> devolver_columna() - 1;
 
-    int fila2 = jugador_secundario -> devolver_fila();
-    int columna2 = jugador_secundario -> devolver_columna();
+    int fila2 = jugador_secundario -> devolver_fila() - 1;
+    int columna2 = jugador_secundario -> devolver_columna() - 1;
 
     mapa -> obtener_casillero(fila1, columna1) -> ocupar_jugador1();
     mapa -> obtener_casillero(fila2, columna2) -> ocupar_jugador2();
@@ -544,9 +546,6 @@ void Juego::pedir_coordenadas(int &fila, int &columna) {
         cout << endl;
         pedir_columna(columna);
     }
-
-	fila = fila -1;
-	columna = columna - 1;
     cout << endl;
 }
 
@@ -568,13 +567,19 @@ Diccionario* Juego:: devolver_diccionario(){
     return diccionario;
 }
 
+bool Juego::son_coordenadas_validas(int &fila, int &columna) {
+        
+    int filas = mapa -> obtener_filas();
+    int columnas = mapa -> obtener_columnas();
+
+    return (fila <= filas - 1 && columna <= columnas - 1);
+
+}
+
 void Juego::ubicar_jugador() {
     
     int fila;
     int columna;
-
-    int filas = mapa -> obtener_filas();
-    int columnas = mapa -> obtener_columnas();
 
     int numero_jugador = jugador_turno -> devolver_numero_jugador();
     
@@ -582,12 +587,10 @@ void Juego::ubicar_jugador() {
     cout << "Por favor, ingrese las coordenadas en las que desea ubicarse: " << endl;
 
     pedir_coordenadas(fila, columna);
-
-    bool coordenadas_validas = fila <= filas - 1 && columna <= columnas - 1;
-
-    while (!coordenadas_validas) { 
-        pedir_coordenadas(fila, columna);
+    
+    while (!son_coordenadas_validas(fila, columna)) { 
         cout << "Las coordenadas ingresadas se encuentran fuera del Mapa." << endl;
+        pedir_coordenadas(fila, columna);
     }
 
     jugador_turno -> asignar_coordenadas(fila, columna);
@@ -602,31 +605,32 @@ bool Juego::acepta_realizar_accion() {
 
 void Juego::opcion_construir_edificio_x_nombre() {
     int costo = 15;
-    int tu_energia =jugador_turno -> obtener_energia();
-    cout<<"Costo energetico : " << costo << endl;
-    cout<<"Tu energia actual: "<< tu_energia << endl;
-    //if(jugador_turno -> tiene_energia() && tu_energia > costo ){}
-    string nombre_edificio_construir = pedir_nombre_edificio_construir();
-    Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
-    Edificio* edificio_a_construir;
+    int tu_energia;
+    costo_energia(costo);
+    if(alcanza_energia(costo, tu_energia)){
+        string nombre_edificio_construir = pedir_nombre_edificio_construir();
+        Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
+        Edificio* edificio_a_construir;
 
-    int piedra, madera, metal, construidos;
+        int piedra, madera, metal, construidos;
 
-    if (edificio_consultado != nullptr) {
-        obtengo_cantidades_edificio(edificio_consultado, piedra, madera, metal, construidos);
+        if (edificio_consultado != nullptr) {
+            obtengo_cantidades_edificio(edificio_consultado, piedra, madera, metal, construidos);
         
-        if (puede_construir_edificio(edificio_consultado)) {
-            mostrar_costo_edificio(edificio_a_construir); 
-            if (acepta_realizar_accion()) {
-                construir_edificio(nombre_edificio_construir);
-            }
-            else {
-                cout << "No se ha construido el Edificio." << endl;
-                cout << endl;
+            if (puede_construir_edificio(edificio_consultado)) {
+                mostrar_costo_edificio(edificio_a_construir); 
+                if (acepta_realizar_accion()) {
+                    construir_edificio(nombre_edificio_construir);
+                    jugador_turno -> restar_energia(costo);
+                 }
+                else {
+                    cout << "No se ha construido el Edificio." << endl;
+                    cout << endl;
+                    }
+                }
             }
         }
     }
-}
 
 bool Juego::puede_construir_edificio(Edificio* edificio) {
     string nombre_edificio = edificio -> obtener_nombre();
@@ -697,6 +701,7 @@ void Juego::mostrar_objetivos_jugador() {
     Inventario *inventario = jugador_turno->devolver_inventario();
     Registro_edificios* registro_edificios = jugador_turno->devolver_resgitro_edificios();
     int energia = jugador_turno -> obtener_energia();
+    //if(alcanza_energia( costo, tu_energia)){
 
     cout<<"Sus objetivo primario es el siguiente: "<<endl;
     cout<<"Construir un obelisco: ";
@@ -801,7 +806,6 @@ void Juego::procesar_opcion(int opcion) {
     
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
-            //falta verificar antes energia
             opcion_construir_edificio_x_nombre();
             break;
         case LISTAR_EDIFICIOS_CONSTRUIDOS:
@@ -846,7 +850,7 @@ void Juego::procesar_opcion(int opcion) {
             recolectar_recursos();
             break;
         case MOVERSE_A_UNA_COORDENADA:
-            mapa -> moverse(inventario, jugador_turno);
+            mapa -> moverse(jugador_turno);
             break;
         case FINALIZAR_TURNO:
             cambiar_turno();
@@ -894,10 +898,9 @@ bool Juego::es_nuestro_edificio(int fila, int columna){
 
 //void Juego::demoler_edificio_x_coordenadas(){
     //int costo = 15;
-    //int tu energia =jugador_turno -> obtener_energia();
-    //cout<<"Costo energetico : " << costo << endl;
-    //cout<<"Tu energia actual: "<< tu_energia << endl;
-    //if(jugador_turno -> tiene_energia() && tu_energia > costo )
+    //int tu_energia;
+    //costo_energia(costo);
+    //if(alcanza_energia(costo, tu_energia)){
     //  int fila, columna;
     //  pedir_coordenadas(fila, columna);
     //bool ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
@@ -908,5 +911,20 @@ bool Juego::es_nuestro_edificio(int fila, int columna){
     //Ver tipo y estado de edificio para saber costo de destruccion.
     //inventario -> devolver_cant_bombas();
     //if(acepta_realizar_accion());
+    //jugador_turno -> restar_energia(costo);
     //Volver al menu.
 //}
+
+void Juego::costo_energia(int costo){
+    int tu_energia =jugador_turno -> obtener_energia();
+    cout<<"Costo energetico : " << costo << endl;
+    cout<<"Tu energia actual: "<< tu_energia << endl;
+}
+bool Juego::alcanza_energia(int costo, int tu_energia){
+    if ( tu_energia >= costo)
+        return true;
+    else{
+        cout<<"No tenes energia suficiente."<<endl;
+        return false;
+    }
+}

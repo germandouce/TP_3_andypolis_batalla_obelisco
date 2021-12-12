@@ -123,7 +123,7 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
-	void moverse(Inventario* inventario, Jugador* jugador);
+	void moverse(Jugador* jugador);
 
 	bool es_movimiento_valido(int fila, int columna);
 

@@ -292,9 +292,10 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 
 // MOVIMIENTO
 
-void Mapa::moverse(Inventario* inventario, Jugador* jugador) {
+void Mapa::moverse(Jugador* jugador) {
 	
 	bool es_jugador2 = jugador -> devolver_numero_jugador() == NUMERO_JUGADOR2;
+	Inventario* inventario = jugador -> devolver_inventario();
 
 	int fila_origen = jugador -> devolver_fila() - 1;
 	int columna_origen = jugador -> devolver_columna() - 1;
@@ -319,10 +320,14 @@ void Mapa::moverse(Inventario* inventario, Jugador* jugador) {
 		int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
 		if (distancia != INFINITO) {
+			cout<<"distancia"<<distancia<<endl;
 			imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
-			ocupar_jugador(fila_destino, columna_destino, es_jugador2);
-			
-			jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
+			//ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+			cout<<"ocupe casillero";
+
+			cout << fila_destino <<  "," << columna_destino << endl;
+			//jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
+			cout << "llegue" << endl;
 
 			cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
 			cout << endl;
@@ -380,9 +385,12 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, Inventario* inventar
 	fila = nodo -> obtener_vertice() -> obtener_fila() - 1;
 	columna = nodo -> obtener_vertice() -> obtener_columna() - 1;
 
+	cout << fila << " ," << columna << endl;
+
 	if (destino != origen) {
-		int destino = nodo -> obtener_anterior();
+		destino = nodo -> obtener_anterior();
 		imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
+		cout << "paso por " << fila << "  ,  " << columna << endl;
 	}
 	else {
 		cout << endl;
@@ -391,15 +399,17 @@ void Mapa::imprimir_camino_recorrido(Lista* lista_vertices, Inventario* inventar
 
 	ocupar_jugador(fila, columna, es_jugador2);
 	recolectar_recursos(fila, columna, inventario);
-
+	cout<<"ocupe juagdor";
 	print_lento(ESPERA);
 
 	matriz[fila][columna] -> iluminar_casillero();
-	system(CLR_SCREEN);
+	//system(CLR_SCREEN);
+	cout << "imprimo mapa???" << endl;
 	imprimir_mapa();
 	matriz[fila][columna] -> desiluminar_casillero();
-
+	
 	desocupar_jugador(fila, columna, es_jugador2);
+	cout<<"DESocupe juagdor";
 }
 
 void Mapa::print_lento(unsigned int tiempo) {

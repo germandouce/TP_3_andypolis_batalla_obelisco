@@ -168,6 +168,8 @@ class Jugador {
     //Si se supera los 100 pts de energia suma hasta 100
     void sumar_energia(int energia);
 
+    void restar_energia(int costo);
+
     //PRE: Recibe un entero con la cantidad de enrgia a sumar
     //POST: 
     void esta_obelisco_construido();
