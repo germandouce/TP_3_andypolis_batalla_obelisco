@@ -52,11 +52,6 @@ class Jugador {
     
     //Constructor de jugador
     Jugador();
-
-    //Pedir coordenadas
-    //PRE:-
-    //POST: Pide las coordenadas en las q quiere ubicarse al jugador
-    void ubicar_jugador();
     
     //Asignar coordenadas
     //PRE:Recibe dos enteros con las coordenadas x e y respectivamente.
@@ -187,11 +182,7 @@ class Jugador {
 
     //PRE:-
     //POST
-    void opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casillero*** mapa);
-
-    //PRE:-
-    //POST
-    void pedir_coordenadas(int &fila, int &columna);
+    // void opcion_construir_edificio_x_nombre(Diccionario* diccionario, Casillero*** mapa);
     
     //PRE:-
     //POST

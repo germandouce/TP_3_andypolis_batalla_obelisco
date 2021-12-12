@@ -195,9 +195,20 @@ class Juego {
     //PRE:
     //POST:
     Mapa* devolver_mapa();
+
+    //Pedir coordenadas
+    //PRE:-
+    //POST: Pide las coordenadas en las q quiere ubicarse al jugador
+    void ubicar_jugador(Jugador*jug_turno);
+
+    void pedir_posicion(Jugador*jug_turno);
+
+    void opcion_construir_edificio_x_nombre(Jugador*jug_turno);
+
+    bool puede_construir_edificio(int piedra, int madera, int metal, Jugador*jug_turno);
+
+    bool acepta_realizar_accion();
+
 };
 
 #endif //JUEGO_H
-
-
-

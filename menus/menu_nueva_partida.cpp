@@ -22,6 +22,8 @@ void procesar_opcion_np(Juego* juego, int opcion) {
     switch (opcion) {
         case MODIFICAR_EDIFICIO_X_NOMBRE:
             juego -> devolver_diccionario() -> modificar_valores_edificios();
+            cout<<"ENTER PARA VOLVER AL MENU"<<endl;
+            cin.get();
             break;
         case LISTAR_TODOS_LOS_EDIFICIOS:
             system(CLR_SCREEN);

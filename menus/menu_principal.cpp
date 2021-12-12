@@ -35,7 +35,7 @@ void procesar_opcion(int opcion, Juego* juego, Jugador* jug_turno, Jugador* jug_
     
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
-            jug_turno->opcion_construir_edificio_x_nombre(diccionario,mapa);
+            juego->opcion_construir_edificio_x_nombre(jug_turno);
             break;
         case LISTAR_EDIFICIOS_CONSTRUIDOS:
             jug_turno->devolver_resgitro_edificios()->mostrar_registro_edificios();
