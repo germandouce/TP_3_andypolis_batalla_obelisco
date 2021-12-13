@@ -829,7 +829,7 @@ void Juego::procesar_opcion(int opcion) {
             //Volver al menu.
             break;
         case COMPRAR_BOMBAS:
-            //comprar_bombas() HECHO pero falta probar!!!!
+            comprar_bombas(inventario);
             break;
         case CONSULTAR_COORDENADA:
             //mapa -> consultar_coordenada();
@@ -924,38 +924,47 @@ bool Juego::alcanza_energia(int costo){
     }
 }
 
-//void Juego:: comprar_bombas(){
-            //int costo = 5;
-            //costo_energia(costo);
-            //if (alcanza_energia(costo)){
-                //int tus_andycoins = inventario -> devolver_cant_andycoins();
-                //int precio_bomba = 100;
-                //int bombas_deseadas;
-                //cout<<"Ingrese la cantidad de bombas que quiere comprar: ";
-                //cin >>bombas_deseadas;
-                //int precio_total_bombas = precio_bomba*bombas_deseadas;
-                //muestra_info_precompra_bombas(int precio_total_bombas, tus_andycoins);
-                //if (andycoins_suficientes( tus_andycoins,  precio_total_bombas) && acepta_realizar_accion()){
-                //     se_compran_bombas();
-                //}}}
+void Juego:: comprar_bombas(Inventario*inventario){
+    int costo = 5;
+    costo_energia(costo);
+    if (alcanza_energia(costo)){
+        int tus_andycoins = inventario -> devolver_cant_andycoins();
+        int precio_bomba = 100;
+        int bombas_deseadas = pide_bombas_deseadas();
+        int precio_total_bombas = precio_bomba*bombas_deseadas;
+        muestra_info_precompra_bombas( precio_total_bombas, tus_andycoins);
+        if (andycoins_suficientes( tus_andycoins,  precio_total_bombas) && acepta_realizar_accion()){
+            se_compran_bombas(precio_total_bombas, costo, inventario);
+        }
+    }
+}
+int Juego::pide_bombas_deseadas(){
+    int bombas_pedidas;
+    cout<<"Ingrese la cantidad de bombas que quiere comprar: ";
+    cin >>bombas_pedidas;
+    return bombas_pedidas;
+}
 
-//bool Juego::andycoins_suficientes(int tus_andycoins, int precio_total_bombas){
-            //  if (tus_andycoins >= precio_total_bombas){
-            //      return true;
-            //  else{
-            //         cout<< "No tenes suficientes andycoins."<<endl;
-            //         return false;}
-            //}
+bool Juego::andycoins_suficientes(int tus_andycoins, int precio_total_bombas){
+            if (tus_andycoins >= precio_total_bombas)
+                 return true;
+            else{
+                cout<< "No tenes suficientes andycoins."<<endl;
+                return false;}
+            }
 
-//void Juego::muestra_info_precompra_bombas(int precio_total_bombas, tus_andycoins){}
-        //cout >> "Precio de total bombas: " << precio_total_bombas << " andycoins." endl;
-        //cout << "Tus andycoins: " << tus_andycoins << endl;
-        //}
+void Juego::muestra_info_precompra_bombas(int precio_total_bombas, int tus_andycoins){
+        cout <<"Precio de total bombas: " << precio_total_bombas << " andycoins."<< endl;
+        cout << "Tus andycoins: " << tus_andycoins << endl;
+        }
 
-//void Juego::se_compran_bombas(int precio_total_bombas, int costo){
- //     int andycoins_actuales = inventario -> cambiar_cantidad_elemento("andycoins", -precio_total_bombas);
-//      int bombas_actuales = inventario -> cambiar_cantidad_elemento("bombas",  precio_total_bombas/100);
-//      cout << "Ha comprado: " << precio_total_bombas/100 << " bombas."<<endl;
-//      cout << "Ahora tiene un total de: " << bombas_actuales<< " bombas" <<endl;
-//      cout << "Ahora tiene un total de: " << andycoins_actuales << " andycoins"<<endl;
-//      jugador_turno -> restar_energia(costo);}
+void Juego::se_compran_bombas(int precio_total_bombas, int costo, Inventario*inventario){
+    inventario-> cambiar_cantidad_elemento("andycoins", -precio_total_bombas);
+    inventario -> cambiar_cantidad_elemento("bombas",  precio_total_bombas/100);
+    int andycoins_actuales = inventario->devolver_cant_andycoins();
+    int bombas_actuales = inventario->devolver_cant_bombas();
+    cout << "Ha comprado: " << precio_total_bombas/100 << " bombas."<<endl;
+    cout << "Ahora tiene un total de: " << bombas_actuales<< " bombas" <<endl;
+    cout << "Ahora tiene un total de: " << andycoins_actuales << " andycoins"<<endl;
+    jugador_turno -> restar_energia(costo);
+}
