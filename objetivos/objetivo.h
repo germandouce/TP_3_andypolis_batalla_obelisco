@@ -8,6 +8,11 @@
 
 using namespace std;
 
+const int CANTIDAD_OBJETIVOS = 3;
+const int MINIMO_OBJETIVO = 0;
+const int MAXIMO_OBJETIVO = 9;
+const int OBELISCO_CONSTRUIDO = 1;
+
 const string COMPRAR_ANDYPOLIS = "Comprar andypolis";
 const int REQUISITO_COMPRAR_ANDYPOLIS = 100000;
 

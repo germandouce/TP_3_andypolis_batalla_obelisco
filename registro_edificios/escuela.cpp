@@ -7,7 +7,7 @@ Escuela::Escuela(int piedra, int madera, int metal, int maximo,  int fila, int c
     this->vida_actual = 1;
     this->vida_maxima = 1;
     this->fila = fila;
-    this->fila = fila;
+    this->columna = columna;
 }
 
 void Escuela::mostrar_mensaje(){

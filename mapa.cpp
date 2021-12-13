@@ -174,6 +174,7 @@ void Mapa::consultar_casillero() {
 void Mapa::llover() {
 
 	if (transitables_disponibles) {
+		cout << endl;
 		generar_lluvia_materiales();
 	}
 	else {

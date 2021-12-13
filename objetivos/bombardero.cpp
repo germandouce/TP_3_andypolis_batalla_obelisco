@@ -7,11 +7,15 @@ Bombardero::Bombardero() : Objetivo() {
 
 bool Bombardero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios,
 Diccionario *diccionario, int energia) {
-    return inventario ->devolver_cant_anterior_bombas() == REQUISITO_BOMBARDERO;
+    // return inventario ->devolver_cant_acumulada_bombas() == REQUISITO_BOMBARDERO;
+    return true;
 }
 
 void Bombardero :: mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    cout<< "Te faltan comprar " << REQUISITO_BOMBARDERO - inventario->devolver_cant_anterior_bombas()
-    <<" bombas para completar este objetivo";
+    // cout<< "Te faltan comprar " << REQUISITO_BOMBARDERO - inventario->devolver_cant_acumulada_bombas()
+    // <<" bombas para completar este objetivo";
+    cout<< "Te faltan comprar " << REQUISITO_BOMBARDERO - 1<<
+    " bombas para completar este objetivo\n"<<endl;
+    
 }

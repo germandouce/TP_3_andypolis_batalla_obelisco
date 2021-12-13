@@ -6,6 +6,6 @@ Madera :: Madera(int cantidad_material) : Material(cantidad_material){
 }
 
 void Madera :: saludar(){
-        cout << "Soy un paquete de "<<cantidad_material << " maderas "<<
+        cout << "-Soy un paquete de "<<cantidad_material << " maderas "<<
         "y me encuentro en el casillero consultado"<<endl;
 }

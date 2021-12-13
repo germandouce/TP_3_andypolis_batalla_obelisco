@@ -13,9 +13,9 @@ void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* regist
 Diccionario *diccionario, int energia){
     cout<<"Te falta construir: "<<endl;
     if (!registro_edificios->al_menos_una_mina()){
-        cout<<"una mina";
+        cout<<"\tuna mina"<<endl;
     }
     if (!registro_edificios->al_menos_una_mina_oro()){
-        cout<<"una mina de oro";
+        cout<<"\tuna mina de oro\n"<<endl;
     }
 }

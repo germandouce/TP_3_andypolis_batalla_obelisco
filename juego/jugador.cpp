@@ -49,8 +49,8 @@ void Jugador::asignar_objetivo(Objetivo *objetivo_a_asignar) {
     objetivos_cumplidos -> insertar_ultimo(cumplido);
 }
 
-bool Jugador::objetivo_cumplido(int numero_objetivo){
-    return objetivos_cumplidos->obtener_dato(numero_objetivo);
+bool Jugador::objetivo_cumplido(int numero_objetivo) {
+    return *objetivos_cumplidos->obtener_dato(numero_objetivo);
 }
 
 void Jugador::agregar_material_a_inventario(){
@@ -123,14 +123,14 @@ bool Jugador::quiere_salir_del_juego(){
 
 void Jugador:: sumar_energia(int energia_ganada) {
     if (energia + energia_ganada > ENERGIA_MAXIMA) {
-        energia += ENERGIA_MAXIMA;
+        energia = ENERGIA_MAXIMA;
     }
     else {
         energia += energia_ganada;
     }
 }
 void Jugador::restar_energia(int costo){
-    int tu_energia =obtener_energia()-costo;
+    energia -= costo;
 }
 
 void Jugador::esta_obelisco_construido(){

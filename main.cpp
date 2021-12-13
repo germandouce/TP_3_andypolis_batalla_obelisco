@@ -25,7 +25,7 @@ int main() {
         juego -> jugar_partida();
     }
     else {
-        cout << "No se pudieron abrir uno o varios archivos." << endl;;
+        cout << ERROR_COLOR << "No se pudieron abrir uno o varios archivos." << END_COLOR << endl;;
     }  
 
     delete juego;

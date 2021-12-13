@@ -12,5 +12,5 @@ Diccionario *diccionario, int energia){
 
 void Cansado::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-  cout<<"deberias consumir "<< energia <<" de energia para completar este  objetivo";
+  cout<<"deberias consumir "<< energia <<" de energia para completar este objetivo\n"<<endl;
 }

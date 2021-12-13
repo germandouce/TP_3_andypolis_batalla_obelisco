@@ -19,6 +19,7 @@
 const int NUMERO_JUGADOR1 = 1;
 const int NUMERO_JUGADOR2 = 2;
 const int ENERGIA_MAXIMA = 100;
+const int ENERGIA_POR_TURNO = 20;
 
 using namespace std;
 

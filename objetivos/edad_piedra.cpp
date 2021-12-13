@@ -13,5 +13,5 @@ Diccionario *diccionario, int energia){
 void Edad_piedra::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
     cout<<"Te faltan obetener "<< REQUISITO_EDAD_PIEDRA - inventario->devolver_cant_piedra() 
-    <<" piedras para cumplir este objetivo";
+    <<" piedras para cumplir este objetivo\n"<<endl;
 }

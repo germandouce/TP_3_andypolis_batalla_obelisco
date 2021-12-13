@@ -12,5 +12,5 @@ Diccionario *diccionario, int energia){
 
 void Energetico::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    cout<<"Te falta recuperar "<<REQUISITO_ENERGETICO - energia <<" de energia para cumplir este objetivo";
+    cout<<"Te falta recuperar "<<REQUISITO_ENERGETICO - energia <<" de energia para cumplir este objetivo\n"<<endl;
 }

@@ -5,9 +5,7 @@
 
 class Madera : public Material {
 
-private:
-
-public:
+    public:
     //Constructor de madera con 1 parametro
     //PRE:-
     //POST: Construye un paquete de maderas con 1 parametros
@@ -17,9 +15,6 @@ public:
     //PRE:-
     //POST: Saluda describiendose
     void saludar();
-
-
 };
-
 
 #endif // MADERA_H_INCLUDED

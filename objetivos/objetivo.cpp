@@ -12,5 +12,5 @@ void Objetivo::mostrar_nombre_objetivo(){
 }
 
 void Objetivo::mostrar_descripcion(){
-    cout << descripcion<< endl;
+    cout << descripcion<<endl;
 }

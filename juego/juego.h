@@ -17,6 +17,7 @@ const string ARCHIVO_MATERIALES = "materiales.txt";
 const char PARENTESIS_CHAR = '(';
 const int OPCION_PARENTESIS = 0;
 const int OPCION_NUMEROS = 1;
+const int CIEN = 100;
 
 const int PRIMER_JUGADOR = 1;
 const int SEGUNDO_JUGADOR = 2;
@@ -90,6 +91,23 @@ class Juego {
     //PRE:-
     //POST:
     void leer_archivos(int &archivos_cargados, bool &nueva_partida);
+    
+    //PRE:-
+    //POST: Valida la opcion del jugador en el menu.
+    int validar_opcion_np(int opcion_elegida);
+
+    //PRE:-
+    //POST: Valida la opcion del menu
+    int validar_opcion(int opcion_elegida);
+
+
+    //PRE:-
+    //POST:-Actualiza las cantidades del inventario.
+    void actualizar_inventario(string nombre, int cantidad1, int cantidad2, ifstream& inventario);
+
+    //PRE:-
+    //POST: valida la eleccion del numero jugador.
+    int validar_jugador();
 
     //
     //PRE:-
@@ -101,10 +119,9 @@ class Juego {
     //POST: Lee el archivo mapa.txt y lo guarda.
     bool cargar_mapa();
 
-    //
-    //PRE:-
-    //POST:
-    void cargar_inventario(ifstream& inventario);
+    //PRE:
+    //POST:Actualiza el inventario.
+    void actualizar_inventario(ifstream& inventario);
     
     //
     //PRE:-
@@ -433,6 +450,8 @@ class Juego {
     void se_compran_bombas(int precio_total_bombas, int costo, Inventario*inventario);
 
     int pide_bombas_deseadas();
+
+    void no_compra_bombas(Inventario* inventario);
 };
 
 #endif //JUEGO_H
