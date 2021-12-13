@@ -55,7 +55,6 @@ int Registro_edificios :: buscar_posicion(int coordenada_x  , int coordenada_y){
     for ( posicion = 0; posicion < cantidad_edificios ; posicion++ ) {
         if (coordenada_x  == actual->obtener_edificio()->obtener_fila() && coordenada_y  == actual->obtener_edificio()->obtener_columna()) {
             return posicion;
-            encontrado = true;
         }
         else{
             encontrado = false;
@@ -64,7 +63,6 @@ int Registro_edificios :: buscar_posicion(int coordenada_x  , int coordenada_y){
     }
     if (encontrado == false){
         posicion = -1;
-        //cout << ERROR_COLOR << "No existe edificio en posicion en tu registro ->> "<< "( " << coordenada_x << ", " << coordenada_y << " )" << END_COLOR << endl;
     }
 
     delete actual;
