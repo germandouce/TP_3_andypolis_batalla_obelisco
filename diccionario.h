@@ -2,7 +2,11 @@
 #define DICCIONARIO_H
 
 #include "nodo_dict.h"
+#include <fstream>
+#include <string>
 #include "Inventario/Inventario.h"
+
+using namespace std;
 
 class Diccionario {
     
@@ -29,13 +33,11 @@ class Diccionario {
 
     Edificio* instanciar_edificio(string nombre_edificio, int fila, int columna);
 
-    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite, int fila, int columna);
-
     void mostrar_todos_edificios();
 
-    void mostrar_todos_edificios(Nodo_dict* nodo);
-
     void modificar_valores_edificios();
+
+    void guardar_edificios(ofstream &archivo);
 
     private:
 
@@ -46,6 +48,12 @@ class Diccionario {
     //PRE: Recibe id y un nodo
     //POST: Devuelve true si el id esta en el diccionacio
     Nodo_dict* buscar_edificio(Nodo_dict* nodo, string clave);
+
+    void guardar_edificios(ofstream &archivo, Nodo_dict* nodo);
+
+    void mostrar_todos_edificios(Nodo_dict* nodo);
+
+    Edificio* instanciar_edificio(string nombre_edificio, int piedra, int madera, int metal, int limite, int fila, int columna);
 
     // PRE: -
     // POST: Borra todos los nodos del diccionario

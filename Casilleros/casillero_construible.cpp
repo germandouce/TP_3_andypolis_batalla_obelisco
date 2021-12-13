@@ -19,12 +19,22 @@ Material* Casillero_construible::obtener_material() {
 }
 
 void Casillero_construible::mostrar() {
-    if (!ocupado) {
+    
+    if (!esta_ocupado()) {
         cout << SUCESS_COLOR << "-Soy un casillero construible y me encuentro vacio." << END_COLOR << endl;
     }
     else {
         cout << SUCESS_COLOR << "-Soy un casillero construible y no me encuentro vacio." << END_COLOR << endl;
-        edificio -> mostrar_mensaje();
+        
+        if (hay_jugador1()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 1 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+        else if (hay_jugador2()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 2 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+        else {
+            edificio -> mostrar_mensaje();
+        }
     }
     cout << endl;
 }

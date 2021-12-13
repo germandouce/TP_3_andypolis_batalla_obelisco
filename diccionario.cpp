@@ -30,7 +30,7 @@ Edificio* Diccionario::buscar_edificio(string nombre_edificio) {
     if (nodo != nullptr) {
         return nodo -> devolver_edificio();
     }
-    cout << "No existe este edificio." << endl;
+    cout << ERROR_COLOR << "El Edificio ingresado no existe." << END_COLOR << endl;
     return nullptr;
 }
 
@@ -115,17 +115,34 @@ void Diccionario::modificar_valores_edificios() {
 
     system(CLR_SCREEN);
     cout << ENTER_COLOR << "Ingrese el nombre del Edificio que desea modificar: " << END_COLOR << endl;
-    cin >> nombre_edificio;
+    getline(cin, nombre_edificio);
 
     Edificio* edificio = buscar_edificio(nombre_edificio);
 
     if (edificio != nullptr) {
         edificio -> modificar_cantidades_edificio();
     }
-    else {
-        cout << ERROR_COLOR << "El Edificio ingresado no existe." << END_COLOR << endl;
-        cout << endl;
+}
+
+void Diccionario::guardar_edificios(ofstream &archivo) {
+    guardar_edificios(archivo, origen);
+}
+
+void Diccionario::guardar_edificios(ofstream &archivo, Nodo_dict* nodo) {
+
+    if (nodo != nullptr) {
+        Edificio* edificio = nodo -> devolver_edificio();
+
+        archivo << edificio -> obtener_nombre() << " ";
+        archivo << edificio -> obtener_cantidad_piedra() << " ";
+        archivo << edificio -> obtener_cantidad_madera() << " ";
+        archivo << edificio -> obtener_cantidad_metal() << " ";
+        archivo << edificio -> obtener_maximo_construir() << endl;
+
+        guardar_edificios(archivo, nodo -> devolver_nodo_derecho());
+        guardar_edificios(archivo, nodo -> devolver_nodo_izquierdo());
     }
+
 }
 
 void Diccionario::borrar_todo(Nodo_dict* nodo) {

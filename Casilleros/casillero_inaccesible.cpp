@@ -17,7 +17,20 @@ Material* Casillero_inaccesible::obtener_material() {
 }
 
 void Casillero_inaccesible::mostrar() {
-    cout << SUCESS_COLOR << "-Soy un casillero inaccesible y me encuentro vacio." << END_COLOR << endl;
+
+    if (!esta_ocupado_jugador()) {
+        cout << SUCESS_COLOR << "-Soy un casillero inaccesible y me encuentro vacio." << END_COLOR << endl;
+    }
+    else {
+        cout << SUCESS_COLOR << "-Soy un casillero inaccesible y no me encuentro vacio." << END_COLOR << endl;
+
+        if (hay_jugador1()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 1 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+        else if (hay_jugador2()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 2 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+    }
     cout << endl;
 }
 

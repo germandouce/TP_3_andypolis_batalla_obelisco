@@ -8,6 +8,7 @@ Comprar_andypolis::Comprar_andypolis() : Objetivo() {
 bool Comprar_andypolis::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
 	// return (inventario->devolver_cant_acumulada_andycoins()  == REQUISITO_COMPRAR_ANDYPOLIS);
+    return true;
 }
 
 void Comprar_andypolis::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

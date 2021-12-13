@@ -117,9 +117,17 @@ class Mapa {
     //post: Imprime el Mapa.
 	void imprimir_mapa();
 
+	//pre:-
+	//post: Muestra todos los edificios.
 	void mostrar_todos_edificios();
-
+	
+	//pre:
+	//post: Agrego aleatoriamente materiales en el mapa.
 	void llover();
+
+	//pre:-
+	//post: Escribe los materiales llovidos en un txt.
+	void guardar_lluvia(ofstream &archivo);
 
 	//pre: -
     //post: Genera una lluvia de Materiales en el Mapa.
@@ -127,18 +135,30 @@ class Mapa {
 
 	void cargar_casilleros_lluvia();
 
+	//pre:-
+	//post:Muestra el movimiento de un jugador desde un punto a otro del mapa.
 	void moverse(Jugador* jugador);
 
+	//pre:-
+	//post:Informa si el movimiento es valido.
 	bool es_movimiento_valido(int fila, int columna);
 
+	//pre:-
+	//post: Imprime el camino minimo.
 	void imprimir_camino_recorrido(Lista* lista_vertices, Inventario* inventario, int origen, int destino, bool es_jugador2);
 
 	void print_lento(unsigned int tiempo);
-
+	
+	//pre:-
+	//post: Ocupa un casillero por un jugador.
 	void ocupar_jugador(int fila, int columna, bool es_jugador2);
 
+	//pre:-
+	//post: Desocupa el casillero si habia un jugador.
 	void desocupar_jugador(int fila, int columna, bool es_jugador2);
 
+	//pre:-
+	//post: Almacena los recursos por los que pasa el jugador.
 	void recolectar_recursos(int fila, int columna, Inventario* inventario);
 
 	//pre: -
@@ -160,7 +180,9 @@ class Mapa {
     //post: Suma uno a los casilleros disponibles correspondientes al tipo ingresado.
 
 	Casillero* crear_subcasillero(int fila, int columna, string tipo_casillero);
-
+	
+	//pre:
+	//post:
 	void asignar_atributos(int filas, int columnas);
 
 	void sumar_casillero_por_tipo(string tipo_casillero);

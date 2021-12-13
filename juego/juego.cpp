@@ -30,6 +30,7 @@ int Juego::validar_opcion_np(int opcion_elegida) {
     cin.ignore(100, '\n');
 
     while (!opcion_valida_np(opcion_elegida)) {
+        cout << endl;
         cout << ERROR_COLOR << "Opcion invalida. Elija nuevamente." << END_COLOR << endl;
         cin >> opcion_elegida;
         cin.clear();
@@ -109,14 +110,11 @@ void Juego::jugar_turno() {
 
     while (!turno_terminado()) {
 
-        string pausa;
-        cout << endl;
-        cout << ENTER_COLOR << "Pulse cualquier tecla para volver al menu." << END_COLOR << endl;
-        cin >> pausa;
         int opcion;
         
-        //system(CLR_SCREEN);
-        mapa -> imprimir_mapa();
+        if (opcion != MOVERSE_A_UNA_COORDENADA) {
+            mapa -> imprimir_mapa();
+        }
         presentar_menu();
         opcion = validar_opcion(opcion);        
         procesar_opcion(opcion);
@@ -147,6 +145,43 @@ void Juego::leer_archivos(int &archivos_cargados, bool &nueva_partida) {
             actualizar_inventario(archivo);
         }
     }
+}
+
+void Juego::guardar_edificios() {
+
+    ofstream edificios(ARCHIVO_EDIFICIOS);
+
+    diccionario -> guardar_edificios(edificios);
+
+    edificios.close();
+}
+
+void Juego::guardar_ubicaciones() {
+
+    ofstream ubicaciones(ARCHIVO_UBICACIONES);
+
+    mapa -> guardar_lluvia(ubicaciones);
+
+    int numero_jugador = jugador_turno -> devolver_numero_jugador();
+
+    if (numero_jugador == SEGUNDO_JUGADOR) {
+        cambiar_turno();
+    }
+
+    guardar_jugador(ubicaciones);
+
+    jugador_turno;
+
+
+}
+
+void Juego::guardar_jugador(ofstream &archivo) {
+
+    int fila = jugador_turno -> devolver_fila();
+    int columna = jugador_turno -> devolver_columna();
+    int numero_jugador = jugador_turno -> devolver_numero_jugador();
+
+    archivo << numero_jugador << " (" << fila << ", " << columna << ")" << endl;
 }
 
 int Juego::validar_jugador(){
@@ -251,7 +286,6 @@ void Juego::actualizar_inventario(ifstream& inventario) {
      
 }
 
-
 void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
 
     string nombre_elemento;
@@ -287,6 +321,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         if (nombre_elemento == S || nombre_elemento == W || nombre_elemento == I || nombre_elemento == C) {
             material = instanciar_material(nombre_elemento);
             mapa -> colocar_material(stoi(fila) - 1, stoi(columna) - 1, material);
+            mapa -> obtener_casillero(stoi(fila), stoi(columna)) -> ocupar_casillero();
         }
         else if (nombre_elemento != "1" && nombre_elemento != "2") {
             edificio = diccionario -> instanciar_edificio(nombre_elemento, stoi(fila), stoi(columna));
@@ -379,8 +414,6 @@ int Juego::generar_numero_random(int min, int max) {
     int range = max + 1 - min;  
     return min + (rand() % range);
 }
-
-
 
 void Juego::asignar_objetivos(Jugador* jugador) {
 
@@ -615,8 +648,6 @@ bool Juego::acepta_realizar_accion() {
     return (eleccion == "Si" || eleccion == "si");
 }
 
-//achicar
-
 void Juego::opcion_construir_edificio_x_nombre() {
 
     int costo = 15;
@@ -801,6 +832,8 @@ void Juego::procesar_opcion_np(int opcion) {
             posicionar_jugadores();
             break;
         case GUARDAR_SALIR:
+            guardar_edificios();
+            jugador_turno -> salir_del_juego();
             break;
     }
 }
@@ -882,8 +915,9 @@ void Juego::procesar_opcion(int opcion) {
             cambiar_turno();
             break;
         case GUARDAR_Y_SALIR:
+            guardar_edificios();
+            jugador_turno -> salir_del_juego();
             cout << "-Se han guardado exitosamente los cambios efectuados!" << endl;
-            jugador_turno->salir_del_juego();
             break;
     }
 }

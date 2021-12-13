@@ -452,6 +452,12 @@ class Juego {
     int pide_bombas_deseadas();
 
     void no_compra_bombas(Inventario* inventario);
+
+    void guardar_edificios();
+
+    void guardar_ubicaciones();
+
+    void guardar_jugador(ofstream &archivo);
 };
 
 #endif //JUEGO_H
