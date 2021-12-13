@@ -187,8 +187,7 @@ void Jugador::guardar_edificios(ofstream &archivo) {
     registro_edificios -> guardar(archivo);
 }
 
-~Jugador::Jugador() {
-    
+Jugador::~Jugador() {
     delete objetivos;
     delete inventario;
     delete registro_edificios;

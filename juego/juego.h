@@ -295,7 +295,7 @@ class Juego {
     //Puede construir edificio
     //PRE:
     //POST:
-    bool puede_construir_edificio(Edificio* edificio);
+    bool puede_construir_edificio(Edificio* edificio, int &fila, int &columna);
     
     //Acepta ralizar accion
     //PRE:
@@ -439,7 +439,7 @@ class Juego {
     //
     //PRE: verificaciones hechas.
     //POS: elimina el edificio segun coordenadas.
-    void demoler_edificio_x_coordenadas();
+    void demoler_edificio_x_coordenadas(Inventario* inventario);
 
     void comprar_bombas(Inventario*inventario);
 
@@ -457,7 +457,13 @@ class Juego {
 
     void mostrar_materiales_por_demolicion(string nombre_edificio_demolido, int madera_recupera,  int piedra_recupera, int metal_recupera);
 
-    void recuperar_mitad_materiales(int madera_recuperada, int piedra_recuperada, int metal_recuperado);
+    void recuperar_mitad_materiales(string nombre_edificio);
+
+    void guardar_edificios();
+
+    void guardar_ubicaciones();
+
+    void guardar_jugador(ofstream &archivo);
 };
 
 #endif //JUEGO_H

@@ -2,7 +2,9 @@
 
 Casillero_construible::Casillero_construible() : Casillero() {}
 
-Casillero_construible::~Casillero_construible() {}
+Casillero_construible::~Casillero_construible() {
+    delete edificio;
+}
 
 void Casillero_construible::construir_edificio(Edificio* edificio) {
     this -> edificio = edificio;

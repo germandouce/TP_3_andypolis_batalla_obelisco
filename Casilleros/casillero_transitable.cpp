@@ -2,7 +2,9 @@
 
 Casillero_transitable::Casillero_transitable() : Casillero() {}
 
-Casillero_transitable::~Casillero_transitable() {}
+Casillero_transitable::~Casillero_transitable() {
+    delete material;
+}
 
 void Casillero_transitable::construir_edificio(Edificio* edificio) {}
 

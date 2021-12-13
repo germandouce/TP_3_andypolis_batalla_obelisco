@@ -305,3 +305,21 @@ bool Registro_edificios::al_menos_uno_de_cada_tipo(){
     return (al_menos_un_aserradero() && al_menos_un_obelisco() && al_menos_una_escuela()
     && al_menos_una_fabrica() && al_menos_una_mina_oro() && al_menos_una_mina() && al_menos_una_planta_electrica());
 }
+
+void Registro_edificios::guardar(ofstream& archivo) {
+
+    Nodo_R* nodo = primero;
+
+    for (int i = 0; i < cantidad_edificios; i++) {
+
+        Edificio* edificio = nodo -> obtener_edificio();
+
+        string nombre_edificio = edificio -> obtener_nombre();
+        int fila = edificio -> obtener_fila();
+        int columna = edificio -> obtener_columna();
+
+        archivo << nombre_edificio << " (" << fila << ", " << columna << ")" << endl;
+
+        nodo = nodo -> obtener_siguiente();
+    }
+}

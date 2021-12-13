@@ -9,6 +9,9 @@
 
 using namespace std;
 
+const int MAX_MATERIAL = 50000;
+const int MIN_MATERIAL = 0;
+
 const string G = "mina de oro";
 const string M = "mina";
 const string A = "aserradero";
@@ -137,9 +140,27 @@ class Edificio {
     //POST: modifica las cantidades de los materiales requeridos del edificio que se pide.
     void modificar_cantidades_edificio();
 
+    //PRE:-
+    //POST: Modifica la cantidad de piedra.
+    void modificar_cantidad_piedra();
+
+    
+    //PRE:-
+    //POST: Modifica la cantidad de madera.
+    void modificar_cantidad_madera();
+
+    
+    //PRE:-
+    //POST: Modifica la cantidad de metal.
+    void modificar_cantidad_metal();
+    
+    //PRE:-
+    //POST: Verifica que las cantidades sean validas.
+    bool verificacion_cantidades(int cantidad_verificar);
+
     // Destructor
     // PRE: -
-    // POS: -
+    // POS: Destructor de edificio.
     virtual ~Edificio();
 };
 

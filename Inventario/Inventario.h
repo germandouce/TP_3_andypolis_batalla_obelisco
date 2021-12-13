@@ -20,8 +20,9 @@ private:
     int cant_metal;
     int cant_andycoins;
     int cant_bombas;
-    int cant_anterior_andycoins;
-    int cant_anterior_bombas;
+    int cant_bombas_acumuladas;
+    int cant_andycoins_acumulados;
+    int cant_bombas_usadas;
 
 public:
     //CONSTRUCTOR
@@ -50,18 +51,6 @@ public:
     //PRE:
     //POS: muestra en pantalla el inventario.
     void mostrar_inventario();
-
-    //PRE:
-    //POS: devuelve cantidad previa de bombas en el inventario.
-    int devolver_cant_anterior_bombas();
-
-    //PRE:
-    //POS: devuelve cantidad previa de andycoins en el inventario.
-    int devolver_cant_anterior_andycoins();
-
-    //PRE: el elemento debe existir.
-    //POS: iguala la cantidad anterior de un elemento con la actual del mismo.
-    void actualizar_cant_anterior_elemento(string elemento);
 
     //PRE: se lee el archivo materiales previamente verificada su existencia.
     //POS: incrementa +1 la cantidad de elementos en el inventario cada vez que se agrega 1 elemento al inventario
@@ -139,6 +128,18 @@ public:
     bool hay_piedra_suficiente(int cantidad_necesaria);
 
     void recolectar_recursos(Registro_edificios* registro_edificios);
+
+    int devolver_cant_bombas_acumuladas();
+
+    int devolver_cant_andycoins_acumulados();
+
+    int devolver_bombas_usadas();
+
+    void acumular_bombas(int cantidad_acumular);
+
+    void acumular_andycoins(int cantidad_acumular);
+
+    void sumar_bombas_usadas(int cantidad_usadas);
 
     //DESTRUCTOR
     ~Inventario();

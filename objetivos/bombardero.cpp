@@ -13,9 +13,9 @@ Diccionario *diccionario, int energia) {
 
 void Bombardero :: mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    // cout<< "Te faltan comprar " << REQUISITO_BOMBARDERO - inventario->devolver_cant_acumulada_bombas()
+    //cout<< "Te faltan usar " << REQUISITO_BOMBARDERO - 
     // <<" bombas para completar este objetivo";
-    cout<< "Te faltan comprar " << REQUISITO_BOMBARDERO - 1<<
+    cout<< "Te faltan usar " << REQUISITO_BOMBARDERO - 1<<
     " bombas para completar este objetivo\n"<<endl;
     
 }

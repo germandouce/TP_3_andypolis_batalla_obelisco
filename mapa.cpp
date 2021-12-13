@@ -458,7 +458,7 @@ void Mapa::guardar_lluvia(ofstream &archivo) {
 			bool hay_jugador = casillero -> esta_ocupado_jugador();
 
 			if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
-				if (esta_ocupado && hay_jugador) {
+				if (esta_ocupado && !hay_jugador) {
 
 					string nombre_material = casillero -> obtener_material() -> obtener_nombre();
 					archivo << nombre_material << " (" << i + 1 << ", " << j + 1 << ")" << endl;

@@ -8,8 +8,11 @@ Inventario::Inventario(){
     cant_madera = 0;
     cant_piedra = 0;
     cant_metal = 0;
-    cant_andycoins = cant_anterior_andycoins = 0;
-    cant_bombas = cant_anterior_bombas = 0;
+    cant_andycoins =  0;
+    cant_bombas =  0;
+    cant_bombas_acumuladas = 0;
+    cant_andycoins_acumulados = 0;
+    cant_bombas_usadas = 0;
 
 }
 
@@ -33,12 +36,17 @@ int Inventario::devolver_cant_bombas(){
     return cant_bombas;
 }
 
-int Inventario::devolver_cant_anterior_andycoins(){
-    return cant_anterior_andycoins;
+int Inventario::devolver_cant_andycoins_acumulados(){
+     return cant_andycoins_acumulados;
 }
 
-int Inventario::devolver_cant_anterior_bombas(){
-    return cant_anterior_bombas;
+int Inventario::devolver_cant_bombas_acumuladas(){
+    return cant_bombas_acumuladas;
+}
+
+
+int Inventario::devolver_bombas_usadas(){
+    return cant_bombas_usadas;
 }
 
 void Inventario::mostrar_inventario() {
@@ -206,7 +214,8 @@ bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
         return false;
     }
     else
-        return true;}
+        return true;
+}
 
 bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
     if (cant_piedra < cantidad_necesaria){
@@ -214,17 +223,9 @@ bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
         return false;
     }
     else
-        return true;}
-
-void Inventario:: actualizar_cant_anterior_elemento(string elemento){
-    if (elemento == I_BOMBAS)
-        cant_anterior_bombas = cant_bombas;
-    else if (elemento == I_ANDYCOINS)
-        cant_anterior_andycoins = cant_andycoins;
-    else
-        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
+        return true;
+    
 }
-
 
 void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
     int primero = 0;
@@ -242,5 +243,15 @@ void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
         actual = actual -> obtener_siguiente();
     }
 }
+void Inventario::acumular_bombas(int cantidad_acumular){
+    cant_bombas_acumuladas += cantidad_acumular;
+}
 
+void Inventario::acumular_andycoins(int cantidad_acumular){
+    cant_andycoins_acumulados += cantidad_acumular;
+}
+
+void Inventario:: sumar_bombas_usadas(int cantidad_usadas){
+    cant_bombas_usadas += cantidad_usadas;
+}
 Inventario::~Inventario() {}
