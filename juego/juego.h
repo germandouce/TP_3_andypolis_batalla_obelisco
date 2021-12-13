@@ -295,7 +295,7 @@ class Juego {
     //Puede construir edificio
     //PRE:
     //POST:
-    bool puede_construir_edificio(Edificio* edificio);
+    bool puede_construir_edificio(Edificio* edificio, int &fila, int &columna);
     
     //Acepta ralizar accion
     //PRE:
@@ -310,7 +310,7 @@ class Juego {
     //Construye edificio
     //PRE: verificaciones hechas.
     //POS: construye edificio
-    void construyo_edificio(Edificio* edificio_a_construir, int fila, int columna);
+    //void construyo_edificio(Edificio* edificio_a_construir, int &fila, int &columna);
 
     //
     //PRE:
@@ -394,7 +394,7 @@ class Juego {
     //
     //PRE:-
     //POST:
-    void construir_edificio(string nombre_edificio);
+    void construir_edificio(string nombre_edificio, int &fila, int &columna);
 
     //
     //PRE:-
@@ -452,6 +452,8 @@ class Juego {
     int pide_bombas_deseadas();
 
     void no_compra_bombas(Inventario* inventario);
+
+    void no_acepta_realzar_accion();
 };
 
 #endif //JUEGO_H

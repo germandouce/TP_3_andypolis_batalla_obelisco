@@ -543,7 +543,7 @@ void Juego::pedir_coordenadas(int &fila, int &columna) {
 
     while (fila <= 0) {
         system(CLR_SCREEN);
-        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo. No puede pasar el limite de filas en el mapa." << END_COLOR << endl;
         cout << endl;
         pedir_fila(fila);
     }
@@ -552,7 +552,7 @@ void Juego::pedir_coordenadas(int &fila, int &columna) {
 
     while (columna <= 0) {
         system(CLR_SCREEN);
-        cout << ERROR_COLOR << "-Debe ingresar un numero positivo." << END_COLOR << endl;
+        cout << ERROR_COLOR << "-Debe ingresar un numero positivo. No puede pasar el limite de columnas en el mapa." << END_COLOR << endl;
         cout << endl;
         pedir_columna(columna);
     }
@@ -632,37 +632,39 @@ void Juego::opcion_construir_edificio_x_nombre() {
 
         if (edificio_consultado != nullptr) {
             obtengo_cantidades_edificio(edificio_consultado, piedra, madera, metal, construidos);
-        
-            if (puede_construir_edificio(edificio_consultado)) {
-                mostrar_costo_edificio(edificio_consultado); 
-
-                if (acepta_realizar_accion()) {
-                    construir_edificio(nombre_edificio_construir);
+            mostrar_costo_edificio(edificio_consultado);
+            if (acepta_realizar_accion()) {
+                int fila,columna;
+                if (puede_construir_edificio(edificio_consultado, fila,  columna)) {
+                    construir_edificio(nombre_edificio_construir, fila, columna);
                     jugador_turno -> restar_energia(costo);
                 }
                 else {
-                    cout << ERROR_COLOR << "No se ha construido el Edificio." << END_COLOR << endl;
-                    cout << endl;
+                    cout << ERROR_COLOR << "No se ha construido edificio." << END_COLOR << endl;
+                    cout << ERROR_COLOR << "Este Casillero esta ocupado o no es un Terreno." << END_COLOR << endl;
                 }
+            }
+            else {
+                no_acepta_realzar_accion();
             }
         }
     }
 }
 
-bool Juego::puede_construir_edificio(Edificio* edificio) {
+bool Juego::puede_construir_edificio(Edificio* edificio, int &fila, int &columna) {
     
     string nombre_edificio = edificio -> obtener_nombre();
     int limite = edificio -> obtener_maximo_construir();
-
     int piedra, madera, metal, construidos;
     obtengo_cantidades_edificio(edificio, piedra, madera, metal, construidos);
-    
     bool limite_respetado = respeta_limite(construidos, limite);
     bool piedra_suficiente = jugador_turno -> devolver_inventario() -> hay_piedra_suficiente(piedra);
     bool madera_suficiente = jugador_turno -> devolver_inventario() -> hay_madera_suficiente(madera);
     bool metal_suficiente = jugador_turno -> devolver_inventario() -> hay_metal_suficiente(metal);
+    bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
+    string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
 
-    return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado;
+    return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado && !esta_ocupado && tipo_casillero == TERRENO;
 }
 
 bool Juego::respeta_limite(int construidos, int limite) {
@@ -683,27 +685,10 @@ void Juego::obtengo_cantidades_edificio(Edificio* edificio, int &piedra, int &ma
     construidos = devuelve_construidos_en_registro(nombre_edificio);
 }
 
-void Juego::construir_edificio(string nombre_edificio) {
-
-    int fila, columna;
-    pedir_coordenadas(fila, columna);
-    bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
-    string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
-    
-    while ( esta_ocupado && tipo_casillero != TERRENO){
-        pedir_coordenadas(fila, columna);
-        bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
-        string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
-    }
-
-    if (!esta_ocupado && tipo_casillero == TERRENO) {
-        Edificio* edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio, fila + 1, columna + 1);
-        ubicar_edificio(edificio_a_construir, fila, columna);
-        cout << SUCESS_COLOR << "Se ha construido el Edificio existosamente!" << END_COLOR << endl;
-    }
-    else {
-        cout << ERROR_COLOR << "Este Casillero esta ocupado o no es un Terreno." << END_COLOR << endl;
-    }
+void Juego::construir_edificio(string nombre_edificio, int &fila, int &columna) {
+    Edificio* edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio, fila + 1, columna + 1);
+    ubicar_edificio(edificio_a_construir, fila, columna);
+    cout << SUCESS_COLOR << "Se ha construido el Edificio existosamente!" << END_COLOR << endl;
 }
 
 void Juego::ubicar_edificio(Edificio* edificio_a_construir, int fila, int columna) {
@@ -811,8 +796,9 @@ bool opcion_valida_np(int opcion) {
 
 void Juego::presentar_menu() {
     cout << ENTER_COLOR << "Jugador " << jugador_turno -> devolver_numero_jugador();
-    cout << ", puede elegir entre las siguientes opciones: " << ERROR_COLOR << endl;
+    cout << ", puede elegir entre las siguientes opciones: " << END_COLOR << endl;
     cout << endl;
+    cout << ENTER_COLOR << "Tu energia --> " << jugador_turno -> obtener_energia() << END_COLOR << endl << endl;
     cout << SUCESS_COLOR;
     cout << "1) Construir edificio por nombre." << endl;
     cout << "2) Listar los edificios construidos." << endl;
@@ -913,36 +899,38 @@ void Juego::recolectar_recursos() {
 }
 
 bool Juego::es_nuestro_edificio(int fila, int columna) {
-    return jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna);
+    if (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna)){
+        cout<< ERROR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
+        return true;}
+    else{
+        return false;
+    }
 }
 
 void Juego::demoler_edificio_x_coordenadas() {
 
     int costo = 15;
-   // int tu_energia;
 
     costo_energia(costo);
     if (alcanza_energia(costo)) {
         int fila, columna;
-        
+
         pedir_coordenadas(fila, columna);
 
-        bool ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
-        bool es_jugador = mapa -> obtener_casillero(fila, columna) -> esta_ocupado_jugador();
-        string tipo_terreno = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
-        
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador) {
-            Edificio* edificio = jugador_turno -> devolver_resgitro_edificios() -> buscar_edificio_en_registro(fila + 1, columna + 1);
-            if (edificio) {
-                if (acepta_realizar_accion()) {
-                	jugador_turno ->devolver_resgitro_edificios()->mostrar_registro_edificios();
-                    jugador_turno -> devolver_resgitro_edificios() -> eliminar(fila + 1, columna + 1);
-                    mapa -> obtener_casillero(fila, columna) -> construir_edificio(nullptr);
-                    cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
-                }
+        bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
+        bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
+        string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
+
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1)) {
+            if (acepta_realizar_accion()) {
+                jugador_turno->devolver_resgitro_edificios()->eliminar(fila + 1, columna + 1);
+                mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
+                jugador_turno -> restar_energia(costo);
+                cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
             }
             else {
-                cout << ERROR_COLOR << "El Edificio que quieres demoler no te pertenece." << END_COLOR << endl;
+                no_acepta_realzar_accion();
+                cout << "Ningun edificio demolido." << endl;
             }
         }
         else {
@@ -987,6 +975,7 @@ void Juego:: comprar_bombas(Inventario*inventario) {
             se_compran_bombas(precio_total_bombas, costo, inventario);
         }
         else {
+            no_acepta_realzar_accion();
             no_compra_bombas(inventario);
         }
     }
@@ -1038,9 +1027,13 @@ void Juego::no_compra_bombas(Inventario* inventario) {
 
     int bombas = inventario -> devolver_cant_bombas();
     int andycoins = inventario->devolver_cant_andycoins();
-    int tu_energia = jugador_turno->obtener_energia();
     cout << ERROR_COLOR << "No has comprado bombas." << END_COLOR << endl;
     cout << ENTER_COLOR << "Tienes un total de: " << SUCESS_COLOR << bombas << " bombas." << END_COLOR << endl;
     cout << ENTER_COLOR << "Tienes un total de: " << SUCESS_COLOR << andycoins << " Andycoins." << END_COLOR << endl;
+}
+
+void Juego::no_acepta_realzar_accion(){
+    int tu_energia = jugador_turno->obtener_energia();
+    cout << ENTER_COLOR << "No aceptaste realizar accion." << SUCESS_COLOR << endl;
     cout << ENTER_COLOR << "Tienes un total de: " << SUCESS_COLOR << tu_energia << " energia." << END_COLOR << endl;
 }
