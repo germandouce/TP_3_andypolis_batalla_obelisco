@@ -623,7 +623,7 @@ void Juego::opcion_construir_edificio_x_nombre() {
     costo_energia(costo);
 
     if (alcanza_energia(costo)) {
-        
+
         string nombre_edificio_construir = pedir_nombre_edificio_construir();
         Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
         Edificio* edificio_a_construir;
@@ -632,38 +632,41 @@ void Juego::opcion_construir_edificio_x_nombre() {
 
         if (edificio_consultado != nullptr) {
             obtengo_cantidades_edificio(edificio_consultado, piedra, madera, metal, construidos);
-            mostrar_costo_edificio(edificio_consultado);
-            mostrar_inventario_en_pantalla();
-            if (acepta_realizar_accion()) {
-                int fila,columna;
-                if (puede_construir_edificio(edificio_consultado, fila,  columna)) {
+
+            if (puede_construir_edificio(edificio_consultado)) {
+                mostrar_costo_edificio(edificio_consultado);
+                cout<<endl;
+                mostrar_inventario_en_pantalla();
+                if (acepta_realizar_accion()) {
                     construir_edificio(nombre_edificio_construir, fila, columna);
                     jugador_turno -> restar_energia(costo);
                 }
                 else {
-                    cout << ERROR_COLOR << "No se ha construido edificio." << END_COLOR << endl;
-                    cout << ERROR_COLOR << "Este Casillero esta ocupado o no es un Terreno." << END_COLOR << endl;
+                    cout << ERROR_COLOR << "No se ha construido el Edificio." << END_COLOR << endl;
+                    no_acepta_realzar_accion();
+                    cout << endl;
                 }
-            }
-            else {
-                no_acepta_realzar_accion();
             }
         }
     }
 }
 
-bool Juego::puede_construir_edificio(Edificio* edificio, int &fila, int &columna) {
-    
+bool Juego::puede_construir_edificio(Edificio* edificio) {
+    int fila, columna;
+    pedir_coordenadas(fila, columna);
+    bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
+    string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
+
     string nombre_edificio = edificio -> obtener_nombre();
     int limite = edificio -> obtener_maximo_construir();
+
     int piedra, madera, metal, construidos;
     obtengo_cantidades_edificio(edificio, piedra, madera, metal, construidos);
+
     bool limite_respetado = respeta_limite(construidos, limite);
     bool piedra_suficiente = jugador_turno -> devolver_inventario() -> hay_piedra_suficiente(piedra);
     bool madera_suficiente = jugador_turno -> devolver_inventario() -> hay_madera_suficiente(madera);
     bool metal_suficiente = jugador_turno -> devolver_inventario() -> hay_metal_suficiente(metal);
-    bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
-    string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
 
     return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado && !esta_ocupado && tipo_casillero == TERRENO;
 }
@@ -687,9 +690,9 @@ void Juego::obtengo_cantidades_edificio(Edificio* edificio, int &piedra, int &ma
 }
 
 void Juego::construir_edificio(string nombre_edificio, int &fila, int &columna) {
-    Edificio* edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio, fila + 1, columna + 1);
-    ubicar_edificio(edificio_a_construir, fila, columna);
-    cout << SUCESS_COLOR << "Se ha construido el Edificio existosamente!" << END_COLOR << endl;
+        Edificio* edificio_a_construir = diccionario -> instanciar_edificio(nombre_edificio, fila + 1, columna + 1);
+        ubicar_edificio(edificio_a_construir, fila, columna);
+        cout << SUCESS_COLOR << "Se ha construido el Edificio existosamente!" << END_COLOR << endl;
 }
 
 void Juego::ubicar_edificio(Edificio* edificio_a_construir, int fila, int columna) {
@@ -881,7 +884,7 @@ bool Juego::opcion_valida(int opcion) {
 
 string Juego::pedir_nombre_edificio_construir() {
     string nombre_edificio_construir;
-    cout << ENTER_COLOR << "Ingrese el nombre edificio que desea construir: " << END_COLOR << endl;;
+    cout << ENTER_COLOR << "\nIngrese el nombre edificio que desea construir: " << END_COLOR ;
     cin >> nombre_edificio_construir;
     return nombre_edificio_construir;
 }
@@ -902,7 +905,7 @@ void Juego::recolectar_recursos() {
 bool Juego::es_nuestro_edificio(int fila, int columna, string quiero_no_quiero) {
     if (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna)){
         if (quiero_no_quiero == "quiero"){
-            cout<< SUCESS_COLOR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
+            cout<< SUCESS_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
         }
         else if (quiero_no_quiero == "no quiero"){
             cout<< ERROR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
@@ -913,7 +916,7 @@ bool Juego::es_nuestro_edificio(int fila, int columna, string quiero_no_quiero) 
     }
 }
 
-void Juego::demoler_edificio_x_coordenadas(Inventario*inventario) {
+void Juego::demoler_edificio_x_coordenadas() {
 
     int costo = 15;
 
@@ -929,13 +932,15 @@ void Juego::demoler_edificio_x_coordenadas(Inventario*inventario) {
         string nombre_edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila+1,columna+1)->obtener_nombre();
 
         if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1, columna + 1, "quiero")) {
-            materiales_por_demolicion(nombre_edificio);
+            int madera_recuperar,  piedra_recuperar, metal_recuperar;
+            mostrar_materiales_por_demolicion(nombre_edificio,madera_recuperar,  piedra_recuperar, metal_recuperar);
             if (acepta_realizar_accion()) {
-                jugador_turno ->devolver_resgitro_edificios()->eliminar(fila+1,columna+1);
+                jugador_turno -> devolver_resgitro_edificios() -> eliminar(fila + 1, columna + 1);
                 mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
-                recuperar_mitad_materiales();
+                recuperar_mitad_materiales(madera_recuperar,  piedra_recuperar, metal_recuperar);
                 jugador_turno -> restar_energia(costo);
                 cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
+                jugador_turno ->devolver_resgitro_edificios()->mostrar_registro_edificios();
             }
             else {
                 no_acepta_realzar_accion();
@@ -1047,21 +1052,18 @@ void Juego::no_acepta_realzar_accion(){
     cout << ENTER_COLOR << "Tienes un total de: " << SUCESS_COLOR << tu_energia << " energia." << END_COLOR << endl;
 }
 
-void Juego::materiales_por_demolicion(string nombre_edificio){
-    int madera_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_madera();
-    int piedra_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_piedra();
-    int metal_recuperado = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_metal();
+void Juego::mostrar_materiales_por_demolicion(string nombre_edificio_demolido, int madera_recupera, int piedra_recupera, int metal_recupera){
+    madera_recupera = diccionario->buscar_edificio(nombre_edificio_demolido)-> obtener_mitad_madera();
+    piedra_recupera = diccionario->buscar_edificio(nombre_edificio_demolido)-> obtener_mitad_piedra();
+    metal_recupera = diccionario->buscar_edificio(nombre_edificio_demolido)-> obtener_mitad_metal();
     cout << ENTER_COLOR << "Materiales recuperados" << END_COLOR << endl;
-    cout << SUCESS_COLOR << "Madera: " << madera_recuperada << endl;
-    cout << "Piedra: " << piedra_recuperada << endl;
-    cout << "Metal: " << metal_recuperado << endl;
+    cout << SUCESS_COLOR << "Madera: " << madera_recupera << endl;
+    cout << "Piedra: " << piedra_recupera << endl;
+    cout << "Metal: " << metal_recupera << endl;
 }
 
-void Juego::recuperar_mitad_materiales(){
-    int madera_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_madera();
-    int piedra_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_piedra();
-    int metal_recuperado = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_metal();
-    inventario->cambiar_cantidad_elemento("madera", madera_recuperada );
-    inventario->cambiar_cantidad_elemento("piedra", piedra_recuperada );
-    inventario->cambiar_cantidad_elemento("metal", metal_recuperado );
+void Juego::recuperar_mitad_materiales(int madera_recuperada, int piedra_recuperada, int metal_recuperado){
+    jugador_turno-> devolver_inventario()->cambiar_cantidad_elemento("madera", madera_recuperada );
+    jugador_turno-> devolver_inventario()->cambiar_cantidad_elemento("piedra", piedra_recuperada );
+    jugador_turno-> devolver_inventario()->cambiar_cantidad_elemento("metal", metal_recuperado );
 }

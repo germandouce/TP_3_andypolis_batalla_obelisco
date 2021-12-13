@@ -295,7 +295,7 @@ class Juego {
     //Puede construir edificio
     //PRE:
     //POST:
-    bool puede_construir_edificio(Edificio* edificio, int &fila, int &columna);
+    bool puede_construir_edificio(Edificio* edificio);
     
     //Acepta ralizar accion
     //PRE:
@@ -394,7 +394,7 @@ class Juego {
     //
     //PRE:-
     //POST:
-    void construir_edificio(string nombre_edificio, int &fila, int &columna);
+    void construir_edificio(string nombre_edificio, int &fila , int &columna);
 
     //
     //PRE:-
@@ -454,6 +454,10 @@ class Juego {
     void no_compra_bombas(Inventario* inventario);
 
     void no_acepta_realzar_accion();
+
+    void mostrar_materiales_por_demolicion(string nombre_edificio_demolido, int madera_recupera,  int piedra_recupera, int metal_recupera);
+
+    void recuperar_mitad_materiales(int madera_recuperada, int piedra_recuperada, int metal_recuperado);
 };
 
 #endif //JUEGO_H
