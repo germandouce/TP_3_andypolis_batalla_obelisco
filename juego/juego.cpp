@@ -12,6 +12,7 @@ void Juego::elegir_opcion_menu_np() {
     int opcion_elegida;
             
     system(CLR_SCREEN);
+    
     while (opcion_elegida != COMENZAR_PARTIDA) {
 
         presentar_menu_np();
@@ -64,9 +65,6 @@ void Juego::jugar_partida() {
     int turnos_sin_llover = 0;
 
     while (!juego_terminado()) {
-
-        cout << SUCESS_COLOR << "Es el turno del Jugador " << jugador_turno -> devolver_numero_jugador() << "." << endl;
-        cout << endl;
             
         turnos_sin_llover++;
 
