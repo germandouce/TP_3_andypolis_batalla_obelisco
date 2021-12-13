@@ -291,6 +291,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         else if (nombre_elemento != "1" && nombre_elemento != "2") {
             edificio = diccionario -> instanciar_edificio(nombre_elemento, stoi(fila), stoi(columna));
             mapa -> construir_edificio(stoi(fila) - 1, stoi(columna) - 1, edificio);
+            mapa -> obtener_casillero(stoi(fila), stoi(columna)) -> ocupar_casillero();
             jugador -> agregar_edificio_al_registro(edificio);
         }
     }
@@ -843,7 +844,7 @@ void Juego::procesar_opcion(int opcion) {
             mostrar_edificios_construidos();
             break;
         case DEMOLER_EDIFICIO_X_COORDENDA:
-            //system("cls");
+            demoler_edificio_x_coordenadas();
             break;
         case ATACAR_EDIFICIO_X_COORDENADA:
             break;
@@ -915,43 +916,39 @@ bool Juego::es_nuestro_edificio(int fila, int columna) {
     return jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna);
 }
 
-//void Juego::demoler_edificio_x_coordenadas(Registro_edificio* registro){
-    //REGISTRO void eliminar(int coordenada_x , int coordenada_y); sacar del registro
-    //Mapa void construir_edificio(int fila, int columna, Edificio* edificio_a_construir); le paso null
-   // bool alcanza_energia(int costo);
+void Juego::demoler_edificio_x_coordenadas() {
 
+    int costo = 15;
+    int tu_energia;
 
-    //int costo = 15;
-    //int tu_energia;
-    //costo_energia(costo);
-    //if(alcanza_energia(costo)){
-        //  int fila;
-        //  int columna;
-        //cout<< "Ingrese fila: " << endl;
-        //cin >> fila;
-        //cout<< "Ingrese columna: " << endl;
-        //cin >> columna;
-        //bool ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
-        //bool es_jugador = mapa -> obtener_casillero(fila, columna) -> esta_ocupado_jugador();
-        // int cantidad_bombas = inventario -> devolver_cant_bombas();
-        //if (ocupado && cantidad_bombas > 0){
-            // string respuesta;
-            //cout << "Desea demoler el edificio?(s/n)" << endl;
-            //cin >> respuesta;
-            //if(respuesta == "s"){
-            //
-            //
-            //}
-        //}
-        //string tipo_casillero = mapa -> obtener_tipo_casillero();
-         //verificar_vida_actual_edificio.
-         //if(!es_nuestro_edificio(fila,columna));
-        //Ver tipo y estado de edificio para saber costo de destruccion.
-        //inventario -> devolver_cant_bombas();
-        //if(acepta_realizar_accion());
-        //jugador_turno -> restar_energia(costo);
-        //Volver al menu.
-//}
+    costo_energia(costo);
+    if (alcanza_energia(costo)) {
+        int fila, columna;
+        
+        pedir_coordenadas(fila, columna);
+
+        bool ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
+        bool es_jugador = mapa -> obtener_casillero(fila, columna) -> esta_ocupado_jugador();
+        string tipo_terreno = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
+        
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador) {
+            Edificio* edificio = jugador_turno -> devolver_resgitro_edificios() -> buscar_edificio_en_registro(fila + 1, columna + 1);
+            if (edificio) {
+                if (acepta_realizar_accion()) {
+                    jugador_turno -> devolver_resgitro_edificios() -> eliminar(fila + 1, columna + 1);
+                    mapa -> obtener_casillero(fila, columna) -> construir_edificio(nullptr);
+                    cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
+                }
+            }
+            else {
+                cout << ERROR_COLOR << "El Edificio que quieres demoler no te pertenece." << END_COLOR << endl;
+            }
+        }
+        else {
+            cout << ERROR_COLOR << "No se encuentra un Edificio en esas coordenadas." << END_COLOR << endl;
+        }
+    }
+}
 
 void Juego::costo_energia(int costo) {
     cout << ENTER_COLOR << "Costo de energia: " << SUCESS_COLOR << costo << END_COLOR << endl;
