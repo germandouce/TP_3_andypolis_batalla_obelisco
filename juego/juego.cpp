@@ -919,7 +919,7 @@ bool Juego::es_nuestro_edificio(int fila, int columna) {
 void Juego::demoler_edificio_x_coordenadas() {
 
     int costo = 15;
-    int tu_energia;
+   // int tu_energia;
 
     costo_energia(costo);
     if (alcanza_energia(costo)) {
@@ -935,6 +935,7 @@ void Juego::demoler_edificio_x_coordenadas() {
             Edificio* edificio = jugador_turno -> devolver_resgitro_edificios() -> buscar_edificio_en_registro(fila + 1, columna + 1);
             if (edificio) {
                 if (acepta_realizar_accion()) {
+                	jugador_turno ->devolver_resgitro_edificios()->mostrar_registro_edificios();
                     jugador_turno -> devolver_resgitro_edificios() -> eliminar(fila + 1, columna + 1);
                     mapa -> obtener_casillero(fila, columna) -> construir_edificio(nullptr);
                     cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
