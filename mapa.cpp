@@ -211,6 +211,7 @@ void Mapa::generar_lluvia_materiales() {
 		Material* material_random = llover_material_aleatorio(material_llovido);
 		string nombre_material = material_random -> obtener_nombre();
 
+
 		if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
 
 			casillero_random -> colocar_material(material_random);
@@ -228,7 +229,7 @@ void Mapa::generar_lluvia_materiales() {
 void Mapa::cargar_casilleros_lluvia() {
 
 	if (transitables_disponibles) {
-		casilleros_lluvia.borrar_todo();
+		casilleros_lluvia.reiniciar_vector();
 	}
 
 	for (int i = 0; i < filas && transitables_disponibles; i++) {

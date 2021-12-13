@@ -10,7 +10,7 @@ Inventario::Inventario(){
     cant_metal = 0;
     cant_andycoins =  0;
     cant_bombas =  0;
-    cant_bombas_acumuladas = 0;
+    cant_bombas_compradas = 0;
     cant_andycoins_acumulados = 0;
     cant_bombas_usadas = 0;
 
@@ -40,8 +40,8 @@ int Inventario::devolver_cant_andycoins_acumulados(){
      return cant_andycoins_acumulados;
 }
 
-int Inventario::devolver_cant_bombas_acumuladas(){
-    return cant_bombas_acumuladas;
+int Inventario::devolver_cant_bombas_compradas(){
+    return cant_bombas_compradas;
 }
 
 
@@ -244,7 +244,7 @@ void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
     }
 }
 void Inventario::acumular_bombas(int cantidad_acumular){
-    cant_bombas_acumuladas += cantidad_acumular;
+    cant_bombas_compradas += cantidad_acumular;
 }
 
 void Inventario::acumular_andycoins(int cantidad_acumular){
@@ -254,4 +254,3 @@ void Inventario::acumular_andycoins(int cantidad_acumular){
 void Inventario:: sumar_bombas_usadas(int cantidad_usadas){
     cant_bombas_usadas += cantidad_usadas;
 }
-Inventario::~Inventario() {}

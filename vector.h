@@ -49,6 +49,8 @@ class Vector {
     void borrar_posicion(int posicion);
 
     void borrar_todo();
+
+    void reiniciar_vector();
 };
 
 template <typename Dato>
@@ -130,6 +132,14 @@ void Vector<Dato>::borrar_todo() {
         delete datos[i];
     }
 
+    delete[] datos;
+    largo = 0;
+}
+
+template <typename Dato>
+
+void Vector<Dato>::reiniciar_vector() {
+    
     delete[] datos;
     largo = 0;
 }

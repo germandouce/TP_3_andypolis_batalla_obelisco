@@ -20,7 +20,7 @@ private:
     int cant_metal;
     int cant_andycoins;
     int cant_bombas;
-    int cant_bombas_acumuladas;
+    int cant_bombas_compradas;
     int cant_andycoins_acumulados;
     int cant_bombas_usadas;
 
@@ -129,7 +129,7 @@ public:
 
     void recolectar_recursos(Registro_edificios* registro_edificios);
 
-    int devolver_cant_bombas_acumuladas();
+    int devolver_cant_bombas_compradas();
 
     int devolver_cant_andycoins_acumulados();
 
@@ -140,9 +140,6 @@ public:
     void acumular_andycoins(int cantidad_acumular);
 
     void sumar_bombas_usadas(int cantidad_usadas);
-
-    //DESTRUCTOR
-    ~Inventario();
 };
 
 #endif //INVENTARIO_INVENTARIO_H

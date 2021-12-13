@@ -7,8 +7,7 @@ Extremista::Extremista() : Objetivo() {
 
 bool Extremista::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    //return inventario->devolver_cant_acumuladas_bombas() == REQUISITO_EXTREMISTA ;
-    return true;
+    return (inventario->devolver_cant_bombas_compradas() == REQUISITO_EXTREMISTA) ;
 }
 
 void Extremista::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

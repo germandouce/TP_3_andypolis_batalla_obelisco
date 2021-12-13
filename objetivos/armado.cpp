@@ -7,7 +7,7 @@ Armado::Armado() : Objetivo() {
 
 bool Armado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
-    return inventario->devolver_cant_bombas() <= REQUISITO_ARMADO;
+    return (inventario->devolver_cant_bombas() <= REQUISITO_ARMADO);
 }
 
 void Armado :: mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
