@@ -138,7 +138,6 @@ void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_
         cambio_cantidad_andycoins(cantidad_sumar_o_restar);
     else
         cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
-    cout<< endl;
 }
 
 void Inventario::actualizar_largo_de_inventario(){

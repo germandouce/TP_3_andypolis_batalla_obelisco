@@ -121,7 +121,7 @@ int Edificio::obtener_columna() {
     return columna;
 }
 
-void Edificio:: modificar_cantidades_edificio() {
+void Edificio::modificar_cantidades_edificio() {
     
     system(CLR_SCREEN);
 
@@ -155,7 +155,7 @@ void Edificio:: modificar_cantidades_edificio() {
         cantidad_metal = nueva_cantidad_metal;
 
         system(CLR_SCREEN);
-        cout << SUCESS_COLOR << "Se han modificao los valores correctamente!" << END_COLOR << endl;
+        cout << SUCESS_COLOR << "Se han modificado los valores correctamente!" << END_COLOR << endl;
         cout << endl;
     }
     else {

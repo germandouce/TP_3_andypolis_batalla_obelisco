@@ -182,3 +182,15 @@ void Jugador::cambia_cantidades_inventario(int madera, int piedra, int metal){
     inventario->cambiar_cantidad_elemento("piedra", piedra);
     inventario->cambiar_cantidad_elemento("metal", metal);
 }
+
+void Jugador::guardar_edificios(ofstream &archivo) {
+    registro_edificios -> guardar(archivo);
+}
+
+~Jugador::Jugador() {
+    
+    delete objetivos;
+    delete inventario;
+    delete registro_edificios;
+    delete objetivos_cumplidos;
+}

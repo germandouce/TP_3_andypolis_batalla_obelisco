@@ -214,6 +214,12 @@ class Jugador {
     void pedir_fila(int &fila);
 
     void cambia_cantidades_inventario(int madera, int piedra, int metal);
+
+    void guardar_edificios(ofstream &archivo);
+
+    //PRE:-
+    //POST: Destructor de la clase jugador.
+    ~Jugador();
 };
 
 #endif // JUGADOR_H
