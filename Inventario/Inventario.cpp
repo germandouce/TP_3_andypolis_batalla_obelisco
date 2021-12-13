@@ -43,7 +43,7 @@ int Inventario::devolver_cant_anterior_bombas(){
 
 void Inventario::mostrar_inventario() {
     if (cantidad_elementos == 0){
-        cout<< "INVENTARIO VACIO" << endl;
+        cout<< ERROR_COLOR << "INVENTARIO VACIO" << END_COLOR << endl;
         cout << "__________________________________________" << endl << endl;
         cout << "Cantidad madera: " << devolver_cant_madera() << endl;
         cout << "Cantiidad piedra: " << devolver_cant_piedra() << endl;
@@ -52,13 +52,13 @@ void Inventario::mostrar_inventario() {
         cout << "Cantidad bombas: " << devolver_cant_bombas() << endl;
     }
     else{
-        cout << "INVENTARIO" << endl;
-        cout << "__________________________________________" << endl << endl;
-        cout << "Cantidad madera: " << devolver_cant_madera() << endl;
+        cout << ENTER_COLOR << "INVENTARIO" << END_COLOR << endl;
+        cout <<  "__________________________________________" << END_COLOR <<endl << endl;
+        cout << SUCESS_COLOR "Cantidad madera: " << devolver_cant_madera() << endl;
         cout << "Cantiidad piedra: " << devolver_cant_piedra() << endl;
         cout << "Cantidad metal: " << devolver_cant_metal() << endl;
         cout << "Cantidad andycoins: " << devolver_cant_andycoins() << endl;
-        cout << "Cantidad bombas: " << devolver_cant_bombas() << endl;
+        cout << "Cantidad bombas: " << devolver_cant_bombas() << END_COLOR << endl;
     }
     cout << endl;
 }

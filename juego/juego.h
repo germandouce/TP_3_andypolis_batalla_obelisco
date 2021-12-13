@@ -307,10 +307,10 @@ class Juego {
     //POS: 
     void obtengo_cantidades_edificio(Edificio* edificio, int &piedra, int &madera, int &metal, int &construidos);
 
-    //Construye edificio
-    //PRE: verificaciones hechas.
-    //POS: construye edificio
-    //void construyo_edificio(Edificio* edificio_a_construir, int &fila, int &columna);
+
+    void materiales_por_demolicion(string nombre_edificio);
+
+    void recuperar_mitad_materiales();
 
     //
     //PRE:
@@ -414,7 +414,7 @@ class Juego {
     //
     //PRE:
     //POS:
-    bool es_nuestro_edificio(int fila, int columna);
+    bool es_nuestro_edificio(int fila, int columna, string quiero_no_quiero);
 
     //
     //PRE:

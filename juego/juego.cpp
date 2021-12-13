@@ -633,6 +633,7 @@ void Juego::opcion_construir_edificio_x_nombre() {
         if (edificio_consultado != nullptr) {
             obtengo_cantidades_edificio(edificio_consultado, piedra, madera, metal, construidos);
             mostrar_costo_edificio(edificio_consultado);
+            mostrar_inventario_en_pantalla();
             if (acepta_realizar_accion()) {
                 int fila,columna;
                 if (puede_construir_edificio(edificio_consultado, fila,  columna)) {
@@ -898,16 +899,21 @@ void Juego::recolectar_recursos() {
     jugador_turno -> devolver_inventario() -> recolectar_recursos(registro_edificios);
 }
 
-bool Juego::es_nuestro_edificio(int fila, int columna) {
+bool Juego::es_nuestro_edificio(int fila, int columna, string quiero_no_quiero) {
     if (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna)){
-        cout<< ERROR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
+        if (quiero_no_quiero == "quiero"){
+            cout<< SUCESS_COLOR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
+        }
+        else if (quiero_no_quiero == "no quiero"){
+            cout<< ERROR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
+        }
         return true;}
     else{
         return false;
     }
 }
 
-void Juego::demoler_edificio_x_coordenadas() {
+void Juego::demoler_edificio_x_coordenadas(Inventario*inventario) {
 
     int costo = 15;
 
@@ -920,11 +926,14 @@ void Juego::demoler_edificio_x_coordenadas() {
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
         string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
+        string nombre_edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila+1,columna+1)->obtener_nombre();
 
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1)) {
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1, columna + 1, "quiero")) {
+            materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
-                jugador_turno->devolver_resgitro_edificios()->eliminar(fila + 1, columna + 1);
+                jugador_turno ->devolver_resgitro_edificios()->eliminar(fila+1,columna+1);
                 mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
+                recuperar_mitad_materiales();
                 jugador_turno -> restar_energia(costo);
                 cout << SUCESS_COLOR << "El edificio se ha demolido exitosamente." << END_COLOR << endl;
             }
@@ -1036,4 +1045,23 @@ void Juego::no_acepta_realzar_accion(){
     int tu_energia = jugador_turno->obtener_energia();
     cout << ENTER_COLOR << "No aceptaste realizar accion." << SUCESS_COLOR << endl;
     cout << ENTER_COLOR << "Tienes un total de: " << SUCESS_COLOR << tu_energia << " energia." << END_COLOR << endl;
+}
+
+void Juego::materiales_por_demolicion(string nombre_edificio){
+    int madera_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_madera();
+    int piedra_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_piedra();
+    int metal_recuperado = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_metal();
+    cout << ENTER_COLOR << "Materiales recuperados" << END_COLOR << endl;
+    cout << SUCESS_COLOR << "Madera: " << madera_recuperada << endl;
+    cout << "Piedra: " << piedra_recuperada << endl;
+    cout << "Metal: " << metal_recuperado << endl;
+}
+
+void Juego::recuperar_mitad_materiales(){
+    int madera_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_madera();
+    int piedra_recuperada = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_piedra();
+    int metal_recuperado = diccionario->buscar_edificio(nombre_edificio)-> obtener_mitad_metal();
+    inventario->cambiar_cantidad_elemento("madera", madera_recuperada );
+    inventario->cambiar_cantidad_elemento("piedra", piedra_recuperada );
+    inventario->cambiar_cantidad_elemento("metal", metal_recuperado );
 }
