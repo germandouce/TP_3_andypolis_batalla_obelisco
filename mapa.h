@@ -184,17 +184,29 @@ class Mapa {
 	//pre:
 	//post:
 	void asignar_atributos(int filas, int columnas);
-
+	
+	//pre:
+	//post:
 	void sumar_casillero_por_tipo(string tipo_casillero);
 
+	//pre:
+	//post: Lee palabra compuesta.
 	string leer_palabra_compuesta(ifstream &archivo, string &nombre_edificio, int opcion);
 
+	//pre:-
+	//post: 
 	bool verificar_tipo_caracter(string palabra, int tipo_caracter);
 
+	//pre:-
+	//post: Informa si es un numero.
 	bool es_numero(string palabra);
 
+	//pre: -
+	//post: Llueve en un casillero
 	Material* llover_material_aleatorio(int &material_llovido);
 
+	//pre: -
+	//post: Devuelve el tipo de material
 	string obtener_tipo_material(int tipo_material);
 
 	//pre: -
