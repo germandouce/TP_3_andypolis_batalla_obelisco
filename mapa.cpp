@@ -121,9 +121,6 @@ void Mapa::imprimir_mapa() {
 	string separador = "  |";
 	string espacios = "   ";
 
-	cout << SUCESS_COLOR << "Este es el mapa de Andypolis: " << endl;
-	cout << END_COLOR << endl;
-
 	for (int c = 0; c < columnas; c++) {
 		if (c > 8) {
 			espacios = "  ";

@@ -37,9 +37,7 @@ bool Juego::opcion_valida_np(int opcion) {
 
 void Juego::cambiar_turno() {
     Jugador* jugador_auxiliar = jugador_turno;
-    cout << "juega el jugador: " << jugador_auxiliar;
     jugador_turno = jugador_secundario;
-    cout << "juega el jugador: " << jugador_turno;
     jugador_secundario = jugador_auxiliar;
 }
 
@@ -49,11 +47,7 @@ bool Juego::turno_terminado() {
     bool alguien_gano = jugador_turno -> gano();
     bool quiere_salir = jugador_turno -> quiere_salir_del_juego();
     bool quiere_terminar_turno = ! (jugador_turno -> es_su_turno());
-    cout << "es turno de :" << jugador_turno << endl;
-    if (quiere_terminar_turno){
-        cout <<"termino su turno"<< endl;
-    }
-
+    
     return (alguien_gano || sin_energia || quiere_terminar_turno || quiere_salir);
 }
 
@@ -71,7 +65,8 @@ void Juego::jugar_partida() {
 
     while (!juego_terminado()) {
 
-        cout << "TURNO DEL JUGADOR " << jugador_turno -> devolver_numero_jugador() << endl;
+        cout << SUCESS_COLOR << "Es el turno del Jugador " << jugador_turno -> devolver_numero_jugador() << "." << endl;
+        cout << endl;
             
         turnos_sin_llover++;
 
@@ -90,6 +85,11 @@ void Juego::jugar_turno() {
     jugador_turno -> sumar_energia(20);
 
     while (!turno_terminado()) {
+
+        string pausa;
+        cout << endl;
+        cout << ENTER_COLOR << "Pulse cualquier tecla para volver al menu." << END_COLOR << endl;
+        pausa = cin.get();
 
         int opcion;
 
@@ -803,7 +803,7 @@ void Juego::presentar_menu() {
 
 void Juego::procesar_opcion(int opcion) {
 
-    system(CLR_SCREEN);
+    //system(CLR_SCREEN);
     Inventario* inventario = jugador_turno -> devolver_inventario();
     Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
     
