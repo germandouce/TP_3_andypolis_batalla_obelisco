@@ -60,10 +60,10 @@ void Grafo::recorrer_nodo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visit
 	int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
 	int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
 
-	if (!existe_edificio(fila, columna, mapa)){
+	if (!existe_edificio(fila, columna, mapa) && !existe_jugador(fila, columna, mapa) ){
 		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, visitados)) {
 			actualizar_nodo(num_nodo_raiz, num_nodo_adyacente, mapa, es_jugador2);
-			}
+		}
 
 		if (!esta_en_vector(num_nodo_adyacente, nodos_a_recorrer, posicion)){
 			posicion++;
@@ -89,7 +89,7 @@ void Grafo::ordenar_vector_distancia_min(int* &nodos_a_recorrer, int visitados, 
 	}
 }
 
-void Grafo::recorrer_grafo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visitados,  Casillero*** mapa, bool es_jugador2, int &posicion) {
+void Grafo::recorrer_grafo(int &num_nodo_raiz, int* &nodos_a_recorrer, int &visitados, Casillero*** mapa, bool es_jugador2, int &posicion) {
 	
 	int cantidad_nodos_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> devolver_cantidad_aristas();
 	int* vector_adyacentes = lista_vertices -> devolver_nodo(num_nodo_raiz) -> obtener_vector_adyacentes();
@@ -135,13 +135,17 @@ bool Grafo::esta_atrapado(Casillero*** mapa, int num_nodo) {
 		int fila = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_fila();
 		int columna = lista_vertices -> devolver_nodo(num_nodo_adyacente) -> obtener_vertice() -> obtener_columna();
 		
-		if(!existe_edificio(fila, columna, mapa)) {
+		if(!existe_edificio(fila, columna, mapa) && !existe_jugador(fila, columna, mapa)) {
 			esta_atrapado = false;
 		}
 
 		i++;
 	}
 	return esta_atrapado;
+}
+
+bool Grafo::existe_jugador(int fila, int columna, Casillero*** mapa) {
+	return mapa[fila - 1][columna - 1] -> esta_ocupado_jugador();
 }
 
 bool Grafo::existe_edificio(int fila, int columna, Casillero*** mapa) {

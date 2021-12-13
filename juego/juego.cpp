@@ -37,7 +37,9 @@ bool Juego::opcion_valida_np(int opcion) {
 
 void Juego::cambiar_turno() {
     Jugador* jugador_auxiliar = jugador_turno;
+    cout << "juega el jugador: " << jugador_auxiliar;
     jugador_turno = jugador_secundario;
+    cout << "juega el jugador: " << jugador_turno;
     jugador_secundario = jugador_auxiliar;
 }
 
@@ -47,6 +49,10 @@ bool Juego::turno_terminado() {
     bool alguien_gano = jugador_turno -> gano();
     bool quiere_salir = jugador_turno -> quiere_salir_del_juego();
     bool quiere_terminar_turno = ! (jugador_turno -> es_su_turno());
+    cout << "es turno de :" << jugador_turno << endl;
+    if (quiere_terminar_turno){
+        cout <<"termino su turno"<< endl;
+    }
 
     return (alguien_gano || sin_energia || quiere_terminar_turno || quiere_salir);
 }
@@ -63,11 +69,7 @@ void Juego::jugar_partida() {
     
     int turnos_sin_llover = 0;
 
-    //cambiar_turno();
-
     while (!juego_terminado()) {
-            
-        //cambiar_turno();
 
         cout << "TURNO DEL JUGADOR " << jugador_turno -> devolver_numero_jugador() << endl;
             
@@ -84,13 +86,14 @@ void Juego::jugar_partida() {
 
 void Juego::jugar_turno() {
 
+    jugador_turno -> iniciar_turno();
     jugador_turno -> sumar_energia(20);
 
     while (!turno_terminado()) {
 
         int opcion;
 
-        //system(CLR_SCREEN);
+        system(CLR_SCREEN);
         mapa -> imprimir_mapa();
         presentar_menu();
 
@@ -106,10 +109,6 @@ void Juego::jugar_turno() {
         }
 
         procesar_opcion(opcion);
-
-        if (!jugador_turno -> tiene_energia()) {
-            jugador_turno -> terminar_turno();
-        } 
     }      
 }
 
@@ -163,6 +162,10 @@ void Juego::posicionar_jugadores() {
     ubicar_jugador();
     cambiar_turno();
     ubicar_jugador();
+
+    if (ingreso == PRIMER_JUGADOR) {
+        cambiar_turno();
+    }
 
     int fila1 = jugador_turno -> devolver_fila() - 1;
     int columna1 = jugador_turno -> devolver_columna() - 1;
@@ -331,6 +334,7 @@ void Juego::crear_juego() {
 
     jugador_secundario -> setear_numero_jugador(2);
     asignar_objetivos(jugador_secundario);
+    jugador_secundario -> terminar_turno();
 }
 
 void Juego::cargar_objetivos(){
@@ -605,9 +609,8 @@ bool Juego::acepta_realizar_accion() {
 
 void Juego::opcion_construir_edificio_x_nombre() {
     int costo = 15;
-    int tu_energia;
     costo_energia(costo);
-    if(alcanza_energia(costo, tu_energia)){
+    if(alcanza_energia(costo)){
         string nombre_edificio_construir = pedir_nombre_edificio_construir();
         Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
         Edificio* edificio_a_construir;
@@ -800,7 +803,7 @@ void Juego::presentar_menu() {
 
 void Juego::procesar_opcion(int opcion) {
 
-    //system(CLR_SCREEN);
+    system(CLR_SCREEN);
     Inventario* inventario = jugador_turno -> devolver_inventario();
     Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
     
@@ -828,14 +831,7 @@ void Juego::procesar_opcion(int opcion) {
             //Volver al menu.
             break;
         case COMPRAR_BOMBAS:
-           //  system("cls");
-            //COMPRAR BOMBAS
-            //Usuario ingresa cantidad deseada de bombas a comprar.
-            //Verificar andycoins.
-            //Informar situacion al usuario
-            //Si se puede comprar preguntar antes de realizar accion.
-            //Si el usuario acepta , realizar compra , informar balance final y volver al menu.
-            //De lo contrario volver al menu (sin realizar compra).
+            //comprar_bombas() HECHO pero falta probar!!!!
             break;
         case CONSULTAR_COORDENADA:
             //mapa -> consultar_coordenada();
@@ -853,6 +849,7 @@ void Juego::procesar_opcion(int opcion) {
             mapa -> moverse(jugador_turno);
             break;
         case FINALIZAR_TURNO:
+            jugador_turno -> terminar_turno();
             cambiar_turno();
             //OJO CON ESTO!
             break;
@@ -916,11 +913,11 @@ bool Juego::es_nuestro_edificio(int fila, int columna){
 //}
 
 void Juego::costo_energia(int costo){
-    int tu_energia =jugador_turno -> obtener_energia();
     cout<<"Costo energetico : " << costo << endl;
-    cout<<"Tu energia actual: "<< tu_energia << endl;
 }
-bool Juego::alcanza_energia(int costo, int tu_energia){
+bool Juego::alcanza_energia(int costo){
+    int tu_energia =jugador_turno -> obtener_energia();
+    cout<<"Tu energia actual: "<< tu_energia << endl;
     if ( tu_energia >= costo)
         return true;
     else{
@@ -928,3 +925,39 @@ bool Juego::alcanza_energia(int costo, int tu_energia){
         return false;
     }
 }
+
+//void Juego:: comprar_bombas(){
+            //int costo = 5;
+            //costo_energia(costo);
+            //if (alcanza_energia(costo)){
+                //int tus_andycoins = inventario -> devolver_cant_andycoins();
+                //int precio_bomba = 100;
+                //int bombas_deseadas;
+                //cout<<"Ingrese la cantidad de bombas que quiere comprar: ";
+                //cin >>bombas_deseadas;
+                //int precio_total_bombas = precio_bomba*bombas_deseadas;
+                //muestra_info_precompra_bombas(int precio_total_bombas, tus_andycoins);
+                //if (andycoins_suficientes( tus_andycoins,  precio_total_bombas) && acepta_realizar_accion()){
+                //     se_compran_bombas();
+                //}}}
+
+//bool Juego::andycoins_suficientes(int tus_andycoins, int precio_total_bombas){
+            //  if (tus_andycoins >= precio_total_bombas){
+            //      return true;
+            //  else{
+            //         cout<< "No tenes suficientes andycoins."<<endl;
+            //         return false;}
+            //}
+
+//void Juego::muestra_info_precompra_bombas(int precio_total_bombas, tus_andycoins){}
+        //cout >> "Precio de total bombas: " << precio_total_bombas << " andycoins." endl;
+        //cout << "Tus andycoins: " << tus_andycoins << endl;
+        //}
+
+//void Juego::se_compran_bombas(int precio_total_bombas, int costo){
+ //     int andycoins_actuales = inventario -> cambiar_cantidad_elemento("andycoins", -precio_total_bombas);
+//      int bombas_actuales = inventario -> cambiar_cantidad_elemento("bombas",  precio_total_bombas/100);
+//      cout << "Ha comprado: " << precio_total_bombas/100 << " bombas."<<endl;
+//      cout << "Ahora tiene un total de: " << bombas_actuales<< " bombas" <<endl;
+//      cout << "Ahora tiene un total de: " << andycoins_actuales << " andycoins"<<endl;
+//      jugador_turno -> restar_energia(costo);}

@@ -35,7 +35,7 @@ void procesar_opcion_np(Juego* juego, int opcion) {
         case COMENZAR_PARTIDA:
             break;
         case GUARDAR_SALIR:
-            //system("cls");
+            system("cls");
             break;
     }
 }

@@ -2,6 +2,8 @@
 #define MAPA_H_INCLUDED
 
 #include <fstream>
+#include <iostream>
+#include <string>
 
 #include "grafo/grafo.h"
 #include "juego/jugador.h"
@@ -60,6 +62,8 @@ const int FILA = 0;
 const int COLUMNA = 1;
 
 const int NULA = -1;
+
+using namespace std;
 
 class Mapa {
 	

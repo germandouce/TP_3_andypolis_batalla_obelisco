@@ -70,6 +70,8 @@ class Grafo {
     //post: informa si se puede ir del origen al destino.
     bool esta_atrapado(Casillero*** matriz, int num_nodo);
 
+    bool existe_jugador(int fila, int columna, Casillero*** mapa);
+
     //pre:
     //post: reinicia el vector de vertices para poder calcular los siguientes caminos minimos(distancia_origen, anterior)
     void reiniciar_vector_vertices();

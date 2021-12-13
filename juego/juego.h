@@ -417,12 +417,20 @@ class Juego {
     //
     //PRE:
     //POS: devuelve true si tu_energia >= costo de accion.
-    bool alcanza_energia(int costo, int tu_energia);
+    bool alcanza_energia(int costo);
 
     //
     //PRE: verificaciones hechas.
     //POS: elimina el edificio segun coordenadas.
     //void demoler_edificio_x_coordenadas();
+
+    //void comprar_bombas();
+
+    //bool andycoins_suficientes(int tus_andycoins, int precio_total_bombas);
+
+    //void muestra_info_precompra_bombas(int precio_total_bombas, tus_andycoins);
+
+    //void :se_compran_bombas(int precio_total_bombas, int costo);
 };
 
 #endif //JUEGO_H
