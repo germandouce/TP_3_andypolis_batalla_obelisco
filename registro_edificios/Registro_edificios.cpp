@@ -92,43 +92,44 @@ void Registro_edificios::agregar(Edificio*edificio){
     int fila = edificio->obtener_fila();
     int columna = edificio ->obtener_columna();
 
-    if (nombre_edificio == A && cantidad_aserraderos < limite_construccion ) {
-        nuevo = new Nodo_R(new Aserradero(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_aserraderos++;
-    }
+    // if (nombre_edificio == A && cantidad_aserraderos < limite_construccion ) {
+    //     nuevo = new Nodo_R(new Aserradero(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_aserraderos++;
+    // }
 
-    else if (nombre_edificio == E && cantidad_escuelas < limite_construccion) {
-        nuevo = new Nodo_R(new Escuela(piedra, madera, metal, limite_construccion, fila, columna)) ;
-        cantidad_escuelas++;
-    }
+    // else if (nombre_edificio == E && cantidad_escuelas < limite_construccion) {
+    //     nuevo = new Nodo_R(new Escuela(piedra, madera, metal, limite_construccion, fila, columna)) ;
+    //     cantidad_escuelas++;
+    // }
 
-    else if (nombre_edificio == F && cantidad_fabricas < limite_construccion) {
-        nuevo = new Nodo_R( new Fabrica(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_fabricas++;
-    }
+    // else if (nombre_edificio == F && cantidad_fabricas < limite_construccion) {
+    //     nuevo = new Nodo_R( new Fabrica(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_fabricas++;
+    // }
 
-    else if (nombre_edificio == M && cantidad_minas < limite_construccion) {
-        nuevo = new Nodo_R(new Mina(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_minas++;
-    }
+    // else if (nombre_edificio == M && cantidad_minas < limite_construccion) {
+    //     nuevo = new Nodo_R(new Mina(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_minas++;
+    // }
 
-    else if (nombre_edificio == G && cantidad_minas_oro < limite_construccion) {
-        nuevo = new Nodo_R(new Mina_de_oro(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_minas_oro++;
-    }
+    // else if (nombre_edificio == G && cantidad_minas_oro < limite_construccion) {
+    //     nuevo = new Nodo_R(new Mina_de_oro(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_minas_oro++;
+    // }
 
-    else if (nombre_edificio == O && cantidad_obeliscos < limite_construccion) {
-        nuevo = new Nodo_R(new Obelisco(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_obeliscos++;
-    }
+    // else if (nombre_edificio == O && cantidad_obeliscos < limite_construccion) {
+    //     nuevo = new Nodo_R(new Obelisco(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_obeliscos++;
+    // }
 
-    else if (nombre_edificio == P && cantidad_plantas_electricas < limite_construccion) {
-        nuevo = new Nodo_R( new Planta_electrica(piedra, madera, metal, limite_construccion, fila, columna));
-        cantidad_plantas_electricas++;
-    }
-    else{
-        cout << "Pasa el limite de edificios a construir." << endl;
-    }
+    // else if (nombre_edificio == P && cantidad_plantas_electricas < limite_construccion) {
+    //     nuevo = new Nodo_R( new Planta_electrica(piedra, madera, metal, limite_construccion, fila, columna));
+    //     cantidad_plantas_electricas++;
+    // }
+    // else{
+    //     cout << "Pasa el limite de edificios a construir." << endl;
+    // }
+    nuevo = new Nodo_R(edificio);
     if(primero == nullptr){
         primero = nuevo;
         ultimo = primero;
