@@ -158,6 +158,8 @@ class Edificio {
     //POST: Verifica que las cantidades sean validas.
     bool verificacion_cantidades(int cantidad_verificar);
 
+    int restar_vida(int vida_sacada);
+
     // Destructor
     // PRE: -
     // POS: Destructor de edificio.

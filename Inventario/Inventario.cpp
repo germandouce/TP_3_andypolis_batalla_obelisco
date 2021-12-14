@@ -233,12 +233,14 @@ void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
     Nodo_R *actual = registro_edificios -> obtener_nodo(primero);
     
     int cantidad;
+    string nombre_edificio;
     string nombre_material;
     
     for (int i = 0 ; i < cantidad_edificios; i++) {
         cantidad = actual -> obtener_edificio() -> obtener_cantidad_brindada();
-        nombre_material = actual -> obtener_edificio() -> obtener_nombre();
-        cambiar_cantidad_elemento(nombre_material,cantidad);
+        nombre_edificio = actual -> obtener_edificio() -> obtener_nombre();
+        nombre_material = actual -> obtener_edificio() -> obtener_material_brindado();
+        cambiar_cantidad_elemento(nombre_material, cantidad);
         cout << "-Se han sumado " << cantidad << " de " << nombre_material << " al Inventario." << endl;
         actual = actual -> obtener_siguiente();
     }

@@ -27,40 +27,6 @@ void Lista::agregar_vertices(int cantidad_elementos, int cantidad_filas, int can
     }
 }
 
-void Lista::mostrar(){
-	int fila = primero -> obtener_vertice() -> obtener_fila();
-	int columna = primero -> obtener_vertice() -> obtener_columna();
-	int cantidad_filas = primero -> obtener_vertice() -> obtener_cantidad_filas();
-	int cantidad_columnas = primero -> obtener_vertice() -> obtener_cantidad_columnas();
-	cout << "nodo " << primero -> obtener_vertice()-> obtener_numero_vertice() << " :" << endl;
-	cout << "fila, columna: (" << fila << ", " << columna << ")" << endl;
-	cout << "Nodos_adyacentes: " << endl;
-	for(int j = 0; j < primero->encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas) ; j++){
-		cout << "nodo " << primero -> obtener_vector_adyacentes()[j] <<", "<< endl;
-	}
-	cout << " " << endl;
-	Nodo* auxiliar = primero;
-	for (int i = 1; i < cantidad_elementos ; i++){
-
-		auxiliar = auxiliar -> obtener_siguiente();
-		if (auxiliar != nullptr){
-			fila = auxiliar -> obtener_vertice() -> obtener_fila();
-			columna = auxiliar -> obtener_vertice() -> obtener_columna();
-			cantidad_filas = auxiliar -> obtener_vertice() -> obtener_cantidad_filas();
-			cantidad_columnas = auxiliar -> obtener_vertice() -> obtener_cantidad_columnas();
-
-			cout << "nodo " << auxiliar -> obtener_vertice()-> obtener_numero_vertice() << " :" << endl;
-			cout << "fila, columna: (" << auxiliar -> obtener_vertice() -> obtener_fila() << ", " << auxiliar -> obtener_vertice() -> obtener_columna() << ")" << endl;
-			cout << "Nodos_adyacentes: " << endl;
-			for(int k = 0; k < auxiliar -> encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas) ; k++){
-				cout << " nodo " << auxiliar -> obtener_vector_adyacentes()[k] <<", " << endl;
-			}
-			cout << " " << endl;
-		}
-	}
-}
-
-
 int Lista::obtener_cantidad_elementos(){
     return cantidad_elementos;
 }
@@ -129,7 +95,7 @@ void Lista::eliminar_nodo(){
     siguiente = primero -> obtener_siguiente();
     delete primero;
     primero = siguiente;
-    }
+}
 
 
 

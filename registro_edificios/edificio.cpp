@@ -206,4 +206,8 @@ void Edificio::modificar_cantidades_edificio() {
     }
 }
 
+int Edificio::restar_vida(int vida_sacada){
+	return (vida_actual -= vida_sacada);
+}
+
 Edificio::~Edificio() {}

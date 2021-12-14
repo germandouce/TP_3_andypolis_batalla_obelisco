@@ -67,6 +67,8 @@ class Juego {
     //Constructor de juego
     Juego();
 
+    ~Juego();
+
     //Inicia una nueva partida
     //PRE:-
     //POST:-
@@ -464,6 +466,12 @@ class Juego {
     void guardar_ubicaciones();
 
     void guardar_jugador(ofstream &archivo);
+
+    void guardar_inventarios();
+
+    void atacar_edificio_x_coordenadas(Inventario* inventario);
+
+    int bombas_a_usar(int limite);
 };
 
 #endif //JUEGO_H

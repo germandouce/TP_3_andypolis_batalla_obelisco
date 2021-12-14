@@ -229,7 +229,7 @@ void Mapa::generar_lluvia_materiales() {
 void Mapa::cargar_casilleros_lluvia() {
 
 	if (transitables_disponibles) {
-		casilleros_lluvia.reiniciar_vector();
+		casilleros_lluvia.borrar_todo();
 	}
 
 	for (int i = 0; i < filas && transitables_disponibles; i++) {
@@ -292,6 +292,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 void Mapa::moverse(Jugador* jugador) {
 	
 	bool es_jugador2 = jugador -> devolver_numero_jugador() == NUMERO_JUGADOR2;
+	int energia = jugador -> obtener_energia();
 	Inventario* inventario = jugador -> devolver_inventario();
 
 	int fila_origen = jugador -> devolver_fila() - 1;
@@ -313,22 +314,30 @@ void Mapa::moverse(Jugador* jugador) {
 		grafo -> calcular_camino_minimo_dijsktra(origen, destino, matriz, es_jugador2);
 		
 		Lista* lista_vertices = grafo -> devolver_lista_vertices();
-		int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
+		int costo = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
-		if (distancia != INFINITO) {
-			imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
-			ocupar_jugador(fila_destino, columna_destino, es_jugador2);
-			matriz[fila_destino][columna_destino] -> ocupar_casillero();
-			jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
-			cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
-			cout << endl;
+		if (costo != INFINITO) {
+			if (energia - costo >= ZERO) {
+				imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
+				ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+				matriz[fila_destino][columna_destino] -> ocupar_casillero();
+				jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
+				jugador -> restar_energia(costo);
+				cout << SUCESS_COLOR << "El costo para moverse fue de: " << costo << " de energia." << END_COLOR << endl;
+				cout << endl;
+			}
+			else {
+				cout << ERROR_COLOR << "No tienes suficiente energia para llegar a la coordenada elegida." << END_COLOR << endl;
+				cout << endl;
+			}
 		}
 		else {
 			cout << ERROR_COLOR << "El Jugador no puede llegar a la coordenada elegida." << END_COLOR << endl;
 			cout << endl;
 		}
-		grafo -> reiniciar_vector_vertices();
+		
 	}
+	grafo -> reiniciar_vector_vertices();
 }
 
 bool Mapa::es_movimiento_valido(int fila, int columna) {

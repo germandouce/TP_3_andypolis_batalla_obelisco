@@ -1,12 +1,19 @@
 #include "juego.h"
 
-
 Juego::Juego() {
     jugador_turno = new Jugador();
     jugador_secundario = new Jugador();
     mapa = new Mapa();
     diccionario = new Diccionario();
     objetivos = new Vector<Objetivo>;
+}
+
+Juego::~Juego() {
+    delete jugador_turno;
+    delete jugador_secundario;
+    delete mapa;
+    delete diccionario;
+    delete objetivos;
 }
 
 void Juego::elegir_opcion_menu_np() {
@@ -72,6 +79,10 @@ bool Juego::turno_terminado() {
     bool alguien_gano = jugador_turno -> gano();
     bool quiere_salir = jugador_turno -> quiere_salir_del_juego();
     bool quiere_terminar_turno = jugador_turno -> es_su_turno();
+
+    if (!tiene_energia){
+        cambiar_turno();
+    }
     
     return (alguien_gano || !tiene_energia || !quiere_terminar_turno || quiere_salir);
 }
@@ -177,6 +188,22 @@ void Juego::guardar_ubicaciones() {
     jugador_turno -> guardar_edificios(ubicaciones);
 
     ubicaciones.close();
+}
+
+void Juego::guardar_inventarios() {
+
+    ofstream materiales(ARCHIVO_MATERIALES);
+
+    Inventario* inventario1 = jugador_turno -> devolver_inventario();
+    Inventario* inventario2 = jugador_secundario -> devolver_inventario();
+
+    materiales << S << " " << inventario1 -> devolver_cant_piedra() << " " << inventario2 -> devolver_cant_piedra() << endl;
+    materiales << W << " " << inventario1 -> devolver_cant_madera() << " " << inventario2 -> devolver_cant_madera() << endl;
+    materiales << I << " " << inventario1 -> devolver_cant_metal() << " " << inventario2 -> devolver_cant_metal() << endl;
+    materiales << B << " " << inventario1 -> devolver_cant_bombas() << " " << inventario2 -> devolver_cant_metal() << endl;
+    materiales << C << " " << inventario1 -> devolver_cant_andycoins() << " " << inventario2 -> devolver_cant_andycoins() << endl;
+
+    materiales.close();
 }
 
 void Juego::guardar_jugador(ofstream &archivo) {
@@ -675,7 +702,7 @@ void Juego::opcion_construir_edificio_x_nombre() {
                     construir_edificio(nombre_edificio_construir, fila, columna);
                     jugador_turno -> restar_energia(costo);
                 }
-                else {
+                else { 
                     cout << ERROR_COLOR << "No se ha construido edificio." << END_COLOR << endl;
                     cout << ERROR_COLOR << "Este Casillero esta ocupado o no es un Terreno." << END_COLOR << endl;
                 }
@@ -870,6 +897,7 @@ void Juego::procesar_opcion(int opcion) {
             demoler_edificio_x_coordenadas(inventario);
             break;
         case ATACAR_EDIFICIO_X_COORDENADA:
+            atacar_edificio_x_coordenadas(inventario);
             break;
         case REPARAR_EDIFICIO_X_COORDENADA :
             // system("cls");
@@ -907,6 +935,7 @@ void Juego::procesar_opcion(int opcion) {
         case GUARDAR_Y_SALIR:
             guardar_edificios();
             guardar_ubicaciones();
+            guardar_inventarios();
             jugador_turno -> salir_del_juego();
             cout << SUCESS_COLOR << "-Se han guardado exitosamente los cambios efectuados!" << END_COLOR << endl;
             break;
@@ -933,8 +962,15 @@ void Juego::llover() {
 }
 
 void Juego::recolectar_recursos() {
-    Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
-    jugador_turno -> devolver_inventario() -> recolectar_recursos(registro_edificios);
+    
+    int costo = 20;
+
+    costo_energia(costo);
+    
+    if (alcanza_energia(costo)) {
+        Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
+        jugador_turno -> devolver_inventario() -> recolectar_recursos(registro_edificios);
+    }
 }
 
 bool Juego::es_nuestro_edificio(int fila, int columna, string quiero_no_quiero) {
@@ -1103,4 +1139,80 @@ void Juego::recuperar_mitad_materiales(string nombre_edificio) {
     jugador_turno -> devolver_inventario() ->cambiar_cantidad_elemento("madera", madera_recuperada );
     jugador_turno -> devolver_inventario() ->cambiar_cantidad_elemento("piedra", piedra_recuperada );
     jugador_turno -> devolver_inventario() ->cambiar_cantidad_elemento("metal", metal_recuperado );
+}
+
+void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
+
+    int costo = 30;
+
+    costo_energia(costo);
+    if (alcanza_energia(costo)) {
+        int fila, columna;
+
+        pedir_coordenadas(fila, columna);
+	    Edificio*edificio_atacar = jugador_secundario-> devolver_resgitro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
+        bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
+        bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
+        string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
+	    string nombre_edificio = edificio_atacar->obtener_nombre();
+        
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1, "no quiero")) {
+            int vida_edificio = edificio_atacar ->obtener_vida_actual();
+		    cout << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< endl;
+		    cout << "Necesitas " << vida_edificio << " bombas para destruir completamente." << endl;
+        
+		    if (acepta_realizar_accion()) {
+			
+                if ( (nombre_edificio == "fabrica") || (nombre_edificio == "mina" )){
+                    int bombas_ataque = bombas_a_usar(vida_edificio);
+                    int vida_pos_ataque = edificio_atacar -> restar_vida(bombas_ataque);
+                    inventario -> sumar_bombas_usadas(bombas_ataque);
+                    inventario -> cambiar_cantidad_elemento("bombas", -bombas_ataque);
+                    
+                    if (vida_pos_ataque == 0){
+                        jugador_secundario -> devolver_resgitro_edificios() -> eliminar(fila+1, columna+1);
+                        mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
+                        mapa->obtener_casillero(fila, columna)->desocupar_casillero();
+                        jugador_turno -> restar_energia(costo);
+                        cout << "No has derribado el edificio del oponente."<< endl;
+                    }
+                
+                    else if (vida_pos_ataque > 0) {
+                        jugador_turno -> restar_energia(costo);
+                        cout<< "Has atacado el edificio del oponente pero sigue en pie. Le quedaron " << edificio_atacar->obtener_vida_actual() << " vidas." << endl;
+                    }
+                }
+                
+                else{
+                    int bombas_ataque = bombas_a_usar(vida_edificio);
+				    jugador_turno -> restar_energia(costo);
+				    jugador_secundario ->devolver_resgitro_edificios() -> eliminar(fila+1, columna+1);
+                    inventario -> sumar_bombas_usadas(bombas_ataque);
+                    inventario -> cambiar_cantidad_elemento("bombas", -bombas_ataque);
+                    mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
+                    mapa->obtener_casillero(fila, columna)->desocupar_casillero();
+				    cout << "Has derribado el edificio del oponente."<< endl;
+				    cout << "Te quedan: " << inventario ->devolver_cant_bombas()  << " bombas." << endl;
+                }
+		    }
+		
+        else{
+			no_acepta_realzar_accion();
+			cout << "Ningun edificio demolido." << endl;
+		}
+        
+    }
+}
+}
+
+
+int Juego::bombas_a_usar(int limite){
+    int bombas_usadas;
+	cout << "Ingrese cantidad bombas a usar (solo necesitas" << limite << " bombas): ";
+	cin >> bombas_usadas;
+	while (bombas_usadas < 0 && bombas_usadas <= limite){
+		cout << "Ingrese cantidad bombas a usar (no gastes bombas de mas. solo necesitas " << limite <<" bombas): ";
+		cin >> bombas_usadas;
+	}
+	return bombas_usadas;
 }
