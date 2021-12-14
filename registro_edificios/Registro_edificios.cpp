@@ -237,7 +237,6 @@ Nodo_R* Registro_edificios::obtener_nodo(int pos) {
         return aux;
     }
     else {
-        cout<< ERROR_COLOR << "Posicion " << pos << " no valida. No existe esa cantidad de nodos en el registro (tomar en cuenta que se empiezan a contar desde posicion 0)." << END_COLOR << endl;
         return nullptr;
     }
 }
