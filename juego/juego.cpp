@@ -1005,7 +1005,7 @@ void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
         if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1  , columna + 1, "quiero")) {
             materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
-                jugador_turno ->devolver_resgitro_edificios()->eliminar(fila ,columna);
+                jugador_turno ->devolver_resgitro_edificios()->eliminar(fila , columna);
                 mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
                 recuperar_mitad_materiales(nombre_edificio);
                 jugador_turno -> restar_energia(costo);
