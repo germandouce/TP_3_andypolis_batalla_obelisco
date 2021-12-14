@@ -153,7 +153,7 @@ void Inventario::actualizar_largo_de_inventario(){
 }
 
 void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje,Registro_edificios*registro_edificios,int fila , int columna){
-    float porcentaje_usar = numero_porcentaje/100;
+    int porcentaje_usar = numero_porcentaje/100;
     if (porcentaje_concultado_valido(porcentaje_usar)){
         if (nombre_material == I_MADERA){
             if (porcentaje_de_madera_existente(porcentaje_usar,registro_edificios,fila,columna))
@@ -181,22 +181,22 @@ void Inventario::consultar_porcentaje_material(string nombre_material ,int numer
          }
 }
 
-bool Inventario::porcentaje_de_madera_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_madera_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_madera()*porcentaje_usar;
-    return ((float)cant_madera >= cantidad_madera_requerida);
+bool Inventario::porcentaje_de_madera_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_madera_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_madera()*porcentaje_usar;
+    return (cant_madera >= cantidad_madera_requerida);
 }
 
-bool Inventario::porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_piedra_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_piedra()*porcentaje_usar;
-    return ((float)cant_piedra >= cantidad_piedra_requerida);
+bool Inventario::porcentaje_de_piedra_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_piedra_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_piedra()*porcentaje_usar;
+    return (cant_piedra >= cantidad_piedra_requerida);
 }
 
-bool Inventario::porcentaje_de_metal_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_metal_requerido =registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_metal()*porcentaje_usar;
-    return ((float)cant_metal >= cantidad_metal_requerido);
+bool Inventario::porcentaje_de_metal_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_metal_requerido =registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_metal()*porcentaje_usar;
+    return (cant_metal >= cantidad_metal_requerido);
 }
 
-bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
+bool Inventario::porcentaje_concultado_valido(int porcentaje_consultado){
     return(porcentaje_consultado > 0);
 }
 

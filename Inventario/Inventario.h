@@ -107,19 +107,19 @@ public:
 
     //PRE:
     //POS: devuelve true si el porcentaje consultado es positivo.
-    bool porcentaje_concultado_valido(float porcentaje_consultado);
+    bool porcentaje_concultado_valido(int porcentaje_consultado);
 
     //PRE: el porcentaje consultado debe ser valido.
     //POS: devuelve true si contas con el procentaje de la cantidad de metal requerido.
-    bool porcentaje_de_metal_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
+    bool porcentaje_de_metal_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
     //PRE: el porcentaje consultado debe ser valido.
     //POS: devuelve true si contas con el procentaje de la cantidad de madera requerida.
-    bool porcentaje_de_madera_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
+    bool porcentaje_de_madera_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
     //PRE: el porcentaje consultado debe ser valido.
     //POS: devuelve true si contas con el procentaje de la cantidad de piedra requerida.
-    bool porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
+    bool porcentaje_de_piedra_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna);
 
     bool hay_madera_suficiente(int cantidad_necesaria);
 

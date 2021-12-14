@@ -162,8 +162,6 @@ void Juego::guardar_ubicaciones() {
 
     mapa -> guardar_lluvia(ubicaciones);
 
-    cout << "guarde lluvia" << endl;
-
     int numero_jugador = jugador_turno -> devolver_numero_jugador();
 
     if (numero_jugador == SEGUNDO_JUGADOR) {
@@ -280,7 +278,7 @@ void Juego::actualizar_inventario(ifstream& inventario) {
         inventario >> cantidad_1;
         inventario >> cantidad_2;
 
-    if (nombre == I_MADERA || nombre == I_PIEDRA || nombre == I_METAL | nombre == I_BOMBAS  || nombre == I_ANDYCOINS) {
+    if ((nombre == I_MADERA) || (nombre == I_PIEDRA) || (nombre == I_METAL) | (nombre == I_BOMBAS)  || (nombre == I_ANDYCOINS)) {
         inventario_jugador_1 -> cambiar_cantidad_elemento(nombre, cantidad_1);
         inventario_jugador_2 -> cambiar_cantidad_elemento(nombre, cantidad_2);
     }
@@ -663,7 +661,6 @@ void Juego::opcion_construir_edificio_x_nombre() {
         
         string nombre_edificio_construir = pedir_nombre_edificio_construir();
         Edificio* edificio_consultado = diccionario -> buscar_edificio(nombre_edificio_construir);
-        Edificio* edificio_a_construir;
 
         int piedra, madera, metal, construidos;
 
@@ -750,8 +747,6 @@ void Juego::mostrar_inventario_en_pantalla() {
 
 void Juego::mostrar_objetivos_jugador() {
 
-    Inventario *inventario = jugador_turno -> devolver_inventario();
-    Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
     int energia = jugador_turno -> obtener_energia();
 
     cout << ENTER_COLOR << "Su objetivo primario, construir un obelisco: " << END_COLOR;
@@ -860,7 +855,6 @@ void Juego::procesar_opcion(int opcion) {
 
     //system(CLR_SCREEN);
     Inventario* inventario = jugador_turno -> devolver_inventario();
-    Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
     
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
@@ -911,7 +905,7 @@ void Juego::procesar_opcion(int opcion) {
             guardar_edificios();
             guardar_ubicaciones();
             jugador_turno -> salir_del_juego();
-            cout << "-Se han guardado exitosamente los cambios efectuados!" << endl;
+            cout << SUCESS_COLOR << "-Se han guardado exitosamente los cambios efectuados!" << END_COLOR << endl;
             break;
     }
 }
