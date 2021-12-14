@@ -330,7 +330,7 @@ void Juego::cargar_ubicaciones(ifstream& ubicaciones) {
         else if (nombre_elemento != "1" && nombre_elemento != "2") {
             edificio = diccionario -> instanciar_edificio(nombre_elemento, stoi(fila), stoi(columna));
             mapa -> construir_edificio(stoi(fila) - 1, stoi(columna) - 1, edificio);
-            mapa -> obtener_casillero(stoi(fila), stoi(columna)) -> ocupar_casillero();
+            mapa -> obtener_casillero(stoi(fila) - 1, stoi(columna) - 1) -> ocupar_casillero();
             jugador -> agregar_edificio_al_registro(edificio);
         }
     }
@@ -669,7 +669,8 @@ void Juego::opcion_construir_edificio_x_nombre() {
             mostrar_costo_edificio(edificio_consultado);
             mostrar_inventario_en_pantalla();
             if (acepta_realizar_accion()) {
-                int fila,columna;
+                int fila, columna;
+                pedir_coordenadas(fila, columna);
                 if (puede_construir_edificio(edificio_consultado, fila, columna)) {
                     construir_edificio(nombre_edificio_construir, fila, columna);
                     jugador_turno -> restar_energia(costo);
@@ -681,6 +682,7 @@ void Juego::opcion_construir_edificio_x_nombre() {
             }
             else {
                 no_acepta_realzar_accion();
+        
             }
         }
     }
@@ -697,9 +699,10 @@ bool Juego::puede_construir_edificio(Edificio* edificio, int &fila, int &columna
     bool madera_suficiente = jugador_turno -> devolver_inventario() -> hay_madera_suficiente(madera);
     bool metal_suficiente = jugador_turno -> devolver_inventario() -> hay_metal_suficiente(metal);
     bool esta_ocupado = mapa -> obtener_casillero(fila, columna) -> esta_ocupado();
+    bool hay_jugador = mapa -> obtener_casillero(fila, columna) -> esta_ocupado_jugador();
     string tipo_casillero = mapa -> obtener_casillero(fila, columna) -> obtener_tipo_casillero();
 
-    return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado && !esta_ocupado && tipo_casillero == TERRENO;
+    return piedra_suficiente && madera_suficiente && metal_suficiente && limite_respetado && tipo_casillero == TERRENO && !esta_ocupado && !hay_jugador;
 }
 
 bool Juego::respeta_limite(int construidos, int limite) {
@@ -917,7 +920,7 @@ bool Juego::opcion_valida(int opcion) {
 string Juego::pedir_nombre_edificio_construir() {
     string nombre_edificio_construir;
     cout << ENTER_COLOR << "Ingrese el nombre edificio que desea construir: " << END_COLOR << endl;;
-    cin >> nombre_edificio_construir;
+    getline(cin, nombre_edificio_construir);
     return nombre_edificio_construir;
 }
     
