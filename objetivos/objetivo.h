@@ -61,7 +61,7 @@ class Objetivo {
     virtual void mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
     Diccionario *diccionario, int energia) = 0;
     
-    ~Objetivo();
+    virtual ~Objetivo();
 };
 
 #endif // OBJETIVO_H_INCLUDED

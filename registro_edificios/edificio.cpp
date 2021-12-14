@@ -121,47 +121,93 @@ int Edificio::obtener_columna() {
     return columna;
 }
 
-void Edificio:: modificar_cantidades_edificio() {
-    
-    system(CLR_SCREEN);
 
-    if (diminutivo != OBELISCO) {
-
+void Edificio::modificar_cantidad_piedra(){
         int nueva_cantidad_piedra;
-        int nueva_cantidad_madera;
-        int nueva_cantidad_metal;
-
+    
         cout << SUCESS_COLOR << "El costo anterior de piedra es de " << cantidad_piedra << "." << END_COLOR << endl;
         cout << endl;
         cout << ENTER_COLOR << "Ingrese el nuevo costo de piedra deseado: " << END_COLOR << endl;
         
         cin >> nueva_cantidad_piedra;
+        if (verificacion_cantidades(nueva_cantidad_piedra)){
+            cantidad_piedra = nueva_cantidad_piedra;
+        }
+          else{
+              cout << "La cantidad ingresada no es valida." << endl;
+              cout << "El intervalo valido es: (" << MAX_MATERIAL <<" ," << MIN_MATERIAL <<" )" << endl;
+          }
+        
         cantidad_piedra = nueva_cantidad_piedra;
 
-        cout << endl;
-        cout << SUCESS_COLOR << "El costo anterior de madera es " << cantidad_madera << "." << END_COLOR << endl;
+}
+
+void Edificio::modificar_cantidad_madera(){
+        int nueva_cantidad_madera;
+    
+        cout << SUCESS_COLOR << "El costo anterior de madera es de " << cantidad_madera << "." << END_COLOR << endl;
         cout << endl;
         cout << ENTER_COLOR << "Ingrese el nuevo costo de madera deseado: " << END_COLOR << endl;
         
         cin >> nueva_cantidad_madera;
+        if (verificacion_cantidades(nueva_cantidad_madera)){
+            cantidad_madera = nueva_cantidad_madera;
+        }
+          else{
+              cout << "La cantidad ingresada no es valida." << endl;
+              cout << "El intervalo valido es: (" << MAX_MATERIAL <<" ," << MIN_MATERIAL <<" )" << endl;
+          }
+        
         cantidad_madera = nueva_cantidad_madera;
 
-        cout << endl;
-        cout << SUCESS_COLOR << "El costo anterior de metal es " << cantidad_metal << "." << END_COLOR << endl;
+}
+
+void Edificio::modificar_cantidad_metal(){
+        int nueva_cantidad_metal;
+    
+        cout << SUCESS_COLOR << "El costo anterior de metal es de " << cantidad_metal << "." << END_COLOR << endl;
         cout << endl;
         cout << ENTER_COLOR << "Ingrese el nuevo costo de metal deseado: " << END_COLOR << endl;
         
         cin >> nueva_cantidad_metal;
+        if (verificacion_cantidades(nueva_cantidad_metal)){
+            cantidad_metal = nueva_cantidad_metal;
+        }
+          else{
+              cout << "La cantidad ingresada no es valida." << endl;
+              cout << "El intervalo valido es: (" << MAX_MATERIAL <<" ," << MIN_MATERIAL <<" )" << endl;
+          }
+        
         cantidad_metal = nueva_cantidad_metal;
 
-        system(CLR_SCREEN);
-        cout << SUCESS_COLOR << "Se han modificao los valores correctamente!" << END_COLOR << endl;
+}
+
+bool Edificio::verificacion_cantidades(int cantidad_verificar){
+    return (MAX_MATERIAL > cantidad_verificar && cantidad_verificar > MIN_MATERIAL);
+
+}
+
+void Edificio::modificar_cantidades_edificio() {
+    
+    system(CLR_SCREEN);
+
+    if (diminutivo != OBELISCO) {
+        
+        modificar_cantidad_piedra();
+        modificar_cantidad_madera();
+        modificar_cantidad_metal();
+
+        cout << SUCESS_COLOR << "Se han modificado los valores correctamente!" << END_COLOR << endl;
         cout << endl;
     }
     else {
         cout << ERROR_COLOR << "El obelisco no es un edificio modificable." << END_COLOR << endl;
         cout << endl;
     }
+}
+
+int Edificio::restar_vida(int vida_sacada){
+	return (vida_actual -= vida_sacada);
 }
 
 Edificio::~Edificio() {}

@@ -8,8 +8,11 @@ Inventario::Inventario(){
     cant_madera = 0;
     cant_piedra = 0;
     cant_metal = 0;
-    cant_andycoins = cant_anterior_andycoins = 0;
-    cant_bombas = cant_anterior_bombas = 0;
+    cant_andycoins =  0;
+    cant_bombas =  0;
+    cant_bombas_compradas = 0;
+    cant_andycoins_acumulados = 0;
+    cant_bombas_usadas = 0;
 
 }
 
@@ -33,17 +36,22 @@ int Inventario::devolver_cant_bombas(){
     return cant_bombas;
 }
 
-int Inventario::devolver_cant_anterior_andycoins(){
-    return cant_anterior_andycoins;
+int Inventario::devolver_cant_andycoins_acumulados(){
+     return cant_andycoins_acumulados;
 }
 
-int Inventario::devolver_cant_anterior_bombas(){
-    return cant_anterior_bombas;
+int Inventario::devolver_cant_bombas_compradas(){
+    return cant_bombas_compradas;
+}
+
+
+int Inventario::devolver_bombas_usadas(){
+    return cant_bombas_usadas;
 }
 
 void Inventario::mostrar_inventario() {
     if (cantidad_elementos == 0){
-        cout<< "INVENTARIO VACIO" << endl;
+        cout<< ERROR_COLOR << "INVENTARIO VACIO" << END_COLOR << endl;
         cout << "__________________________________________" << endl << endl;
         cout << "Cantidad madera: " << devolver_cant_madera() << endl;
         cout << "Cantiidad piedra: " << devolver_cant_piedra() << endl;
@@ -52,13 +60,13 @@ void Inventario::mostrar_inventario() {
         cout << "Cantidad bombas: " << devolver_cant_bombas() << endl;
     }
     else{
-        cout << "INVENTARIO" << endl;
-        cout << "__________________________________________" << endl << endl;
-        cout << "Cantidad madera: " << devolver_cant_madera() << endl;
+        cout << ENTER_COLOR << "INVENTARIO" << END_COLOR << endl;
+        cout <<  "__________________________________________" << END_COLOR <<endl << endl;
+        cout << SUCESS_COLOR "Cantidad madera: " << devolver_cant_madera() << endl;
         cout << "Cantiidad piedra: " << devolver_cant_piedra() << endl;
         cout << "Cantidad metal: " << devolver_cant_metal() << endl;
         cout << "Cantidad andycoins: " << devolver_cant_andycoins() << endl;
-        cout << "Cantidad bombas: " << devolver_cant_bombas() << endl;
+        cout << "Cantidad bombas: " << devolver_cant_bombas() << END_COLOR << endl;
     }
     cout << endl;
 }
@@ -138,7 +146,6 @@ void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_
         cambio_cantidad_andycoins(cantidad_sumar_o_restar);
     else
         cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
-    cout<< endl;
 }
 
 void Inventario::actualizar_largo_de_inventario(){
@@ -146,7 +153,7 @@ void Inventario::actualizar_largo_de_inventario(){
 }
 
 void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje,Registro_edificios*registro_edificios,int fila , int columna){
-    float porcentaje_usar = numero_porcentaje/100;
+    int porcentaje_usar = numero_porcentaje/100;
     if (porcentaje_concultado_valido(porcentaje_usar)){
         if (nombre_material == I_MADERA){
             if (porcentaje_de_madera_existente(porcentaje_usar,registro_edificios,fila,columna))
@@ -174,22 +181,22 @@ void Inventario::consultar_porcentaje_material(string nombre_material ,int numer
          }
 }
 
-bool Inventario::porcentaje_de_madera_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_madera_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_madera()*porcentaje_usar;
-    return ((float)cant_madera >= cantidad_madera_requerida);
+bool Inventario::porcentaje_de_madera_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_madera_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_madera()*porcentaje_usar;
+    return (cant_madera >= cantidad_madera_requerida);
 }
 
-bool Inventario::porcentaje_de_piedra_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_piedra_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_piedra()*porcentaje_usar;
-    return ((float)cant_piedra >= cantidad_piedra_requerida);
+bool Inventario::porcentaje_de_piedra_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_piedra_requerida = registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_piedra()*porcentaje_usar;
+    return (cant_piedra >= cantidad_piedra_requerida);
 }
 
-bool Inventario::porcentaje_de_metal_existente(float porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
-    float cantidad_metal_requerido =registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_metal()*porcentaje_usar;
-    return ((float)cant_metal >= cantidad_metal_requerido);
+bool Inventario::porcentaje_de_metal_existente(int porcentaje_usar, Registro_edificios*registro_edificios, int fila, int columna){
+    int cantidad_metal_requerido =registro_edificios->buscar_edificio_en_registro(fila,columna)->obtener_cantidad_metal()*porcentaje_usar;
+    return (cant_metal >= cantidad_metal_requerido);
 }
 
-bool Inventario::porcentaje_concultado_valido(float porcentaje_consultado){
+bool Inventario::porcentaje_concultado_valido(int porcentaje_consultado){
     return(porcentaje_consultado > 0);
 }
 
@@ -207,7 +214,8 @@ bool Inventario:: hay_metal_suficiente(int cantidad_necesaria){
         return false;
     }
     else
-        return true;}
+        return true;
+}
 
 bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
     if (cant_piedra < cantidad_necesaria){
@@ -215,17 +223,9 @@ bool Inventario:: hay_piedra_suficiente(int cantidad_necesaria){
         return false;
     }
     else
-        return true;}
-
-void Inventario:: actualizar_cant_anterior_elemento(string elemento){
-    if (elemento == I_BOMBAS)
-        cant_anterior_bombas = cant_bombas;
-    else if (elemento == I_ANDYCOINS)
-        cant_anterior_andycoins = cant_andycoins;
-    else
-        cout<< "No se encuentra " << elemento << " en el inventario."<< endl;
+        return true;
+    
 }
-
 
 void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
     int primero = 0;
@@ -233,15 +233,26 @@ void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
     Nodo_R *actual = registro_edificios -> obtener_nodo(primero);
     
     int cantidad;
+    string nombre_edificio;
     string nombre_material;
     
     for (int i = 0 ; i < cantidad_edificios; i++) {
         cantidad = actual -> obtener_edificio() -> obtener_cantidad_brindada();
-        nombre_material = actual -> obtener_edificio() -> obtener_nombre();
-        cambiar_cantidad_elemento(nombre_material,cantidad);
+        nombre_edificio = actual -> obtener_edificio() -> obtener_nombre();
+        nombre_material = actual -> obtener_edificio() -> obtener_material_brindado();
+        cambiar_cantidad_elemento(nombre_material, cantidad);
         cout << "-Se han sumado " << cantidad << " de " << nombre_material << " al Inventario." << endl;
         actual = actual -> obtener_siguiente();
     }
 }
+void Inventario::acumular_bombas(int cantidad_acumular){
+    cant_bombas_compradas += cantidad_acumular;
+}
 
-Inventario::~Inventario() {}
+void Inventario::acumular_andycoins(int cantidad_acumular){
+    cant_andycoins_acumulados += cantidad_acumular;
+}
+
+void Inventario:: sumar_bombas_usadas(int cantidad_usadas){
+    cant_bombas_usadas += cantidad_usadas;
+}

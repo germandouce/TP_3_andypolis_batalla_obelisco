@@ -3,7 +3,7 @@ para detectar errores gruesos que saltan con extensiones de VSC.
 Por otro lado, los archivos que se encuentran dispersos en la carpeta actual 
 SI COMPILAN CON EL SIGUIENTE COMANDO: 
 
-g++ Casilleros/*.cpp grafo/*.cpp Inventario/*.cpp juego/*.cpp materiales/*.cpp objetivos/*.cpp registro_edificios/*.cpp  *.cpp -o main
+g++ Casilleros/*.cpp grafo/*.cpp Inventario/*.cpp juego/*.cpp materiales/*.cpp objetivos/*.cpp registro_edificios/*.cpp  *.cpp -o main -Wall -Werror -Wconversion
 Si ubicacion esta vacio o no esta, no se lee materiales.
 
 

@@ -31,7 +31,7 @@ void Nodo::cargar_vector_adyacentes(){
 	int columna = obtener_vertice() -> obtener_columna();
 	int cantidad_aristas = encontrar_tipo_nodo(fila, columna, cantidad_filas, cantidad_columnas);
 
-	vector_adyacentes = new int[cantidad_aristas];
+	vector_adyacentes = new int [cantidad_aristas];
 	int i = 0;
 	if (!esta_arriba(fila, columna, cantidad_filas, cantidad_columnas)){
 		vector_adyacentes[i] = numero_vertice - cantidad_filas;

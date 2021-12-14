@@ -125,8 +125,9 @@ void Vector<Dato>::borrar_posicion(int posicion) {
 template <typename Dato>
 
 void Vector<Dato>::borrar_todo() {
-    largo = 0;
+
     delete[] datos;
+    largo = 0;
 }
 
 #endif // _VECTOR_TEMPLATE_

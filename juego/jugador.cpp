@@ -10,7 +10,7 @@ Jugador::Jugador() {
     this -> objetivos_cumplidos = new Vector<bool>;
     this -> energia = 50;
     this -> andycoins_acumulados = 0;
-    this -> bombas_usadas;
+    this -> bombas_usadas = 0;
     this -> bombas_compradas = 0;
     this -> fila = 0;
     this -> columna = 0;
@@ -181,4 +181,15 @@ void Jugador::cambia_cantidades_inventario(int madera, int piedra, int metal){
     inventario->cambiar_cantidad_elemento("madera", madera);
     inventario->cambiar_cantidad_elemento("piedra", piedra);
     inventario->cambiar_cantidad_elemento("metal", metal);
+}
+
+void Jugador::guardar_edificios(ofstream &archivo) {
+    registro_edificios -> guardar(archivo);
+}
+
+Jugador::~Jugador() {
+    delete objetivos;
+    delete inventario;
+    delete registro_edificios;
+    delete objetivos_cumplidos;
 }

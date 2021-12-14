@@ -211,6 +211,7 @@ void Mapa::generar_lluvia_materiales() {
 		Material* material_random = llover_material_aleatorio(material_llovido);
 		string nombre_material = material_random -> obtener_nombre();
 
+
 		if (puede_llover_mas(piedra_llovida, madera_llovida, metal_llovido, andycoins_llovido, material_llovido)) {
 
 			casillero_random -> colocar_material(material_random);
@@ -258,7 +259,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 		}
 	}
 
-	if (material_llovido == MADERA) {
+	else if (material_llovido == MADERA) {
 		if (madera_llovida > ZERO) {
 			madera_llovida--;
 		}
@@ -267,7 +268,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 		}
 	}
 
-	if (material_llovido == METAL) {
+	else if (material_llovido == METAL) {
 		if (metal_llovido > ZERO) {
 			metal_llovido--;
 		}
@@ -276,7 +277,7 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 		}
 	}
 
-	if (material_llovido == ANDYCOINS) {
+	else {
 		if (andycoins_llovido > ZERO) {
 			andycoins_llovido--;
 		}
@@ -288,11 +289,10 @@ bool Mapa::puede_llover_mas(int &piedra_llovida, int &madera_llovida, int &metal
 	return puede_llover_mas;
 }
 
-// MOVIMIENTO
-
 void Mapa::moverse(Jugador* jugador) {
 	
 	bool es_jugador2 = jugador -> devolver_numero_jugador() == NUMERO_JUGADOR2;
+	int energia = jugador -> obtener_energia();
 	Inventario* inventario = jugador -> devolver_inventario();
 
 	int fila_origen = jugador -> devolver_fila() - 1;
@@ -303,11 +303,10 @@ void Mapa::moverse(Jugador* jugador) {
 	int columna_destino;
 	int destino;
 	
+	imprimir_mapa();
 	pedir_coordenadas(fila_destino, columna_destino);
 
 	if (es_movimiento_valido(fila_destino, columna_destino)) {
-
-		//system(CLR_SCREEN);
 
 		origen = fila_origen * filas + columna_origen + 1;
 		destino = fila_destino * filas + columna_destino + 1;
@@ -315,24 +314,30 @@ void Mapa::moverse(Jugador* jugador) {
 		grafo -> calcular_camino_minimo_dijsktra(origen, destino, matriz, es_jugador2);
 		
 		Lista* lista_vertices = grafo -> devolver_lista_vertices();
-		int distancia = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
+		int costo = lista_vertices -> devolver_nodo(destino) -> obtener_distancia_minima_origen();
 
-		if (distancia != INFINITO) {
-			imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
-			ocupar_jugador(fila_destino, columna_destino, es_jugador2);
-			matriz[fila_destino][columna_destino] -> desocupar_casillero();
-			jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
-			cout << SUCESS_COLOR << "El costo para moverse fue de: " << distancia << " de energia." << END_COLOR << endl;
-			cout << endl;
-
+		if (costo != INFINITO) {
+			if (energia - costo >= ZERO) {
+				imprimir_camino_recorrido(lista_vertices, inventario, origen, destino, es_jugador2);
+				ocupar_jugador(fila_destino, columna_destino, es_jugador2);
+				matriz[fila_destino][columna_destino] -> ocupar_casillero();
+				jugador -> asignar_coordenadas(fila_destino + 1, columna_destino + 1);
+				jugador -> restar_energia(costo);
+				cout << SUCESS_COLOR << "El costo para moverse fue de: " << costo << " de energia." << END_COLOR << endl;
+				cout << endl;
+			}
+			else {
+				cout << ERROR_COLOR << "No tienes suficiente energia para llegar a la coordenada elegida." << END_COLOR << endl;
+				cout << endl;
+			}
 		}
 		else {
 			cout << ERROR_COLOR << "El Jugador no puede llegar a la coordenada elegida." << END_COLOR << endl;
 			cout << endl;
 		}
 		
-		grafo -> reiniciar_vector_vertices();
 	}
+	grafo -> reiniciar_vector_vertices();
 }
 
 bool Mapa::es_movimiento_valido(int fila, int columna) {
@@ -431,37 +436,53 @@ void Mapa::desocupar_jugador(int fila, int columna, bool es_jugador2) {
 void Mapa::recolectar_recursos(int fila, int columna, Inventario* inventario) {
 
 	string tipo_casillero = matriz[fila][columna] -> obtener_tipo_casillero();
-	bool ocupado = matriz[fila][columna] -> esta_ocupado();
+	Material* material = matriz[fila][columna] -> obtener_material();
 
-	if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && ocupado) {
+	if ((tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) && material) {
 		
-		Material* material = matriz[fila][columna] -> obtener_material();
 		string nombre_material = material -> obtener_nombre();
 		int cantidad_material = material -> obtener_cantidad();
-	
+
 		inventario -> cambiar_cantidad_elemento(nombre_material, cantidad_material);
+		
+		delete material;
 		matriz[fila][columna] -> colocar_material(nullptr);
 		matriz[fila][columna] -> desocupar_casillero();
 		transitables_disponibles++;
 	}
 }
 
-// CONSTRUIR EDIFICIO
-
 void Mapa::construir_edificio(int fila, int columna, Edificio* edificio_a_construir) {
 	matriz[fila][columna] -> construir_edificio(edificio_a_construir);
 	matriz[fila][columna] -> ocupar_casillero();
+}
+
+void Mapa::guardar_lluvia(ofstream &archivo) {
+
+	for (int i = 0; i < filas; i++) {
+		for (int j = 0; j < columnas; j++) {
+
+			Casillero* casillero = matriz[i][j];
+			string tipo_casillero = casillero -> obtener_tipo_casillero();
+			bool esta_ocupado = casillero -> esta_ocupado();
+			bool hay_jugador = casillero -> esta_ocupado_jugador();
+
+			if (tipo_casillero == CAMINO || tipo_casillero == MUELLE || tipo_casillero == BETUN) {
+				if (esta_ocupado && !hay_jugador) {
+
+					string nombre_material = casillero -> obtener_material() -> obtener_nombre();
+					archivo << nombre_material << " (" << i + 1 << ", " << j + 1 << ")" << endl;
+				}
+			}
+		}
+	}
 }
 
 Casillero*** Mapa::devolver_matriz(){
 	return matriz;
 }
 
-// METODOS PRIVADOS
-
 void Mapa::pedir_coordenadas(int &fila, int &columna) {
-	
-	system(CLR_SCREEN);
 
 	pedir_fila(fila);
 

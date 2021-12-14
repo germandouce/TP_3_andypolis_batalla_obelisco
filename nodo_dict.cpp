@@ -1,6 +1,6 @@
 #include "nodo_dict.h"
 
-Nodo_dict::Nodo_dict(Edificio* edificio){
+Nodo_dict::Nodo_dict(Edificio* edificio) {
     this -> edificio = edificio;
     this -> clave = edificio -> obtener_nombre();
     this -> izquierdo = nullptr;
@@ -66,4 +66,6 @@ bool Nodo_dict::hijo_izquierdo_unico() {
     return devolver_nodo_derecho() == nullptr && devolver_nodo_izquierdo() != nullptr;
 }
 
-Nodo_dict::~Nodo_dict() {}
+Nodo_dict::~Nodo_dict() {
+    delete edificio;
+}

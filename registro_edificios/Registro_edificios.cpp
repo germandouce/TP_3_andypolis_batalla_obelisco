@@ -47,13 +47,13 @@ int Registro_edificios::obtener_cantidad_minas_oro(){
     return cantidad_minas_oro;
 }
 
-int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
+int Registro_edificios :: buscar_posicion(int coordenada_x  , int coordenada_y){
     Nodo_R *actual;
     actual = primero;
     bool encontrado;
     int posicion;
     for ( posicion = 0; posicion < cantidad_edificios ; posicion++ ) {
-        if (coordenada_x == actual->obtener_edificio()->obtener_fila() && coordenada_y == actual->obtener_edificio()->obtener_columna()) {
+        if (coordenada_x  == actual->obtener_edificio()->obtener_fila() && coordenada_y  == actual->obtener_edificio()->obtener_columna()) {
             return posicion;
         }
         else{
@@ -63,8 +63,6 @@ int Registro_edificios :: buscar_posicion(int coordenada_x , int coordenada_y){
     }
     if (encontrado == false){
         posicion = -1;
-        cout << "No existe edificio en posicion ->> "<< "( " << coordenada_x << ", " << coordenada_y << " )" <<endl;
-        cout << "Entonces no existe en el registro de edificios."<<endl;
     }
 
     delete actual;
@@ -127,7 +125,7 @@ void Registro_edificios::agregar(Edificio*edificio){
          cantidad_plantas_electricas++;
      }
      else{
-       cout << "Pasa el limite de edificios a construir." << endl;
+       cout << ERROR_COLOR << "Pasa el limite de edificios a construir." << END_COLOR << endl;
      }
     nuevo = new Nodo_R(edificio);
     if(primero == nullptr){
@@ -156,18 +154,12 @@ void Registro_edificios::eliminar(int coordenada_x , int coordenada_y){
         else{
             Nodo_R* anterior = obtener_nodo(posicion_edificio_buscado - 1);
             baja = anterior->obtener_siguiente();
-            //aca
-            baja ->obtener_edificio()->mostrar_mensaje();
-            cout<< "baja --> " << baja << endl;
+            baja ->obtener_edificio();
             anterior->cambiar_siguiente(baja->obtener_siguiente());
         }
         actualizar_cantidad_tipo_edificio(nombre_edificio);
         cantidad_edificios--;
-        cout<< "elimino baja -->" << baja << endl;
         delete baja;
-    }
-    else{
-        cout << "No puede eliminarse un edificio que no existe en el registro." << endl;
     }
 }
 
@@ -245,7 +237,6 @@ Nodo_R* Registro_edificios::obtener_nodo(int pos) {
         return aux;
     }
     else {
-        cout<< "Posicion " << pos << " no valida. No existe esa cantidad de nodos en el registro (tomar en cuenta que se empiezan a contar desde posicion 0).\n" << endl;
         return nullptr;
     }
 }
@@ -283,33 +274,51 @@ int Registro_edificios::obtener_edificios_construidos(string nombre_edificio) {
 }
 
 bool Registro_edificios::al_menos_un_obelisco(){
-    return (obtener_cantidad_obeliscos() >= 0);
+    return (obtener_cantidad_obeliscos() >= 1);
 }
 
 bool Registro_edificios::al_menos_una_mina(){
-    return (obtener_cantidad_minas() >= 0);
+    return (obtener_cantidad_minas() >= 1);
 }
 
 bool Registro_edificios::al_menos_una_fabrica(){
-    return (obtener_cantidad_fabricas() >=0);
+    return (obtener_cantidad_fabricas() >=1);
 }
 
 bool Registro_edificios::al_menos_un_aserradero(){
-    return (obtener_cantidad_aserraderos() >= 0);
+    return (obtener_cantidad_aserraderos() >= 1);
 }
 
 bool Registro_edificios::al_menos_una_mina_oro(){
-    return (obtener_cantidad_minas_oro() >= 0);
+    return (obtener_cantidad_minas_oro() >= 1);
 }
 
 bool Registro_edificios::al_menos_una_planta_electrica(){
-    return  (obtener_cantidad_plantas_electricas() >= 0);
+    return  (obtener_cantidad_plantas_electricas() >= 1);
 }
 bool Registro_edificios::al_menos_una_escuela(){
-    return (obtener_cantidad_escuelas() >= 0);
+    return (obtener_cantidad_escuelas() >= 1);
 }
 
 bool Registro_edificios::al_menos_uno_de_cada_tipo(){
     return (al_menos_un_aserradero() && al_menos_un_obelisco() && al_menos_una_escuela()
     && al_menos_una_fabrica() && al_menos_una_mina_oro() && al_menos_una_mina() && al_menos_una_planta_electrica());
+}
+
+void Registro_edificios::guardar(ofstream& archivo) {
+
+    Nodo_R* nodo = primero;
+
+    for (int i = 0; i < cantidad_edificios; i++) {
+
+        Edificio* edificio = nodo -> obtener_edificio();
+
+        string nombre_edificio = edificio -> obtener_nombre();
+        int fila = edificio -> obtener_fila();
+        int columna = edificio -> obtener_columna();
+
+        archivo << nombre_edificio << " (" << fila << ", " << columna << ")" << endl;
+
+        nodo = nodo -> obtener_siguiente();
+    }
 }

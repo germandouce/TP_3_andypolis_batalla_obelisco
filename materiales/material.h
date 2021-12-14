@@ -37,6 +37,8 @@ class Material {
     //POST: Cada material saluda.
     virtual void saludar() = 0;
 
+    virtual ~Material() = 0;
+
     //pre: -
     //post: Devuelve el nombre del Material.
     string obtener_nombre();

@@ -6,6 +6,8 @@ Material::Material() {
     this -> cantidad_material = 0;
 }
 
+Material::~Material() {}
+
 Material::Material(int cantidad_material) {
 	this -> nombre_material = "material";
 	this-> diminutivo = "";

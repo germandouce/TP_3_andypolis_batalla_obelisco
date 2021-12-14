@@ -2,7 +2,9 @@
 
 Casillero_transitable::Casillero_transitable() : Casillero() {}
 
-Casillero_transitable::~Casillero_transitable() {}
+Casillero_transitable::~Casillero_transitable() {
+    delete material;
+}
 
 void Casillero_transitable::construir_edificio(Edificio* edificio) {}
 
@@ -19,12 +21,22 @@ Material* Casillero_transitable::obtener_material() {
 }
 
 void Casillero_transitable::mostrar() {
-    if (!ocupado) {
+    
+    if (!esta_ocupado()) {
         cout << SUCESS_COLOR << "-Soy un casillero transitable y me encuentro vacio." << END_COLOR << endl;
     }
     else {
         cout << SUCESS_COLOR << "-Soy un casillero transitable y no me encuentro vacio." << END_COLOR << endl;
-        material -> saludar();
+
+        if (hay_jugador1()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 1 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+        else if (hay_jugador2()) {
+            cout << SUCESS_COLOR << "-Soy el Jugador 2 y me encuentro en el casillero consultado." << END_COLOR << endl;
+        }
+        else {
+            material -> saludar();
+        }
     }
     cout << endl;
 }

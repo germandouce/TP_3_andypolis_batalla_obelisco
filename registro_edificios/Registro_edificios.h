@@ -2,7 +2,8 @@
 #define REGISTRO_EDIFICIOS_H
 
 #include "Nodo_registro.h"
-
+#include <fstream>
+#include <string>
 #include "planta_electrica.h"
 #include "obelisco.h"
 #include "mina.h"
@@ -11,9 +12,11 @@
 #include "escuela.h"
 #include "aserradero.h"
 
+using namespace std;
+
 const int NO_EXISTE = 999999;
 
-class Registro_edificios{
+class Registro_edificios {
 
 //ATRIBUTOS
 private:
@@ -136,6 +139,8 @@ public:
     //pre:
     //post: devuelve true si hay 1 edificio construido de cada tipo.
     bool al_menos_uno_de_cada_tipo();
+
+    void guardar(ofstream &archivo);
 
     //DESTRUCTOR
     ~Registro_edificios();

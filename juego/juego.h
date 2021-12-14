@@ -67,6 +67,8 @@ class Juego {
     //Constructor de juego
     Juego();
 
+    ~Juego();
+
     //Inicia una nueva partida
     //PRE:-
     //POST:-
@@ -295,7 +297,7 @@ class Juego {
     //Puede construir edificio
     //PRE:
     //POST:
-    bool puede_construir_edificio(Edificio* edificio);
+    bool puede_construir_edificio(Edificio* edificio, int &fila, int &columna);
     
     //Acepta ralizar accion
     //PRE:
@@ -307,10 +309,10 @@ class Juego {
     //POS: 
     void obtengo_cantidades_edificio(Edificio* edificio, int &piedra, int &madera, int &metal, int &construidos);
 
-    //Construye edificio
-    //PRE: verificaciones hechas.
-    //POS: construye edificio
-    void construyo_edificio(Edificio* edificio_a_construir, int fila, int columna);
+
+    void materiales_por_demolicion(string nombre_edificio);
+
+    void recuperar_mitad_materiales();
 
     //
     //PRE:
@@ -394,7 +396,7 @@ class Juego {
     //
     //PRE:-
     //POST:
-    void construir_edificio(string nombre_edificio);
+    void construir_edificio(string nombre_edificio, int &fila , int &columna);
 
     //
     //PRE:-
@@ -414,7 +416,7 @@ class Juego {
     //
     //PRE:
     //POS:
-    bool es_nuestro_edificio(int fila, int columna);
+    bool es_nuestro_edificio(int fila, int columna, string quiero_no_quiero);
 
     //
     //PRE:
@@ -439,7 +441,7 @@ class Juego {
     //
     //PRE: verificaciones hechas.
     //POS: elimina el edificio segun coordenadas.
-    void demoler_edificio_x_coordenadas();
+    void demoler_edificio_x_coordenadas(Inventario* inventario);
 
     void comprar_bombas(Inventario*inventario);
 
@@ -452,6 +454,24 @@ class Juego {
     int pide_bombas_deseadas();
 
     void no_compra_bombas(Inventario* inventario);
+
+    void no_acepta_realzar_accion();
+
+    void mostrar_materiales_por_demolicion(string nombre_edificio_demolido, int madera_recupera,  int piedra_recupera, int metal_recupera);
+
+    void recuperar_mitad_materiales(string nombre_edificio);
+
+    void guardar_edificios();
+
+    void guardar_ubicaciones();
+
+    void guardar_jugador(ofstream &archivo);
+
+    void guardar_inventarios();
+
+    void atacar_edificio_x_coordenadas(Inventario* inventario);
+
+    int bombas_a_usar(int limite);
 };
 
 #endif //JUEGO_H
