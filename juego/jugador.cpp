@@ -134,12 +134,12 @@ void Jugador::restar_energia(int costo){
 }
 
 void Jugador::esta_obelisco_construido(){
-    if (devolver_resgitro_edificios()->obtener_cantidad_obeliscos() == 1){
+    if (devolver_registro_edificios()->obtener_cantidad_obeliscos() == 1){
        obelisco_construido = true;
     }  
 }
 
-Registro_edificios* Jugador::devolver_resgitro_edificios(){
+Registro_edificios* Jugador::devolver_registro_edificios(){
     return registro_edificios;
 }
 
@@ -156,7 +156,7 @@ void Jugador::opcion_demoler_edificio_x_coordenada() {
     int columna;
     cout << "Ingrese numero de columna: ";
     cin >> columna;
-    devolver_resgitro_edificios()->eliminar(fila, columna);
+    devolver_registro_edificios()->eliminar(fila, columna);
 }
 
 bool Jugador::encuentra_edificio(Diccionario* diccionario, string nombre_edificio_buscar) {
