@@ -1197,12 +1197,10 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
 
 
 int Juego::bombas_a_usar(int limite){
-    int bombas_usadas;
-	cout << ENTER_COLOR << "Ingrese cantidad bombas a usar (solo necesitas" << limite << " bombas): " << END_COLOR;
-	cin >> bombas_usadas;
-	while (bombas_usadas < 0 && bombas_usadas > limite){
-		cout << ERROR_COLOR << "Ingrese cantidad bombas a usar (no gastes bombas de mas. solo necesitas " << limite <<" bombas): "<<END_COLOR;
-		cin >> bombas_usadas;
+    int bombas_usadas = 0;
+	while (bombas_usadas <= 0 || bombas_usadas > limite){
+        cout << ENTER_COLOR << "Ingrese cantidad bombas a usar (solo necesitas" << limite << " bombas): " << END_COLOR;
+        cin >> bombas_usadas;
 	}
 	return bombas_usadas;
 }
