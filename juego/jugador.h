@@ -178,7 +178,7 @@ class Jugador {
     //Devolver resgitro edificios
     //PRE:-
     //POST:Devuelve un puntero al registro de edificios del jugador
-    Registro_edificios* devolver_resgitro_edificios();
+    Registro_edificios* devolver_registro_edificios();
 
     //Devolver inventario
     //PRE:-
