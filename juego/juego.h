@@ -416,7 +416,7 @@ class Juego {
     //
     //PRE:
     //POS:
-    bool es_nuestro_edificio(int fila, int columna, string quiero_no_quiero);
+    bool es_nuestro_edificio(int fila, int columna);
 
     //
     //PRE:
