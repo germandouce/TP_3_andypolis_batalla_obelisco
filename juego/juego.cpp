@@ -1214,9 +1214,9 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
 
-        if (ocupado && !es_jugador && es_nuestro_edificio(edificio_resparar,fila, columna) && tengo_el_porcentaje_necesario(edificio_reparar)) {
+        if (ocupado && !es_jugador && es_nuestro_edificio(edificio_reparar,fila, columna) && tengo_el_porcentaje_necesario(edificio_reparar)) {
 
-            string nombre_edficio_r = edificio_reparar -> obtener_nombre();
+            string nombre_edificio_r = edificio_reparar -> obtener_nombre();
             int vida_edificio = edificio_reparar ->obtener_vida_actual();
 
             if ((nombre_edificio_r == F) || (nombre_edficio_r == M)){
