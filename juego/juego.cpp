@@ -973,18 +973,8 @@ void Juego::recolectar_recursos() {
     }
 }
 
-bool Juego::es_nuestro_edificio(int fila, int columna, string quiero_no_quiero) {
-    if (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna)){
-        if (quiero_no_quiero == "quiero"){
-            cout<< SUCESS_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
-        }
-        else if (quiero_no_quiero == "no quiero"){
-            cout<< ERROR_COLOR << "Es nuestro edificio."<< END_COLOR << endl;
-        }
-        return true;}
-    else{
-        return false;
-    }
+bool Juego::es_nuestro_edificio(int fila, int columna) {
+    return (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna));
 }
 
 void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
@@ -1002,7 +992,7 @@ void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
         string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
         string nombre_edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila+1,columna+1)->obtener_nombre();
 
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1  , columna + 1, "quiero")) {
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1  , columna + 1)) {
             materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
                 jugador_turno ->devolver_resgitro_edificios()->eliminar(fila , columna);
@@ -1156,7 +1146,7 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
         string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
 	    string nombre_edificio = edificio_atacar->obtener_nombre();
         
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1, "no quiero")) {
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1)) {
             int vida_edificio = edificio_atacar ->obtener_vida_actual();
 		    cout << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< endl;
 		    cout << "Necesitas " << vida_edificio << " bombas para destruir completamente." << endl;
@@ -1174,12 +1164,12 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
                         mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
                         mapa->obtener_casillero(fila, columna)->desocupar_casillero();
                         jugador_turno -> restar_energia(costo);
-                        cout << "No has derribado el edificio del oponente."<< endl;
+                        cout << "Has derribado el edificio del oponente."<< endl;
                     }
                 
                     else if (vida_pos_ataque > 0) {
                         jugador_turno -> restar_energia(costo);
-                        cout<< "Has atacado el edificio del oponente pero sigue en pie. Le quedaron " << edificio_atacar->obtener_vida_actual() << " vidas." << endl;
+                        cout<< SUCESS_COLOR << "Has atacado el edificio del oponente pero sigue en pie. Le quedaron " << edificio_atacar->obtener_vida_actual() << " vidas." << END_COLOR << endl;
                     }
                 }
                 
@@ -1208,10 +1198,10 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
 
 int Juego::bombas_a_usar(int limite){
     int bombas_usadas;
-	cout << "Ingrese cantidad bombas a usar (solo necesitas" << limite << " bombas): ";
+	cout << ENTER_COLOR << "Ingrese cantidad bombas a usar (solo necesitas" << limite << " bombas): " << END_COLOR;
 	cin >> bombas_usadas;
-	while (bombas_usadas < 0 && bombas_usadas <= limite){
-		cout << "Ingrese cantidad bombas a usar (no gastes bombas de mas. solo necesitas " << limite <<" bombas): ";
+	while (bombas_usadas < 0 && bombas_usadas > limite){
+		cout << ERROR_COLOR << "Ingrese cantidad bombas a usar (no gastes bombas de mas. solo necesitas " << limite <<" bombas): "<<END_COLOR;
 		cin >> bombas_usadas;
 	}
 	return bombas_usadas;

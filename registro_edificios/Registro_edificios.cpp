@@ -47,13 +47,13 @@ int Registro_edificios::obtener_cantidad_minas_oro(){
     return cantidad_minas_oro;
 }
 
-int Registro_edificios :: buscar_posicion(int coordenada_x  , int coordenada_y){
+int Registro_edificios :: buscar_posicion(int fila, int columna){
     Nodo_R *actual;
     actual = primero;
     bool encontrado;
     int posicion;
     for ( posicion = 0; posicion < cantidad_edificios ; posicion++ ) {
-        if (coordenada_x  == actual->obtener_edificio()->obtener_fila() && coordenada_y  == actual->obtener_edificio()->obtener_columna()) {
+        if (fila == actual->obtener_edificio()->obtener_fila() && columna == actual->obtener_edificio()->obtener_columna()) {
             return posicion;
         }
         else{
@@ -225,12 +225,12 @@ void Registro_edificios :: mostrar_registro_edificios() {
     delete act;
 }
 
-bool Registro_edificios:: posicion_valida_a_consutar(int pos){
+bool Registro_edificios:: posicion_valida_a_consultar(int pos){
     return (pos < cantidad_edificios && pos >= 0);
 }
 
 Nodo_R* Registro_edificios::obtener_nodo(int pos) {
-    if (posicion_valida_a_consutar(pos)){
+    if (posicion_valida_a_consultar(pos)){
         Nodo_R* aux = primero;
         for (int i = 0; i < pos; i++)
             aux = aux->obtener_siguiente();

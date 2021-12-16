@@ -73,7 +73,7 @@ public:
 
     //pre: recibe int posicion a consultar.
     //post: devuelve true si la posicion consultada es <= a la cantidad de edificios en el registro (largo registro).
-    bool posicion_valida_a_consutar(int pos);
+    bool posicion_valida_a_consultar(int pos);
 
     //pre:
     //post: verifica existencia de edificio consultado segun coordenadas.
