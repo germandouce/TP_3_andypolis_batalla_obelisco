@@ -966,7 +966,7 @@ void Juego::recolectar_recursos() {
 }
 
 bool Juego::es_nuestro_edificio(Edificio*edificio, int fila , int columna) {
-    edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila,columna);
+    edificio = jugador_turno -> devolver_registro_edificios() ->buscar_edificio_en_registro(fila,columna);
     if (edificio != nullptr){
         cout << "Es nuestro"<<endl;
         return true;}
@@ -1204,7 +1204,7 @@ int Juego::bombas_a_usar(int limite){
 	return bombas_usadas;
 }
 void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
-    int costo = 25
+    int costo = 25;
     costo_energia(costo);
     if (alcanza_energia(costo)) {
         int fila, columna;
