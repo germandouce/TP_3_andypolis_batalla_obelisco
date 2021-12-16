@@ -59,7 +59,7 @@ void Jugador::agregar_material_a_inventario(){
 
 void Jugador::agregar_edificio_al_registro(Edificio* edificio){
     
-    devolver_resgitro_edificios()->agregar(edificio);
+    devolver_registro_edificios()->agregar(edificio);
 }
 
 void Jugador::mostrar_nombre_objetivo(int numero_objetivo){

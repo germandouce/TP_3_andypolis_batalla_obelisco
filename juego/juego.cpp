@@ -762,12 +762,12 @@ void Juego::ubicar_edificio(Edificio* edificio_a_construir, int fila, int column
     obtengo_cantidades_edificio(edificio_a_construir, piedra, madera, metal, construidos);
     mapa -> obtener_casillero(fila, columna) -> construir_edificio(edificio_a_construir);
     mapa -> obtener_casillero(fila, columna)-> ocupar_casillero();
-    jugador_turno -> devolver_resgitro_edificios() -> agregar(edificio_a_construir);
+    jugador_turno -> devolver_registro_edificios() -> agregar(edificio_a_construir);
     jugador_turno -> cambia_cantidades_inventario(-madera, -piedra, -metal);
 }
 
 void Juego::mostrar_edificios_construidos() {
-    jugador_turno -> devolver_resgitro_edificios() -> mostrar_registro_edificios();
+    jugador_turno -> devolver_registro_edificios() -> mostrar_registro_edificios();
 }
 
 void Juego::mostrar_inventario_en_pantalla() {
@@ -781,7 +781,7 @@ void Juego::mostrar_objetivos_jugador() {
 
     cout << ENTER_COLOR << "Su objetivo primario, construir un obelisco: " << END_COLOR;
 
-    if (jugador_turno -> devolver_resgitro_edificios() -> obtener_cantidad_obeliscos() != OBELISCO_CONSTRUIDO) {
+    if (jugador_turno -> devolver_registro_edificios() -> obtener_cantidad_obeliscos() != OBELISCO_CONSTRUIDO) {
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
     }
     else {
@@ -807,7 +807,7 @@ void Juego::mostrar_objetivos_jugador() {
 void Juego::verificar_objetivos() {
 
     Inventario *inventario = jugador_turno -> devolver_inventario();
-    Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
+    Registro_edificios* registro_edificios = jugador_turno -> devolver_registro_edificios();
     int energia = jugador_turno -> obtener_energia();
     
     for (int i = 0; i < CANTIDAD_OBJETIVOS; i++) {
@@ -946,7 +946,7 @@ string Juego::pedir_nombre_edificio_construir() {
 }
     
 int Juego::devuelve_construidos_en_registro(string nombre_edificio) {
-    return (jugador_turno -> devolver_resgitro_edificios() -> obtener_edificios_construidos(nombre_edificio));
+    return (jugador_turno -> devolver_registro_edificios() -> obtener_edificios_construidos(nombre_edificio));
 }
 
 void Juego::llover() {
@@ -960,7 +960,7 @@ void Juego::recolectar_recursos() {
     costo_energia(costo);
     
     if (alcanza_energia(costo)) {
-        Registro_edificios* registro_edificios = jugador_turno -> devolver_resgitro_edificios();
+        Registro_edificios* registro_edificios = jugador_turno -> devolver_registro_edificios();
         jugador_turno -> devolver_inventario() -> recolectar_recursos(registro_edificios);
     }
 }
@@ -995,7 +995,7 @@ void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
         if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(edificio_demoler,fila + 1  , columna + 1)) {
             materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
-                jugador_turno ->devolver_resgitro_edificios()->eliminar(fila , columna);
+                jugador_turno ->devolver_registro_edificios()->eliminar(fila , columna);
                 mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
                 recuperar_mitad_materiales(nombre_edificio);
                 jugador_turno -> restar_energia(costo);
@@ -1140,7 +1140,7 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
         int fila, columna;
 
         pedir_coordenadas(fila, columna);
-	    Edificio*edificio_atacar = jugador_secundario-> devolver_resgitro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
+	    Edificio*edificio_atacar = jugador_secundario-> devolver_registro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
 	    string nombre_edificio = edificio_atacar->obtener_nombre();
@@ -1159,7 +1159,7 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
                     inventario -> cambiar_cantidad_elemento("bombas", -bombas_ataque);
                     
                     if (vida_pos_ataque == 0){
-                        jugador_secundario -> devolver_resgitro_edificios() -> eliminar(fila+1, columna+1);
+                        jugador_secundario -> devolver_registro_edificios() -> eliminar(fila+1, columna+1);
                         mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
                         mapa->obtener_casillero(fila, columna)->desocupar_casillero();
                         jugador_turno -> restar_energia(costo);
@@ -1175,7 +1175,7 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
                 else{
                     int bombas_ataque = bombas_a_usar(vida_edificio);
 				    jugador_turno -> restar_energia(costo);
-				    jugador_secundario ->devolver_resgitro_edificios() -> eliminar(fila+1, columna+1);
+				    jugador_secundario ->devolver_registro_edificios() -> eliminar(fila+1, columna+1);
                     inventario -> sumar_bombas_usadas(bombas_ataque);
                     inventario -> cambiar_cantidad_elemento("bombas", -bombas_ataque);
                     mapa->obtener_casillero(fila, columna)->construir_edificio(nullptr);
@@ -1210,7 +1210,7 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
         int fila, columna;
 
         pedir_coordenadas(fila, columna);
-        Edificio*edificio_reparar = jugador_secundario-> devolver_resgitro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
+        Edificio*edificio_reparar = jugador_secundario-> devolver_registro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
 
@@ -1219,7 +1219,7 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
             string nombre_edificio_r = edificio_reparar -> obtener_nombre();
             int vida_edificio = edificio_reparar ->obtener_vida_actual();
 
-            if ((nombre_edificio_r == F) || (nombre_edficio_r == M)){
+            if ((nombre_edificio_r == F) || (nombre_edificio_r == M)){
                 cout << ENTER_COLOR << nombre_edificio_r << " tiene " << vida_edificio <<" vida/s."<< END_COLOR << endl;
                 int costo_madera = inventario->devolver_cant_madera() * (25/100);
                 int costo_piedra = inventario->devolver_cant_piedra() * (25/100);
@@ -1257,7 +1257,7 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
 }
 
 bool Juego::tengo_el_porcentaje_necesario(Edificio*edificio){
-    Registro_edificios*registro_edificios = jugador_turno->devolver_resgitro_edificios();
+    Registro_edificios*registro_edificios = jugador_turno->devolver_registro_edificios();
     int fila = edificio->obtener_fila();
     int columna = edificio -> obtener_columna();
     bool tengo_madera = jugador_turno->devolver_inventario()->porcentaje_de_madera_existente(25,registro_edificios,fila,columna);
