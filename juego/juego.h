@@ -416,11 +416,6 @@ class Juego {
     //
     //PRE:
     //POS:
-    bool es_nuestro_edificio(Edificio*edificio, int fila, int columna);
-
-    //
-    //PRE:
-    //POS:
     bool respeta_limite(int construidos, int limite);
 
     //

@@ -965,17 +965,6 @@ void Juego::recolectar_recursos() {
     }
 }
 
-bool Juego::es_nuestro_edificio(Edificio*edificio, int fila , int columna) {
-    edificio = jugador_turno -> devolver_registro_edificios() ->buscar_edificio_en_registro(fila,columna);
-    if (edificio != nullptr){
-        cout << "Es nuestro"<<endl;
-        return true;}
-    else{
-        cout << "No es nuestro" << endl;
-        return false;
-    }
-}
-
 void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
 
     int costo = 15;
@@ -985,14 +974,14 @@ void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
         int fila, columna;
 
         pedir_coordenadas(fila, columna);
-        Edificio*edificio_demoler = jugador_turno->devolver_registro_edificios()-> buscar_edifcio_en_registro(fila+1,columna+1);
+        Edificio*edificio_demoler = jugador_turno->devolver_registro_edificios()-> buscar_edificio_en_registro(fila+1,columna+1);
 
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
         string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
         string nombre_edificio = edificio_demoler->obtener_nombre();
 
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(edificio_demoler,fila + 1  , columna + 1)) {
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && edificio_demoler!= nullptr) {
             materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
                 jugador_turno ->devolver_registro_edificios()->eliminar(fila , columna);
@@ -1145,7 +1134,7 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
 	    string nombre_edificio = edificio_atacar->obtener_nombre();
         
-        if (ocupado && !es_jugador && !es_nuestro_edificio(edificio_atacar,fila,columna)) {
+        if (ocupado && !es_jugador && edificio_atacar!= nullptr) {
             int vida_edificio = edificio_atacar ->obtener_vida_actual();
 		    cout << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< endl;
 		    cout << "Necesitas " << vida_edificio << " bombas para destruir completamente." << endl;
@@ -1210,11 +1199,11 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
         int fila, columna;
 
         pedir_coordenadas(fila, columna);
-        Edificio*edificio_reparar = jugador_secundario-> devolver_registro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
+        Edificio*edificio_reparar = jugador_turno-> devolver_registro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
 
-        if (ocupado && !es_jugador && es_nuestro_edificio(edificio_reparar,fila, columna) && tengo_el_porcentaje_necesario(edificio_reparar)) {
+        if (ocupado && !es_jugador && edificio_reparar!= nullptr && tengo_el_porcentaje_necesario(edificio_reparar)) {
 
             string nombre_edificio_r = edificio_reparar -> obtener_nombre();
             int vida_edificio = edificio_reparar ->obtener_vida_actual();
