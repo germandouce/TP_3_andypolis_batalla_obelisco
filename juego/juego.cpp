@@ -1210,9 +1210,9 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
 
             if ((nombre_edificio_r == F) || (nombre_edificio_r == M)){
                 cout << ENTER_COLOR << nombre_edificio_r << " tiene " << vida_edificio <<" vida/s."<< END_COLOR << endl;
-                int costo_madera = inventario->devolver_cant_madera() / 4.0;
-                int costo_piedra = inventario->devolver_cant_piedra() / 4.0;
-                int costo_metal = inventario->devolver_cant_metal() / 4.0;
+                int costo_madera = inventario->devolver_cant_madera() / 4;
+                int costo_piedra = inventario->devolver_cant_piedra() / 4;
+                int costo_metal = inventario->devolver_cant_metal() / 4;
                 if ( vida_edificio == 2){
                     cout << ERROR_COLOR << "\nEl edificio no necesita reparacion." << END_COLOR << endl;
                 }
@@ -1249,9 +1249,9 @@ bool Juego::tengo_el_porcentaje_necesario(Edificio*edificio){
     Registro_edificios*registro_edificios = jugador_turno->devolver_registro_edificios();
     int fila = edificio->obtener_fila();
     int columna = edificio -> obtener_columna();
-    bool tengo_madera = jugador_turno->devolver_inventario()->porcentaje_de_madera_existente((25/100.0),registro_edificios,fila,columna);
-    bool tengo_piedra = jugador_turno->devolver_inventario()->porcentaje_de_piedra_existente((25/100.0),registro_edificios,fila,columna);
-    bool tengo_metal = jugador_turno->devolver_inventario()->porcentaje_de_metal_existente((25/100.0),registro_edificios,fila,columna);
+    bool tengo_madera = jugador_turno->devolver_inventario()->porcentaje_de_madera_existente((25/100),registro_edificios,fila,columna);
+    bool tengo_piedra = jugador_turno->devolver_inventario()->porcentaje_de_piedra_existente((25/100),registro_edificios,fila,columna);
+    bool tengo_metal = jugador_turno->devolver_inventario()->porcentaje_de_metal_existente((25/100),registro_edificios,fila,columna);
     if (tengo_madera  && tengo_metal && tengo_piedra){
         cout << SUCESS_COLOR << "Tengo los materiales necesarios." << END_COLOR << endl;
         return true;
