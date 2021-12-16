@@ -153,7 +153,7 @@ void Inventario::actualizar_largo_de_inventario(){
 }
 
 void Inventario::consultar_porcentaje_material(string nombre_material ,int numero_porcentaje,Registro_edificios*registro_edificios,int fila , int columna){
-    int porcentaje_usar = numero_porcentaje/100.0;
+    int porcentaje_usar = numero_porcentaje/100;
     if (porcentaje_concultado_valido(porcentaje_usar)){
         if (nombre_material == I_MADERA){
             if (porcentaje_de_madera_existente(porcentaje_usar,registro_edificios,fila,columna))
