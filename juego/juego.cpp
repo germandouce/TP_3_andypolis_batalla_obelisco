@@ -1220,7 +1220,7 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
             int vida_edificio = edificio_reparar ->obtener_vida_actual();
 
             if ((nombre_edificio_r == F) || (nombre_edficio_r == M)){
-                cout << ENTER_COLOR << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< END_COLOR << endl;
+                cout << ENTER_COLOR << nombre_edificio_r << " tiene " << vida_edificio <<" vida/s."<< END_COLOR << endl;
                 int costo_madera = inventario->devolver_cant_madera() * (25/100);
                 int costo_piedra = inventario->devolver_cant_piedra() * (25/100);
                 int costo_metal = inventario->devolver_cant_metal() * (25/100);
@@ -1231,7 +1231,7 @@ void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
                     cout << ENTER_COLOR << "Costo madera: " << costo_madera << endl;
                     cout << "Costo piedra: " << costo_piedra << endl;
                     cout << "Costo metal:" << costo_metal<< END_COLOR << endl;
-                    cout << SUCESS_COLO << "\nEl edificio necesita reparacion." << END_COLOR << endl;
+                    cout << SUCESS_COLOR << "\nEl edificio necesita reparacion." << END_COLOR << endl;
                     if (acepta_realizar_accion()){
                         edificio_reparar ->sumar_vida(1);
                         inventario ->cambiar_cantidad_elemento("madera",-costo_madera);
