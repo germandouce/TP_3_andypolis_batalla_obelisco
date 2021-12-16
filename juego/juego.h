@@ -416,7 +416,7 @@ class Juego {
     //
     //PRE:
     //POS:
-    bool es_nuestro_edificio(int fila, int columna);
+    bool es_nuestro_edificio(Edificio*edificio, int fila, int columna);
 
     //
     //PRE:
@@ -472,6 +472,10 @@ class Juego {
     void atacar_edificio_x_coordenadas(Inventario* inventario);
 
     int bombas_a_usar(int limite);
+
+    void reparar_edificio_x_coordenadas(Inventario*inventario);
+
+    bool tengo_el_porcentaje_necesario(Edificio*edificio);
 };
 
 #endif //JUEGO_H

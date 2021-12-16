@@ -900,15 +900,7 @@ void Juego::procesar_opcion(int opcion) {
             atacar_edificio_x_coordenadas(inventario);
             break;
         case REPARAR_EDIFICIO_X_COORDENADA :
-            // system("cls");
-            //REPARAR
-            //Pasar coordenada. verificar su existencia en el mapa.
-            //Spottear edificio en el mapa.
-            //verificar que no sea nuestro
-            //Ver estado de edificio.
-            //Verificar en inventario materiales (al menos 25% de c/u requerido) y energia.
-            //Reparar (si lo desea el usuario--consultar).
-            //Volver al menu.
+            reparar_edificio_x_coordenadas(inventario);
             break;
         case COMPRAR_BOMBAS:
             comprar_bombas(inventario);
@@ -973,8 +965,15 @@ void Juego::recolectar_recursos() {
     }
 }
 
-bool Juego::es_nuestro_edificio(int fila, int columna) {
-    return (jugador_turno -> devolver_resgitro_edificios() -> existe(fila, columna));
+bool Juego::es_nuestro_edificio(Edificio*edificio, int fila , int columna) {
+    edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila,columna);
+    if (edificio != nullptr){
+        cout << "Es nuestro"<<endl;
+        return true;}
+    else{
+        cout << "No es nuestro" << endl;
+        return false;
+    }
 }
 
 void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
@@ -986,13 +985,14 @@ void Juego::demoler_edificio_x_coordenadas(Inventario* inventario) {
         int fila, columna;
 
         pedir_coordenadas(fila, columna);
+        Edificio*edificio_demoler = jugador_turno->devolver_registro_edificios()-> buscar_edifcio_en_registro(fila+1,columna+1);
 
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
         string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
-        string nombre_edificio = jugador_turno -> devolver_resgitro_edificios() ->buscar_edificio_en_registro(fila+1,columna+1)->obtener_nombre();
+        string nombre_edificio = edificio_demoler->obtener_nombre();
 
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(fila + 1  , columna + 1)) {
+        if (tipo_terreno == TERRENO && ocupado && !es_jugador && es_nuestro_edificio(edificio_demoler,fila + 1  , columna + 1)) {
             materiales_por_demolicion(nombre_edificio);
             if (acepta_realizar_accion()) {
                 jugador_turno ->devolver_resgitro_edificios()->eliminar(fila , columna);
@@ -1143,10 +1143,9 @@ void Juego::atacar_edificio_x_coordenadas(Inventario* inventario) {
 	    Edificio*edificio_atacar = jugador_secundario-> devolver_resgitro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
         bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
         bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
-        string tipo_terreno = mapa->obtener_casillero(fila, columna)->obtener_tipo_casillero();
 	    string nombre_edificio = edificio_atacar->obtener_nombre();
         
-        if (tipo_terreno == TERRENO && ocupado && !es_jugador && !es_nuestro_edificio(fila + 1, columna + 1)) {
+        if (ocupado && !es_jugador && !es_nuestro_edificio(edificio_atacar,fila,columna)) {
             int vida_edificio = edificio_atacar ->obtener_vida_actual();
 		    cout << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< endl;
 		    cout << "Necesitas " << vida_edificio << " bombas para destruir completamente." << endl;
@@ -1203,4 +1202,73 @@ int Juego::bombas_a_usar(int limite){
         cin >> bombas_usadas;
 	}
 	return bombas_usadas;
+}
+void Juego::reparar_edificio_x_coordenadas(Inventario*inventario){
+    int costo = 25
+    costo_energia(costo);
+    if (alcanza_energia(costo)) {
+        int fila, columna;
+
+        pedir_coordenadas(fila, columna);
+        Edificio*edificio_reparar = jugador_secundario-> devolver_resgitro_edificios()->buscar_edificio_en_registro(fila+1,columna+1);
+        bool ocupado = mapa->obtener_casillero(fila, columna)->esta_ocupado();
+        bool es_jugador = mapa->obtener_casillero(fila, columna)->esta_ocupado_jugador();
+
+        if (ocupado && !es_jugador && es_nuestro_edificio(edificio_resparar,fila, columna) && tengo_el_porcentaje_necesario(edificio_reparar)) {
+
+            string nombre_edficio_r = edificio_reparar -> obtener_nombre();
+            int vida_edificio = edificio_reparar ->obtener_vida_actual();
+
+            if ((nombre_edificio_r == F) || (nombre_edficio_r == M)){
+                cout << ENTER_COLOR << nombre_edificio << " tiene " << vida_edificio <<" vida/s."<< END_COLOR << endl;
+                int costo_madera = inventario->devolver_cant_madera() * (25/100);
+                int costo_piedra = inventario->devolver_cant_piedra() * (25/100);
+                int costo_metal = inventario->devolver_cant_metal() * (25/100);
+                if ( vida_edificio == 2){
+                    cout << ERROR_COLOR << "\nEl edificio no necesita reparacion." << END_COLOR << endl;
+                }
+                else if (vida_edificio == 1){
+                    cout << ENTER_COLOR << "Costo madera: " << costo_madera << endl;
+                    cout << "Costo piedra: " << costo_piedra << endl;
+                    cout << "Costo metal:" << costo_metal<< END_COLOR << endl;
+                    cout << SUCESS_COLO << "\nEl edificio necesita reparacion." << END_COLOR << endl;
+                    if (acepta_realizar_accion()){
+                        edificio_reparar ->sumar_vida(1);
+                        inventario ->cambiar_cantidad_elemento("madera",-costo_madera);
+                        inventario ->cambiar_cantidad_elemento("piedra",-costo_piedra);
+                        inventario ->cambiar_cantidad_elemento("metal",-costo_metal);
+                        jugador_turno ->restar_energia(costo);
+
+                    }
+                    else{
+                        cout << SUCESS_COLOR << "No se ha reparado edificio." << END_COLOR << endl;
+                        no_acepta_realzar_accion();
+                    }
+                }
+            }
+            else{
+                cout << ERROR_COLOR << "Edificio no reparable y en pien." << END_COLOR << endl;
+            }
+        }
+        else{
+            cout << ERROR_COLOR << "No es posible reparar edificio." << END_COLOR << endl;
+        }
+    }
+}
+
+bool Juego::tengo_el_porcentaje_necesario(Edificio*edificio){
+    Registro_edificios*registro_edificios = jugador_turno->devolver_resgitro_edificios();
+    int fila = edificio->obtener_fila();
+    int columna = edificio -> obtener_columna();
+    bool tengo_madera = jugador_turno->devolver_inventario()->porcentaje_de_madera_existente(25,registro_edificios,fila,columna);
+    bool tengo_piedra = jugador_turno->devolver_inventario()->porcentaje_de_piedra_existente(25,registro_edificios,fila,columna);
+    bool tengo_metal = jugador_turno->devolver_inventario()->porcentaje_de_metal_existente(25,registro_edificios,fila,columna);
+    if (tengo_madera  && tengo_metal && tengo_piedra){
+        cout << SUCESS_COLOR << "Tengo los materiales necesarios." << END_COLOR << endl;
+        return true;
+    }
+    else {
+        cout << ERROR_COLOR << "No tengo los materiales necesario." << END_COLOR << endl;
+        return false;
+    }
 }

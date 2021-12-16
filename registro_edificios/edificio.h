@@ -160,6 +160,8 @@ class Edificio {
 
     int restar_vida(int vida_sacada);
 
+    int sumar_vida(int vida_sumada);
+
     // Destructor
     // PRE: -
     // POS: Destructor de edificio.

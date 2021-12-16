@@ -210,4 +210,8 @@ int Edificio::restar_vida(int vida_sacada){
 	return (vida_actual -= vida_sacada);
 }
 
+int Edificio::sumar_vida(int vida_sumada){
+    return (vida_actual += vida_sumada);
+}
+
 Edificio::~Edificio() {}
