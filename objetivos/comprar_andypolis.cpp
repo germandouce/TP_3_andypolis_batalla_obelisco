@@ -7,7 +7,7 @@ Comprar_andypolis::Comprar_andypolis() : Objetivo() {
 
 bool Comprar_andypolis::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
-	if (inventario->devolver_cant_acumulada_andycoins()  >= REQUISITO_COMPRAR_ANDYPOLIS)
+	if (inventario-> devolver_cant_andycoins_acumulados()  >= REQUISITO_COMPRAR_ANDYPOLIS)
         return true;
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;

@@ -7,7 +7,7 @@ Energetico::Energetico(): Objetivo() {
 
 bool Energetico::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    if(energia = REQUISITO_ENERGETICO)
+    if(energia == REQUISITO_ENERGETICO)
         return true;
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
