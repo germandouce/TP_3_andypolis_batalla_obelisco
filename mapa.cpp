@@ -148,7 +148,9 @@ void Mapa::imprimir_mapa() {
 		cout << ENTER_COLOR << " " << lineas_columnas << endl;
 	}
 	cout << END_COLOR << endl;
+
 }
+
 
 void Mapa::consultar_casillero() {
 	

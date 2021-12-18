@@ -7,8 +7,10 @@ Letrado::Letrado(): Objetivo() {
 
 bool Letrado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-   if (diccionario->buscar_edificio("escuela")->obtener_maximo_construir() == registro_edificios->obtener_cantidad_escuelas())
+   if (diccionario->buscar_edificio("escuela")->obtener_maximo_construir() == registro_edificios->obtener_cantidad_escuelas()) {
+       cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
        return true;
+   }
    else{
        cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
        return false;

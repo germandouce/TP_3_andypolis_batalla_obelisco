@@ -8,9 +8,9 @@ Objetivo::Objetivo() {
 Objetivo::~Objetivo() {}
 
 void Objetivo::mostrar_nombre_objetivo(){
-    cout<< nombre_objetivo<<": ";
+    cout<< SUCESS_COLOR << "--> " << nombre_objetivo<<": " << END_COLOR;
 }
 
 void Objetivo::mostrar_descripcion(){
-    cout << descripcion<<endl;
+    cout << SUCESS_COLOR << descripcion<< END_COLOR << endl;
 }

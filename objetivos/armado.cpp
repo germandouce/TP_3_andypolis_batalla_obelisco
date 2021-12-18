@@ -1,14 +1,16 @@
 #include "armado.h"
 
 Armado::Armado() : Objetivo() {
-    this -> nombre_objetivo = CONSTRUCTOR;
+    this -> nombre_objetivo = ARMADO;
     this -> descripcion = "Tener 10 bombas en el inventario.";
 }
 
 bool Armado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
-    if (inventario->devolver_cant_bombas() >= REQUISITO_ARMADO)
+    if (inventario->devolver_cant_bombas() >= REQUISITO_ARMADO) {
+        cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
         return true;
+    }
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
         return false;

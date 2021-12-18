@@ -72,37 +72,37 @@ void Inventario::mostrar_inventario() {
 }
 
 bool Inventario::cambio_cantidad_madera_valida( int cantidad_consultada){
-    return(cant_madera > cantidad_consultada *(-1));
+    return(cant_madera >= cantidad_consultada *(-1));
 }
 
 bool Inventario::cambio_cantidad_piedra_valida( int cantidad_consultada){
-    return(cant_piedra > cantidad_consultada*(-1) );
+    return(cant_piedra >= cantidad_consultada*(-1) );
 }
 
 bool Inventario::cambio_cantidad_metal_valida( int cantidad_consultada){
-    return(cant_metal > cantidad_consultada *(-1));
+    return(cant_metal >= cantidad_consultada *(-1));
 }
 
 bool Inventario::cambio_cantidad_andycoins_valida( int cantidad_consultada){
-    return(cant_andycoins > cantidad_consultada*(-1));
+    return(cant_andycoins >= cantidad_consultada*(-1));
 }
 
 bool Inventario::cambio_cantidad_bombas_valida( int cantidad_consultada){
-    return(cant_bombas > cantidad_consultada*(-1));
+    return(cant_bombas >= cantidad_consultada*(-1));
 }
 
 bool Inventario::cambio_cantidad_bombas_compradas_valida( int cantidad_consultada){
-    return(cant_bombas_compradas > cantidad_consultada*(-1));
+    return(cant_bombas_compradas >= cantidad_consultada*(-1));
 }
 
 bool Inventario::cambio_cantidad_andycoins_acumulados_valida( int cantidad_consultada){
-    return(cant_andycoins_acumulados > cantidad_consultada*(-1));
+    return(cant_andycoins_acumulados >= cantidad_consultada*(-1));
 }
 
 
 void Inventario::cambio_cantidad_madera(int cantidad){
     if (cantidad < 0 && !cambio_cantidad_madera_valida(cantidad)){
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << endl;
+        cout<< ERROR_COLOR << "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de madera. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     }
     else{
         int cantidad_actualizada = cant_madera + cantidad;
@@ -111,7 +111,7 @@ void Inventario::cambio_cantidad_madera(int cantidad){
 }
 void Inventario::cambio_cantidad_piedra(int cantidad){
     if (cantidad < 0 &&!cambio_cantidad_piedra_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << endl;
+        cout<< ERROR_COLOR << "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de piedra. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_piedra + cantidad;
         cant_piedra = cantidad_actualizada;}
@@ -119,7 +119,7 @@ void Inventario::cambio_cantidad_piedra(int cantidad){
 
 void Inventario::cambio_cantidad_metal(int cantidad){
     if (cantidad < 0 && !cambio_cantidad_metal_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << endl;
+        cout<< ERROR_COLOR << "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de metal. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_metal + cantidad;
         cant_metal = cantidad_actualizada;}
@@ -127,7 +127,7 @@ void Inventario::cambio_cantidad_metal(int cantidad){
 
 void Inventario::cambio_cantidad_bombas(int cantidad){
     if (cantidad < 0 &&!cambio_cantidad_bombas_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << endl;
+        cout<< ERROR_COLOR << "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_bombas + cantidad;
         cant_bombas = cantidad_actualizada;}
@@ -135,7 +135,7 @@ void Inventario::cambio_cantidad_bombas(int cantidad){
 
 void Inventario::cambio_cantidad_andycoins(int cantidad){
     if (cantidad < 0 &&!cambio_cantidad_andycoins_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << endl;
+        cout<<ERROR_COLOR<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_andycoins + cantidad;
         cant_andycoins = cantidad_actualizada;}
@@ -143,7 +143,7 @@ void Inventario::cambio_cantidad_andycoins(int cantidad){
 
 void Inventario::cambio_cantidad_andycoins_acumulados(int cantidad){
     if (cantidad < 0 &&!cambio_cantidad_andycoins_acumulados_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins acumulados en la partida. Las cantidades no pueden estar en negativo." << endl;
+        cout<<ERROR_COLOR<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins acumulados en la partida. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_andycoins_acumulados + cantidad;
         cant_andycoins_acumulados = cantidad_actualizada;}
@@ -151,7 +151,7 @@ void Inventario::cambio_cantidad_andycoins_acumulados(int cantidad){
 
 void Inventario::cambio_cantidad_bombas_compradas(int cantidad){
     if (cantidad < 0 &&!cambio_cantidad_bombas_compradas_valida(cantidad))
-        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas compradas. Las cantidades no pueden estar en negativo." << endl;
+        cout<<ERROR_COLOR<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas compradas. Las cantidades no pueden estar en negativo." << END_COLOR << endl;
     else{
         int cantidad_actualizada = cant_bombas_compradas + cantidad;
         cant_bombas_compradas = cantidad_actualizada;}

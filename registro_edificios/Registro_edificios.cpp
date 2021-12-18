@@ -195,30 +195,30 @@ void Registro_edificios :: mostrar_registro_edificios() {
     Nodo_R *act;
     act = primero;
     if (cantidad_edificios == 0) {
-        cout << "EL REGISTRO DE EDIFICIOS ESTA VACIO" << "\n\n";
+        cout << ERROR_COLOR << "EL REGISTRO DE EDIFICIOS ESTA VACIO" << END_COLOR <<"\n\n";
     } else {
-        cout << "\nREGISTRO DE EDIFICIOS GENERAL"<<endl;
-        cout << "__________________________________________" << endl << endl;
-        cout << "Cantidad Minas: " << obtener_cantidad_minas() << endl;
+        cout << ENTER_COLOR<< "\nREGISTRO DE EDIFICIOS GENERAL" << endl;
+        cout <<  "__________________________________________" <<END_COLOR<< endl << endl;
+        cout << SUCESS_COLOR << "Cantidad Minas: " << obtener_cantidad_minas() << endl;
         cout << "Cantidad Minas de oro: " << obtener_cantidad_minas_oro() << endl;
         cout << "Cantidad Aserraderos: " << obtener_cantidad_aserraderos() << endl;
         cout << "Cantidad Fabricas: " << obtener_cantidad_fabricas() << endl;
         cout << "Cantidad Escuelas: " << obtener_cantidad_escuelas() << endl;
         cout << "Cantidad Obeliscos: " << obtener_cantidad_obeliscos() << endl;
-        cout << "Cantidad Plantas electricas: " << obtener_cantidad_plantas_electricas() << endl << endl;
+        cout << "Cantidad Plantas electricas: " << obtener_cantidad_plantas_electricas() << END_COLOR << endl << endl;
 
-        cout << "REGISTRO DE EDIFICIOS DETALLADO"<<endl;
-        cout << "__________________________________________" << endl<<endl;
+        cout << ENTER_COLOR << "REGISTRO DE EDIFICIOS DETALLADO"<<endl;
+        cout << "__________________________________________" << END_COLOR << endl<<endl;
 
         for (int posicion = 0; posicion < cantidad_edificios; posicion++){
-            cout << "Nombre: " << act->obtener_edificio()->obtener_nombre() << endl;
+            cout << SUCESS_COLOR << "Nombre: " << act->obtener_edificio()->obtener_nombre() << endl;
             cout << "Diminutivo: " << act->obtener_edificio()->obtener_diminutivo() << endl;
             cout << "Cantidad de piedra: " << act->obtener_edificio()->obtener_cantidad_piedra() << endl;
             cout << "Cantidad de madera: " << act->obtener_edificio()->obtener_cantidad_madera() << endl;
             cout << "Cantidad de metal: " << act->obtener_edificio()->obtener_cantidad_metal() << endl;
             cout << "Cantidad limite de construccion: " << act->obtener_edificio()->obtener_maximo_construir() << endl;
             cout << "Vida actual: " << act->obtener_edificio()->obtener_vida_actual() << endl;
-            cout << "Ubicacion en mapa: " << "( " << act->obtener_edificio()->obtener_fila() << ", "<< act->obtener_edificio()->obtener_columna() << " )\n" << endl;
+            cout << "Ubicacion en mapa: " << "( " << act->obtener_edificio()->obtener_fila() << ", "<< act->obtener_edificio()->obtener_columna() << " )\n" << END_COLOR << endl;
             act = act->obtener_siguiente();
         }
     }

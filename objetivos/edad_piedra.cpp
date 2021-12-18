@@ -7,8 +7,10 @@ Edad_piedra::Edad_piedra() : Objetivo() {
 
 bool Edad_piedra::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    if(inventario->devolver_cant_piedra() >= REQUISITO_EDAD_PIEDRA)
+    if(inventario->devolver_cant_piedra() >= REQUISITO_EDAD_PIEDRA) {
+        cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
         return true;
+    }
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
         return false;

@@ -7,8 +7,10 @@ Constructor::Constructor(): Objetivo() {
 
 bool Constructor::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    if(registro_edificios->al_menos_uno_de_cada_tipo())
+    if(registro_edificios->al_menos_uno_de_cada_tipo()) {
+        cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
         return true;
+    }
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
         return false;
@@ -17,23 +19,23 @@ Diccionario *diccionario, int energia){
 
 void Constructor::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    cout<<"Te faltan construir al menos 1 edificio de cada uno de los siguientes tipos: "<<endl;
-    if (registro_edificios->al_menos_una_planta_electrica()){
+    cout<<"Te faltan construir al menos 1 edificio de cada uno de los siguientes tipos: \n"<<endl;
+    if (!registro_edificios->al_menos_una_planta_electrica()){
         cout<<"\tPlanta electrica"<<endl;
     }
-    if (registro_edificios->al_menos_una_mina()){
-        cout<<"\tAserradero"<<endl;
-    }
-    if (registro_edificios->al_menos_una_fabrica()){
-        cout<<"\tEscuela"<<endl;
-    }
-    if (registro_edificios->al_menos_una_escuela() ){
-        cout<<"\tFabrica"<<endl;
-    }
-    if (registro_edificios->al_menos_un_aserradero() ){
+    if (!registro_edificios->al_menos_una_mina()){
         cout<<"\tMina"<<endl;
     }
-    if (registro_edificios->al_menos_una_mina_oro() ){
+    if (!registro_edificios->al_menos_una_fabrica()){
+        cout<<"\tFabrica"<<endl;
+    }
+    if (!registro_edificios->al_menos_una_escuela() ){
+        cout<<"\tEscuela"<<endl;
+    }
+    if (!registro_edificios->al_menos_un_aserradero() ){
+        cout<<"\tAserradero"<<endl;
+    }
+    if (!registro_edificios->al_menos_una_mina_oro() ){
         cout<<"\tMina oro\n"<<endl;
     }
 }

@@ -393,6 +393,8 @@ class Juego {
     //POS: 
     string pedir_nombre_edificio_construir();
 
+    void finalzar_turno(Inventario*inventario);
+
 
     //
     //PRE:-

@@ -779,7 +779,7 @@ void Juego::mostrar_objetivos_jugador() {
 
     int energia = jugador_turno -> obtener_energia();
 
-    cout << ENTER_COLOR << "Su objetivo primario, construir un obelisco: " << END_COLOR;
+    cout << ENTER_COLOR << "\nSu objetivo primario, construir un obelisco: " << END_COLOR;
 
     if (jugador_turno -> devolver_registro_edificios() -> obtener_cantidad_obeliscos() != OBELISCO_CONSTRUIDO) {
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
@@ -789,7 +789,7 @@ void Juego::mostrar_objetivos_jugador() {
     }
     
     cout << endl;
-    cout << ENTER_COLOR << "Sus objetivos secundarios son los siguientes:" << END_COLOR << endl;
+    cout << ENTER_COLOR << "Sus objetivos secundarios son los siguientes:" << END_COLOR << endl << endl;
     
     for (int i = 0; i < CANTIDAD_OBJETIVOS; i++) {
         jugador_turno -> mostrar_nombre_objetivo(i);
@@ -797,6 +797,7 @@ void Juego::mostrar_objetivos_jugador() {
 
         if (!jugador_turno -> objetivo_cumplido(i)) {
             jugador_turno -> mostrar_progreso_objetivo(i, energia, diccionario);
+            cout<<endl;
         }
         else {
             cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
@@ -921,13 +922,7 @@ void Juego::procesar_opcion(int opcion) {
             mapa -> moverse(jugador_turno);
             break;
         case FINALIZAR_TURNO:
-            int andycoins_partida = inventario -> devolver_cant_andycoins_acumulados();
-            int bombas_compradas_partida = inventario ->devolver_cant_bombas_compradas();
-            verificar_objetivos();
-            inventario ->cambiar_cantidad_elemento("andycoins acumulados", -andycoins_partida);
-            inventario ->cambiar_cantidad_elemento("bombas compradas", - bombas_compradas_partida);
-            jugador_turno -> terminar_turno();
-            cambiar_turno();
+            finalzar_turno(inventario);
             break;
         case GUARDAR_Y_SALIR:
             guardar_edificios();
@@ -941,6 +936,16 @@ void Juego::procesar_opcion(int opcion) {
 
 bool Juego::opcion_valida(int opcion) {
     return(opcion >= OPCION_MINIMA && opcion <= OPCION_MAXIMA);
+}
+
+void Juego::finalzar_turno(Inventario*inventario){
+    int andycoins_partida = inventario -> devolver_cant_andycoins_acumulados();
+    int bombas_compradas_partida = inventario ->devolver_cant_bombas_compradas();
+    mostrar_objetivos_jugador();
+    inventario ->cambiar_cantidad_elemento("andycoins acumulados", - andycoins_partida);
+    inventario ->cambiar_cantidad_elemento("bombas compradas", - bombas_compradas_partida);
+    jugador_turno -> terminar_turno();
+    cambiar_turno();
 }
 
 string Juego::pedir_nombre_edificio_construir() {

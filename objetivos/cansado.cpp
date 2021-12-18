@@ -7,7 +7,14 @@ Cansado::Cansado() : Objetivo() {
 
 bool Cansado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-  return (energia == REQUISITO_CANSADO);
+  if(energia == REQUISITO_CANSADO){
+      cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
+      return true;
+  }
+  else{
+      cout << ERROR_COLOR << "COMPLETADO" << END_COLOR << endl;
+      return false;
+  }
 }
 
 void Cansado::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

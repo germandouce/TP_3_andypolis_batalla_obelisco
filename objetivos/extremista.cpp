@@ -7,8 +7,10 @@ Extremista::Extremista() : Objetivo() {
 
 bool Extremista::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    if (inventario->devolver_cant_bombas_compradas() == REQUISITO_EXTREMISTA)
+    if (inventario->devolver_cant_bombas_compradas() == REQUISITO_EXTREMISTA) {
+        cout << SUCESS_COLOR << "COMPLETADO" << END_COLOR << endl;
         return true;
+    }
     else{
         cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
         return false;
@@ -17,8 +19,6 @@ Diccionario *diccionario, int energia){
 
 void Extremista::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    // cout<< "Te falta obetener "<< REQUISITO_ENERGETICO - inventario->devolver_cant_acumuladas_bombas()
-    // <<" bombas para cumplir este objetivo"<<endl;
-    cout<< "Te falta obetener "<< REQUISITO_ENERGETICO - 2<<endl;
-    cout <<" FUNCION JOSE\n"<<endl;
+    cout<< "Te falta obetener "<< REQUISITO_ENERGETICO - inventario->devolver_cant_bombas_compradas()
+    <<" bombas para cumplir este objetivo.\n"<<endl;
 }
