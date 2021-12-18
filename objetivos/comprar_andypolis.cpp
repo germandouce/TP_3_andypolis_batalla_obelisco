@@ -17,5 +17,5 @@ Diccionario *diccionario, int energia) {
 
 void Comprar_andypolis::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
-	cout<< "Te falta obtener "<< REQUISITO_COMPRAR_ANDYPOLIS - (inventario->devolver_cant_acumulada_andycoins())<<endl;
+	cout<< "Te falta obtener "<< REQUISITO_COMPRAR_ANDYPOLIS - (inventario->devolver_cant_andycoins_acumulados())<<endl;
 }
