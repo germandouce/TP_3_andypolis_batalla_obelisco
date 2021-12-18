@@ -7,8 +7,12 @@ Bombardero::Bombardero() : Objetivo() {
 
 bool Bombardero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios,
 Diccionario *diccionario, int energia) {
-    return inventario ->devolver_bombas_usadas() == REQUISITO_BOMBARDERO;
-    return true;
+    if (inventario ->devolver_bombas_usadas() == REQUISITO_BOMBARDERO)
+        return true;
+    else{
+        cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
+        return false;
+    }
 }
 
 void Bombardero :: mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

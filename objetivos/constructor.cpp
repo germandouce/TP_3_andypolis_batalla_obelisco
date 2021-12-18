@@ -7,7 +7,12 @@ Constructor::Constructor(): Objetivo() {
 
 bool Constructor::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return registro_edificios->al_menos_uno_de_cada_tipo();
+    if(registro_edificios->al_menos_uno_de_cada_tipo())
+        return true;
+    else{
+        cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
+        return false;
+    }
 }
 
 void Constructor::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

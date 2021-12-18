@@ -393,6 +393,7 @@ class Juego {
     //POS: 
     string pedir_nombre_edificio_construir();
 
+
     //
     //PRE:-
     //POST:

@@ -48,9 +48,17 @@ public:
     //POS: devuelve cantidas de bombas en el inventario.
     int devolver_cant_bombas();
 
+    bool cambio_cantidad_andycoins_acumulados_valida( int cantidad_consultada);
+
+    void cambio_cantidad_andycoins_acumulados(int cantidad);
+
     //PRE:
     //POS: muestra en pantalla el inventario.
     void mostrar_inventario();
+
+    bool cambio_cantidad_bombas_compradas_valida(int cantidad_consultada);
+
+    void cambio_cantidad_bombas_compradas(int cantidad);
 
     //PRE: se lee el archivo materiales previamente verificada su existencia.
     //POS: incrementa +1 la cantidad de elementos en el inventario cada vez que se agrega 1 elemento al inventario

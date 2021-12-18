@@ -6,7 +6,12 @@ Minero::Minero(): Objetivo() {
 }
 bool Minero::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    return (registro_edificios->al_menos_una_mina() && registro_edificios->al_menos_una_mina_oro() );
+    if(registro_edificios->al_menos_una_mina() && registro_edificios->al_menos_una_mina_oro())
+        return true;
+    else{
+        cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
+        return false;
+    }
 }
 
 void Minero::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 

@@ -91,6 +91,14 @@ bool Inventario::cambio_cantidad_bombas_valida( int cantidad_consultada){
     return(cant_bombas > cantidad_consultada*(-1));
 }
 
+bool Inventario::cambio_cantidad_bombas_compradas_valida( int cantidad_consultada){
+    return(cant_bombas_compradas > cantidad_consultada*(-1));
+}
+
+bool Inventario::cambio_cantidad_andycoins_acumulados_valida( int cantidad_consultada){
+    return(cant_andycoins_acumulados > cantidad_consultada*(-1));
+}
+
 
 void Inventario::cambio_cantidad_madera(int cantidad){
     if (cantidad < 0 && !cambio_cantidad_madera_valida(cantidad)){
@@ -133,6 +141,22 @@ void Inventario::cambio_cantidad_andycoins(int cantidad){
         cant_andycoins = cantidad_actualizada;}
 }
 
+void Inventario::cambio_cantidad_andycoins_acumulados(int cantidad){
+    if (cantidad < 0 &&!cambio_cantidad_andycoins_acumulados_valida(cantidad))
+        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de andycoins acumulados en la partida. Las cantidades no pueden estar en negativo." << endl;
+    else{
+        int cantidad_actualizada = cant_andycoins_acumulados + cantidad;
+        cant_andycoins_acumulados = cantidad_actualizada;}
+}
+
+void Inventario::cambio_cantidad_bombas_compradas(int cantidad){
+    if (cantidad < 0 &&!cambio_cantidad_bombas_compradas_valida(cantidad))
+        cout<< "No se puede restarle " << cantidad *(-1) << " a la cantidad actual de bombas compradas. Las cantidades no pueden estar en negativo." << endl;
+    else{
+        int cantidad_actualizada = cant_bombas_compradas + cantidad;
+        cant_bombas_compradas = cantidad_actualizada;}
+}
+
 void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_sumar_o_restar) {
     if (nombre_elemento == I_MADERA)
         cambio_cantidad_madera(cantidad_sumar_o_restar);
@@ -144,6 +168,10 @@ void Inventario::cambiar_cantidad_elemento(string nombre_elemento, int cantidad_
       cambio_cantidad_bombas(cantidad_sumar_o_restar);
     else if (nombre_elemento == I_ANDYCOINS)
         cambio_cantidad_andycoins(cantidad_sumar_o_restar);
+    else if (nombre_elemento == "bombas compradas")
+        cambio_cantidad_bombas_compradas(cantidad_sumar_o_restar);
+    else if (nombre_elemento == "andycoins acumulados")
+        cambio_cantidad_andycoins_acumulados(cantidad_sumar_o_restar);
     else
         cout<< "No se encuentra " << nombre_elemento << " en el inventario."<< endl;
 }

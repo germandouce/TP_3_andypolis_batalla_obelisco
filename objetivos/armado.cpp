@@ -7,12 +7,19 @@ Armado::Armado() : Objetivo() {
 
 bool Armado::comprobar_requisito(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia) {
-    return (inventario->devolver_cant_bombas() >= REQUISITO_ARMADO);
+    if (inventario->devolver_cant_bombas() >= REQUISITO_ARMADO)
+        return true;
+    else{
+        cout << ERROR_COLOR << "NO COMPLETADO" << END_COLOR << endl;
+        return false;
+    }
 }
 
 void Armado :: mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
-    cout << "Te falta sumar " << REQUISITO_ARMADO - inventario -> devolver_cant_bombas()
-    <<" en tu innventario para completar este objetivo\n";
-
+    int cant_bombas_invt = inventario -> devolver_cant_bombas();
+    if (cant_bombas_invt < REQUISITO_ARMADO){
+        cout << "Te falta sumar " << REQUISITO_ARMADO - cant_bombas_invt
+             <<" en tu innventario para completar este objetivo\n";
+    }
 }

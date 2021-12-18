@@ -921,6 +921,11 @@ void Juego::procesar_opcion(int opcion) {
             mapa -> moverse(jugador_turno);
             break;
         case FINALIZAR_TURNO:
+            int andycoins_partida = inventario -> devolver_cant_andycoins_acumulados();
+            int bombas_compradas_partida = inventario ->devolver_cant_bombas_compradas();
+            verificar_objetivos();
+            inventario ->cambiar_cantidad_elemento("andycoins acumulados", -andycoins_partida);
+            inventario ->cambiar_cantidad_elemento("bombas compradas", - bombas_compradas_partida);
             jugador_turno -> terminar_turno();
             cambiar_turno();
             break;
