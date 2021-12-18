@@ -20,22 +20,16 @@ Diccionario *diccionario, int energia){
 void Constructor::mostrar_progreso(Inventario* inventario, Registro_edificios* registro_edificios, 
 Diccionario *diccionario, int energia){
     cout<<"Te faltan construir al menos 1 edificio de cada uno de los siguientes tipos: \n"<<endl;
-    if (!registro_edificios->al_menos_una_planta_electrica()){
+    if (!registro_edificios->al_menos_una_planta_electrica())
         cout<<"\tPlanta electrica"<<endl;
-    }
-    if (!registro_edificios->al_menos_una_mina()){
+    if (!registro_edificios->al_menos_una_mina())
         cout<<"\tMina"<<endl;
-    }
-    if (!registro_edificios->al_menos_una_fabrica()){
+    if (!registro_edificios->al_menos_una_fabrica())
         cout<<"\tFabrica"<<endl;
-    }
-    if (!registro_edificios->al_menos_una_escuela() ){
+    if (!registro_edificios->al_menos_una_escuela())
         cout<<"\tEscuela"<<endl;
-    }
-    if (!registro_edificios->al_menos_un_aserradero() ){
-        cout<<"\tAserradero"<<endl;
-    }
-    if (!registro_edificios->al_menos_una_mina_oro() ){
+    if (!registro_edificios->al_menos_un_aserradero())
+        cout << "\tAserradero" << endl;
+    if (!registro_edificios->al_menos_una_mina_oro())
         cout<<"\tMina oro\n"<<endl;
     }
-}

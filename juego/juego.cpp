@@ -812,12 +812,12 @@ void Juego::verificar_objetivos() {
     int energia = jugador_turno -> obtener_energia();
     
     for (int i = 0; i < CANTIDAD_OBJETIVOS; i++) {
-        if (objetivos -> obtener_dato(i) -> comprobar_requisito(inventario, registro_edificios, diccionario, energia)
-        && jugador_turno -> objetivo_cumplido(i)) {
-            jugador_turno -> cumplir_un_objetivo_secundario();
+        if (objetivos -> obtener_dato(i) -> comprobar_requisito(inventario, registro_edificios, diccionario, energia)){
             jugador_turno -> cumplir_objetivo(i);
+            jugador_turno -> cumplir_un_objetivo_secundario();
         }
     }
+    jugador_turno->gano();
 }
 
 void Juego::presentar_menu_np() {
@@ -890,21 +890,26 @@ void Juego::procesar_opcion(int opcion) {
     switch (opcion) {
         case CONSTRUIR_EDIFICIO_X_NOMBRE:
             opcion_construir_edificio_x_nombre();
+            jugador_turno -> gano();
             break;
         case LISTAR_EDIFICIOS_CONSTRUIDOS:
             mostrar_edificios_construidos();
             break;
         case DEMOLER_EDIFICIO_X_COORDENDA:
             demoler_edificio_x_coordenadas(inventario);
+            jugador_turno -> gano();
             break;
         case ATACAR_EDIFICIO_X_COORDENADA:
             atacar_edificio_x_coordenadas(inventario);
+            jugador_turno -> gano();
             break;
         case REPARAR_EDIFICIO_X_COORDENADA :
             reparar_edificio_x_coordenadas(inventario);
+            jugador_turno -> gano();
             break;
         case COMPRAR_BOMBAS:
             comprar_bombas(inventario);
+            jugador_turno -> gano();
             break;
         case CONSULTAR_COORDENADA:
             mapa -> consultar_casillero();
@@ -917,14 +922,18 @@ void Juego::procesar_opcion(int opcion) {
             break;
         case RECOLECTAR_RECURSOS_PRODUCIDOS:
             recolectar_recursos();
+            jugador_turno -> gano();
             break;
         case MOVERSE_A_UNA_COORDENADA:
             mapa -> moverse(jugador_turno);
+            jugador_turno -> gano();
             break;
         case FINALIZAR_TURNO:
             finalzar_turno(inventario);
             break;
         case GUARDAR_Y_SALIR:
+            int andycoins_partida = inventario -> devolver_cant_andycoins_acumulados();
+            inventario ->cambiar_cantidad_elemento("andycoins acumulados", - andycoins_partida);
             guardar_edificios();
             guardar_ubicaciones();
             guardar_inventarios();
@@ -939,10 +948,9 @@ bool Juego::opcion_valida(int opcion) {
 }
 
 void Juego::finalzar_turno(Inventario*inventario){
-    int andycoins_partida = inventario -> devolver_cant_andycoins_acumulados();
     int bombas_compradas_partida = inventario ->devolver_cant_bombas_compradas();
     mostrar_objetivos_jugador();
-    inventario ->cambiar_cantidad_elemento("andycoins acumulados", - andycoins_partida);
+    verificar_objetivos();
     inventario ->cambiar_cantidad_elemento("bombas compradas", - bombas_compradas_partida);
     jugador_turno -> terminar_turno();
     cambiar_turno();

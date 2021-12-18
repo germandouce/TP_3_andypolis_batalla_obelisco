@@ -270,6 +270,9 @@ void Inventario::recolectar_recursos(Registro_edificios* registro_edificios) {
         nombre_material = actual -> obtener_edificio() -> obtener_material_brindado();
         cambiar_cantidad_elemento(nombre_material, cantidad);
         cout << "-Se han sumado " << cantidad << " de " << nombre_material << " al Inventario." << endl;
+        if (nombre_material == "andycoins"){
+            cambio_cantidad_andycoins_acumulados(cantidad);
+        }
         actual = actual -> obtener_siguiente();
     }
 }
