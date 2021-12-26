@@ -3,14 +3,12 @@
 ## General
 
 Parte 3 de 3 del trabajo práctico "Andypolis" de la materia Algoritmos y Programación II de FIUBA.
-En esta tecera etapa se agrega agregan funcionalidades al programa para convertirlo en un juego que se gana construyendo un 
-obelisco o cumpliendo objetivos secundarios. Para ello se incorporan 2 jugadores que tienen un inventario de materiales cada uno 
-listado comun de edificos esturado en un diccionario que esta implementado como un ABB. También se agrega un grafo
-para que los mismos se muevan por el mapa siguiendo el camino de menor peso (implementado mediante el algoritmo de Dijstra) y recolectando materiales que llueven en el mapa cada 2 turnos. 
-Para información mas detallada leer el arhivo  "Andypolis la batalla por el obelisco v1.6.pdf".
+En esta tecera etapa se agregan funcionalidades al programa para convertirlo en un juego que se gana construyendo un 
+obelisco o cumpliendo otros objetivos secundarios que el juego muestra a cada jugador. Para ello se incorporan 2 jugadores que tienen un inventario de materiales cada uno y un listado común de edificos estructurado en un diccionario que esta implementado como un ABB. También se agrega un grafo para que los mismos se muevan por el mapa siguiendo el camino de menor peso (implementado mediante el algoritmo de Dijstra) y recolectando materiales que llueven en el mapa cada 2 turnos. 
+Para información mas detallada leer el archivo  "Andypolis la batalla por el obelisco v1.6.pdf".
 
 ## Partes previas
-Para ver el código correspondiente a la parte 1 de 3 del trbajo práctico dirigirse a:
+Para ver el código correspondiente a la parte 2 de 3 del trbajo práctico dirigirse a:
 [Tp Andypolis: La constucción](https://github.com/germandus/Tp-Andypolis-la-construccion)
 
 ## Compilación y ejecución
