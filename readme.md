@@ -2,7 +2,8 @@
 
 # Creditos
 Este trabajo práctico fue realizado por un equipo de 4 personas:
-[Jorge](https://github.com/blaufoxj), [Nicolas Centurión](https://github.com/NicolasCenturion), [Jose](https://github com/Jsf-MK-ian) y [Germán Douce](https://github.com/germandus)
+[Jorge](https://github.com/blaufoxj), [Nicolas Centurión](https://github.com/NicolasCenturion), 
+[Jose](https://github com/Jsf-MK-ian) y [Germán Douce](https://github.com/germandus)
 
 ## General
 
