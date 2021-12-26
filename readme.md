@@ -1,5 +1,12 @@
 # Tp Andypolis: La batalla por el obelisco
 
+# Creditos
+Este trabajo práctico fue realizado por un equipo de 4 personas:
+Jorge: https://github.com/blaufoxj
+Nicolas Centurión: https://github.com/NicolasCenturion
+Jose: https://github.com/Jsf-MK-ian
+Germán Douce: https://github.com/germandus
+
 ## General
 
 Parte 3 de 3 del trabajo práctico "Andypolis" de la materia Algoritmos y Programación II de FIUBA.
